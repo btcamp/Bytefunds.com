@@ -1,0 +1,43 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "_Layout.cshtml";
+}
+
+@Html.Partial("_Breadcrumb", Model)
+
+<section id="services" class="light-gray-bg pv-30 clearfix">
+    <div class="container">
+        <div class="row">
+            @*<div class="col-md-8 col-md-offset-2">
+                    <h2 class="text-center">上的发生的</h2>
+                    <div class="separator"></div>
+                </div>*@
+            @{
+                foreach (IPublishedContent content in Model.Content.Children)
+                {
+                    IPublishedContent img = Umbraco.Media(content.GetPropertyValue<int>("img"));
+
+                    <div class="col-sm-4">
+                        <div class="image-box style-2 mb-20">
+                            <div class="overlay-container overlay-visible">
+                                <img src="@img.Url" alt="">
+                                <a href="@img.Url" class="overlay-link popup-img"><i class="fa fa-plus"></i></a>
+                                <div class="overlay-bottom hidden-xs">
+                                    <div class="text">
+                                        <p class="lead margin-clear text-left">@(content.GetPropertyValue<string>("title"))</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="body padding-horizontal-clear">
+                                @(Html.Raw(content.GetPropertyValue<string>("briefintroduction")))
+                                <p><a href="@content.Url">了解更多 ></a></p>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+            }
+
+        </div>
+    </div>
+</section>

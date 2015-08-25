@@ -1,0 +1,26 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "_Layout.cshtml";
+    string str = "0.00", username = str, accumulatedEarnings = str, latestearnings = str, fundAccount = str, assets = str, tel = string.Empty;
+
+    if (!Members.IsLoggedIn())
+    {
+        <script>
+            window.onload = function () {
+                location.href = "/";
+            }
+        </script>
+    }
+    else
+    {
+        IMember member = ApplicationContext.Services.MemberService.GetById(Members.GetCurrentMemberId());
+        username = member.Name;
+        accumulatedEarnings = member.GetValue<double>("accumulatedEarnings").ToString("f2");
+        latestearnings = member.GetValue<double>("latestearnings").ToString("f2");
+        fundAccount = member.GetValue<double>("fundAccount").ToString("f2");
+        assets = member.GetValue<double>("assets").ToString("f2");
+        tel = member.GetValue<string>("tel");
+    }
+}
+
+<h1>Member center</h1>

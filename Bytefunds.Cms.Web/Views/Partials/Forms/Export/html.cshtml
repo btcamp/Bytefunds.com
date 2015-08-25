@@ -1,0 +1,23 @@
+﻿@model Umbraco.Forms.Web.Models.Backoffice.EntrySearchResultCollection
+<table>
+    <thead>
+        <tr>
+        @foreach (var header in Model.schema) { 
+            <th>
+                @header.Name
+            </th>
+        }
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var row in Model.Results) { 
+        <tr>
+        @foreach(var col in row.Fields){
+            <td>
+                @Html.Raw(col)
+            </td>
+        }
+        </tr>
+    }
+    </tbody>
+</table>

@@ -1,0 +1,208 @@
+/* Theme Name: The Project - Responsive Website Template
+Author:HtmlCoder
+Author URI:http://www.htmlcoder.me
+Author e-mail:htmlcoder.me@gmail.com
+Version:1.0.0
+Created:December 2014
+License URI:http://support.wrapbootstrap.com/
+File Description: Place here your custom CSS styles
+*/
+body {
+    position: relative;
+    min-height: 100%;
+    padding-bottom: 68px;
+}
+
+#portfolio {
+    background: url("../images/interview.jpg") no-repeat;
+    background-size: 100% 100%;
+    padding: 0;
+    color: #ffffff;
+}
+
+    #portfolio blockquote p, #portfolio h3 {
+        color: #ffffff;
+    }
+
+.footer iframe {
+    height: 300px;
+    width: 100%;
+    border: 1px solid #ccc;
+}
+
+* {
+    font-weight: 400;
+    font-family: "Î¢ÈíÑÅºÚ",Calibri, Arial, Sans-Serif;
+}
+
+.web-design {
+    margin: 10px auto;
+    text-align: center;
+}
+
+    .web-design img {
+        margin: auto;
+    }
+
+.light-gray-bg {
+    padding: 25px;
+}
+
+    .light-gray-bg .icon {
+        display: block !important;
+        margin: 0 auto 15px;
+        background: #C6AB5C;
+        color: #ffffff;
+        width: 60px;
+        height: 60px;
+        line-height: 60px;
+        border-radius: 50%;
+    }
+
+    .light-gray-bg h4 {
+        font-weight: 600;
+        margin-bottom: 20px;
+        font-family: "Î¢ÈíÑÅºÚ",Calibri, Arial, Sans-Serif;
+    }
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+    color: #CD9F2E !important;
+}
+
+.line {
+    margin-bottom: 20px;
+    width: 100%;
+    height: 1px;
+    background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0.1) 0%, rgba(255,255,255,1) 30%, rgba(255,255,255,0.6) 75%, rgba(255,255,255,0.1) 100%);
+    background: -ms-linear-gradient(left, rgba(255, 255, 255, 0.1) 0%, rgba(255,255,255,1) 30%, rgba(255,255,255,0.6) 75%, rgba(255,255,255,0.1) 100%);
+    background: -moz-linear-gradient(left, rgba(255, 255, 255, 0.1) 0%, rgba(255,255,255,1) 30%, rgba(255,255,255,0.6) 75%, rgba(255,255,255,0.1) 100%);
+    background: -o-linear-gradient(left, rgba(255, 255, 255, 0.1) 0%, rgba(255,255,255,1) 30%, rgba(255,255,255,0.6) 75%, rgba(255,255,255,0.1) 100%);
+    background: linear-gradient(left, rgba(255, 255, 255, 0.1) 0%, rgba(255,255,255,1) 30%, rgba(255,255,255,0.6) 75%, rgba(255,255,255,0.1) 100%);
+}
+
+.imgline {
+    opacity: 0.5;
+}
+
+.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #C6AB5C;
+}
+
+.main-navigation .navbar-nav > .open > a,
+.main-navigation .navbar-nav > .open > a:hover,
+.main-navigation .navbar-nav > .open > a:focus,
+.main-navigation .navbar-nav > .dropdown > a:focus {
+    color: #C6AB5C;
+}
+
+a {
+    color: #C6AB5C;
+}
+
+    a:hover {
+        color: #C6AB5C;
+    }
+
+.wechatTitle {
+    color: #C6AB5C;
+}
+
+.weixin {
+    cursor: pointer;
+}
+
+.newsbtn {
+    cursor: pointer;
+}
+
+.imgbottom {
+    color: #FFF;
+    background-color: #373737;
+}
+
+    .imgbottom > h2, .imgbottom > h5 {
+        color: #FFF;
+    }
+
+.supwin {
+    background-color: #C6AB5C;
+}
+
+.campbell-fund-one {
+    font-family: "Î¢ÈíÑÅºÚ";
+}
+
+.margin-20 {
+    margin-top: 20px;
+}
+
+table td {
+    text-align: center;
+    border: 1px solid;
+    padding: 5px 10px;
+    height: 45px;
+    font-weight: 600;
+}
+
+.campbell-thead {
+    background: #31708F;
+    border: 1px solid #000000;
+}
+
+    .campbell-thead th {
+        height: 50px;
+        line-height: 50px;
+        color: #ffffff;
+        font-size: 1.6em;
+        font-weight: 500;
+        text-align: center;
+    }
+
+.campbell-table, .campbell-table2 {
+    width: 100%;
+}
+
+    .campbell-table .td1 {
+        background: #D1E4EC;
+        width: 15%;
+    }
+
+    .campbell-table .td2 {
+        width: 30%;
+    }
+
+    .campbell-table .td3 {
+        width: 15%;
+        background: #D1E4EC;
+    }
+
+    .campbell-table .td4 {
+        width: 40%;
+    }
+
+    .campbell-table tbody tr:nth-child(2n), .campbell-table2 tr:nth-child(2n) {
+        background: #EBECEC;
+    }
+
+.tr-colSpan {
+    background: #EBECEC !important;
+}
+
+.campbell-description {
+    text-indent: 2em;
+    line-height: 25px;
+    font-weight: 600;
+}
+
+.state-error {
+    color: red;
+}
+
+    .state-error .input-validation-error {
+        border-color: red !important;
+        color: red;
+    }
+
+    .state-error i {
+        color: red !important;
+    }

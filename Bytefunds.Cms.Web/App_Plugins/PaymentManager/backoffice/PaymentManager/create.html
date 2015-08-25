@@ -1,0 +1,92 @@
+﻿<style type="text/css">
+    body.umbracoDialog {
+        overflow: auto;
+    }
+
+    .umb-dialog .umb-control-group .umb-el-wrap {
+        overflow: hidden;
+    }
+
+        .umb-dialog .umb-control-group .umb-el-wrap label {
+            float: left;
+            width: 140px;
+        }
+
+            .umb-dialog .umb-control-group .umb-el-wrap label:after {
+                content: ":";
+            }
+
+        .umb-dialog .umb-control-group .umb-el-wrap .controls-row {
+            float: left;
+            width: 280px;
+            padding-top: 8px;
+        }
+
+            .umb-dialog .umb-control-group .umb-el-wrap .controls-row select {
+                width: auto;
+            }
+</style>
+<script src="/Scripts/umbraco.appplugins.controllers.js"></script>
+<div ng-controller="CreatePayment">
+    <div class="umbracoDialog umb-dialog" ng-show="loaded">
+        <form ng-submit="save()">
+            <div class="control-group umb-control-group" style=''>
+                <p class="umb-abstract">创建入金记录</p>
+                <div class="umb-el-wrap ">
+                    <label class="control-label">用户真实姓名</label>
+                    <div class="controls controls-row">
+                        <input type="text" name="username" value="{{model.username}}" ng-model="model.username" />
+                    </div>
+                </div>
+                <div class="umb-el-wrap ">
+                    <label class="control-label">邮箱</label>
+                    <div class="controls controls-row">
+                        <input type="text" name="email" value="{{model.email}}" ng-model="model.email" />
+                    </div>
+                </div>
+
+                <div class="umb-el-wrap ">
+                    <label class="control-label" for="amountCny">注资金额(CNY)</label>
+                    <div class="controls controls-row">
+                        <input type="text" name="amountCny" value="{{model.amountCny}}" ng-keyup="amountCnyKeyup()" ng-model="model.amountCny" id="amountCny" />
+                    </div>
+                </div>
+                <div class="umb-el-wrap ">
+                    <label class="control-label">汇率</label>
+                    <div class="controls controls-row">
+                        <span style="color: red; font-weight: bold">
+                            <p style="float: left">USD&nbsp;{{currentNode.metaData.UmbExcRate.EnValue}}&nbsp;：&nbsp;CNY&nbsp;</p>
+                            <p>{{model.cny}}</p>
+                            <!--<input type="hidden" name="cny" value="{{currentNode.metaData.UmbExcRate.CnValue}}" id="cny" />-->
+                        </span>
+                    </div>
+                </div>
+                <div class="umb-el-wrap ">
+                    <label class="control-label">换算</label>
+                    <div class="controls controls-row">
+                        <span style="color: red; font-weight: bold">
+                            <p id="currentUsd">{{model.amountUsd}}</p>
+                            <input type="hidden" name="amountUsd" value="{{model.amountUsd}}" ng-model="model.amountUsd" id="amountUsd" />
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="umb-dialog-footer btn-toolbar umb-btn-toolbar">
+                <!--<input type="button" name="save" value="Save" id="btnsave" />-->
+                <div class="umb-tab-buttons" detect-fold ng-class="{'umb-dimmed': busy}">
+                    <div class="btn-group">
+                        <button type="submit" data-hotkey="ctrl+s" id="btnsave" class="btn btn-success">
+                            <localize key="buttons_save">Save</localize>
+                        </button>
+                    </div>
+                </div>
+                <!--<input type="button" name="name" value="Cancel" onclick="UmbClientMgr.closeModalWindow()" />-->
+            </div>
+        </form>
+
+    </div>
+    <div class="loading" ng-hide="loaded">
+        <img style="display: block; margin: 0 auto; padding-top: 200px;" src="/Umbraco/assets/img/loader.gif" />
+    </div>
+</div>
+

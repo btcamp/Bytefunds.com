@@ -1,0 +1,58 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@*@{
+        if (CurrentPage.Ancestors().Any())
+        {
+            bool isHomePage = true;
+            <ul>
+
+                @foreach (var page in CurrentPage.Ancestors().OrderBy("Level"))
+                {
+                    if (isHomePage)
+                    {
+                        <li><a href="@page.Url">实盈投资 @page.GetPropertyValue("pageTitle")</a><span>></span></li>
+                        isHomePage = false;
+                    }
+                    else
+                    {
+                        <li><a href="@page.Url">@page.GetPropertyValue("pageTitle")</a><span>></span></li>
+                    }
+                }
+                <li>@CurrentPage.GetPropertyValue("pageTitle")</li>
+            </ul>
+        }
+    }*@
+
+<div class="breadcrumb-container">
+    <div class="container">
+        <ol class="breadcrumb">
+
+            @{
+                if (CurrentPage.Ancestors().Any())
+                {
+                    bool isHomePage = true;
+                    var list = CurrentPage.Ancestors().OrderBy("Level");
+
+                    foreach (var page in CurrentPage.Ancestors().OrderBy("Level"))
+                    {
+                        if (isHomePage)
+                        {
+                            <li><i class="fa fa-home pr-10"></i><a href="@page.Url">首页</a></li>
+                            isHomePage = false;
+                        }
+                        else
+                        {
+                            if (page.GetPropertyValue<bool>("showOnTopMenu"))
+                            {
+                                <li><a href="@page.Url">@page.GetPropertyValue("pageTitle")</a></li>
+                            }
+                        }
+                    }
+                    <li class="active">@CurrentPage.GetPropertyValue("pageTitle")</li>
+
+                }
+            }
+            @*<li><i class="fa fa-home pr-10"></i><a href="index.html">Home</a></li>
+                <li class="active">Page Services 2</li>*@
+        </ol>
+    </div>
+</div>

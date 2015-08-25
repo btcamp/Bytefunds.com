@@ -1,0 +1,247 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+
+@{
+    var rootweb = Model.Content.Ancestor(1);
+    string email = rootweb.GetPropertyValue<string>("email");
+    string tel = rootweb.GetPropertyValue<string>("tel");
+    int logoid = rootweb.GetPropertyValue<int>("logo");
+    IPublishedContent logo = Umbraco.Media(logoid);
+
+    string url = Model.Content.Name != "Home" ? "/" : "";
+
+    IPublishedContent wechat = Umbraco.Media(1261);
+    IPublishedContent code = Umbraco.Media(1262);
+
+    MemberRegisterViewModel registerModel = new MemberRegisterViewModel();
+    MemberLoginViewModel loginModel = new MemberLoginViewModel();
+
+    Html.EnableClientValidation();
+    Html.EnableUnobtrusiveJavaScript();
+}
+<div class="header-container">
+    <div class="header-top dark ">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-3 col-sm-6 col-md-9">
+                    <!-- header-top-first start -->
+                    <!-- ================ -->
+                    <div class="header-top-first clearfix">
+                        <ul class="social-links circle small clearfix">
+                            <li class="twitter"><a class="weixin"><i class=" fa fa-weixin"></i></a></li>
+                        </ul>
+                        <ul class="list-inline hidden-xs">
+                            <li><i class="fa fa-phone pr-5 pl-10"></i>@(string.IsNullOrEmpty(tel) ? "020-23388388" : tel)</li>
+                            <li><i class="fa fa-envelope-o pr-5 pl-10"></i>@(string.IsNullOrEmpty(email) ? "cs@supwin.com" : email)</li>
+                        </ul>
+                    </div>
+                    <!-- header-top-first end -->
+                </div>
+                <div class="col-xs-9 col-sm-6 col-md-3">
+                    <!-- header-top-second start -->
+                    <!-- ================ -->
+                    <div id="header-top-second" class="clearfix">
+                        <!-- header top dropdowns start -->
+                        <!-- ================ -->
+                        <div class="header-top-dropdown text-right">
+                            @{
+                                if (Members.IsLoggedIn())
+                                {
+                                    <div class="btn-group">
+                                        <a class="btn btn-default btn-sm" href="/memberinfo"><i class="fa fa-user pr-10"></i> 用户中心</a>
+                                    </div>
+
+                                    <div class="btn-group">
+                                        <a href="/umbraco/Api/Member/Logout" class="btn btn-default btn-sm logout"><i class="fa fa-sign-out pr-10"></i> 退出</a>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="btn-group">
+                                        <a class="btn btn-default btn-sm btnregister"><i class="fa fa-user pr-10"></i> 注册</a>
+                                    </div>
+                                    <div class="btn-group dropdown">
+                                        <button type="button" id="btnlogin" class="btn dropdown-toggle btn-default btn-sm" data-toggle="dropdown"><i class="fa fa-lock pr-10"></i> 登陆</button>
+                                        <ul class="dropdown-menu dropdown-menu-right dropdown-animation">
+                                            <li>
+                                                <form class="login-form margin-clear" action="/umbraco/Api/Member/Login" method="post">
+                                                    <div class="form-group has-feedback">
+                                                        @Html.LabelFor(e => loginModel.Email, new { @class = "control-label" })
+                                                        @Html.TextBoxFor(e => loginModel.Email, new { @class = "form-control", placeholder = "请输入登陆邮箱" })
+                                                        @*<input type="text" class="form-control" placeholder="">*@
+                                                        <i class="fa fa-user form-control-feedback"></i>
+                                                        @Html.ValidationMessageFor(e => loginModel.Email)
+                                                    </div>
+                                                    <div class="form-group has-feedback">
+                                                        @Html.LabelFor(e => loginModel.Password, new { @class = "control-label" })
+                                                        @Html.PasswordFor(e => loginModel.Password, new { @class = "form-control", placeholder = "请输入登陆邮箱" })
+                                                        <i class="fa fa-lock form-control-feedback"></i>
+                                                        @Html.ValidationMessageFor(e => loginModel.Password)
+                                                    </div>
+                                                    <button type="submit" class="btn btn-gray btn-sm">登陆</button>
+                                                    <span class="pl-5 pr-5">或者</span>
+                                                    <button type="button" class="btn btn-default btn-sm btnlogin">注册</button>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                }
+                            }
+                        </div>
+                        <!--  header top dropdowns end -->
+                    </div>
+                    <!-- header-top-second end -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ================ -->
+    <header class="header  fixed   clearfix">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-xs-6">
+                    <!-- header-left start -->
+                    <!-- ================ -->
+                    <div class="header-left clearfix">
+                        <!-- logo -->
+                        <div id="logo" class="logo">
+                            <a href="@rootweb.Url"><img id="logo_img" src="@logo.Url" alt="实盈"></a>
+                        </div>
+                    </div>
+                    <!-- header-left end -->
+                </div>
+                <div class="col-md-9 col-xs-6">
+
+                    <!-- header-right start -->
+                    <!-- ================ -->
+                    <div class="header-right clearfix">
+                        <!-- main-navigation start -->
+                        <!-- classes: -->
+                        <!-- "onclick": Makes the dropdowns open on click, this the default bootstrap behavior e.g. class="main-navigation onclick" -->
+                        <!-- "animated": Enables animations on dropdowns opening e.g. class="main-navigation animated" -->
+                        <!-- "with-dropdown-buttons": Mandatory class that adds extra space, to the main navigation, for the search and cart dropdowns -->
+                        <!-- ================ -->
+                        <div class="main-navigation animated">
+                            <!-- navbar start -->
+                            <!-- ================ -->
+                            <nav class="navbar navbar-default">
+                                <div class="container-fluid">
+                                    <!-- Toggle get grouped for better mobile display -->
+                                    <div class="navbar-header">
+                                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
+                                            <span class="sr-only">Toggle navigation</span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                        </button>
+                                    </div>
+                                    <!-- Collect the nav links, forms, and other content for toggling -->
+                                    <div class="collapse navbar-collapse scrollspy smooth-scroll" id="navbar-collapse-1">
+                                        <ul class="nav navbar-nav  navbar-right">
+
+                                            @{
+                                                <li><a href="@url#banner">关于我们</a></li>
+                                                <li><a href="@url#development">企业发展</a></li>
+                                                <li><a href="@url#services">最新动态</a></li>
+                                                <li><a href="@url#portfolio">客服中心</a></li>
+                                                <li><a href="@url#cooperation">合作伙伴</a></li>
+                                                <li><a href="@url#contact">联系我们</a></li>
+                                            }
+
+                                        </ul>
+
+                                    </div>
+                                </div>
+                            </nav>
+                            <!-- navbar end -->
+                        </div>
+                        <!-- main-navigation end -->
+                    </div>
+                    <!-- header-right end -->
+
+                </div>
+            </div>
+        </div>
+
+    </header>
+    <!-- header end -->
+</div>
+
+<div class="modal fade" id="weixinModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body" style="text-align:center">
+                <h6 style="text-align:right"><button data-dismiss="modal" style="background-color:transparent;border:none"><i class="fa fa-close"></i></button></h6>
+                <h2 class="wechatTitle">@Umbraco.GetDictionaryValue("WeiXinTitle")</h2>
+                <img src="@code.Url" alt="code" style="margin:0 auto" />
+                <span>@Umbraco.GetDictionaryValue("WeiXinNumber")</span>
+            </div>
+            <div class="modal-footer">
+                <div class="row" style="text-align:left">
+                    <div class="col-xs-2">
+                        <img style="float:right;" src="@wechat.Url" alt="We chat" />
+                    </div>
+                    <div class="col-xs-10">
+                        <div>
+                            <b>@Umbraco.GetDictionaryValue("WeiXinScanning")</b>
+                        </div>
+                        <div>
+                            @Umbraco.GetDictionaryValue("WeiXinStep")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myregisterModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">注册</h4>
+            </div>
+            <form action="/umbraco/Api/Member/Regsiter" class="form-horizontal" method="post">
+                <div class="modal-body">
+                    <div class="form-group">
+                        @Html.LabelFor(e => registerModel.Name, new { @class = "col-sm-3 control-label" })
+                        @*<label for="inputName" class="col-sm-3 control-label">First Name <span class="text-danger small">*</span></label>*@
+                        <div class="col-sm-8">
+                            @Html.TextBoxFor(e => registerModel.Name, new { @class = "form-control", placeholder = "请输入姓名" })
+                            @Html.ValidationMessageFor(e => registerModel.Name)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(e => registerModel.Phone, new { @class = "col-sm-3 control-label" })
+                        @*<label for="inputName" class="col-sm-3 control-label">First Name <span class="text-danger small">*</span></label>*@
+                        <div class="col-sm-8">
+                            @Html.TextBoxFor(e => registerModel.Phone, new { @class = "form-control", placeholder = "请输入手机号" })
+                            @Html.ValidationMessageFor(e => registerModel.Phone)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(e => registerModel.Email, new { @class = "col-sm-3 control-label" })
+                        @*<label for="inputName" class="col-sm-3 control-label">First Name <span class="text-danger small">*</span></label>*@
+                        <div class="col-sm-8">
+                            @Html.TextBoxFor(e => registerModel.Email, new { @class = "form-control", placeholder = "请输入邮箱" })
+                            @Html.ValidationMessageFor(e => registerModel.Email)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(e => registerModel.Password, new { @class = "col-sm-3 control-label" })
+                        @*<label for="inputName" class="col-sm-3 control-label">First Name <span class="text-danger small">*</span></label>*@
+                        <div class="col-sm-8">
+                            @Html.PasswordFor(e => registerModel.Password, new { @class = "form-control", placeholder = "请输入密码" })
+                            @Html.ValidationMessageFor(e => registerModel.Password)
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-dark" data-dismiss="modal">取消</button>
+                    <button type="submit" class="btn btn-sm btn-default">注册</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

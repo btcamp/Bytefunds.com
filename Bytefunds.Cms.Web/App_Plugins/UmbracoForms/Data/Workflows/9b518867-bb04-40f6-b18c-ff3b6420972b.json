@@ -1,0 +1,14 @@
+{
+  "id": "9b518867-bb04-40f6-b18c-ff3b6420972b",
+  "name": "Send email to 123456@qq.com when submitted",
+  "form": "7c672757-c3df-4baf-b338-88d49179888a",
+  "active": true,
+  "workflowTypeId": "e96badd7-05be-4978-b8d9-b3d733de70a5",
+  "executesOn": "Submitted",
+  "settings": {
+    "Email": "123456@qq.com",
+    "Subject": "the form  was submitted",
+    "Message": "the form  was submitted, this is the list of values it contained, you can turn this email off under workflows in Umbraco Contour"
+  },
+  "sortOrder": 0
+}

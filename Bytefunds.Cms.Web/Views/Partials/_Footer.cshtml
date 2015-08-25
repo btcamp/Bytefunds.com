@@ -1,0 +1,72 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+
+
+<footer id="footer" class="clearfix">
+    <!-- .footer start -->
+    <!-- ================ -->
+    <div class="footer" id="contact">
+        @{
+            if (Model.Content.GetPropertyValue<bool>("isshowContactus"))
+            {
+                IPublishedContent contactus = Model.Content.Ancestor(1).Children(e => e.Name.Contains("Home")).FirstOrDefault().Children(e => e.Name.Contains
+                    ("Contactus")).FirstOrDefault();
+                <div class="container">
+                    <div class="footer-inner">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2 class="text-center">@(contactus.GetPropertyValue<string>("title"))</h2>
+                                <div class="separator"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="footer-content">
+                                    @*<div class="logo-footer"><img id="logo-footer" src="images/logo.png" alt=""></div>*@
+                                    @(Html.Raw(contactus.GetPropertyValue<string>("content")))
+                                    <p>@(Umbraco.GetDictionaryValue("CompanyName") + "：" + contactus.GetPropertyValue<string>("name"))</p>
+                                    <p>@(Umbraco.GetDictionaryValue("CustomerEmail") + "：" + contactus.GetPropertyValue<string>("email"))</p>
+                                    <p>@(Umbraco.GetDictionaryValue("Tel") + "：" + contactus.GetPropertyValue<string>("tel"))</p>
+                                    <p>@(Umbraco.GetDictionaryValue("Fax") + "：" + contactus.GetPropertyValue<string>("fax"))</p>
+                                    <p>@(Umbraco.GetDictionaryValue("Address") + "：" + contactus.GetPropertyValue<string>("address"))</p>
+                                    <p>@(Umbraco.GetDictionaryValue("ZipCode") + "：" + contactus.GetPropertyValue<string>("zipcode"))</p>
+                                    <div class="separator-2"></div>
+                                    <ul class="social-links circle margin-clear animated-effect-1">
+                                        <li class="twitter"><a class="weixin"><i class="fa fa-weixin"></i></a></li>
+                                        @*<li class="googleplus"><a target="_blank" href="http://plus.google.com"><i class="fa fa-google-plus"></i></a></li>
+                                            <li class="linkedin"><a target="_blank" href="http://www.linkedin.com"><i class="fa fa-linkedin"></i></a></li>
+                                            <li class="xing"><a target="_blank" href="http://www.xing.com"><i class="fa fa-xing"></i></a></li>
+                                            <li class="skype"><a target="_blank" href="http://www.skype.com"><i class="fa fa-skype"></i></a></li>
+                                            <li class="youtube"><a target="_blank" href="https://www.youtube.com"><i class="fa fa-youtube"></i></a></li>
+                                            <li class="dribbble"><a target="_blank" href="https://dribbble.com/"><i class="fa fa-dribbble"></i></a></li>
+                                            <li class="pinterest"><a target="_blank" href="http://www.pinterest.com"><i class="fa fa-pinterest"></i></a></li>
+                                            <li class="flickr"><a target="_blank" href="http://www.flickr.com"><i class="fa fa-flickr"></i></a></li>
+                                            <li class="instagram"><a target="_blank" href="http://www.instagram.com"><i class="fa fa-instagram"></i></a></li>*@
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <iframe src="@(contactus.GetPropertyValue<string>("addressLink"))"  style="border:none"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+
+        <!-- .footer end -->
+        <!-- .subfooter start -->
+        <!-- ================ -->
+        <div class="subfooter" style="position:absolute;width:100%;bottom:0">
+            <div class="container">
+                <div class="subfooter-inner">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p class="text-center">实盈投资有限公司版权所有 All Rights Reserved&nbsp;&nbsp;&nbsp;&nbsp;网站备案号:粤ICP备14041727</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- .subfooter end -->
+</footer>

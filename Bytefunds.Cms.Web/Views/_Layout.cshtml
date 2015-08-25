@@ -1,0 +1,64 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+
+@{
+    var supwinConent = Model.Content.Ancestor(1);
+    string pageHeadTitle = string.Empty;
+    string pageTitle = string.Empty;
+    if (!string.IsNullOrEmpty(supwinConent.GetPropertyValue("websitename").ToString()))
+    {
+        pageHeadTitle = supwinConent.GetPropertyValue("websitename").ToString();
+    }
+    if (!string.IsNullOrEmpty(Model.Content.GetPropertyValue("pagetitle").ToString()))
+    {
+        pageTitle = Model.Content.GetPropertyValue("pagetitle").ToString();
+    }
+}
+<!DOCTYPE html>
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <title>@pageTitle@(pageTitle == string.Empty ? string.Empty : "  |  ")@pageHeadTitle</title>
+    <meta name="description" content="The Project a Bootstrap-based, Responsive HTML5 Template">
+    <meta name="author" content="htmlcoder.me">
+    <!-- Mobile Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=yes">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="template/images/favicon.ico">
+    @{Html.RenderPartial("_Style");}
+</head>
+<!-- body classes:  -->
+<!-- "boxed": boxed layout mode e.g. <body class="boxed"> -->
+<!-- "pattern-1 ... pattern-9": background patterns for boxed layout mode e.g. <body class="boxed pattern-1"> -->
+<!-- "transparent-header": makes the header transparent and pulls the banner to top -->
+<body class="no-trans front-page">
+    <!-- scrollToTop -->
+    <!-- ================ -->
+    <div class="scrollToTop circle"><i class="icon-up-open-big"></i></div>
+
+    <!-- page wrapper start -->
+    <!-- ================ -->
+    <div class="page-wrapper">
+
+        <!-- header-container start -->
+        @{Html.RenderPartial("_Header", Model);}
+        <!-- header-container end -->
+        <!-- banner start -->
+        <!-- ================ -->
+        @RenderBody()
+    </div>
+    <!-- footer top end -->
+    <!-- footer start (Add "dark" class to #footer in order to enable dark footer) -->
+    <!-- ================ -->
+    @{Html.RenderPartial("_Footer", Model);}
+    <!-- footer end -->
+    <!-- page-wrapper end -->
+    <!-- JavaScript files placed at the end of the document so the pages load faster -->
+    <!-- ================================================== -->
+    @{Html.RenderPartial("_Script");}
+
+    @RenderSection("scripts", false)
+</body>
+</html>
