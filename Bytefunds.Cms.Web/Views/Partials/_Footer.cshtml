@@ -23,12 +23,12 @@
                                 <div class="footer-content">
                                     @*<div class="logo-footer"><img id="logo-footer" src="images/logo.png" alt=""></div>*@
                                     @(Html.Raw(contactus.GetPropertyValue<string>("content")))
-                                    <p>@(Umbraco.GetDictionaryValue("CompanyName") + "：" + contactus.GetPropertyValue<string>("name"))</p>
-                                    <p>@(Umbraco.GetDictionaryValue("CustomerEmail") + "：" + contactus.GetPropertyValue<string>("email"))</p>
-                                    <p>@(Umbraco.GetDictionaryValue("Tel") + "：" + contactus.GetPropertyValue<string>("tel"))</p>
-                                    <p>@(Umbraco.GetDictionaryValue("Fax") + "：" + contactus.GetPropertyValue<string>("fax"))</p>
-                                    <p>@(Umbraco.GetDictionaryValue("Address") + "：" + contactus.GetPropertyValue<string>("address"))</p>
-                                    <p>@(Umbraco.GetDictionaryValue("ZipCode") + "：" + contactus.GetPropertyValue<string>("zipcode"))</p>
+                                    <p>@("公司名称：" + contactus.GetPropertyValue<string>("name"))</p>
+                                    <p>@("联系邮箱：" + contactus.GetPropertyValue<string>("email"))</p>
+                                    <p>@("联系电话：" + contactus.GetPropertyValue<string>("tel"))</p>
+                                    <p>@("传真：" + contactus.GetPropertyValue<string>("fax"))</p>
+                                    <p>@("公司地址：" + contactus.GetPropertyValue<string>("address"))</p>
+                                    <p>@("邮编：" + contactus.GetPropertyValue<string>("zipcode"))</p>
                                     <div class="separator-2"></div>
                                     <ul class="social-links circle margin-clear animated-effect-1">
                                         <li class="twitter"><a class="weixin"><i class="fa fa-weixin"></i></a></li>

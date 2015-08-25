@@ -62,12 +62,16 @@
             $.get("/umbraco/Api/News/Get?key=" + $(this).data("id"), function (result) {
                 $("#myProductModalLabel").text(result.title);
                 $("#productcontent").html(result.content);
-                $("#buyaction").attr("href", "/Pay?id=" + result.id);
+                if (result.canbuy) {
+                    $("#buyaction").attr("href", "/Pay?id=" + result.id);
+                } else {
+                    $("#buyaction").hide();
+                }
                 $("#myModalproduct").modal("show");
             }, "json");
         });
         $('#myModal').on('hidden.bs.modal', function (e) {
-            $("#myLargeModalLabel").text("实盈投资");
+            $("#myLargeModalLabel").text("比特城邦");
             $("#content").html('<div><img style="margin:0 auto" src="/assets/images/loading.jpg" alt="loading" /></div>');
         });
         $("#myModalproduct").on('hidden.bs.modal', function (e) {

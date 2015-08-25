@@ -41,7 +41,7 @@
         <!-- slider revolution start -->
         <!-- ================ -->
         <div class="slider-banner-container">
-            <div class="slider-banner-fullscreen">
+            <div class="slider-banner-fullwidth">
                 <ul class="slides">
                     <!-- slide 1 start -->
                     <!-- ================ -->
@@ -515,7 +515,17 @@
                                 <h5>周期 @(item.GetValue<string>("cycle"))</h5>
                                 <div class="separator"></div>
                                 <p>@(item.GetValue<string>("introduction"))</p>
-                                <a data-id="@item.Id" class="btn btn-default btn-sm btn-hvr hvr-shutter-out-horizontal margin-clear productBtn">详情<i class="fa fa-arrow-right pl-10"></i></a>
+                                @{
+                    if (item.GetValue<bool>("canBuy"))
+                    {
+                        <a data-id="@item.Id" class="btn btn-default btn-sm  margin-clear productBtn">详情<i class="fa fa-arrow-right pl-10"></i></a>
+                    }
+                    else
+                    {
+                        <a data-id="@item.Id" class="btn btn-gray btn-sm  margin-clear productBtn">详情<i class="fa fa-arrow-right pl-10"></i></a>
+                    }
+}
+
                             </div>
                         </div>
                     </div>
