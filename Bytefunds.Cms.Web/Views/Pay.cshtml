@@ -13,6 +13,7 @@
 
 
     string username = string.Empty, phone = string.Empty, email = string.Empty;
+    string minAmount = Request.QueryString["minAmount"];
     int id = int.Parse(Request.QueryString["id"]);
     IContent product = ApplicationContext.Services.ContentService.GetById(id);
 
@@ -25,11 +26,11 @@
     content.SetValue("buyproduct", Request.QueryString["id"]);
     if (!Members.GetCurrentLoginStatus().IsLoggedIn)
     {
-        <script>
+        @*<script>
             window.onload = function () {
                 document.getElementById("btnlogin").click();
             }
-        </script>
+        </script>*@
 
         ApplicationContext.Services.ContentService.Save(content);
         email = content.Id.ToString();
@@ -49,14 +50,14 @@
         email = email + "^_^" + content.Id;
     }
 
-    string url = string.Format("{0}?Username={1}&Phone={2}&Email={3}&Linkphone=0&Successurl={4}&Failurl={5}&Paytype={6}&Formurl={7}&Amount={8}&cny=0", payurl, username, phone, email, successurl, payfailurl, array[0], array[1], product.GetValue<string>("amount"));
+    string url = string.Format("{0}?Username={1}&Phone={2}&Email={3}&Linkphone=0&Successurl={4}&Failurl={5}&Paytype={6}&Formurl={7}&Amount={8}&cny=0&minAmount={9}", payurl, username, phone, email, successurl, payfailurl, array[0], array[1], product.GetValue<string>("amount"), minAmount);
 }
 <section class="section clearfix">
     <div class="container">
-        <h2 class="text-center">热销产品</h2>
+        <h2 class="text-center">购买产品</h2>
         <div class="separator"></div>
         <div class="row grid-space-10">
-            <iframe src="@url" style="border:none;width:100%;min-height:500px"></iframe>
+            <iframe src="@url" style="border:none;width:100%;min-height:630px"></iframe>
         </div>
     </div>
 </section>

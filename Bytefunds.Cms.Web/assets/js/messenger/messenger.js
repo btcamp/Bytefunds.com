@@ -475,7 +475,7 @@ window.Messenger.Events = (function() {
           clearTimeout(this._hideTimeout);
         }
         this._hideTimeout = setTimeout(function() {
-          return _this.hide();
+          //return _this.hide();
         }, this.options.hideAfter * 1000);
       } else {
         this.$message.removeClass('messenger-will-hide-after');
@@ -484,7 +484,7 @@ window.Messenger.Events = (function() {
         this.$message.addClass('messenger-will-hide-on-navigate');
         if ((typeof Backbone !== "undefined" && Backbone !== null ? Backbone.history : void 0) != null) {
           Backbone.history.on('route', function() {
-            return _this.hide();
+            //return _this.hide();
           });
         }
       } else {

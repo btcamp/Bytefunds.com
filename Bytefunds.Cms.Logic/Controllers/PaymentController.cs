@@ -2,6 +2,7 @@
 using Bytefunds.Cms.Logic.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -20,7 +21,7 @@ namespace Bytefunds.Cms.Logic.Controllers
             try
             {
                 Content = DESHelper.DecryptDES(Content);
-                System.IO.File.AppendAllText(System.IO.Path.Combine(Server.MapPath("~/"), Guid.NewGuid().ToString() + ".txt"), Content);
+                WriteLog(Content);
                 temp = Content;
                 System.Web.Script.Serialization.JavaScriptSerializer jss = new System.Web.Script.Serialization.JavaScriptSerializer();
                 PaymentModel payModel = jss.Deserialize<Models.PaymentModel>(Content);
@@ -71,19 +72,19 @@ namespace Bytefunds.Cms.Logic.Controllers
                     Services.ContentService.Save(content);
                     //触发创建事件
                     EventHandlers.CustomRaiseEvent.RaiseContentCreated(content);
-                    System.IO.File.AppendAllText(System.IO.Path.Combine(Server.MapPath("~/"), Guid.NewGuid().ToString() + ".txt"), "success!!!");
+                    WriteLog("success!!");
                     return Json("ok", JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
-                    System.IO.File.AppendAllText("c:\\PaySuccess.txt", "重复提交" + payModel.Billno);
+                    WriteLog("重复提交" + payModel.Billno);
                     return new ContentResult() { Content = "重复提交" };
                 }
 
             }
             catch (Exception ex)
             {
-                System.IO.File.AppendAllText(System.IO.Path.Combine(Server.MapPath("~/"), Guid.NewGuid().ToString() + ".txt"), ex.ToString());
+                WriteLog(ex.ToString());
                 return new ContentResult() { Content = "fail" + temp + ex };
             }
         }
@@ -101,6 +102,16 @@ namespace Bytefunds.Cms.Logic.Controllers
             model.Success = true;
             model.Msg = "清除成功!";
             return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        public void WriteLog(string msg)
+        {
+            string path = Server.MapPath("/log/");
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            System.IO.File.AppendAllText(Path.Combine(path, DateTime.Now.ToString("yyyyMMdd") + ".log"), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + " " + msg + "\r\n");
         }
     }
 }

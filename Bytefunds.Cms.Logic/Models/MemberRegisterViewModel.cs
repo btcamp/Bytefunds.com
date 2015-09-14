@@ -8,8 +8,8 @@ namespace Bytefunds.Cms.Logic.Models
 {
     public class MemberRegisterViewModel
     {
-        [Display(Name = "用户名")]
-        [Required(ErrorMessage="请输入姓名")]
+        [Display(Name = "昵称")]
+        [Required(ErrorMessage = "请输入昵称")]
         public string Name { get; set; }
         [Display(Name = "邮箱")]
         [Required(ErrorMessage = "请输入邮箱")]
@@ -24,5 +24,10 @@ namespace Bytefunds.Cms.Logic.Models
         [Display(Name = "密码")]
         [Required(ErrorMessage = "请输入密码")]
         public string Password { get; set; }
+
+        //[Display(Name = "确认密码")]
+        //[Required(ErrorMessage = "请输入确认密码")]
+        //[Compare("Password",ErrorMessage="两次密码不一致，请重新输入")]
+        //public string ConfirmPassword { get; set; }
     }
 }

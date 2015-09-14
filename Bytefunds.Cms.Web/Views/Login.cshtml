@@ -1,0 +1,48 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "_Layout.cshtml";
+
+    Html.EnableClientValidation();
+    Html.EnableUnobtrusiveJavaScript();
+
+    MemberLoginViewModel loginModel = new MemberLoginViewModel();
+}
+
+
+<section class="pv-30 clearfix">
+    <div class="container sign-up">
+        <div class="row">
+            <div class="form-block center-block p-30 light-gray-bg border-clear text-left" style="">
+                <h2 class="title">登录</h2>
+                <form class="form-horizontal" role="form" method="post" action="/umbraco/Api/Member/Login">
+                    <div class="form-group has-feedback">
+                        @Html.LabelFor(m => loginModel.Phone, new { @class = "col-sm-3 control-label" })
+                        <div class="col-sm-8">
+                            <div>
+                                @Html.TextBoxFor(m => loginModel.Phone, new { @class = "form-control", placeholder = "请输入您的邮箱" })
+                                <i class="fa fa-phone form-control-feedback"></i>
+                            </div>
+                            @Html.ValidationMessageFor(m => loginModel.Phone)
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback">
+                        @Html.LabelFor(m => loginModel.Password, new { @class = "col-sm-3 control-label" })
+                        <div class="col-sm-8">
+                            <div>
+                                @Html.PasswordFor(m => loginModel.Password, new { @class = "form-control", placeholder = "请输入您的密码" })
+                                <i class="fa fa-lock form-control-feedback"></i>
+                            </div>
+                            @Html.ValidationMessageFor(m => loginModel.Password)
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <div class="col-sm-offset-3 col-sm-8 submit-btn">
+                            <button type="submit" class="btn btn-group btn-warning btn-animated">登录<i class="fa fa-check"></i></button>
+                            <span>没有账号？ <a href="/register">免费注册</a></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

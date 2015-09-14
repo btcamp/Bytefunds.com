@@ -11,7 +11,10 @@ namespace Bytefunds.Cms.Logic.Models
         {
             Success = false;
             RedirectUrl = "/";
+            IsRedirect = true;
         }
+
+        public bool IsRedirect { get; set; }
         public bool Success { get; set; }
 
         public string Msg { get; set; }

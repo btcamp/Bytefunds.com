@@ -1,30 +1,12 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+
+@using Bytefunds.Cms.Logic.Helpers;
+
 @{
     Layout = "_Layout.cshtml";
 
-
-    IPublishedContent banners = Model.Content.Children.Where(e => e.Name.Contains("Banners")).FirstOrDefault();
-    IPublishedContent contentbanner01 = banners.Children.Where(e => e.Name.Contains("01")).FirstOrDefault();
-    IPublishedContent contentbanner02 = banners.Children.Where(e => e.Name.Contains("02")).FirstOrDefault();
-    IPublishedContent contentbanner03 = banners.Children.Where(e => e.Name.Contains("03")).FirstOrDefault();
-    IPublishedContent contentbanner04 = banners.Children.Where(e => e.Name.Contains("04")).FirstOrDefault();
-    IPublishedContent contentbanner05 = banners.Children.Where(e => e.Name.Contains("05")).FirstOrDefault();
-
-    IPublishedContent imgbanner01 = Umbraco.Media(contentbanner01.GetPropertyValue<int>("img"));
-    IPublishedContent imgbanner02 = Umbraco.Media(contentbanner02.GetPropertyValue<int>("img"));
-    IPublishedContent imgbanner03 = Umbraco.Media(contentbanner03.GetPropertyValue<int>("img"));
-    IPublishedContent imgbanner04 = Umbraco.Media(contentbanner04.GetPropertyValue<int>("img"));
-    IPublishedContent imgbanner05 = Umbraco.Media(contentbanner05.GetPropertyValue<int>("img"));
-
-    IPublishedContent development = Model.Content.Children.Where(e => e.Name.Contains("Development")).FirstOrDefault();
-
-    IPublishedContent register = Model.Content.Children.Where(e => e.Name.Contains("Register")).FirstOrDefault();
-
-    IPublishedContent LatestNews = Model.Content.Children.Where(e => e.Name.Contains("LatestNews")).FirstOrDefault();
-
-    IPublishedContent user = Model.Content.Children.Where(e => e.Name.Contains("User")).FirstOrDefault();
-
-    IPublishedContent partners = Model.Content.Children.Where(e => e.Name.Contains("Partners")).FirstOrDefault();
+    IContentType ct = ApplicationContext.Services.ContentTypeService.GetContentType("ProductElement");
+    IEnumerable<IContent> contents = ApplicationContext.Services.ContentService.GetContentOfContentType(ct.Id).Where(c => c.Status != ContentStatus.Trashed);
 
     IPublishedContent news = Model.Content.Ancestor(1).Children.Where(e => e.Name.Contains("News")).FirstOrDefault();
     IEnumerable<IPublishedContent> newsList = null;
@@ -32,9 +14,18 @@
     {
         newsList = news.Children().OrderByDescending(e => e.UpdateDate).Skip(0).Take(10);
     }
+    Html.EnableClientValidation();
+    Html.EnableUnobtrusiveJavaScript();
+    MemberLoginViewModel loginModel = new MemberLoginViewModel();
+    ReservationViewModel reservationModel = new ReservationViewModel();
+
+
+    decimal sumAmount = decimal.Parse(SystemSettingsHelper.GetSystemSettingsByKey("sum:amount"));
+    decimal amount1 = decimal.Parse(SystemSettingsHelper.GetSystemSettingsByKey("amounted"));
+    string number1 = ((amount1 / sumAmount) * 100).ToString("f2") + "%";
 }
 
-<div id="banner" class="banner clearfix">
+<div class="banner clearfix" style="position: relative">
     <!-- slideshow start -->
     <!-- ================ -->
     <div class="slideshow">
@@ -45,547 +36,169 @@
                 <ul class="slides">
                     <!-- slide 1 start -->
                     <!-- ================ -->
-                    <li data-transition="random" data-slotamount="7" data-masterspeed="500" data-saveperformance="on">
+                    <li data-transition="fade" data-slotamount="1" data-masterspeed="500" data-saveperformance="on">
                         <!-- main image -->
-                        <img src="@imgbanner01.Url" alt="slidebg1" data-bgposition="center top" data-bgrepeat="no-repeat" data-bgfit="cover">
+                        <img src="/assets/images/banner01.jpg" alt="slidebg1" data-bgposition="center top" data-bgrepeat="no-repeat" data-bgfit="cover">
+                        <!-- Transparent Background -->
                         <div class="tp-caption dark-translucent-bg"
                              data-x="center"
                              data-y="bottom"
-                             data-speed="500"
-                             data-easing="easeOutQuad"
+                             data-speed="600"
                              data-start="0">
                         </div>
-
-                        <!-- LAYER NR. 1 -->
-                        <div class="tp-caption sfr stl xlarge_white"
-                             data-x="center"
-                             data-y="50"
-                             data-speed="200"
-                             data-easing="easeOutQuad"
-                             data-start="1000"
-                             data-end="2500"
-                             data-splitin="chars"
-                             data-elementdelay="0.1"
-                             data-endelementdelay="0.1"
-                             data-splitout="chars">
-                            @*全球首发！*@
-                            @(contentbanner01.GetPropertyValue<string>("remark1"))
-                        </div>
-
-                        <!-- LAYER NR. 2 -->
-                        <div class="tp-caption sfl str xlarge_white"
-                             data-x="center"
-                             data-y="50"
-                             data-speed="200"
-                             data-easing="easeOutQuad"
-                             data-start="2500"
-                             data-end="4000"
-                             data-splitin="chars"
-                             data-elementdelay="0.1"
-                             data-endelementdelay="0.1"
-                             data-splitout="chars">
-                            @*全球首发！*@
-                            @(contentbanner01.GetPropertyValue<string>("remark1"))
-                        </div>
-
-                        <!-- LAYER NR. 3 -->
-                        <div class="tp-caption sfr stt xlarge_white"
-                             data-x="center"
-                             data-y="50"
-                             data-speed="200"
-                             data-easing="easeOutQuad"
-                             data-start="4000"
-                             data-end="6000"
-                             data-splitin="chars"
-                             data-elementdelay="0.1"
-                             data-endelementdelay="0.1"
-                             data-splitout="chars"
-                             data-endspeed="400">
-                            @*ALGOFORCE®量化系统*@
-                            @(contentbanner01.GetPropertyValue<string>("remark2"))
-                        </div>
-
-                        <!-- LAYER NR. 4 -->
-                        <div class="tp-caption sft fadeout text-center large_white"
-                             data-x="center"
-                             data-y="50"
-                             data-speed="500"
-                             data-easing="easeOutQuad"
-                             data-start="7500"
-                             data-end="10000">
-                            @*ALGOFORCE<sup>®</sup> 全球最完美的量化交易系统*@
-                            @(Html.Raw(contentbanner01.GetPropertyValue<string>("remark3")))
-                        </div>
-
-
-                        <!-- LAYER NR. 8 -->
-                        <div class="tp-caption ZoomIn fadeout text-center tp-resizeme large_white"
-                             data-x="center"
-                             data-y="150"
-                             data-speed="500"
-                             data-easing="easeOutQuad"
-                             data-start="6400"
-                             data-end="10000">
-                            <div class="separator light"></div>
-                        </div>
-
-                        <!-- LAYER NR. 9 -->
-                        <div class="tp-caption sft fadeout medium_white text-center"
-                             data-x="center"
-                             data-y="190"
-                             data-speed="500"
-                             data-easing="easeOutQuad"
-                             data-start="5800"
-                             data-end="10000"
-                             data-endspeed="600">
-                            @*<p>基于对金融市场各类交易标存在的波动率、相关性、交易报价与交易资金等一系列有效数据收集 </p> <p> 后，使用自主研发的各类数学模型进行分析判断，最终通过算法交易有效的消除系统风险，实现</p><p> 稳定套利与绝对收益。</p>*@
-                            <p>@(contentbanner01.GetPropertyValue<string>("remark4"))</p>
-                            <p>@(contentbanner01.GetPropertyValue<string>("remark5"))</p>
-                            <p>@(contentbanner01.GetPropertyValue<string>("remark6"))</p>
-                        </div>
-
-                        <!-- LAYER NR. 10 -->
-                        <div class="tp-caption fade fadeout"
-                             data-x="center"
-                             data-y="bottom"
-                             data-voffset="100"
-                             data-speed="500"
-                             data-easing="easeOutQuad"
-                             data-start="2000"
-                             data-end="10000"
-                             data-endspeed="200">
-                            <a href="#page-start" class="btn btn-lg moving smooth-scroll"><i class="icon-down-open-big"></i><i class="icon-down-open-big"></i><i class="icon-down-open-big"></i></a>
-                        </div>
-
-                        <!-- LAYER NR. 6 -->
-                        @*<div class="tp-caption sfb fadeout small_white"
-                                   data-x="left"
-                                   data-y="420"
-                                   data-speed="500"
-                                   data-start="2500"
-                                   data-easing="easeOutQuad"
-                                   data-endspeed="600">
-                                <a href="#" class="btn btn-default btn-lg btn-animated" style="background-color:#CD9F2E;border-color:#CD9F2E"><i class="fa  fa-caret-right"></i>了解更多</a>
-                            </div>*@
                     </li>
                     <!-- slide 1 end -->
                     <!-- slide 2 start -->
                     <!-- ================ -->
-                    <li data-transition="random" data-slotamount="7" data-masterspeed="500" data-saveperformance="on">
+                    <li data-transition="fade" data-slotamount="1" data-masterspeed="500" data-saveperformance="on">
                         <!-- main image -->
-                        <img src="@imgbanner02.Url" alt="slidebg2" data-bgposition="center top" data-bgrepeat="no-repeat" data-bgfit="cover">
+                        <img src="/assets/images/banner02.jpg" alt="slidebg2" data-bgposition="center top" data-bgrepeat="no-repeat" data-bgfit="cover">
+                        <!-- Transparent Background -->
                         <div class="tp-caption dark-translucent-bg"
                              data-x="center"
                              data-y="bottom"
-                             data-speed="500"
-                             data-easing="easeOutQuad"
+                             data-speed="600"
                              data-start="0">
                         </div>
-
-                        <!-- LAYER NR. 1 -->
-                        <div class="tp-caption sfb fadeout large_white"
-                             data-x="left"
-                             data-y="70"
-                             data-speed="500"
-                             data-start="1000"
-                             data-easing="easeOutQuad"
-                             data-end="10000">
-                            @*<span class="logo-font">The Project</span> <br> Premium HTML5 Bootstrap Theme*@
-                            @*实盈出席上海国际电影节*@
-                            @(contentbanner02.GetPropertyValue<string>("remark1"))
-                        </div>
-                        <div class="tp-caption sfb fadeout large_white tp-resizeme hidden-xs"
-                             data-x="left"
-                             data-y="120"
-                             data-speed="500"
-                             data-easing="easeOutQuad"
-                             data-start="800"
-                             data-end="10000"
-                             data-endspeed="600">
-                            <div class="separator light"></div>
-                        </div>
-                        <!-- LAYER NR. 2 -->
-                        <div class="tp-caption sfb fadeout text-left medium_white"
-                             data-x="left"
-                             data-y="150"
-                             data-speed="500"
-                             data-start="1300"
-                             data-easing="easeOutQuad"
-                             data-endspeed="600">
-                            @*第21届上海电视节目白玉兰奖揭晓*@
-                            <p>@(contentbanner02.GetPropertyValue<string>("remark2"))</p>
-                        </div>
-
-                        <!-- LAYER NR. 3 -->
-                        <div class="tp-caption sfb fadeout text-left small_white"
-                             data-x="left"
-                             data-y="230"
-                             data-speed="500"
-                             data-start="1600"
-                             data-easing="easeOutQuad"
-                             data-endspeed="600">
-                            @*实盈团队远赴上海出席本次电影节，为团队成员柯利明现场助威，同时实盈在此兴奋的宣布*@
-                            @*儒意实盈量化影视基金正式宣布起航！*@
-                            <p>@(contentbanner02.GetPropertyValue<string>("remark3"))</p>
-                            <p>@(contentbanner02.GetPropertyValue<string>("remark4"))</p>
-                        </div>
-
-                        <!-- LAYER NR. 4 -->
-                        @*<div class="tp-caption sfb fadeout text-left small_white"
-                                 data-x="left"
-                                 data-y="270"
-                                 data-speed="500"
-                                 data-start="1900"
-                                 data-easing="easeOutQuad"
-                                 data-endspeed="600">
-
-                                @(contentbanner02.GetPropertyValue<string>("remark4"))
-                            </div>*@
                     </li>
-                    <li data-transition="random" data-slotamount="7" data-masterspeed="500" data-saveperformance="on">
-                        <!-- main image -->
-                        <img src="@imgbanner03.Url" alt="slidebg2" data-bgposition="center top" data-bgrepeat="no-repeat" data-bgfit="cover">
-                        <div class="tp-caption dark-translucent-bg"
-                             data-x="center"
-                             data-y="bottom"
-                             data-speed="500"
-                             data-easing="easeOutQuad"
-                             data-start="0">
-                        </div>
-
-                        <!-- LAYER NR. 1 -->
-                        <div class="tp-caption sfb fadeout large_white"
-                             data-x="left"
-                             data-y="70"
-                             data-speed="500"
-                             data-start="1000"
-                             data-easing="easeOutQuad"
-                             data-end="10000">
-                            @*至尊盈伍号*@
-                            @(contentbanner03.GetPropertyValue<string>("remark1"))
-                        </div>
-                        <div class="tp-caption sfb fadeout large_white tp-resizeme hidden-xs"
-                             data-x="left"
-                             data-y="120"
-                             data-speed="500"
-                             data-easing="easeOutQuad"
-                             data-start="900"
-                             data-end="10000"
-                             data-endspeed="600">
-                            <div class="separator light"></div>
-                        </div>
-                        <!-- LAYER NR. 2 -->
-                        <div class="tp-caption sfb fadeout text-left medium_white"
-                             data-x="left"
-                             data-y="150"
-                             data-speed="500"
-                             data-start="1300"
-                             data-easing="easeOutQuad"
-                             data-endspeed="600">
-                            @*每月利息，年化收益率高达14%*@
-                            <p>@(contentbanner03.GetPropertyValue<string>("remark2"))</p>
-                        </div>
-
-                        <!-- LAYER NR. 3 -->
-                        <div class="tp-caption sfb fadeout text-left small_white"
-                             data-x="left"
-                             data-y="230"
-                             data-speed="500"
-                             data-start="1600"
-                             data-easing="easeOutQuad"
-                             data-endspeed="600">
-                            @*"至尊盈伍号"是实盈投资退出的按月回收收益的理财服务模式*@
-                            @*本金选择继续投资，利息按月回收，每月收益高达1.17%。选择逐月续存，收益档次自动累计*@
-                            @*年息高达10.08%*@
-                            <p>@(contentbanner03.GetPropertyValue<string>("remark3"))</p>
-                            <p>@(contentbanner03.GetPropertyValue<string>("remark4"))</p>
-                            <p>@(contentbanner03.GetPropertyValue<string>("remark5"))</p>
-                        </div>
-                        <!-- LAYER NR. 6 -->
-                        <div class="tp-caption sfb fadeout small_white"
-                             data-x="left"
-                             data-y="390"
-                             data-speed="500"
-                             data-start="2500"
-                             data-easing="easeOutQuad"
-                             data-endspeed="600">
-                            <a href="@contentbanner03.Children.FirstOrDefault().Url" class="btn btn-default btn-lg btn-animated" style="background-color:#CD9F2E;border-color:#CD9F2E"><i class="fa fa-caret-right"></i>@(contentbanner03.GetPropertyValue<string>("urltitle"))</a>
-                        </div>
-                    </li>
-                    <li data-transition="random" data-slotamount="7" data-masterspeed="500" data-saveperformance="on">
-                        <!-- main image -->
-                        <img src="@imgbanner04.Url" alt="slidebg1" data-bgposition="center top" data-bgrepeat="no-repeat" data-bgfit="cover">
-                        <div class="tp-caption dark-translucent-bg"
-                             data-x="center"
-                             data-y="bottom"
-                             data-speed="500"
-                             data-easing="easeOutQuad"
-                             data-start="0">
-                        </div>
-
-                        <!-- LAYER NR. 1 -->
-                        <div class="tp-caption sfr stl xlarge_white"
-                             data-x="center"
-                             data-y="50"
-                             data-speed="200"
-                             data-easing="easeOutQuad"
-                             data-start="1000"
-                             data-end="2500"
-                             data-splitin="chars"
-                             data-elementdelay="0.1"
-                             data-endelementdelay="0.1"
-                             data-splitout="chars">
-                            @(contentbanner04.GetPropertyValue<string>("remark1"))
-                        </div>
-
-                        <!-- LAYER NR. 2 -->
-                        <div class="tp-caption sfl str xlarge_white"
-                             data-x="center"
-                             data-y="50"
-                             data-speed="200"
-                             data-easing="easeOutQuad"
-                             data-start="2500"
-                             data-end="4000"
-                             data-splitin="chars"
-                             data-elementdelay="0.1"
-                             data-endelementdelay="0.1"
-                             data-splitout="chars">
-                            @(contentbanner04.GetPropertyValue<string>("remark1"))
-                        </div>
-
-                        <!-- LAYER NR. 3 -->
-                        <div class="tp-caption sfr stt xlarge_white"
-                             data-x="center"
-                             data-y="50"
-                             data-speed="200"
-                             data-easing="easeOutQuad"
-                             data-start="4000"
-                             data-end="6000"
-                             data-splitin="chars"
-                             data-elementdelay="0.1"
-                             data-endelementdelay="0.1"
-                             data-splitout="chars"
-                             data-endspeed="400">
-                            @(contentbanner04.GetPropertyValue<string>("remark2"))
-                        </div>
-
-                        <!-- LAYER NR. 4 -->
-                        <div class="tp-caption sft fadeout text-center large_white"
-                             data-x="center"
-                             data-y="50"
-                             data-speed="500"
-                             data-easing="easeOutQuad"
-                             data-start="7500"
-                             data-end="10000">
-                            @(contentbanner04.GetPropertyValue<string>("remark2"))
-                        </div>
-
-
-                        <!-- LAYER NR. 8 -->
-                        <div class="tp-caption ZoomIn fadeout text-center tp-resizeme large_white"
-                             data-x="center"
-                             data-y="150"
-                             data-speed="500"
-                             data-easing="easeOutQuad"
-                             data-start="6400"
-                             data-end="10000">
-                            <div class="separator light"></div>
-                        </div>
-
-                        <!-- LAYER NR. 9 -->
-                        <div class="tp-caption sft fadeout medium_white text-center"
-                             data-x="center"
-                             data-y="190"
-                             data-speed="500"
-                             data-easing="easeOutQuad"
-                             data-start="5800"
-                             data-end="10000"
-                             data-endspeed="600">
-                            <p>@(Html.Raw(contentbanner04.GetPropertyValue<string>("remark3")))</p>
-                            <p>@(contentbanner04.GetPropertyValue<string>("remark4"))</p>
-                            <p>@(contentbanner04.GetPropertyValue<string>("remark5"))</p>
-                        </div>
-
-
-                        <!-- LAYER NR. 6 -->
-                        <div class="tp-caption sfb fadeout small_white"
-                             data-x="center"
-                             data-y="420"
-                             data-speed="500"
-                             data-start="2500"
-                             data-easing="easeOutQuad"
-                             data-endspeed="600">
-                            <a href="@contentbanner04.Children.FirstOrDefault().Url" class="btn btn-default btn-lg btn-animated" style="background-color:#CD9F2E;border-color:#CD9F2E"><i class="fa fa-caret-right"></i>@(contentbanner04.GetPropertyValue<string>("urltitle"))</a>
-                        </div>
-                    </li>
-                    <li data-transition="random" data-slotamount="7" data-masterspeed="500" data-saveperformance="on">
-                        <!-- main image -->
-                        <img src="@imgbanner05.Url" alt="slidebg2" data-bgposition="center top" data-bgrepeat="no-repeat" data-bgfit="cover">
-                        <div class="tp-caption dark-translucent-bg"
-                             data-x="center"
-                             data-y="bottom"
-                             data-speed="500"
-                             data-easing="easeOutQuad"
-                             data-start="0">
-                        </div>
-
-                        <!-- LAYER NR. 1 -->
-                        <div class="tp-caption sfb fadeout large_white"
-                             data-x="left"
-                             data-y="70"
-                             data-speed="500"
-                             data-start="1000"
-                             data-easing="easeOutQuad"
-                             data-end="10000">
-                            @*<span class="logo-font">The Project</span> <br> Premium HTML5 Bootstrap Theme*@
-                            @*实盈出席上海国际电影节*@
-                            @(contentbanner05.GetPropertyValue<string>("remark1"))
-                        </div>
-                        <div class="tp-caption sfb fadeout large_white tp-resizeme hidden-xs"
-                             data-x="left"
-                             data-y="120"
-                             data-speed="500"
-                             data-easing="easeOutQuad"
-                             data-start="800"
-                             data-end="10000"
-                             data-endspeed="600">
-                            <div class="separator light"></div>
-                        </div>
-                        <!-- LAYER NR. 2 -->
-                        <div class="tp-caption sfb fadeout text-left medium_white"
-                             data-x="left"
-                             data-y="150"
-                             data-speed="500"
-                             data-start="1300"
-                             data-easing="easeOutQuad"
-                             data-endspeed="600">
-                            <p>@(contentbanner05.GetPropertyValue<string>("remark2"))</p>
-                        </div>
-
-                        <!-- LAYER NR. 3 -->
-                        <div class="tp-caption sfb fadeout text-left small_white"
-                             data-x="left"
-                             data-y="230"
-                             data-speed="500"
-                             data-start="1600"
-                             data-easing="easeOutQuad"
-                             data-endspeed="600">
-                            <p>@(contentbanner05.GetPropertyValue<string>("remark3"))</p>
-                            <p>@(contentbanner05.GetPropertyValue<string>("remark4"))</p>
-                        </div>
-                        <div class="tp-caption sfb fadeout small_white"
-                             data-x="left"
-                             data-y="420"
-                             data-speed="500"
-                             data-start="2500"
-                             data-easing="easeOutQuad"
-                             data-endspeed="600">
-                            <a href="@contentbanner05.Children.FirstOrDefault().Url" class="btn btn-default btn-lg btn-animated" style="background-color:#CD9F2E;border-color:#CD9F2E"><i class="fa fa-caret-right"></i>@(contentbanner05.GetPropertyValue<string>("urltitle"))</a>
-                        </div>
-                    </li>
+                    <!-- slide 2 end -->
                 </ul>
                 <div class="tp-bannertimer"></div>
             </div>
         </div>
         <!-- slider revolution end -->
     </div>
+    <!-- slideshow end -->
+    <div class="banner-float hidden-sm hidden-xs">
+        <h2 class="banner-float-1">高于活期存款<strong>50</strong><span>倍</span> 以上的收益</h2>
+        <div class="separator banner-float-2" style="top:25%"></div>
+        <p class="banner-float-3">已有 <span>1596</span> 位高端客户在比特金服安全的获得收益</p>
+        <p class="banner-float-4">零钱计划为您安全快速的赚钱</p>
+        <p><a class="btn btn-block banner-float-5 btn-buy" href="">点击立即购买</a></p>
+        <p class="banner-float-6">没有账户，<a href="/register">免费注册</a></p>
+    </div>
 </div>
-
-<section class="section clearfix">
+<div id="page-start"></div>
+<section class="clearfix news">
     <div class="container">
-        <h2 class="text-center">热销产品</h2>
-        <div class="separator"></div>
-        <div class="row grid-space-10">
-            @{
-                int contentTypeid = ApplicationContext.Services.ContentTypeService.GetContentType("ProductElement").Id;
-                IEnumerable<IContent> lists = ApplicationContext.Services.ContentService.GetContentOfContentType(contentTypeid);
-                foreach (IContent item in lists)
-                {
-                    int img = item.GetValue<int>("img");
-                    <div class="col-sm-6 col-md-3">
-                        <div class="image-box style-2 mb-20 shadow bordered light-gray-bg text-center boxed object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="150">
-                            <div class="overlay-container">
-                                <img src="@Umbraco.Media(img).Url" alt="">
-                                <div class="overlay-to-top">
-                                    <p class="small margin-clear">@(item.GetValue<string>("title"))</p>
-                                </div>
-                            </div>
-                            <div class="body">
-                                <h4>金额 @(item.GetValue<string>("amount")) 收益 @(item.GetValue<string>("rate"))</h4>
-                                <h5>周期 @(item.GetValue<string>("cycle"))</h5>
-                                <div class="separator"></div>
-                                <p>@(item.GetValue<string>("introduction"))</p>
-                                @{
-                    if (item.GetValue<bool>("canBuy"))
-                    {
-                        <a data-id="@item.Id" class="btn btn-default btn-sm  margin-clear productBtn">详情<i class="fa fa-arrow-right pl-10"></i></a>
+        <div class="row">
+            <div class="col-md-2 news-title">
+                <span>最新公告</span><span><i class="fa fa-volume-up"></i></span>
+            </div>
+            <div class="col-md-6 news-1-content">
+                <ul class="list" id="news-1">
+                    <li class="animated fadeInUp"><span>2015-08-25</span><a href="#">360互联+指数上线 反映市场情绪发现市场价值</a></li>
+                </ul>
+                <table class="news-content-1" style="display: none">
+                    @{
+                        foreach (var item in newsList)
+                        {
+                            <tr>
+                                <td>@(item.CreateDate.ToString("yyyy-MM-dd"))</td>
+                                <td>@(item.Url)</td>
+                                <td>@(item.GetPropertyValue<string>("title"))</td>
+                            </tr>
+                        }
                     }
-                    else
-                    {
-                        <a data-id="@item.Id" class="btn btn-gray btn-sm  margin-clear productBtn">详情<i class="fa fa-arrow-right pl-10"></i></a>
-                    }
-}
-
-                            </div>
-                        </div>
-                    </div>
-                }
-            }
+                    @*<tr>
+                            <td>2015-09-02</td>
+                            <td>#</td>
+                            <td>金融惊艳市场 你财富活期宝翻倍券半天售4亿</td>
+                        </tr>
+                        <tr>
+                            <td>2015-09-01</td>
+                            <td>#</td>
+                            <td>金融独立品牌亮相 创始人详解为何做金融业务</td>
+                        </tr>
+                        <tr>
+                            <td>2015-08-25</td>
+                            <td>#</td>
+                            <td>互联+指数上线 反映市场情绪发现市场价值</td>
+                        </tr>*@
+                </table>
+            </div>
+            <div class="col-md-4">
+                <a href="/news" style="color:rgb(134,134,134);text-decoration:none">更多 >></a>
+            </div>
+            @*<div class="col-md-4 news-2-content">
+                    <ul class="list" id="news-2">
+                        <li class="animated fadeInUp"><span>3分钟前</span>用户: <span class="account">180000000043</span><span class="invested-content">成功投资47000元</span></li>
+                    </ul>
+                    <table class="news-content-2" style="display: none">
+                        <tr>
+                            <td>3分钟前</td>
+                            <td>130000000053</td>
+                            <td>成功投资47000元</td>
+                        </tr>
+                        <tr>
+                            <td>4分钟前</td>
+                            <td>130000000063</td>
+                            <td>成功投资60000元</td>
+                        </tr>
+                        <tr>
+                            <td>5分钟前</td>
+                            <td>150000000053</td>
+                            <td>成功投资100000元</td>
+                        </tr>
+                    </table>
+                </div>*@
         </div>
     </div>
 </section>
 
-<!-- section -->
-<!-- ================ -->
-<section class="pv-30" id="development">
-    <div class="container">
+<section class="pv-20 clearfix">
+    <div class="container hot-product">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <h2 class="text-center">@(development.GetPropertyValue<string>("title"))</h2>
+                <h2 class="text-center">热销产品</h2>
                 <div class="separator"></div>
-                <p class="large text-center">@(development.GetPropertyValue<string>("content").ReomveHtmlAttribute())</p>
             </div>
-        </div>
-        <div class="row">
-            @{
-                foreach (IPublishedContent content in development.Children)
-                {
-                    int linkid = content.GetPropertyValue<int>
-                        ("urllink");
-                    dynamic childrenContent = Umbraco.Content(linkid);
-                    if (childrenContent.Id != 0)
-                    {
-                        <div class="col-md-4 ">
-                            <div class="pv-40 ph-40 light-gray-bg boxed shadow object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="150">
-                                <div class="icon without-bg"><i class="@(content.GetPropertyValue<string>("style"))"></i></div>
-                                <div class="body">
-                                    <h4 class="title text-center">@(content.GetPropertyValue<string>("title"))</h4>
-                                    <p class="text-center">@(content.GetPropertyValue<string>("content").ReomveHtmlAttribute())</p>
-                                    <p class="text-center"><a href="@(childrenContent.Url)">@(content.GetPropertyValue<string>("urltitle"))</a></p>
+            <div class="col-xs-12" style="height: 10px;"></div>
+            <div class="image-box">
+                <div class="col-md-5">
+                    <img src="/assets/images/hot/bytejinfu.jpg" alt="" style="width: 100%">
+                </div>
+                <div class="col-md-7">
+                    <div class="body">
+                        <h3>鹏华资产实盈量化复兴资产管理计划（主推）</h3>
+                        <div class="separator-2"></div>
+                        <div class="raise-funds">
+                            <p><span class="raise-funds-title">开 放 额 度：</span><span class="cash">@(sumAmount.ToString("N2"))</span>元</p>
+                            <p><span class="raise-funds-title">已募集资金：</span><span class="cash">@(amount1.ToString("N2"))</span>元</p>
+                            <div class="progress mt-30 style-1">
+                                <span class="text"></span>
+                                <div class="progress-bar progress-bar-warning progress-bar-striped active" data-animate-width="@number1">
+                                    <span class="label object-non-visible animated object-visible fadeInLeftSmall" data-animation-effect="fadeInLeftSmall" data-effect-delay="500"></span>
                                 </div>
                             </div>
                         </div>
-                    }
-
-                }
-            }
+                        <p class="raise-funds-content">本私募产品是由鹏华资产管理有限公司发行的ETF期现套利对冲基金产品，仅接受合格投资人购买。预期收益可达<span class="earnings">66.9%</span>最大回撤0.67%，属于低风险高收益量化投资产品。</p>
+                        <div style="position: relative">
+                            <span class="btn btn-animated btn-warning margin-clear reservation-btn">立即预约<i class="fa fa-arrow-right pl-10"></i></span>
+                            <a href="/funds" class="reservation-more">了解更多>></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        <br />
     </div>
 </section>
+<!-- section end -->
+<!-- section start -->
 <!-- ================ -->
-<section class="section dark-bg clearfix">
+<section class="section default-bg clearfix">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="call-to-action text-center">
                     <div class="row">
                         <div class="col-sm-8">
-                            <h1 class="title">@(register.GetPropertyValue<string>("title"))</h1>
-                            <p>@(register.GetPropertyValue<string>("content").ReomveHtmlAttribute())</p>
+                            <img src="/assets/images/Backup_of_bitejinfu.png" alt="" style="margin: auto; height: 100%" />
                         </div>
                         <div class="col-sm-4">
                             <br>
-                            <p><a href="@(Umbraco.Content(register.GetPropertyValue<int>("btnlink")).Url)" class="btn btn-lg btn-gray-transparent btn-animated" style="border-color: #FFFFFF">@(register.GetPropertyValue<string>("registerbtn"))<i class="fa fa-arrow-right pl-20"></i></a></p>
+                            <p><a href="/register" class="btn btn-lg btn-gray-transparent btn-animated">马上注册<i class="fa fa-arrow-right pl-10"></i></a></p>
                         </div>
                     </div>
                 </div>
@@ -594,161 +207,336 @@
     </div>
 </section>
 <!-- section end -->
-<section id="services" class="section light-gray-bg clearfix">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <h2 class="text-center">@(LatestNews.GetPropertyValue<string>("title"))</h2>
-                <div class="separator"></div>
-            </div>
-        </div>
-    </div>
-    <div class="owl-carousel carousel-autoplay pl-10 pr-10">
-        @{
-            foreach (IPublishedContent content in newsList)
-            {
-                IPublishedContent img = Umbraco.Media(content.GetPropertyValue<int>
-                    ("img"));
+<!-- section start -->
+<!-- ================ -->
+<section id="" class="pv-20  clearfix light-gray-bg">
+    <div class="container ">
+        <div class="row online-product">
+            <div class="grid-space-10">
+                @{
+                    foreach (IContent item in contents.OrderBy(e => e.GetValue<int>("sort")))
+                    {
+                        decimal amount = item.GetValue<decimal>("sumAmount");
+                        decimal purchasedAmount = item.GetValue<decimal>("purchasedAmount");
 
+                        string number = ((purchasedAmount / amount) * 100).ToString("f2") + "%";
 
-                <div class="listing-item pl-10 pr-10 mb-20  object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="200">
-                    <div class="overlay-container bordered overlay-visible newsbtn" data-id="@content.Id">
-
-                        <div class="overlay-container overlay-visible">
-                            <img src="@img.Url" alt="" style="width:100%">
-                            <span class="overlay-link"><i class="fa fa-plus"></i></span>
-                            <div class="overlay-bottom hidden-xs">
-                                <div class="text">
-                                    <p class="lead margin-clear text-left">@(content.GetPropertyValue<string>("title"))</p>
+                        <div class="col-md-3 col-sm-6 boxed object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                            <div class="listing-item white-bg bordered mb-20">
+                                <div class="body">
+                                    <h2 class="subject">@(item.GetValue<string>("title"))</h2>
+                                    <h4>@(item.GetValue<string>("title2"))</h4>
+                                    <div class="title">
+                                        <p>@(item.GetValue<string>("title3"))</p>
+                                    </div>
+                                    <div class="progress style-1">
+                                        <div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: @number"></div>
+                                    </div>
+                                    <div class="cash">
+                                        <p><span class="cash-now">@purchasedAmount.ToString("N2") 元</span> / <span>@amount.ToString("N2") 元</span></p>
+                                    </div>
+                                    <p class="content">@(item.GetValue<string>("introduction"))</p>
+                                    <div class="clearfix benefit-content">
+                                        <div class="col-xs-6">
+                                            <h3 class="benefit-percent">@(item.GetValue<string>("rate"))</h3>
+                                            <h4>年化收益</h4>
+                                        </div>
+                                        <div class="v-line"></div>
+                                        <div class="col-xs-6">
+                                            <h3>@(item.GetValue<string>("cycle"))</h3>
+                                            <h4>项目期限</h4>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <h4>起投金额：@(item.GetValue<double>("startAmount").ToString("N2")) 元</h4>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        @*<a href="/pay?id=@item.Id&minAmount=@(item.GetValue<double>("startAmount"))" class="btn btn-block btn-gray btn-warning">近请期待..</a>*@
+                                        <a class="btn btn-block btn-gray btn-warning">敬请期待..</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="body padding-horizontal-clear">
-                            @(Html.Raw(content.GetPropertyValue<string>("briefintroduction")))
-                        </div>
-                    </div>
-                </div>
-            }
-        }
-    </div>
-
-</section>
-
-<div id="portfolio" class="section pv-30 light-gray-bg">
-    <div class="owl-carousel content-slider space-top">
-        @{
-            foreach (IPublishedContent content in user.Children)
-            {
-                IPublishedContent headimg = Umbraco.Media(content.GetPropertyValue<int>
-                    ("img"));
-
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-8 col-md-offset-2">
-                            <div class="testimonial text-center">
-                                <div class="testimonial-image">
-                                    <img src="@headimg.Url" alt="Jane Doe" title="Jane Doe" class="img-circle">
-                                </div>
-                                @*<h3>@(content.GetPropertyValue<string>("title"))</h3>*@
-                                <div class="separator"></div>
-                                <div class="testimonial-body">
-                                    <blockquote>
-                                        @(Html.Raw(content.GetPropertyValue<string>("content")))
-                                    </blockquote>
-                                    <div class="line"></div>
-                                    <div class="testimonial-info-1">@(content.GetPropertyValue<string>("remark1"))</div>
-                                    <div class="testimonial-info-2">@(content.GetPropertyValue<string>("remark2"))</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            }
-        }
-    </div>
-</div>
-<section id="cooperation" class="light-gray-bg pv-30 clearfix">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <h2 class="text-center">@(partners.GetPropertyValue<string>("title"))</h2>
-                <div class="separator"></div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="container">
-                <div class="clients-container">
-                    <div class="clients">
-                        @{
-                            object obj = partners.GetPropertyValue("partners");
-                            List<string>
-                                list = obj.ToString().Split(',').ToList();
-                            int a = 1;
-                            foreach (var item in list.Skip(0).Take(5))
-                            {
-                                string time = (a * 200).ToString();
-                                <div style="width:160px;height:160px" class="client-image object-non-visible" data-animation-effect="fadeIn" data-effect-delay="@time">
-                                    <img src="@(Umbraco.Media(int.Parse(item)).Url)" alt="">
-                                </div>
-                                a++;
-                            }
-                            <p></p>
-                            foreach (var item in list.Skip(5).Take(5))
-                            {
-                                string time = (a * 200).ToString();
-                                <div style="width:160px;height:160px" class="client-image object-non-visible" data-animation-effect="fadeIn" data-effect-delay="@time">
-                                    <img src="@(Umbraco.Media(int.Parse(item)).Url)" alt="">
-                                </div>
-                                a++;
-                            }
-                        }
-                    </div>
-                </div>
+                    }
+                }
             </div>
         </div>
     </div>
 </section>
-<div id="myModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header" style="background-color:#C6AB5C">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="myLargeModalLabel">实盈投资</h4>
+<!-- section end -->
+<!-- section start -->
+<!-- ================ -->
+<section id="achievement" class="pv-20 clearfix">
+    <div class="container achievement">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h2 class="text-center">历史业绩及常见问题</h2>
+                <div class="separator"></div>
+                <p class="large text-center"></p>
             </div>
-            <div class="modal-body" style="min-height:300px">
-                <div style="max-width:700px;margin:0 auto" id="content">
-                    <div>
-                        <img style="margin:0 auto" src="/assets/images/loading.jpg" alt="loading" />
+            <div class="col-md-6">
+                <div class="owl-carousel content-slider-with-large-controls" style="position: relative;">
+                    <div class="overlay-container overlay-visible">
+                        <img src="/assets/images/achievement/ach01.jpg" alt="">
+                        <div class="overlay-bottom hidden-xs"></div>
+                        <div>
+                            <h4>方正副邦-合生强债（量化部分）</h4>
+                            <p class="benefit">年化收益率: <strong>12.96%</strong></p>
+                        </div>
+                        <a href="/assets/images/achievement/ach01.jpg" class="popup-img overlay-link hidden-xs" title="方正副邦-合生强债（量化部分）"><i class="icon-zoom-in"></i></a>
+                    </div>
+                    <div class="overlay-container overlay-visible">
+                        <img src="/assets/images/achievement/ach02.jpg" alt="">
+                        <div class="overlay-bottom hidden-xs"></div>
+                        <div>
+                            <h4>东航金融-自营盘1号</h4>
+                            <p class="benefit">年化收益率: <strong>15.06%</strong></p>
+                        </div>
+                        <a href="/assets/images/achievement/ach02.jpg" class="popup-img overlay-link hidden-xs" title="东航金融-自营盘1号"><i class="icon-zoom-in"></i></a>
+                    </div>
+                    <div class="overlay-container overlay-visible">
+                        <img src="/assets/images/achievement/ach03.jpg" alt="">
+                        <div class="overlay-bottom hidden-xs"></div>
+                        <div>
+                            <h4>东航金融-小金牛-固收2号</h4>
+                            <p class="benefit">年化收益率: <strong>19.05%</strong></p>
+                        </div>
+                        <a href="/assets/images/achievement/ach03.jpg" class="popup-img overlay-link hidden-xs" title="东航金融-小金牛-固收2号"><i class="icon-zoom-in"></i></a>
                     </div>
                 </div>
-
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-dark" data-dismiss="modal">返回</button>
+            <div class="col-md-6 problem">
+                <div class="panel-group collapse-style-2" id="accordion-2">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion-2" href="#collapseOne-1" class="collapsed">
+                                    1、什么是“ETF期限对冲基金”？
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne-1" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <span></span>简单来讲，“ETF期现对冲基金”是“ETF套利+股指期货对冲”的一种复合式基金。首先，套利主要通过ETF的跨市场交易完成的。当ETF市价（即二级市场价格）高于ETF净值（即一级市场价格）时，ETF产生了溢价，此时投资者可以通过在股市中购买成分股组合，按照成分股规则申购成ETF份额，然后在二级市场以市价卖出进行套利；ETF市价低于ETF净值，则称为ETF产生折价，投资者可以通过在二级市场上买入ETF份额并赎回其对应的一揽子股票，然后再从股市中卖出进行套利。所以说，通过同一商品在不同市场上价格出现偏离而获利的方式就是套利，这也是风险很低的一种投资方式。当然，比特对产品的收益和风控追求完美，我们总在探索和完善数学模型，所以比特在套利的基础上做空股指期货，进一步规避了大盘暴跌而带来的投资风险。这等于给您的资金又上了一把锁！让我们开始吧！
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion-2" href="#collapseTwo-2" class="collapsed">
+                                    2、什么是量化交易？
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseTwo-2" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <span></span>量化交易是指借助现代统计学和数学的方法，利用计算机技术来进行交易的证券投资方式。量化交易从庞大的历史数据中海选能带来超额收益的多种“大概率”事件以制定策略，用数量模型验证及固化这些规律和策略，然后严格执行已固化的策略来指导投资，以求获得可以持续的、稳定且高于平均收益的超额回报。
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion-2" href="#collapseTwo-3" class="collapsed">
+                                    3、什么是委托计划？
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseTwo-3" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <span></span>甲方接受资金委托人的委托，对委托资金提供代理投资和管理，并由乙方依本协议约定保障资金委托人本金及收益的计划。
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion-4" href="#collapseTwo-4">
+                                    4、什么是固定年化收益？
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseTwo-4" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                <span></span>以所委托的本金计算，一年所能产生的固定收益。 <br /> 甲方每年实际收益=委托资金×固定年化收益
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion-4" href="#collapseTwo-5" class="collapsed">
+                                    5、什么是产品期限？
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseTwo-5" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <span></span>指在本协议委托理财服务总期限内，受托人依据委托人每一次申请的并生效的《ETF期限对冲基金认购书》中说申购及续期的产品期限
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion-4" href="#collapseTwo-6" class="collapsed">
+                                    5、若已购买产品需要续期，如何计算收益？
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseTwo-6" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <span></span>续期后投资期限达到下个投资期限区间，则续期内的收益按照达到投资期限区间的年化收益计算收益，若甲方在续期内增加投资资金，则新增投资资金按首次投资的投资期限区间年化收益计算收益。甲方可选择月度领取收益，也可在确定投资期限到期后一次性领取收益。
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
-<div id="myModalproduct" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header" style="background-color:#C6AB5C">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="myProductModalLabel">实盈投资</h4>
+</section>
+<!-- section end -->
+<section id="guarantee" class="section clearfix light-gray-bg">
+    <div class="container guarantee">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h2 class="text-center">为什么选择比特金服</h2>
+                <div class="separator"></div>
+                <p class="large text-center">纯P2F平台，专注于投资ETF对冲套利产品，帮助客户安全获得高收益</p>
             </div>
-            <div class="modal-body" style="min-height:300px">
-                <div style="max-width:700px;margin:0 auto" id="productcontent">
-                    <div>
-                        <img style="margin:0 auto" src="/assets/images/loading.jpg" alt="loading" />
+        </div>
+        <div class="row">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="pv-30 ph-30 boxed shadow object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                    <div class="icon without-bg"><img src="/assets/images/guarantee/01.png" alt="" /></div>
+                    <div class="body">
+                        <h4 class="title text-center">资金安全保障</h4>
+                        <p class="text-center">资金由招商银行进行托管，鹏华基金作为资金管理人，平安保险全程财产保险，保障资金安全</p>
                     </div>
                 </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="pv-30 ph-30 boxed shadow object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="200">
+                    <div class="icon without-bg"><img src="/assets/images/guarantee/02.png" alt="" /></div>
+                    <div class="body">
+                        <h4 class="title text-center">风险控制保障</h4>
+                        <p class="text-center">专业风控团队严格把控债权风险，3000万元分先储备金作为劣后资金，实盈投资公司作为第三方本息保障机构</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="pv-30 ph-30 boxed shadow object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="200">
+                    <div class="icon without-bg"><img src="/assets/images/guarantee/03.png" alt="" /></div>
+                    <div class="body">
+                        <h4 class="title text-center">数据安全保障</h4>
+                        <p class="text-center">服务器托管在阿里云并多重备份，128位通信加密及多重防火墙确保数据安全，按照法律法规保护用户隐私</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="pv-30 ph-30 boxed shadow object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                    <div class="icon without-bg"><img src="/assets/images/guarantee/04.png" alt="" /></div>
+                    <div class="body">
+                        <h4 class="title text-center">法律法规保障</h4>
+                        <p class="text-center">专业律所对客户投资行为提供法律保障，债券转让方式符合国家法律法规，广州岭南律师事务所提供法律支持</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
+<!-- section -->
+<!-- ================ -->
+<section class="pv-20 clearfix" id="cooperation">
+    <div class="container" style="padding-bottom: 20px;">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h2 class="text-center">合作机构</h2>
+                <div class="separator"></div>
+                <p class="large text-center"></p>
             </div>
-            <div class="modal-footer">
-                <a id="buyaction" href="/Pay/" class="btn btn-success btn-sm">立即购买</a>
-                <button type="button" class="btn btn-sm btn-dark" data-dismiss="modal">返回</button>
+            <div class="clients-container col-md-12">
+                <div class="clients">
+                    <div class="col-md-2 col-xs-4 object-non-visible" data-animation-effect="fadeIn" data-effect-delay="300">
+                        <img src="/assets/images/cooperation/04.png" class="clients-img" alt="">
+                    </div>
+                    <div class="col-md-2 col-xs-4 object-non-visible" data-animation-effect="fadeIn" data-effect-delay="200">
+                        <img src="/assets/images/cooperation/05.png" class="clients-img" alt="">
+                    </div>
+                    <div class="col-md-2 col-xs-4 object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">
+                        <img src="/assets/images/cooperation/06.png" class="clients-img" alt="">
+                    </div>
+                    <div class="col-md-2 col-xs-4 object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">
+                        <img src="/assets/images/cooperation/01.png" class="clients-img" alt="">
+                    </div>
+                    <div class="col-md-2 col-xs-4 object-non-visible" data-animation-effect="fadeIn" data-effect-delay="200">
+                        <img src="/assets/images/cooperation/02.png" class="clients-img" alt="">
+                    </div>
+                    <div class="col-md-2 col-xs-4 object-non-visible" data-animation-effect="fadeIn" data-effect-delay="300">
+                        <img src="/assets/images/cooperation/03.png" class="clients-img" alt="">
+                    </div>
+                </div>
             </div>
+        </div>
+    </div>
+</section>
+
+<div class="modal animated fadeIn hidden" id="reservation-content" tabindex="-1" role="dialog" aria-labelledby="reservation" aria-hidden="false" style="display: block;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close closed" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="reservation-title">预约信息</h4>
+            </div>
+            <form action="/umbraco/Api/Member/Reservation" class="form-horizontal" method="post" novalidate="novalidate">
+                <div class="modal-body">
+                    <div class="form-group has-feedback">
+                        @Html.LabelFor(e => reservationModel.Name, new { @class = "col-sm-3 control-label" })
+                        <div class="col-sm-8">
+                            <div>
+                                @Html.TextBoxFor(e => reservationModel.Name, new { @class = "form-control", placeholder = "请输入姓名" })
+                                <i class="fa fa-user form-control-feedback"></i>
+                            </div>
+                            @Html.ValidationMessageFor(e => reservationModel.Name)
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback">
+                        @Html.LabelFor(e => reservationModel.Phone, new { @class = "col-sm-3 control-label" })
+                        <div class="col-sm-8">
+                            <div>
+                                @Html.TextBoxFor(e => reservationModel.Phone, new { @class = "form-control", placeholder = "请输入手机号" })
+                                <i class="fa fa-phone form-control-feedback"></i>
+                            </div>
+                            @Html.ValidationMessageFor(e => reservationModel.Phone)
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback">
+                        @Html.LabelFor(e => reservationModel.Email, new { @class = "col-sm-3 control-label" })
+                        <div class="col-sm-8">
+                            <div>
+                                @Html.TextBoxFor(e => reservationModel.Email, new { @class = "form-control", placeholder = "请输入邮箱" })
+                                <i class="fa fa-envelope form-control-feedback"></i>
+                            </div>
+                            @Html.ValidationMessageFor(e => reservationModel.Email)
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback">
+                        @Html.LabelFor(e => reservationModel.Text, new { @class = "col-sm-3 control-label" })
+                        <div class="col-sm-8">
+                            <div>
+                                @Html.TextAreaFor(e => reservationModel.Text, new { @class = "form-control", placeholder = "请输入信息", rows = "5" })
+                            </div>
+                            @Html.ValidationMessageFor(e => reservationModel.Text)
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-dark closed" data-dismiss="modal">取消</button>
+                    <button type="submit" class="btn btn-sm btn-default submit-btn">发送</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

@@ -28,13 +28,13 @@ h4,
 h5,
 h6,
 .navbar .navbar-nav {
-  font-family: 'Raleway', sans-serif;
+  font-family: "微软雅黑",'Raleway', sans-serif;
 }
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "微软雅黑",'Roboto', sans-serif;
 }
 .logo-font {
-  font-family: 'Pacifico', cursive, sans-serif;
+  font-family: "微软雅黑",'Pacifico', cursive, sans-serif;
 }
 /*Typography
 ---------------------------------- */
@@ -309,7 +309,6 @@ ul {
 }
 .header-top .list-inline {
   display: inline-block;
-  color: #ffffff;
 }
 /* Medium desktop devices and tablets */
 @media (min-width: 992px) and (max-width: 1199px) {
@@ -463,7 +462,7 @@ tbody {
   border-top-color: rgba(37, 42, 44, 0.5);
 }
 .header-left {
-  padding: 12px 0 0 0;
+  padding: 2px 0 0 0;
 }
 .header-right {
   position: relative;
@@ -493,20 +492,21 @@ tbody {
   padding: 20px 0;
 }
 .footer {
-  background-color: #f4f4f4;
+  padding: 40px 0;
+  background-color: #fafafa;
 }
 .footer-content {
   padding: 20px 0;
 }
 .subfooter {
-  background-color: #ececec;
+  background-color: #f5f5f5;
   padding: 25px 0;
   border-top: 1px solid #eaeaea;
 }
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
   .with-dropdown-buttons .navbar-default .navbar-collapse {
-    padding-right: 120px;
+    padding-right: 0px;
   }
   .with-dropdown-buttons .header-dropdown-buttons {
     position: absolute;
@@ -529,7 +529,7 @@ tbody {
     vertical-align: top;
   }
   .header.centered .with-dropdown-buttons .navbar-default .navbar-collapse {
-    padding-right: 0px!important;
+    padding-right: 150px !important;
   }
   .header.centered .with-dropdown-buttons .header-dropdown-buttons {
     position: relative;
@@ -539,11 +539,11 @@ tbody {
   }
 }
 /* Large and Medium devices (desktops, tablets less than 1199px) */
-@media (min-width: 768px) and (max-width: 1199px) {
-  .main-navigation.with-dropdown-buttons .navbar-default .navbar-collapse {
-    padding-right: 110px;
-  }
-}
+/*@media (min-width: 768px) and (max-width: 1199px) {*/
+  /*.main-navigation.with-dropdown-buttons .navbar-default .navbar-collapse {*/
+    /*padding-right: 110px;*/
+  /*}*/
+/*}*/
 /* Medium desktop devices and tablets */
 @media (min-width: 768px) and (max-width: 991px) {
   header.full-width .main-navigation.with-dropdown-buttons .navbar-default .navbar-collapse {
@@ -686,7 +686,7 @@ tbody {
   background: url("../images/background-img-7.jpg") 50% 0px no-repeat;
 }
 .fullscreen-bg {
-  background: url("../images/fullscreen-bg.jpg") 50% 0px no-repeat;
+  background: rgba(0, 0, 0, 0.7);
   position: fixed;
   top: 0;
   left: 0;
@@ -704,9 +704,9 @@ tbody {
   background-color: #ffffff;
 }
 .light-gray-bg {
-  background-color: #fafafa;
-  border-top: 1px solid #f3f3f3;
-  border-bottom: 1px solid #f3f3f3;
+  background-color: #fcfcfc;
+  border-top: 1px solid #fcfcfc;
+  border-bottom: 1px solid #fcfcfc;
 }
 .footer-top.light-gray-bg {
   background-color: #f5f5f5;
@@ -714,8 +714,8 @@ tbody {
   border-bottom: 1px solid #eaeaea;
 }
 .dark-bg {
-  background-color:#C6AB5C;
-  color: #ffffff;
+  background-color: #373737;
+  color: #cdcdcd;
 }
 .dark-bg + .dark-bg:not(.image-box):not(.full-image-container):not(.full-text-container):not(.full-width-section) {
   background-color: #555555;
@@ -740,7 +740,7 @@ tbody {
   color: #cdcdcd;
 }
 .default-bg {
-  background-color: #09afdf;
+  background-color: #CD9F3B !important;
   color: #ffffff;
 }
 .default-bg h1,
@@ -783,7 +783,7 @@ tbody {
 .light-translucent-bg:after,
 .dark-translucent-bg:after,
 .default-translucent-bg:after,
-.two-col-translucent-bg:after {
+.two-col-transluent-bg:after {
   content: "";
   position: absolute;
   top: 0;
@@ -984,6 +984,10 @@ tbody {
 .fixed-header-on.boxed .header.fixed {
   left: auto;
 }
+.fixed-header-on .header .logo {
+  margin: -10px 0 -5px 0;
+  display: none;
+}
 .fixed-header-on .header .site-slogan,
 .fixed-header-on .header.centered .header-left {
   display: none;
@@ -1004,8 +1008,11 @@ tbody {
     border: 1px solid #2e3537;
   }
   .fixed-header-on .main-navigation .navbar-nav > li > a {
-    padding-top: 21px!important;
-    padding-bottom: 21px!important;
+      padding: 20px 15px 18px 15px !important;
+  }
+  .header-left{
+      position: relative !important;
+      top: 7px !important;
   }
   .fixed-header-on .header:not(.centered) .main-navigation .navbar-nav > .dropdown > a:before {
     top: 24px;
@@ -1487,10 +1494,9 @@ h5 + .separator {
 ----------------------------------------------------------------------------- */
 /*Header Top*/
 .header-top {
-  font-size: 16px;
+  font-size: 12px;
   color: #777777;
   font-weight: 300;
-  font-family: Calibri, Arial, Sans-Serif;
 }
 .header-top.dark,
 .header-top.colored {
@@ -1506,10 +1512,7 @@ h5 + .separator {
 /* Medium desktop devices and tablets */
 @media (min-width: 992px) and (max-width: 1199px) {
   .header-top {
-      font-size: 16px;
-      color: #777777;
-      font-weight: 300;
-      font-family: Calibri, Arial, Sans-Serif;
+    font-size: 11px;
   }
 }
 /*Header*/
@@ -1522,9 +1525,9 @@ h5 + .separator {
   line-height: 1.5;
 }
 .footer h2.title {
-  font-size: 22px;
+  font-size: 20px;
   text-transform: none;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 /*Subfooter*/
 .subfooter {
@@ -2578,7 +2581,7 @@ fieldset[disabled] .btn-default {
   border-bottom: 1px solid #f1f1f1;
 }
 .nav-tabs.style-2 > li > a {
-  color: #999999;
+  color: #777;
 }
 .nav-tabs.style-2 > li > a:hover {
   color: #333333;
@@ -3976,9 +3979,9 @@ fieldset[disabled] .form-control {
   bottom: 0px;
   left: 0;
   right: 0px;
-  background-color: rgba(30, 30, 30, 0.5);
   overflow: hidden;
   opacity: 0;
+  z-index: 1000;
   filter: alpha(opacity=0);
   -webkit-transition: all ease-in-out 0.25s;
   -o-transition: all ease-in-out 0.25s;
@@ -4204,7 +4207,6 @@ fieldset[disabled] .form-control {
 .navbar-default .navbar-nav > li > a {
   color: #333333;
   font-size: 16px;
-  padding: 10px 15px 10px 15px;
   z-index: 102;
   border: none;
   border-bottom: 1px solid transparent;
@@ -4334,7 +4336,7 @@ header.full-width .dropdown-menu .dropdown-menu.to-left {
     left: auto!important;
   }
 }
-/* Mega Menu 
+/* Mega Menu
 ------------------------------ */
 .mega-menu.dropdown {
   position: static;
@@ -4405,7 +4407,7 @@ header .dropdown-menu > li.active > a i.fa-circle-o:before {
   border-color: #f7f7f7;
   text-decoration: none;
 }
-/* Arrow for parent menu item 
+/* Arrow for parent menu item
 ------------------------------ */
 .dropdown > a:before {
   font-family: 'FontAwesome';
@@ -4447,7 +4449,7 @@ header .dropdown-menu > li.active > a i.fa-circle-o:before {
 .header.centered:not(.dark) .dropdown .dropdown.open > a:before {
   color: #09afdf;
 }
-/* Dropdown animations 
+/* Dropdown animations
 ------------------------------ */
 .animated.main-navigation .navbar-nav .open .dropdown-menu,
 #offcanvas.animated .open .dropdown-menu,
@@ -4477,35 +4479,20 @@ header.full-width .animated.main-navigation .dropdown-menu .open .dropdown-menu.
 /* Mobile Menu
 ------------------------------ */
 /* mobile menu toggle button on hover/focus */
-@media (max-width: 767px){
-    .navbar{
-        background: none !important;
-        border: none;
-    }
-    .navbar-default{
-        margin-top: 0.1em;
-    }
-	.navbar-collapse {
-		position:absolute !important;
-		width:100%;
-		background:#FCFCFC;
-		z-index:100;
-		text-align:center;
-	}
-}
 .navbar-default .navbar-toggle {
   border-color: #ccc;
 }
 .navbar-default .navbar-toggle:hover,
 .navbar-default .navbar-toggle:focus {
-  background-color: #fCfCfC;
+  background-color: #fafafa;
+  border-color: #cdb891;
 }
 .navbar-default .navbar-toggle .icon-bar {
   background-color: #ccc;
 }
 .navbar-default .navbar-toggle:hover .icon-bar,
 .navbar-default .navbar-toggle:focus .icon-bar {
-  background-color: #C6AB5C;
+  background-color:  #cdb891;
 }
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
@@ -4519,7 +4506,7 @@ header.full-width .animated.main-navigation .dropdown-menu .open .dropdown-menu.
     margin: 0;
   }
   .navbar-default .navbar-nav > li > a {
-    padding: 28px 15px 27px 15px;
+    padding: 23px 15px 21px 15px;
   }
   /*centered logo layout*/
   .header.centered .navbar-default .navbar-nav > li > a {
@@ -4560,7 +4547,7 @@ header.full-width .animated.main-navigation .dropdown-menu .open .dropdown-menu.
 @media (min-width: 768px) and (max-width: 1199px) {
   .navbar-default .navbar-nav > li > a {
     font-size: 15px;
-    padding: 28px 10px 27px 10px;
+    padding: 27px 10px 22px 10px;
   }
 }
 /* Medium devices (tablets landscape to portrait) */
@@ -4589,7 +4576,7 @@ header.full-width .animated.main-navigation .dropdown-menu .open .dropdown-menu.
 @media (min-width: 1200px) {
   /* first level menu item */
   .main-navigation .navbar-nav > li {
-    margin: 0 0 0 10px;
+    margin: 0 0 0 20px;
   }
   .main-navigation .navbar-nav > li:first-child {
     margin: 0;
@@ -4612,7 +4599,7 @@ header.full-width .animated.main-navigation .dropdown-menu .open .dropdown-menu.
   }
   /* first level item */
   .navbar-default .navbar-nav > li > a {
-    border-bottom: 1px solid #f3f3f3;
+    border-bottom: 1px solid #f9f9f9;
   }
   .navbar-default .navbar-nav > li:last-child > a {
     border-bottom: 1px solid transparent;
@@ -5124,6 +5111,7 @@ header.full-width .animated.main-navigation .dropdown-menu .open .dropdown-menu.
 .social-links li {
   display: inline-block;
   margin: 0 2px 2px 0;
+  padding: 5px 0;
 }
 .social-links li a {
   width: 40px;
@@ -5500,7 +5488,6 @@ header.full-width .animated.main-navigation .dropdown-menu .open .dropdown-menu.
   padding: 5px;
   min-width: 270px;
   margin-top: 6px;
-  font-size: 0;
   -webkit-box-shadow: none;
   box-shadow: none;
   background-color: #f2f2f2;
@@ -5527,6 +5514,9 @@ header.full-width .animated.main-navigation .dropdown-menu .open .dropdown-menu.
   background-color: transparent;
   border: 1px solid #999999;
   color: #000000;
+}
+.header-dropdown-buttons{
+    margin-top: -5px;
 }
 .header-dropdown-buttons .btn-group:first-child {
   margin-right: 5px;
@@ -5744,7 +5734,7 @@ ul.tweets li span {
   font-size: 12px;
   color: #777777;
 }
-/* Media 
+/* Media
 ---------------------------------- */
 .media {
   margin-top: 0;
@@ -5991,7 +5981,6 @@ h6.media-heading {
 }
 .call-to-action p {
   margin-bottom: 10px;
-  color: #ffffff;
 }
 /* Small devices (tablets, phones less than 767px) */
 @media (max-width: 767px) {
@@ -6360,7 +6349,7 @@ h6.media-heading {
   height: 100%;
 }
 .slideshow .dark-translucent-bg {
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.2);
 }
 .slideshow .light-translucent-bg {
   background-color: rgba(255, 255, 255, 0.4);
@@ -6371,14 +6360,12 @@ h6.media-heading {
 }
 .xlarge_white {
   font-size: 68px;
-  font-family: 'Raleway', sans-serif;
   font-weight: 400;
   color: #ffffff;
   line-height: 1.2;
 }
 .large_white {
   font-size: 42px;
-  font-family: 'Raleway', sans-serif;
   color: #ffffff;
   line-height: 1.2;
 }
@@ -6753,7 +6740,7 @@ h6.media-heading {
 .container .content-slider-with-large-controls,
 .container .content-slider-with-large-controls-autoplay {
   margin-bottom: 50px;
-  border: 1px solid #f5f5f5;
+  border-bottom: 1px solid #f5f5f5;
 }
 /* Styling Next and Prev buttons */
 /*style-1*/
@@ -6851,10 +6838,11 @@ h6.media-heading {
   top: auto;
   bottom: -10px;
 }
+
 .content-slider-with-large-controls .owl-buttons div,
 .content-slider-with-large-controls-autoplay .owl-buttons div {
   display: inline-block;
-  font-size: 18px;
+  font-size: 0.9em;
   position: absolute;
   text-transform: capitalize;
   font-weight: 300;
@@ -6878,7 +6866,7 @@ h6.media-heading {
 .content-slider-with-large-controls-autoplay .owl-buttons .owl-prev:after {
   content: "\f104";
   left: 15px;
-  color: #09afdf;
+  color:  #CD9F3B;
 }
 .content-slider-with-large-controls .owl-buttons .owl-next,
 .content-slider-with-large-controls-autoplay .owl-buttons .owl-next {
@@ -6890,7 +6878,7 @@ h6.media-heading {
 .content-slider-with-large-controls-autoplay .owl-buttons .owl-next:after {
   content: "\f105";
   right: 15px;
-  color: #09afdf;
+    color: #CD9F3B;
 }
 .container .content-slider-with-large-controls .owl-buttons .owl-prev,
 .container .content-slider-with-large-controls-autoplay .owl-buttons .owl-prev {
@@ -6926,6 +6914,7 @@ h6.media-heading {
   text-align: center;
   width: 100%;
   z-index: 10;
+  margin-top: 10px;
 }
 .owl-controls .owl-page,
 .owl-controls .owl-page {
@@ -6943,7 +6932,7 @@ h6.media-heading {
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
   border-radius: 20px;
-  background: #ffffff;
+  background: #e7e7e7;
 }
 .dark-controls .owl-controls .owl-page span,
 .dark-controls .owl-controls .owl-page span {

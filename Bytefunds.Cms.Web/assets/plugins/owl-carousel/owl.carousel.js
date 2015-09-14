@@ -86,7 +86,7 @@ if (typeof Object.create !== "function") {
             base.wrapItems();
             base.$owlItems = base.$elem.find(".owl-item");
             base.$owlWrapper = base.$elem.find(".owl-wrapper");
-            base.playDirection = "next";
+            base.playDirection = "下一个";
             base.prevItem = 0;
             base.prevArr = [0];
             base.currentItem = 0;
@@ -1469,7 +1469,7 @@ if (typeof Object.create !== "function") {
         stopOnHover : false,
 
         navigation : false,
-        navigationText : ["prev", "next"],
+        navigationText : ["上一个", "下一个"],
         rewindNav : true,
         scrollPerPage : false,
 

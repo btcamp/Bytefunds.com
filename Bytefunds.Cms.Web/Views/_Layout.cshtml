@@ -12,6 +12,9 @@
     {
         pageTitle = Model.Content.GetPropertyValue("pagetitle").ToString();
     }
+
+    ViewBag.description = Model.Content.GetPropertyValue<string>("description");
+    ViewBag.keywords = Model.Content.GetPropertyValue<string>("keywords");
 }
 <!DOCTYPE html>
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
@@ -21,12 +24,14 @@
 <head>
     <meta charset="utf-8">
     <title>@pageTitle@(pageTitle == string.Empty ? string.Empty : "  |  ")@pageHeadTitle</title>
-    <meta name="description" content="The Project a Bootstrap-based, Responsive HTML5 Template">
-    <meta name="author" content="htmlcoder.me">
+    <meta name="description" content="@ViewBag.description" />
+    <meta name="keywords" content="@ViewBag.keywords" />
+    <!-- Mobile Specifics -->
+
     <!-- Mobile Meta -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=yes">
     <!-- Favicon -->
-    <link rel="shortcut icon" href="template/images/favicon.ico">
+    <link rel="shortcut icon" href="/favicon.ico">
     @{Html.RenderPartial("_Style");}
 </head>
 <!-- body classes:  -->
@@ -37,7 +42,7 @@
     <!-- scrollToTop -->
     <!-- ================ -->
     <div class="scrollToTop circle"><i class="icon-up-open-big"></i></div>
-
+    <div class="circle qqService hidden-xs hidden-sm"></div>
     <!-- page wrapper start -->
     <!-- ================ -->
     <div class="page-wrapper">

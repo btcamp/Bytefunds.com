@@ -1,0 +1,155 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "_Layout.cshtml";
+    ReservationViewModel reservationModel = new ReservationViewModel();
+    Html.EnableClientValidation();
+    Html.EnableUnobtrusiveJavaScript();
+}
+@Html.Partial("_Breadcrumb", Model)
+<div class="container product">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>鹏华资产实盈量化复兴资产管理计划</h2>
+            <div class="separator-2"></div>
+            <p class="margin-clear hot-product-content">本私募产品是由鹏华资产管理有限公司发行的ETF期现套利对冲基金产品，仅接受合格投资人购买。预期收益可达66.9%，最大回撤0.67%，属于低风险高收益量化投资产品。</p>
+            <div class="overlay-container">
+                <img src="/assets/images/hot/2015820105759.jpg" alt="" style="width: 100%">
+            </div>
+            <div class="description-title">
+                <h4>主要投资领域</h4>
+            </div>
+            <p>上海证券交易所、深证证券交易所上市的股票、场内ETF基金（不包括场外申赎），LOF基金，货币市场基金，网上新股申购，国债逆回购以及中国金融期货交易所上市的股指期货合约，控制基金风险。</p>
+        </div>
+        <div class="col-md-6">
+            <table class="campbell-table">
+                <thead class="campbell-thead">
+                    <tr>
+                        <th colspan="2">鹏华资产实盈量化复兴资产管理计划</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="td1">基金名称</td>
+                        <td class="td2">鹏华资产实盈量化复兴资产管理计划</td>
+                    </tr>
+                    <tr>
+                        <td class="td1">产品规模</td>
+                        <td class="td2">劣后级：3000万元；优先级：1.5亿元</td>
+                    </tr>
+                    <tr>
+                        <td class="td1">币种</td>
+                        <td class="td2">人民币</td>
+                    </tr>
+                    <tr>
+                        <td class="td1">产品期限</td>
+                        <td class="td2">1年</td>
+                    </tr>
+                    <tr>
+                        <td class="td1">成立时间</td>
+                        <td class="td2">2015年8月14日</td>
+                    </tr>
+                    <tr>
+                        <td class="td1">最低起投</td>
+                        <td class="td2">100万人民币，以10万人民币为最小单位递增</td>
+                    </tr>
+                    <tr>
+                        <td class="td1">基金类型</td>
+                        <td class="td2">结构化</td>
+                    </tr>
+                    <tr>
+                        <td class="td1">最大回撤</td>
+                        <td class="td2">0.67%，超低风险</td>
+                    </tr>
+                    <tr>
+                        <td class="td1">预期收益</td>
+                        <td class="td2">年化60%，银行定存利率22倍</td>
+                    </tr>
+                    <tr>
+                        <td class="td1">开放认购额度</td>
+                        <td class="td2">30,000,000元人民币</td>
+                    </tr>
+                    <tr>
+                        <td class="td1">已认购额度</td>
+                        <td class="td2">10,000,000元人民币</td>
+                    </tr>
+                    <tr>
+                        <td class="td1">基金管理人</td>
+                        <td class="td2">鹏华资产管理（深圳）有限公司</td>
+                    </tr>
+                    <tr>
+                        <td class="td1">托管银行</td>
+                        <td class="td2">招商银行股份有限公司</td>
+                    </tr>
+                    <tr>
+                        <td class="td1">法律顾问</td>
+                        <td class="td2">广东岭南律师事务所</td>
+                    </tr>
+                    <tr>
+                        <td class="td1">投资顾问</td>
+                        <td class="td2">广州实盈投资管理有限公司</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div>
+        <span class="btn btn-animated btn-warning margin-clear reservation-btn">立即预约<i class="fa fa-arrow-right pl-10"></i></span>
+    </div>
+</div>
+<div class="modal animated fadeIn hidden" id="reservation-content" tabindex="-1" role="dialog" aria-labelledby="reservation" aria-hidden="false" style="display: block;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close closed" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="reservation-title">预约信息</h4>
+            </div>
+            <form action="/umbraco/Api/Member/Reservation" class="form-horizontal" method="post" novalidate="novalidate">
+                <div class="modal-body">
+                    <div class="form-group has-feedback">
+                        @Html.LabelFor(e => reservationModel.Name, new { @class = "col-sm-3 control-label" })
+                        <div class="col-sm-8">
+                            <div>
+                                @Html.TextBoxFor(e => reservationModel.Name, new { @class = "form-control", placeholder = "请输入姓名" })
+                                <i class="fa fa-user form-control-feedback"></i>
+                            </div>
+                            @Html.ValidationMessageFor(e => reservationModel.Name)
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback">
+                        @Html.LabelFor(e => reservationModel.Phone, new { @class = "col-sm-3 control-label" })
+                        <div class="col-sm-8">
+                            <div>
+                                @Html.TextBoxFor(e => reservationModel.Phone, new { @class = "form-control", placeholder = "请输入手机号" })
+                                <i class="fa fa-phone form-control-feedback"></i>
+                            </div>
+                            @Html.ValidationMessageFor(e => reservationModel.Phone)
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback">
+                        @Html.LabelFor(e => reservationModel.Email, new { @class = "col-sm-3 control-label" })
+                        <div class="col-sm-8">
+                            <div>
+                                @Html.TextBoxFor(e => reservationModel.Email, new { @class = "form-control", placeholder = "请输入邮箱" })
+                                <i class="fa fa-envelope form-control-feedback"></i>
+                            </div>
+                            @Html.ValidationMessageFor(e => reservationModel.Email)
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback">
+                        @Html.LabelFor(e => reservationModel.Text, new { @class = "col-sm-3 control-label" })
+                        <div class="col-sm-8">
+                            <div>
+                                @Html.TextAreaFor(e => reservationModel.Text, new { @class = "form-control", placeholder = "请输入信息", rows = "5" })
+                            </div>
+                            @Html.ValidationMessageFor(e => reservationModel.Text)
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-dark closed" data-dismiss="modal">取消</button>
+                    <button type="submit" class="btn btn-sm btn-default submit-btn">发送</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
