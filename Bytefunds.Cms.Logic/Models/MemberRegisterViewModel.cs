@@ -8,8 +8,8 @@ namespace Bytefunds.Cms.Logic.Models
 {
     public class MemberRegisterViewModel
     {
-        [Display(Name = "昵称")]
-        [Required(ErrorMessage = "请输入昵称")]
+        [Display(Name = "姓名")]
+        [Required(ErrorMessage = "请输入姓名")]
         public string Name { get; set; }
         [Display(Name = "邮箱")]
         [Required(ErrorMessage = "请输入邮箱")]
