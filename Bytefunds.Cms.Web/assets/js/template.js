@@ -171,8 +171,8 @@
             var height;
             if($(window).height()<=667){
                 height=320;
-            }else if($(window).height()>667 && $(window).height()<=1080){
-                height=400;
+            }else if($(window).height()>667 && $(window).height()<=1366){
+                height=420;
             }else{
                 height=650;
             }

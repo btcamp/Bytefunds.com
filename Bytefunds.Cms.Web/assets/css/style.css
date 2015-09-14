@@ -39,7 +39,7 @@ body {
 /*Typography
 ---------------------------------- */
 html {
-  height: 100%;
+  height: 100%;ss
 }
 body {
   font-size: 15px;
@@ -559,11 +559,11 @@ tbody {
     padding: 10px 0;
   }
 }
+
 /* Small devices (tablets, phones less than 767px) */
-@media (max-width: 767px) {
-  /*Transparent Header*/
-  .transparent-header .header-left {
-    padding: 12px 0 12px;
+@media (max-width: 768px) {
+  .header-left {
+    padding: 12px 0 ;
   }
   .transparent-header .header-right {
     z-index: 21;
@@ -4079,7 +4079,7 @@ fieldset[disabled] .form-control {
   bottom: 0px;
   left: 0;
   right: 0px;
-  background-color: rgba(30, 30, 30, 0.5);
+  background-color: rgba(30, 30, 30, 0.3);
   overflow: hidden;
   opacity: 0;
   filter: alpha(opacity=0);
@@ -4588,76 +4588,76 @@ header.full-width .animated.main-navigation .dropdown-menu .open .dropdown-menu.
 }
 /* Small devices (tablets, phones less than 767px) */
 @media (max-width: 767px) {
-  /* Mobile menu
-	------------------------------ */
-  /* active item */
-  .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
-  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
-  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
-    color: #0c9ec7;
-    background-color: transparent;
-  }
-  /* first level item */
-  .navbar-default .navbar-nav > li > a {
-    border-bottom: 1px solid #f9f9f9;
-  }
-  .navbar-default .navbar-nav > li:last-child > a {
-    border-bottom: 1px solid transparent;
-  }
-  /* first level item hover and focus states */
-  .navbar-default .navbar-nav > li > a:hover,
-  .navbar-default .navbar-nav > li > a:focus,
-  .navbar-default .navbar-nav > .active > a,
-  .navbar-default .navbar-nav > .active > a:hover,
-  .navbar-default .navbar-nav > .active > a:focus {
-    color: #0c9ec7;
-    background-color: #fff;
-    border-bottom-color: transparent;
-  }
-  /* second level menu */
-  .navbar-default .navbar-nav .open .dropdown-menu {
-    background-color: #ffffff;
-  }
-  /* second level item */
-  .navbar-default .navbar-nav .open .dropdown-menu > li > a,
-  .navbar-default .navbar-nav .open .dropdown-menu .dropdown-header {
-    padding: 12px 15px 12px 40px;
-    color: #333333;
-    border-color: #f9f9f9;
-  }
-  /* second level item on hover/focus */
-  .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
-  .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
-    color: #0c9ec7;
-  }
-  /* third level item */
-  .navbar-nav .open .dropdown-menu .dropdown-menu > li > a {
-    padding-left: 60px;
-  }
-  /* four level item */
-  .navbar-nav .open .dropdown-menu .dropdown-menu .dropdown-menu > li > a {
-    padding-left: 80px;
-  }
-  /* Arrow for parent menu item */
-  .navbar-default .navbar-nav > .dropdown.open > a:before {
-    color: #09afdf;
-  }
-  .dropdown > a:before,
-  .header.centered .dropdown > a:before {
-    color: #999999;
-    top: 14px;
-    right: 32px;
-  }
-  .dropdown .dropdown > a:before,
-  .header.centered .dropdown .dropdown > a:before {
-    right: 36px;
-  }
-  /*Transparent Mobile menu*/
-  .transparent-header .main-navigation .navbar.navbar-default {
-    background-color: rgba(255, 255, 255, 0.9);
-    position: absolute;
-    width: 100%;
-  }
+      /* Mobile menu
+	    ------------------------------ */
+      /* active item */
+      .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+      .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+      .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+        color: #0c9ec7;
+        background-color: transparent;
+      }
+      /* first level item */
+      .navbar-default .navbar-nav > li > a {
+        border-bottom: 1px solid #f9f9f9;
+      }
+      .navbar-default .navbar-nav > li:last-child > a {
+        border-bottom: 1px solid transparent;
+      }
+      /* first level item hover and focus states */
+      .navbar-default .navbar-nav > li > a:hover,
+      .navbar-default .navbar-nav > li > a:focus,
+      .navbar-default .navbar-nav > .active > a,
+      .navbar-default .navbar-nav > .active > a:hover,
+      .navbar-default .navbar-nav > .active > a:focus {
+        color: #0c9ec7;
+        background-color: #fff;
+        border-bottom-color: transparent;
+      }
+      /* second level menu */
+      .navbar-default .navbar-nav .open .dropdown-menu {
+        background-color: #ffffff;
+      }
+      /* second level item */
+      .navbar-default .navbar-nav .open .dropdown-menu > li > a,
+      .navbar-default .navbar-nav .open .dropdown-menu .dropdown-header {
+        padding: 12px 15px 12px 40px;
+        color: #333333;
+        border-color: #f9f9f9;
+      }
+      /* second level item on hover/focus */
+      .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+      .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+        color: #0c9ec7;
+      }
+      /* third level item */
+      .navbar-nav .open .dropdown-menu .dropdown-menu > li > a {
+        padding-left: 60px;
+      }
+      /* four level item */
+      .navbar-nav .open .dropdown-menu .dropdown-menu .dropdown-menu > li > a {
+        padding-left: 80px;
+      }
+      /* Arrow for parent menu item */
+      .navbar-default .navbar-nav > .dropdown.open > a:before {
+        color: #09afdf;
+      }
+      .dropdown > a:before,
+      .header.centered .dropdown > a:before {
+        color: #999999;
+        top: 14px;
+        right: 32px;
+      }
+      .dropdown .dropdown > a:before,
+      .header.centered .dropdown .dropdown > a:before {
+        right: 36px;
+      }
+      /*Transparent Mobile menu*/
+      .transparent-header .main-navigation .navbar.navbar-default {
+        background-color: rgba(255, 255, 255, 0.9);
+        position: absolute;
+        width: 100%;
+      }
 }
 /* 6.2 Dark Version
 ----------------------------------------------------------------------------- */
