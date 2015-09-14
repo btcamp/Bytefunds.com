@@ -3,24 +3,20 @@ body {
     min-height: 100%;
     position: relative;
 }
-
+@media(max-width:768px) {
+    body {
+        padding-bottom: 120px;
+    }
+}
 .nav {
     text-align: center;
 }
-
 @media (max-width: 768px) {
     .navbar {
         border: none;
         background: #FCFCFC !important;
     }
 }
-
-@media (max-width:320px) {
-    .navbar {
-        top: -4px;
-    }
-}
-
 .submit-button {
     float: right;
 }
@@ -139,7 +135,7 @@ body {
         margin-top: 20px;
     }
 }
-
+s
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
     color: #CD9F3B;
     background: #ffffff;
@@ -179,14 +175,9 @@ a:hover,a:focus {
         color: #ef9b00;
     }
 
-@media (min-width: 768px) and (max-width:996px ) {
+@media (min-width: 768px) {
     .navbar-nav > li {
-        margin: 10px 0 0 0;
         padding: 0 10px;
-    }
-
-    .header-dropdown-buttons {
-        margin-top: 10px;
     }
 }
 
@@ -215,25 +206,25 @@ a:hover,a:focus {
         font-size: 1.1em;
     }
 
-        .banner-float h2 strong {
-            color: #ffe333;
-            font-size: 2.5em;
-            font-family: Arial;
-        }
+    .banner-float h2 strong {
+        color: #ffe333;
+        font-size: 2.5em;
+        font-family: Arial;
+    }
 
-        .banner-float h2 span, .banner-float h3 span {
-            font-size: 1.3em;
-        }
+    .banner-float h2 span, .banner-float h3 span {
+        font-size: 1.3em;
+    }
 
     .banner-float p {
         color: #ffffff;
         text-align: center;
     }
 
-        .banner-float p a {
-            font-size: 1.1em;
-            font-family: "黑体";
-        }
+    .banner-float p a {
+        font-size: 1.1em;
+        font-family: "黑体";
+    }
 
 .banner-float-1, .banner-float-2, .banner-float-3, .banner-float-4, .banner-float-5, .banner-float-6 {
     position: absolute;
@@ -271,7 +262,7 @@ a:hover,a:focus {
 
     .banner-float-5:hover {
         color: #ffffff !important;
-        border-color: #ffe333;
+        opacity:0.8;
     }
 
 .banner-float-6 {
@@ -302,34 +293,21 @@ a:hover,a:focus {
 }
 
 @media (min-width: 1700px) {
-    .banner-float h2, .banner-float h3 {
+    banner-float{
+        font-family:"黑体"；
+    }
+    .banner-float h2, .banner-float h3 ,.banner-float-6 a{
         font-size: 1.4em;
+        font-family:"黑体"；
+    }
+    .banner-float h2 strong {
+        font-size: 2.8em;
     }
 
-        .banner-float h2 strong {
-            font-size: 2.8em;
-        }
-
-        .banner-float h2 span, .banner-float h3 span {
-            font-size: 1.5em;
-        }
-
-    .banner-float p a {
+   .banner-float h2 span, .banner-float h3 span, .banner-float p a, .banner-float-3 span, .banner-float-4  {
         font-size: 1.5em;
+        font-family:"黑体"；
     }
-
-    .banner-float-3 span {
-        font-size: 1.5em;
-    }
-
-    .banner-float-4 {
-        font-size: 1.5em;
-    }
-
-    /*.banner-float-5 {
-        padding-top: 15px;
-        padding-bottom: 15px;
-    }*/
 }
 
 .banner-float .separator:after {
@@ -476,28 +454,27 @@ input:focus, textarea:focus {
     margin-bottom: 20px;
 }
 
-    .description-title h4 {
-        background-color: #F5B024;
-        padding: 10px 10px 8px 15px;
-        display: inline-block;
-        position: relative;
-        top: 10px;
-        color: #ffffff;
-        font-size: 1.2em;
-        border-radius: 5px 5px 0 0px;
-    }
-
-        .description-title h4:after {
-            position: absolute;
-            right: -37px;
-            bottom: -1px;
-            content: '';
-            width: 0;
-            height: 0;
-            border-style: solid;
-            border-width: 40px 0 0 40px;
-            border-color: transparent transparent transparent #F5B024;
-        }
+.description-title h4 {
+    background-color: #F5B024;
+    padding: 12px 10px 8px 15px;
+    display: inline-block;
+    position: relative;
+    top: 10px;
+    color: #ffffff;
+    font-size: 1.2em;
+    border-radius: 5px 5px 0 0px;
+}
+.description-title h4:after {
+     position: absolute;
+     right: -39px;
+     bottom: -1px;
+     content: '';
+     width: 0;
+     height: 0;
+     border-style: solid;
+     border-width: 42px 0 0 42px;
+     border-color: transparent transparent transparent #F5B024;
+}
 
 .product .btn {
     font-size: 1.1em;
@@ -576,7 +553,7 @@ input:focus, textarea:focus {
 }
 
     .modal .modal-dialog {
-        margin-top: 8%;
+        margin-top: 6%;
     }
 
 .hidden {
@@ -705,9 +682,7 @@ input:focus, textarea:focus {
         }
 
     .online-product .content {
-        text-indent: 1em;
         color: #9e9e9e;
-        ;
     }
 
     .online-product .benefit-content {
@@ -761,7 +736,7 @@ input:focus, textarea:focus {
 }
 
     .collapse-style-2 .panel-heading a.collapsed {
-        background-color: rgba(205, 159, 59, 0.7);
+        background-color: rgba(205, 159, 59, 0.6);
     }
 
 .modal-header {
@@ -771,6 +746,10 @@ input:focus, textarea:focus {
 .btn-default {
     background-color: rgb(205, 159, 59) !important;
     border-color: rgb(205, 159, 59) !important;
+}
+.btn-default:hover {
+    background-color: rgba(205, 159, 59,0.8) !important;
+    border-color: rgba(205, 159, 59,0.8) !important;
 }
 
 .header-top .btn-default {
