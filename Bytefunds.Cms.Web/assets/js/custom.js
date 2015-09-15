@@ -153,7 +153,7 @@ function modalLoading(msg) {
     }
     bootbox.dialog({
         title: $(document).attr('title'),
-        message: '<img src="/Content/img/ajax-loader2.gif" />' + msg,
+        message: '<img src="/assets/images/ajax-loader2.gif" style="display:inline" />' + msg,
         animate: false,
         buttons: {
         }

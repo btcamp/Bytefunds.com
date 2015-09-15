@@ -23,7 +23,7 @@
     }
 }
 <section class="main-container margin-clear padding-top-clear">
-    <div class="container">
+    @*<div class="container">
         <div class="row">
             <div class="col-md-6">
                 <ul class="list-inline">
@@ -34,12 +34,25 @@
                 </ul>
             </div>
         </div>
-    </div>
+    </div>*@
 
 
 
     <div class="container" id="user-summary">
-        <h3>尊敬的用户：@username</h3>
+        <div class="row">
+            <div class="col-md-6">
+                <h3>尊敬的用户：@username</h3>
+            </div>
+            <div class="col-md-6">
+                <ul class="list-inline">
+                    <li><i class="icon-font approve" title="姓名">&#xe641;</i></li>
+                    <li><i class="icon-font" title="邮箱">&#xe61a;</i></li>
+                    <li><i class="icon-font" title="手机">&#xe675;</i></li>
+                    <li><i class="icon-font" title="银行卡">&#xf00c0;</i></li>
+                </ul>
+            </div>
+        </div>
+        
         <div class="row summary-infos">
             <div class="col-sm-6">
                 <div class="summary-info summary-info-p2p">
