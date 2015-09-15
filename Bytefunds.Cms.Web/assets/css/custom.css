@@ -1347,3 +1347,156 @@ input:focus, textarea:focus {
     display: block;
     font-size: 12px;
 }
+
+/*热销产品页面*/
+.bid-now, .bid-date, .bid-benefit {
+    margin: 0 5px;
+}
+
+.bid-now, .bid-benefit {
+    color: #F5B024;
+    font-size: 1.1em;
+}
+
+.bid-title span {
+    margin-right: 15px;
+    color: #9e9e9e;
+    ;
+}
+
+.bid-2 span {
+    margin-left: 15px;
+}
+
+.bid-2 > div {
+    height: 28px;
+}
+
+.bid-2 .bid-2-box {
+    border-right: 1px solid #9e9e9e;
+}
+
+.bid-2 > div p {
+    text-align: center;
+    font-size: 1.1em;
+}
+
+    .bid-2 > div p i {
+        color: #9e9e9e;
+        font-size: 1.5em;
+    }
+
+.bid-content {
+    text-indent: 2em;
+    line-height: 30px;
+}
+
+.bid-charts {
+    border: 1px solid rgba(158, 158, 158, 0.60);
+    padding: 10px 15px 0 5px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.bid-warning {
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+.bid-warning {
+    font-size: 0.9em;
+}
+
+    .bid-warning i {
+        font-size: 1.0em;
+        margin-top: 2px;
+        color: #ff0000;
+    }
+
+.bid-characteristic {
+    margin-top: 20px;
+}
+
+    .bid-characteristic h5 {
+        font-size: 1.1em;
+    }
+
+    .bid-characteristic .tab-pane span {
+        display: inline-block;
+    }
+
+    .bid-characteristic .tab-pane1 .span1 {
+        color: #2c364e;
+        width: 35%;
+    }
+
+    .bid-characteristic .tab-pane1 .span2 {
+        width: 65%;
+    }
+
+.tab-pane-content h6 {
+    font-size: 1.0em;
+}
+
+.tab-pane-content p {
+    font-size: 0.9em;
+    line-height: 28px;
+}
+
+.tab-pane-content .icon-ok {
+    background: #F5B024;
+    color: #ffffff;
+    border-radius: 50%;
+    margin-right: 5px;
+    font-size: 0.9em;
+}
+
+.nav-tabs.style-2 > li > a {
+    color: #777777;
+}
+
+    .nav-tabs.style-2 > li > a:hover {
+        color: #333333;
+        background-color: #fcfcfc !important;
+        border-color: #fcfcfc;
+        border-bottom-color: #fcfcfc !important;
+    }
+
+    .nav-tabs.style-2 > li > a:focus {
+        border-color: transparent;
+        background-color: transparent;
+    }
+
+.nav-tabs.style-2 > li.active > a,
+.nav-tabs.style-2 > li.active > a:hover,
+.nav-tabs.style-2 > li.active > a:focus {
+    color: #333333;
+    cursor: default;
+    background-color: #fcfcfc !important;
+    border-color: #fcfcfc;
+    border-bottom-color: transparent;
+}
+
+.nav-tabs.style-2 + .tab-content > .tab-pane {
+    padding: 15px;
+    border: 1px solid #fcfcfc !important;
+    border-top: none;
+    background-color: #fcfcfc;
+}
+
+.nav-tabs.style-2 {
+    border-bottom: 1px solid #fcfcfc;
+}
+
+.bid-right .btn-sm {
+    font-size: 1.0em;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+@media (min-width: 960px) {
+    .bid-right-content {
+        margin: 50px 0;
+        padding: 0 15px;
+    }
+}

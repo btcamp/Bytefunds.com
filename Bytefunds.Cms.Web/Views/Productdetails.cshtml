@@ -8,22 +8,21 @@
 }
 @Html.Partial("ModalReservation")
 
-
 <section class="pv-30 clearfix">
     <div class="container">
         <div class="row">
             <div class="col-sm-9 bid-left">
                 <div class="description-title">
-                    <h4>零钱计划第一季</h4>
+                    <h4>@(content.GetPropertyValue<string>("title"))</h4>
                 </div>
-                <p>一次性还本付息 | 平安承保</p>
+                <p>@(content.GetPropertyValue<string>("title2"))</p>
                 <div class="row">
                     <div class="col-sm-2" id="indicatorContainer">
 
                     </div>
                     <div class="col-sm-10">
-                        <h4 class="bid-title">项目金额： <span class="">10W</span>最低起投： <span>100元</span></h4>
-                        <p>已经完成投标<span class="bid-now">10,885.00</span>元 , 即刻投资收益自<span class="bid-date">2015-09-10</span>起算，每万元预期收益<span class="bid-benefit">133.70</span>元</p>
+                        <h4 class="bid-title">项目金额： <span class="">@(content.GetPropertyValue<double>("sumAmount").ToString("N2")) 元</span>最低起投： <span>@(content.GetPropertyValue<double>("startAmount").ToString("N2")) 元</span></h4>
+                        <p>已经完成投标<span class="bid-now">@(content.GetPropertyValue<double>("purchasedAmount").ToString("N2"))</span>元 , 即刻投资收益自<span class="bid-date">2015-09-10</span>起算，每万元预期收益<span class="bid-benefit">133.70</span>元</p>
                     </div>
                 </div>
                 <hr />
@@ -32,11 +31,11 @@
                         <p><i class="fa fa-bar-chart"></i><span class="bid-benefit">8%</span></p>
                     </div>
                     <div class="col-md-2 col-xs-5">
-                        <p><i class="fa fa-clock-o"></i><span>1个月</span></p>
+                        <p><i class="fa fa-clock-o"></i><span>@(content.GetPropertyValue<string>("cycle"))</span></p>
                     </div>
                 </div>
                 <hr />
-                <p class="bid-content">本项目周期为1个月，是间接投资鹏华资产实盈量化复兴资产管理计划，通过债权转让方式方式使中小投资者有机会投资私募基金，并获得固定保底收益和浮动增值收益。比特金服作为信息提供方独家发布此投资信息。</p>
+                <p class="bid-content">@(content.GetPropertyValue<string>("introduction"))</p>
                 <div class="bid-charts" id="charts"></div>
                 <div class="bid-characteristic">
                     <ul class="nav nav-tabs style-2" role="tablist">
@@ -48,14 +47,14 @@
                             <div class="row tab-pane1">
                                 <div class="col-md-12">
                                     <ul class="list clearfix">
-                                        <li class="col-sm-6"><span class="span1">基金名称</span><span class="span2">零钱计划第一季</span></li>
+                                        <li class="col-sm-6"><span class="span1">基金名称</span><span class="span2">@(content.GetPropertyValue<string>("title"))</span></li>
                                         <li class="col-sm-6"><span class="span1">运作方式</span><span class="span2">开放式</span></li>
                                         <li class="col-sm-6"><span class="span1">基金类型</span><span class="span2">货币型</span></li>
                                         <li class="col-sm-6"><span class="span1">基金经理</span><span class="span2">邓掘，陈鑫</span></li>
                                         <li class="col-sm-6"><span class="span1">基金简称</span><span class="span2">零钱计划</span></li>
                                         <li class="col-sm-6"><span class="span1">币种</span><span class="span2">CNY</span></li>
                                         <li class="col-sm-6"><span class="span1">成立时间</span><span class="span2">2015-09-07</span></li>
-                                        <li class="col-sm-6"><span class="span1">基金代码</span><span class="span2">000709</span></li>
+                                        @*<li class="col-sm-6"><span class="span1">基金代码</span><span class="span2">000709</span></li>*@
                                         <li class="col-sm-6"><span class="span1">托管人</span><span class="span2">招商银行</span></li>
                                         <li class="col-sm-6"><span class="span1">管理人</span><span class="span2">鹏华资产深圳有限公司</span></li>
                                     </ul>
@@ -99,7 +98,8 @@
             <div class="col-sm-3 bid-right">
                 <div class="bid-right-content">
                     <h4>即刻申购</h4>
-                    <a href="#" class="btn-sm btn btn-gray btn-block">立即股买</a>
+                    @*/pay?id=@content.Id&minAmount=@(content.GetPropertyValue<double>("startAmount"))*@
+                    <a href="#" class="btn-sm btn btn-gray btn-block">敬请期待</a>
                     <small style="line-height: 25px;">尊敬的用户您好，自2015年9月17日起，比特金服基金服务功能将全面展开。新的基金服务很快就要上线了，敬请期待。</small>
                     <hr style="border-style: dashed" />
                 </div>
@@ -114,7 +114,7 @@
                     <hr style="border-style: dashed" />
                 </div>
                 <div class="bid-right-content">
-                    <img src="images/hezuo.jpg" alt="" />
+                    <img src="/assets/images/hezuo.jpg" alt="" />
                 </div>
             </div>
         </div>
