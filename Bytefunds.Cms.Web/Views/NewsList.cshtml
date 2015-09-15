@@ -4,18 +4,17 @@
 }
 
 @*@Html.Partial("_Breadcrumb", Model)*@
-
-<section id="services" class="light-gray-bg pv-30 clearfix">
+<section id="news" class="light-gray-bg pv-30 clearfix news-page">
     <div class="container">
         <div class="row">
-            <section class="col-md-12">
+            <div class="col-md-12">
                 @{
                     foreach (IPublishedContent content in Model.Content.Children.OrderByDescending(e => e.CreateDate).Take(20))
                     {
                         <section>
                             <h4>
                                 <i class="fa fa-dot-circle-o"></i>
-                                <a href="@content.Url">@(content.GetPropertyValue<string>("title"))</a>
+                                <a href="@content.Url" style="font-size:16px">@(content.GetPropertyValue<string>("title"))</a>
                             </h4>
                             <small>@(content.CreateDate.ToString("yyyy-MM-dd HH:mm:ss"))</small>
                             <p></p>
@@ -23,7 +22,7 @@
                         </section>
                     }
                 }
-            </section>
+            </div>
         </div>
     </div>
 </section>

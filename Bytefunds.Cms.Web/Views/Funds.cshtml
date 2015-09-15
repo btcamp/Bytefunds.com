@@ -2,7 +2,6 @@
 @{
     Layout = "_Layout.cshtml";
 }
-
 <div class="etf-bg" data-animation-effect="fadeIn" data-effect-delay="50">
     <img src="/assets/images/etf.jpg" alt="" style="width:100%;" />
 </div>
@@ -76,6 +75,27 @@
     </div>
 </section>
 <!-- section end -->
+<section class="section default-bg clearfix ">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="call-to-action text-center">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <h1 class="title">鹏华资产量化复兴管理计划</h1>
+                            <p style="padding-top:10px;font-size:1.1em">收益高，风险小，全胜战绩，历史最大收益 <span style="font-size:1.5em;color:#FD9F3B">66.9%</span>，新产品火热预约中, 专业的团队，带您延续昨日的辉煌，你心动了吗？</p>
+                            <p></p>
+                        </div>
+                        <div class="col-sm-4">
+                            <br>
+                            <p style="margin-top:5px;"><span  class="reservation-btn btn btn-lg btn-gray-transparent btn-animated ">立即预约<i class="fa fa-arrow-right pl-10"></i></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 <!-- section start -->
 <!-- ================ -->
 <section class="clearfix pv-20 etf-2 object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
@@ -156,4 +176,53 @@
             </div>
         </div>
     </div>
-</section>
+</section>s
+
+<div class="modal animated fadeIn hidden" id="reservation-content" tabindex="-1" role="dialog" aria-labelledby="reservation" aria-hidden="false" style="display: block;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close closed" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="reservation-title">预约信息</h4>
+            </div>
+            <form action="" class="form-horizontal" method="post" novalidate="novalidate">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="reservation_Name">姓名：</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" data-val="true" data-val-required="请输入姓名" id="reservation_Name" name="reservation.Name" placeholder="请输入姓名" type="text" value="">
+                            <span class="field-validation-valid" data-valmsg-for="reservation.Name" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="reservation_Phone">手机：</label>
+
+                        <div class="col-sm-8">
+                            <input class="form-control has-feedback" data-val="true" data-val-regex="请输入正确的手机号码" data-val-regex-pattern="^\d{11}$" data-val-required="请输入手机" id="reservation_Phone" name="reservation.Phone" placeholder="请输入手机号" type="text" value="">
+                            <span class="field-validation-valid" data-valmsg-for="reservation.Phone" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="reservation_Email">邮箱：</label>
+
+                        <div class="col-sm-8">
+                            <input class="form-control" data-val="true" data-val-regex="请输入正确的邮箱地址" data-val-regex-pattern="" data-val-required="请输入邮箱" id="reservation_Email" name="reservation.Email" placeholder="请输入邮箱" type="text" value="">
+                            <span class="field-validation-valid" data-valmsg-for="reservation.Email" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="reservation_text">信息：</label>
+                        <div class="col-sm-8">
+                            <textarea name="" id="reservation_text" cols="30" rows="3" class="form-control" placeholder="请输入你的信息"></textarea>
+                            <span class="field-validation-valid" data-valmsg-for="reservation.Password" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-dark closed" data-dismiss="modal">取消</button>
+                    <button type="submit" class="btn btn-sm btn-default submit-btn">发送</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

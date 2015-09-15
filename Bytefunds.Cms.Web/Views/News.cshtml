@@ -4,11 +4,12 @@
 }
 @Html.Partial("_Breadcrumb", Model)
 
-<section class="main-container padding-bottom-clear">
-
+<section class="main-container">
     <div class="container">
         <div class="row">
-            @(Html.Raw(Model.Content.GetPropertyValue<string>("content")))
+            <div class="col-md-12">
+                @(Html.Raw(Model.Content.GetPropertyValue<string>("content")))
+            </div>
         </div>
     </div>
 </section>
