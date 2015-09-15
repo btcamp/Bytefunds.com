@@ -1,0 +1,122 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "_Layout.cshtml";
+
+    string id = Request.QueryString["id"];
+    IPublishedContent content = Umbraco.Content(int.Parse(id));
+
+}
+@Html.Partial("ModalReservation")
+
+
+<section class="pv-30 clearfix">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9 bid-left">
+                <div class="description-title">
+                    <h4>零钱计划第一季</h4>
+                </div>
+                <p>一次性还本付息 | 平安承保</p>
+                <div class="row">
+                    <div class="col-sm-2" id="indicatorContainer">
+
+                    </div>
+                    <div class="col-sm-10">
+                        <h4 class="bid-title">项目金额： <span class="">10W</span>最低起投： <span>100元</span></h4>
+                        <p>已经完成投标<span class="bid-now">10,885.00</span>元 , 即刻投资收益自<span class="bid-date">2015-09-10</span>起算，每万元预期收益<span class="bid-benefit">133.70</span>元</p>
+                    </div>
+                </div>
+                <hr />
+                <div class="bid-2 row">
+                    <div class="col-md-2 col-xs-5 bid-2-box">
+                        <p><i class="fa fa-bar-chart"></i><span class="bid-benefit">8%</span></p>
+                    </div>
+                    <div class="col-md-2 col-xs-5">
+                        <p><i class="fa fa-clock-o"></i><span>1个月</span></p>
+                    </div>
+                </div>
+                <hr />
+                <p class="bid-content">本项目周期为1个月，是间接投资鹏华资产实盈量化复兴资产管理计划，通过债权转让方式方式使中小投资者有机会投资私募基金，并获得固定保底收益和浮动增值收益。比特金服作为信息提供方独家发布此投资信息。</p>
+                <div class="bid-charts" id="charts"></div>
+                <div class="bid-characteristic">
+                    <ul class="nav nav-tabs style-2" role="tablist">
+                        <li class="active"><a href="#h2tab1" role="tab" data-toggle="tab" aria-expanded="true">基金概况</a></li>
+                        <li class=""><a href="#h2tab2" role="tab" data-toggle="tab" aria-expanded="false">产品特色</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="h2tab1">
+                            <div class="row tab-pane1">
+                                <div class="col-md-12">
+                                    <ul class="list clearfix">
+                                        <li class="col-sm-6"><span class="span1">基金名称</span><span class="span2">零钱计划第一季</span></li>
+                                        <li class="col-sm-6"><span class="span1">运作方式</span><span class="span2">开放式</span></li>
+                                        <li class="col-sm-6"><span class="span1">基金类型</span><span class="span2">货币型</span></li>
+                                        <li class="col-sm-6"><span class="span1">基金经理</span><span class="span2">邓掘，陈鑫</span></li>
+                                        <li class="col-sm-6"><span class="span1">基金简称</span><span class="span2">零钱计划</span></li>
+                                        <li class="col-sm-6"><span class="span1">币种</span><span class="span2">CNY</span></li>
+                                        <li class="col-sm-6"><span class="span1">成立时间</span><span class="span2">2015-09-07</span></li>
+                                        <li class="col-sm-6"><span class="span1">基金代码</span><span class="span2">000709</span></li>
+                                        <li class="col-sm-6"><span class="span1">托管人</span><span class="span2">招商银行</span></li>
+                                        <li class="col-sm-6"><span class="span1">管理人</span><span class="span2">鹏华资产深圳有限公司</span></li>
+                                    </ul>
+                                    <div class="tab-pane-content">
+                                        <h6>投资目标</h6>
+                                        <p>在力求本金安全、确保资产流动性的基础上，追求超越业绩比较基准的投资回报。</p>
+                                    </div>
+                                    <div class="tab-pane-content">
+                                        <h6>投资策略</h6>
+                                        <p>本基金将根据市场情况和可投资品种的容量，在严谨深入的研究分析基础上，综合考量宏观经济形势、市场资金面走向、信用债券的信用评级、协议存款交易对手的信用资质以及各类资产的收益率水平等，确定各类货币市场工具的配置比例并进行积极的投资组合管理，在保证基金资产的安全性和流动性的基础上力争为投资人创造稳定的收益。</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="h2tab2">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="tab-pane-content">
+                                        <h6>豪门定制，只为您</h6>
+                                        <p><i class="icon-ok"></i>本产品由中国量化学会理事长--丁鹏博士操刀策划，给您真正的高大上体验</p>
+                                    </div>
+                                    <div class="tab-pane-content">
+                                        <h6>专业团队，放心购买</h6>
+                                        <p><i class="icon-ok"></i>国内首批货币基金管理人，拥有丰富的管理经验</p>
+                                    </div>
+                                    <div class="tab-pane-content">
+                                        <h6>让利更明显</h6>
+                                        <p><i class="icon-ok"></i>费率较传统货币基金明显降低，更多让利投资人</p>
+                                    </div>
+                                    <div class="tab-pane-content">
+                                        <h6>风险小，收益高</h6>
+                                        <p><i class="icon-ok"></i>产品最大回撤0.67%，收益历史最高可达66.9%</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="bid-warning"><i class="icon-warning-empty"></i> 比特金服提醒您：投资有风险</p>
+            </div>
+            <div class="col-sm-3 bid-right">
+                <div class="bid-right-content">
+                    <h4>即刻申购</h4>
+                    <a href="#" class="btn-sm btn btn-gray btn-block">立即股买</a>
+                    <small style="line-height: 25px;">尊敬的用户您好，自2015年9月17日起，比特金服基金服务功能将全面展开。新的基金服务很快就要上线了，敬请期待。</small>
+                    <hr style="border-style: dashed" />
+                </div>
+                <div class="bid-right-content hidden-xs">
+                    <h4>了解更多？</h4>
+                    <p>请点击右侧QQ图标在线咨询，我们将竭诚为你服务 --->></p>
+                    <hr style="border-style: dashed" />
+                </div>
+                <div class="bid-right-content">
+                    <h4>火热销售，值得您期待</h4>
+                    <a href="#" class="btn-sm btn btn-warning btn-block reservation-btn">立即预约</a>
+                    <hr style="border-style: dashed" />
+                </div>
+                <div class="bid-right-content">
+                    <img src="images/hezuo.jpg" alt="" />
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
