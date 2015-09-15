@@ -1,11 +1,13 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 @{
     Layout = "_Layout.cshtml";
+    Html.EnableClientValidation();
+    Html.EnableUnobtrusiveJavaScript();
 }
-
 <div class="etf-bg" data-animation-effect="fadeIn" data-effect-delay="50">
     <img src="/assets/images/etf.jpg" alt="" style="width:100%;" />
 </div>
+
 <!-- section start -->
 <!-- ================ -->
 <section class="clearfix pv-20 light-gray-bg etf-1">
@@ -76,6 +78,27 @@
     </div>
 </section>
 <!-- section end -->
+<section class="section default-bg clearfix">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="call-to-action text-center">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <h1 class="title">鹏华资产量化复兴管理计划</h1>
+                            <p style="padding-top:10px;font-size:1.1em">收益高，风险小，全胜战绩，历史最大收益 <span style="font-size:1.5em;color:#FD9F3B">66.9%</span>，新产品火热预约中, 专业的团队，带您延续昨日的辉煌，你心动了吗？</p>
+                            <p></p>
+                        </div>
+                        <div class="col-sm-4">
+                            <br>
+                            <p style="margin-top:5px;"><span class="reservation-btn btn btn-lg btn-gray-transparent btn-animated ">立即预约<i class="fa fa-arrow-right pl-10"></i></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 <!-- section start -->
 <!-- ================ -->
 <section class="clearfix pv-20 etf-2 object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
@@ -157,3 +180,4 @@
         </div>
     </div>
 </section>
+@Html.Partial("ModalReservation")

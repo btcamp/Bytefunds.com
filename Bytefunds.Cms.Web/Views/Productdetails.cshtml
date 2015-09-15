@@ -2,10 +2,16 @@
 @{
     Layout = "_Layout.cshtml";
 
+    Html.EnableClientValidation();
+    Html.EnableUnobtrusiveJavaScript();
+
     string id = Request.QueryString["id"];
     IPublishedContent content = Umbraco.Content(int.Parse(id));
-
+    double sumAmount = content.GetPropertyValue<double>("sumAmount");
+    double purchasedAmount = content.GetPropertyValue<double>("purchasedAmount");
+    string number = ((purchasedAmount / sumAmount) * 100).ToString("f0");
 }
+
 @Html.Partial("ModalReservation")
 
 <section class="pv-30 clearfix">
@@ -21,14 +27,15 @@
 
                     </div>
                     <div class="col-sm-10">
-                        <h4 class="bid-title">项目金额： <span class="">@(content.GetPropertyValue<double>("sumAmount").ToString("N2")) 元</span>最低起投： <span>@(content.GetPropertyValue<double>("startAmount").ToString("N2")) 元</span></h4>
-                        <p>已经完成投标<span class="bid-now">@(content.GetPropertyValue<double>("purchasedAmount").ToString("N2"))</span>元 , 即刻投资收益自<span class="bid-date">2015-09-10</span>起算，每万元预期收益<span class="bid-benefit">133.70</span>元</p>
+                        <h4 class="bid-title">项目金额： <span class="">@(sumAmount.ToString("N2")) 元</span>最低起投： <span>@(content.GetPropertyValue<double>("startAmount").ToString("N2")) 元</span></h4>
+                        <p>已经完成投标<span class="bid-now">@(purchasedAmount.ToString("N2"))</span>元 , 即刻投资收益自<span class="bid-date">2015-09-10</span>起算，每万元预期收益<span class="bid-benefit">133.70</span>元</p>
+                        <input type="hidden" id="indicatorValue" value="@number" />
                     </div>
                 </div>
                 <hr />
                 <div class="bid-2 row">
                     <div class="col-md-2 col-xs-5 bid-2-box">
-                        <p><i class="fa fa-bar-chart"></i><span class="bid-benefit">8%</span></p>
+                        <p><i class="fa fa-bar-chart"></i><span class="bid-benefit">@(content.GetPropertyValue<string>("rate"))</span></p>
                     </div>
                     <div class="col-md-2 col-xs-5">
                         <p><i class="fa fa-clock-o"></i><span>@(content.GetPropertyValue<string>("cycle"))</span></p>

@@ -1,4 +1,6 @@
 ﻿@{
+    Html.EnableClientValidation();
+    Html.EnableUnobtrusiveJavaScript();
     ReservationViewModel reservationModel = new ReservationViewModel();
 }
 <div class="modal animated fadeIn hidden" id="reservation-content" tabindex="-1" role="dialog" aria-labelledby="reservation" aria-hidden="false" style="display: block;">

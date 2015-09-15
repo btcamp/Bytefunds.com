@@ -23,7 +23,6 @@
 		if ((platform.indexOf('win') == 0 || platform.indexOf('linux') == 0) && !Modernizr.touch) {
 			if ($.browser.webkit) {
 				$.webkitSmoothScroll();
-				console.log("hello webkit");
 			}
 		};
 		//Show dropdown on hover only for desktop devices
@@ -171,10 +170,8 @@
             var height;
             if($(window).height()<=667){
                 height=320;
-            }else if($(window).height()>667 && $(window).height()<=1366){
-                height=420;
-            }else{
-                height=650;
+            }else if($(window).height()>667 && $(window).height()<=1080){
+                height=450;
             }
 			$('.slider-banner-container .slider-banner-fullwidth').show().revolution({
 				delay:8000,
@@ -515,7 +512,7 @@
 			});
 			$(".owl-carousel.content-slider-with-large-controls").owlCarousel({
 				singleItem: true,
-				autoPlay: false,
+				autoPlay: true,
 				navigation: true,
 				pagination: true
 			});	
@@ -858,7 +855,6 @@
 		// Animated Circular Progress Bars
 		//-----------------------------------------------
 		if ($(".knob").length>0) {
-
 			$(".knob").knob();
 			$(".knob").each(function() {
 				var animateVal = $(this).attr("data-animate-value");
