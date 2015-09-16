@@ -71,6 +71,7 @@ namespace Bytefunds.Cms.Logic.Controllers
                         var m = Services.MemberService.GetByUsername(member.UserName);
                         m.SetValue("tel", model.Phone);
                         Services.MemberService.SavePassword(m, model.Password);
+                        Services.MemberService.Save(m);
                         result.Success = true;
                         result.Msg = "欢迎您的加入";
                         result.IsRedirect = true;

@@ -61,35 +61,55 @@ namespace Bytefunds.Cms.Logic.EventHandlers
                 {
                     string tplid = string.Empty;
                     string title = string.Empty;
+                    string accountbuyId = string.Empty;
                     if (e.Alias.ToLower().Equals("payrecords"))
                     {
                         tplid = SystemSettingsHelper.GetSystemSettingsByKey("manager:payment:tplid");
+                        accountbuyId = SystemSettingsHelper.GetSystemSettingsByKey("account:buy:tplid");
                     }
                     else if (e.Alias.ToLower().Equals("refundtype"))
                     {
                         tplid = SystemSettingsHelper.GetSystemSettingsByKey("manager:refund:tplid");
                     }
 
-                    int tpl;
-                    if (int.TryParse(tplid, out tpl))
+                    int tpl, accounttplid;
+
+                    if (int.TryParse(tplid, out tpl) && int.TryParse(accountbuyId, out accounttplid))
                     {
                         IMedia content = ApplicationContext.Current.Services.MediaService.GetById(tpl);
+                        IMedia accountbuytmp = ApplicationContext.Current.Services.MediaService.GetById(accounttplid);
                         //创建Content的时候Name属性赋值的email
-                        IMember member = ApplicationContext.Current.Services.MemberService.GetByEmail(e.Entity.GetValue<string>("email"));
+                        IMember member = ApplicationContext.Current.Services.MemberService.GetById(e.Entity.GetValue<int>("memberPicker"));
+                        IContent product = ApplicationContext.Current.Services.ContentService.GetById(e.Entity.GetValue<int>("buyproduct"));
                         if (member == null)
                         {
                             return;
                             // throw new CustomException.NotFoundEmailException("邮箱不存在");
                         }
-                        string oldbodycontent = Helpers.SendmailHelper.Replace(content.GetValue<string>("bodytext"), member.Key, e.Entity.Id);
+                        Configuration configurationFile = WebConfigurationManager.OpenWebConfiguration(HttpContext.Current.Request.ApplicationPath);
+                        MailSettingsSectionGroup mailSettings = (MailSettingsSectionGroup)configurationFile.GetSectionGroup("system.net/mailSettings");
+
                         string managerEmail = SystemSettingsHelper.GetSystemSettingsByKey("manager:email");
-                        Helpers.SendmailHelper.SendEmail(content.GetValue<string>("title"), oldbodycontent, managerEmail);
+                        string oldbodycontent = content.GetValue<string>("bodytext")
+                                                .Replace("{{name}}", member.Name)
+                                                .Replace("{{product}}", product.GetValue<string>("title"))
+                                                .Replace("{{amount}}", e.Entity.GetValue<double>("amountCny").ToString("N2"));
+                        //发送邮件到管理员
+                        library.SendMail(mailSettings.Smtp.Network.UserName, managerEmail, content.GetValue<string>("title"), oldbodycontent, true);
+                        //发送邮件到用户
+                        string accountContent = accountbuytmp.GetValue<string>("bodytext")
+                                                .Replace("{{name}}", member.Name)
+                                                .Replace("{{product}}", product.GetValue<string>("title"))
+                                                .Replace("{{rate}}", product.GetValue<string>("rate"))
+                                                .Replace("{{amount}}", e.Entity.GetValue<double>("amountCny").ToString("N2"));
+                        WriteLog(member.Username + "\r\n" + accountbuytmp.GetValue<string>("title"));
+                        library.SendMail(mailSettings.Smtp.Network.UserName, member.Username, accountbuytmp.GetValue<string>("title"), accountContent, true);
                     }
                 }
             }
             catch (Exception ex)
             {
-
+                WriteLog(ex.ToString());
                 return;
             }
             #endregion
@@ -134,6 +154,17 @@ namespace Bytefunds.Cms.Logic.EventHandlers
             {
                 return;
             }
+        }
+
+        public void WriteLog(string msg)
+        {
+
+            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "log");
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            System.IO.File.AppendAllText(Path.Combine(path, DateTime.Now.ToString("yyyyMMdd") + ".log"), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + " " + msg + "\r\n");
         }
     }
 }
