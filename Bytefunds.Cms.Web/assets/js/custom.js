@@ -12,7 +12,7 @@ jQuery(function ($) {
         ByteFunds.showCharts();
     });
     ByteFunds.qqService = function (qq) {
-        var qq_list = new Array("578485754", "3226588475");
+        var qq_list = new Array("578485754","3226588475");
         //随机
         var qq_i = Math.floor(Math.random() * qq_list.length);
         if (!qq) {
@@ -149,11 +149,11 @@ function modalLoading(msg) {
         return;
     }
     if (msg == null) {
-        msg = "正在提交数据，请稍候";
+        msg = "正在提交数据，请稍候...";
     }
     bootbox.dialog({
         title: $(document).attr('title'),
-        message: '<img src="/assets/images/ajax-loader2.gif" style="display:inline" />' + msg,
+        message: '<img src="/assets/images/ajax-loader2.gif" style="float:left;margin:4px 5px 0 0" />' + msg,
         animate: false,
         buttons: {
         }

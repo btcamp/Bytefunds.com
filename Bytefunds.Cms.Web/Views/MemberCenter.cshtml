@@ -20,25 +20,8 @@
         fundAccount = member.GetValue<double>("fundAccount").ToString("f2");
         assets = member.GetValue<double>("assets").ToString("f2");
         tel = member.GetValue<string>("tel");
-
-
-
+        
         <section class="main-container margin-clear padding-top-clear">
-            @*<div class="container">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <ul class="list-inline">
-                                <li><i class="icon-font approve" title="姓名">&#xe641;</i></li>
-                                <li><i class="icon-font" title="邮箱">&#xe61a;</i></li>
-                                <li><i class="icon-font" title="手机">&#xe675;</i></li>
-                                <li><i class="icon-font" title="银行卡">&#xf00c0;</i></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>*@
-
-
-
             <div class="container" id="user-summary">
                 <div class="row">
                     <div class="col-md-12">
@@ -124,7 +107,7 @@
                             </div>
                             <div class="account-unactive">
                                 <h4>您还未开通基金账户</h4>
-                                <a class="btn btn-large" href="">立即开通</a>
+                                <a class="btn btn-large btn-warning" href="">立即开通</a>
                             </div>
                         </div>
                     </div>
