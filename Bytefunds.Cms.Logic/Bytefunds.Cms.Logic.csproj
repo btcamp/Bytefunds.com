@@ -161,6 +161,7 @@
     <Compile Include="Helpers\UmbracoDictionaryHelper.cs" />
     <Compile Include="Helpers\UmbracoExtension.cs" />
     <Compile Include="Models\AccountSummary.cs" />
+    <Compile Include="Models\BankCertificationViewModel.cs" />
     <Compile Include="Models\ChangePasswordModel.cs" />
     <Compile Include="Models\ImportExcelResponseModel.cs" />
     <Compile Include="Models\JsonStringExtension.cs" />
@@ -178,6 +179,7 @@
     <Compile Include="Models\ThreadParameter.cs" />
     <Compile Include="Models\TxtParamClass.cs" />
     <Compile Include="Models\UmbDictionaryModel.cs" />
+    <Compile Include="Models\VerifiedViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CustomSection\ProductManager.cs" />
   </ItemGroup>

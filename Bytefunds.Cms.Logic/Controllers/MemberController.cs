@@ -14,6 +14,17 @@ namespace Bytefunds.Cms.Logic.Controllers
     [PluginController("Api")]
     public class MemberController : SurfaceController
     {
+        public MemberController()
+        {
+            //IMediaService ms = Services.MediaService;
+            //if (depositImage != null && depositImage.ContentLength > 0)
+            //{
+            //    IMedia mediaImage = ms.CreateMedia(realName + "(" + amountUsd + "$ / " + rechargeDateTime.ToString("yyyy-MM-dd HH:mm:ss") + ")", 5121, "Image");
+
+            //    mediaImage.SetValue("umbracoFile", depositImage);
+            //    ms.Save(mediaImage);
+            //}
+        }
         // GET: Member
         [HttpPost]
         public ActionResult Regsiter([Bind(Prefix = "registerModel")]MemberRegisterViewModel model)
@@ -62,6 +73,9 @@ namespace Bytefunds.Cms.Logic.Controllers
                         Services.MemberService.SavePassword(m, model.Password);
                         result.Success = true;
                         result.Msg = "欢迎您的加入";
+                        result.IsRedirect = true;
+                        result.RedirectUrl = "/memberinfo";
+                        EventHandlers.CustomRaiseEvent.RaiseRegistered(m);
                         break;
                     }
 
@@ -134,6 +148,95 @@ namespace Bytefunds.Cms.Logic.Controllers
 
                 throw;
             }
+        }
+
+        public ActionResult BankCertification([Bind(Prefix = "bankCertificationViewModel")] BankCertificationViewModel model)
+        {
+            ResponseModel responseModel = new ResponseModel();
+            if (!Members.IsLoggedIn())
+            {
+                responseModel.Success = false;
+                responseModel.Msg = "请先进行登录过在进行补充信息";
+            }
+            else if (!ModelState.IsValid)
+            {
+                foreach (var item in ModelState)
+                {
+                    if (item.Value.Errors.Count > 0)
+                    {
+                        responseModel.Success = false;
+                        responseModel.Msg = item.Value.Errors.FirstOrDefault().ErrorMessage;
+                    }
+                }
+            }
+            else
+            {
+                IMember member = Services.MemberService.GetById(Members.GetCurrentMemberId());
+                member.SetValue("bankName", model.BankName);
+                member.SetValue("bankAccountName", model.BankAccountName);
+                member.SetValue("bankCardNumber", model.BankCardNumber);
+                member.SetValue("bankCertification", true);
+                Services.MemberService.Save(member);
+                responseModel.Success = true;
+                responseModel.Msg = "保存成功，感谢您的支持，我们将会做的更好！";
+                responseModel.RedirectUrl = "/memberinfo";
+            }
+            return Json(responseModel, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Verified([Bind(Prefix = "verifiedViewModel")]VerifiedViewModel model)
+        {
+            ResponseModel responseModel = new ResponseModel();
+            if (!Members.IsLoggedIn())
+            {
+                responseModel.Success = false;
+                responseModel.Msg = "请先进行登录过在进行补充信息";
+            }
+            else if (!ModelState.IsValid)
+            {
+                foreach (var item in ModelState)
+                {
+                    if (item.Value.Errors.Count > 0)
+                    {
+                        responseModel.Success = false;
+                        responseModel.Msg = item.Value.Errors.FirstOrDefault().ErrorMessage;
+                    }
+                }
+            }
+            else
+            {
+                IMember member = Services.MemberService.GetById(Members.GetCurrentMemberId());
+                member.SetValue("idcard", model.IDCard);
+
+                if (model.Card1 != null && model.Card2 != null)
+                {
+                    IMedia media1 = Services.MediaService.CreateMedia(string.Format("{0}_{1}", model.IDCard, 1), 4417, "Image");
+                    IMedia media2 = Services.MediaService.CreateMedia(string.Format("{0}_{1}", model.IDCard, 2), 4417, "Image");
+                    media1.SetValue("umbracoFile", model.Card1);
+                    media2.SetValue("umbracoFile", model.Card2);
+                    List<IMedia> list = new List<IMedia>() { media1, media2 };
+                    Services.MediaService.Save(list);
+
+                    member.SetValue("card1", media1.Id);
+                    member.SetValue("card2", media2.Id);
+                    Services.MemberService.Save(member);
+                    responseModel.Success = true;
+
+                    responseModel.Msg = "保存成功，我们将在24小时内进行审核！";
+                    responseModel.RedirectUrl = "/memberinfo";
+                    System.Threading.Tasks.Task.Factory.StartNew(() =>
+                    {
+                        //发送邮件通知管理人
+                        umbraco.library.SendMail("jiangchun1320@163.com", "jiangchun1320@qq.com", "用户实名认证提交", string.Format("{0}提交了身份证信息！请尽快审核！", member.Name), true);
+                    });
+                }
+                else
+                {
+                    responseModel.Success = false;
+                    responseModel.Msg = "请选择身份证正反面照！";
+                }
+            }
+            return Json(responseModel, JsonRequestBehavior.AllowGet);
         }
     }
 }
