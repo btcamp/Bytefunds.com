@@ -46,7 +46,7 @@ namespace Bytefunds.Cms.Logic.Controllers
                             //保存member的信息
                             double assets = currentMember.GetValue<double>("assets");
                             double fundAccount = currentMember.GetValue<double>("fundAccount");
-                            currentMember.SetValue("assets", (assets + payModel.Amount).ToString("f2"));
+                            currentMember.SetValue("assets","0");
                             currentMember.SetValue("fundAccount", (fundAccount + payModel.Amount).ToString("f2"));
                             Services.MemberService.Save(currentMember);
                         }

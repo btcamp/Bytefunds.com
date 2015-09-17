@@ -15,12 +15,12 @@
     {
         IMember member = ApplicationContext.Services.MemberService.GetById(Members.GetCurrentMemberId());
         username = member.Name;
-        accumulatedEarnings = member.GetValue<double>("accumulatedEarnings").ToString("f2");
-        latestearnings = member.GetValue<double>("latestearnings").ToString("f2");
-        fundAccount = member.GetValue<double>("fundAccount").ToString("f2");
-        assets = member.GetValue<double>("assets").ToString("f2");
+        accumulatedEarnings = member.GetValue<double>("accumulatedEarnings").ToString("f2") + "元";
+        latestearnings = member.GetValue<double>("latestearnings").ToString("f2") + "元";
+        fundAccount = member.GetValue<double>("fundAccount").ToString("f2") + "元";
+        assets = member.GetValue<double>("assets").ToString("N2") + "元";
         tel = member.GetValue<string>("tel");
-        
+
         <section class="main-container margin-clear padding-top-clear">
             <div class="container" id="user-summary">
                 <div class="row">

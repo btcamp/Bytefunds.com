@@ -49,7 +49,7 @@ namespace Bytefunds.Cms.Logic.Helpers
                 }
                 IContentType ct = ApplicationContext.Current.Services.ContentTypeService.GetContentType("EmailRecords");
                 IContent doc = ApplicationContext.Current.Services.ContentService.CreateContent(title + "|" + DateTime.Now.ToShortDateString(), ct.Id, "EmailRecords");
-             
+
 
                 doc.SetValue("memberId", (currentMember == null && toemail == managerEmail) ? "0" : currentMember.Id.ToString());
                 doc.SetValue("emailAddress", (currentMember == null && toemail == managerEmail) ? toemail : currentMember.Email);
@@ -178,8 +178,8 @@ namespace Bytefunds.Cms.Logic.Helpers
                 PreValueCollection coll = ApplicationContext.Current.Services.DataTypeService.GetPreValuesCollectionByDataTypeId(ptype.DataTypeDefinitionId);
                 if (coll.PreValuesAsDictionary.Count == 0)
                 {
-                    string value=entity.GetValue<string>(ptype.Alias);
-                    
+                    string value = entity.GetValue<string>(ptype.Alias);
+
                     content = content.Replace("{{" + contenttypename + "." + ptype.Alias + "}}", entity.GetValue<string>(ptype.Alias));
                 }
                 else
@@ -201,24 +201,43 @@ namespace Bytefunds.Cms.Logic.Helpers
         }
 
 
-        public static void SendEmail_WithoutRecord(string title,string content,string toMail)
+        public static void SendEmail_WithoutRecord(string title, string content, string toMail)
         {
             try
             {
                 Random r = new Random((int)DateTime.Now.Ticks);
-                int sleepTime  = r.Next(100, 1000);
+                int sleepTime = r.Next(100, 1000);
                 Thread.Sleep(sleepTime);
                 Configuration configurationFile = WebConfigurationManager.OpenWebConfiguration(HttpContext.Current.Request.ApplicationPath);
                 MailSettingsSectionGroup mailSettings = (MailSettingsSectionGroup)configurationFile.GetSectionGroup("system.net/mailSettings");
-                umbraco.library.SendMail(mailSettings.Smtp.Network.UserName,toMail,title,content, true);
+                umbraco.library.SendMail(mailSettings.Smtp.Network.UserName, toMail, title, content, true);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
         }
 
-     
+        public static void SendEmail(string toMail, string tplkey, Dictionary<string, string> dictionary)
+        {
+            string tplid = SystemSettingsHelper.GetSystemSettingsByKey(tplkey);
+            int tpl = 0;
+            if (int.TryParse(tplid, out tpl))
+            {
+                IMedia media = ApplicationContext.Current.Services.MediaService.GetById(tpl);
+                string content = media.GetValue<string>("bodytext");
+                foreach (var item in dictionary)
+                {
+                    content = content.Replace(item.Key, item.Value);
+                }
+                Configuration configurationFile = WebConfigurationManager.OpenWebConfiguration("/");
+                MailSettingsSectionGroup mailSettings = (MailSettingsSectionGroup)configurationFile.GetSectionGroup("system.net/mailSettings");
+                umbraco.library.SendMail(mailSettings.Smtp.Network.UserName, toMail, media.GetValue<string>("title"), content, true);
+            }
+
+        }
+
+
     }
 
 }

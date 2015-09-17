@@ -32,7 +32,10 @@ namespace Bytefunds.Cms.Logic.EventHandlers
             //umbraco.cms.businesslogic.member.Member.AfterSave+=Member_AfterSave;
 
             ContentService.Saved += ContentService_Saved;
+            QuartzCore.QuartzJobUtils.Instance.StartQuartz();
         }
+
+
 
         private void ContentService_Saved(IContentService sender, Umbraco.Core.Events.SaveEventArgs<IContent> e)
         {
@@ -102,14 +105,14 @@ namespace Bytefunds.Cms.Logic.EventHandlers
                                                 .Replace("{{product}}", product.GetValue<string>("title"))
                                                 .Replace("{{rate}}", product.GetValue<string>("rate"))
                                                 .Replace("{{amount}}", e.Entity.GetValue<double>("amountCny").ToString("N2"));
-                        WriteLog(member.Username + "\r\n" + accountbuytmp.GetValue<string>("title"));
+                       Common.CustomLog.WriteLog(member.Username + "\r\n" + accountbuytmp.GetValue<string>("title"));
                         library.SendMail(mailSettings.Smtp.Network.UserName, member.Username, accountbuytmp.GetValue<string>("title"), accountContent, true);
                     }
                 }
             }
             catch (Exception ex)
             {
-                WriteLog(ex.ToString());
+                Common.CustomLog.WriteLog(ex.ToString());
                 return;
             }
             #endregion
@@ -156,15 +159,6 @@ namespace Bytefunds.Cms.Logic.EventHandlers
             }
         }
 
-        public void WriteLog(string msg)
-        {
-
-            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "log");
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
-            System.IO.File.AppendAllText(Path.Combine(path, DateTime.Now.ToString("yyyyMMdd") + ".log"), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + " " + msg + "\r\n");
-        }
+        
     }
 }

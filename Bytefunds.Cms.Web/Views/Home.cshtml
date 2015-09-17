@@ -17,7 +17,7 @@
     Html.EnableClientValidation();
     Html.EnableUnobtrusiveJavaScript();
     MemberLoginViewModel loginModel = new MemberLoginViewModel();
-    
+
 
 
     decimal sumAmount = decimal.Parse(SystemSettingsHelper.GetSystemSettingsByKey("sum:amount"));
@@ -238,12 +238,12 @@
                                     <p class="content">@(item.GetValue<string>("introduction"))</p>
                                     <div class="clearfix benefit-content">
                                         <div class="col-xs-6">
-                                            <h3 class="benefit-percent">@(item.GetValue<string>("rate"))</h3>
+                                            <h3 class="benefit-percent">@(item.GetValue<string>("rate") + "%")</h3>
                                             <h4>年化收益</h4>
                                         </div>
                                         <div class="v-line"></div>
                                         <div class="col-xs-6">
-                                            <h3>@(item.GetValue<string>("cycle"))</h3>
+                                            <h3>@(item.GetValue<string>("cycle") + "个月")</h3>
                                             <h4>项目期限</h4>
                                         </div>
                                         <div class="col-xs-12">
