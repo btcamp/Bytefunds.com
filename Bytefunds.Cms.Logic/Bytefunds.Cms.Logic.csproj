@@ -169,10 +169,10 @@
     <Compile Include="Models\AccountSummary.cs" />
     <Compile Include="Models\BankCertificationViewModel.cs" />
     <Compile Include="Models\ChangePasswordModel.cs" />
+    <Compile Include="Models\EarninisRecordsViewModel.cs" />
     <Compile Include="Models\ImportExcelResponseModel.cs" />
     <Compile Include="Models\JsonStringExtension.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
-    <Compile Include="Models\Member.cs" />
     <Compile Include="Models\MemberLoginViewModel.cs" />
     <Compile Include="Models\MemberRegisterViewModel.cs" />
     <Compile Include="Models\News.cs" />

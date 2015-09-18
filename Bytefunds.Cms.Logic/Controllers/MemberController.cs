@@ -312,5 +312,73 @@ namespace Bytefunds.Cms.Logic.Controllers
             //}
             return Content("test");
         }
+        public ActionResult Clear()
+        {
+            IContentType ct = Services.ContentTypeService.GetContentType("EarningsRecordsElement");
+            IEnumerable<IContent> result = Services.ContentService.GetContentOfContentType(ct.Id);
+            foreach (var item in result)
+            {
+                Services.ContentService.Delete(item);
+            }
+            return Content("OK");
+        }
+
+        public ActionResult GetProfitsByProductId(int id)
+        {
+            int memberId = 0;
+            EarninisRecordsViewModel model = new EarninisRecordsViewModel();
+            if (int.TryParse(SystemSettingsHelper.GetSystemSettingsByKey("show:accountId"), out memberId))
+            {
+                IContentType ct = Services.ContentTypeService.GetContentType("EarningsRecordsElement");
+                IEnumerable<IContent> result = Services.ContentService.GetContentOfContentType(ct.Id)
+                                                .Where(e => e.GetValue<int>("memberId") == memberId)
+                                                .Where(e => e.GetValue<int>("productid") == id);
+                if (result != null && result.Count() > 0)
+                {
+                    var groupkeys = result.OrderByDescending(e => e.CreateDate)
+                                               .GroupBy(e => e.CreateDate.ToString("yyyy-MM-dd"))
+                                               .Select(e => new
+                                               {
+                                                   Key = e.Key,
+                                                   Value = e.Sum(a => a.GetValue<decimal>("earning"))
+                                               });
+
+                    foreach (var item in groupkeys.OrderBy(e => Convert.ToDateTime(e.Key)))
+                    {
+                        model.Times.Add(item.Key);
+                        model.Datas.Add(item.Value);
+                    }
+                }
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetProfits()
+        {
+            EarninisRecordsViewModel model = new EarninisRecordsViewModel();
+            if (Members.IsLoggedIn())
+            {
+                IContentType ct = Services.ContentTypeService.GetContentType("EarningsRecordsElement");
+                IEnumerable<IContent> result = Services.ContentService.GetContentOfContentType(ct.Id).Where(e => e.GetValue<int>("memberId") == Members.GetCurrentMemberId());
+
+                if (result != null && result.Count() > 0)
+                {
+                    var groupkeys = result.OrderByDescending(e => e.CreateDate)
+                                               .GroupBy(e => e.CreateDate.ToString("yyyy-MM-dd"))
+                                               .Select(e => new
+                                               {
+                                                   Key = e.Key,
+                                                   Value = e.Sum(a => a.GetValue<decimal>("earning"))
+                                               });
+                   
+                    foreach (var item in groupkeys.OrderBy(e => Convert.ToDateTime(e.Key)))
+                    {
+                        model.Times.Add(item.Key);
+                        model.Datas.Add(item.Value);
+                    }
+                }
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
     }
 }

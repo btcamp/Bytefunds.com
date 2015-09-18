@@ -44,7 +44,7 @@ namespace Bytefunds.Cms.Logic.QuartzCore
             {
                 scheduler.Start();
                 Quartz.IJobDetail job1 = new Quartz.Impl.JobDetailImpl("计算用户最新收益", "EarningsJob", typeof(EarningsJob));
-                Quartz.ICronTrigger trigger = new Quartz.Impl.Triggers.CronTriggerImpl("计算用户最新收益触发器", "triggergroup", "计算用户最新收益", "EarningsJob", "* * 6 * * ?");
+                Quartz.ICronTrigger trigger = new Quartz.Impl.Triggers.CronTriggerImpl("计算用户最新收益触发器", "triggergroup", "计算用户最新收益", "EarningsJob", "0 0 6 * * ?");//每天早上六点执行
                 scheduler.ScheduleJob(job1, trigger);
                 Common.CustomLog.WriteLog("成功启动任务！" + scheduler.IsStarted);
             }

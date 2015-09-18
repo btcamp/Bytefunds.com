@@ -47,7 +47,8 @@ namespace Bytefunds.Cms.Logic.QuartzCore
                             IContentType earningsContentType = Services.ContentTypeService.GetContentType("EarningsRecordsElement");
                             IContent earningsContent = Services.ContentService.CreateContent(earningsName, earningsContentType.Id, "EarningsRecordsElement");
                             earningsContent.SetValue("memberid", memberid);
-                            earningsContent.SetValue("productid", content.Id);
+                            earningsContent.SetValue("productid", content.GetValue<int>("buyproduct"));
+                            earningsContent.SetValue("payrecodeid", content.Id);
                             earningsContent.SetValue("earning", profit.ToString("f2"));
                             Services.ContentService.Save(earningsContent);
                             sb.AppendFormat("<p style='orphans: 2; widows: 2; padding: 1px 34px 21px; margin: 0px;'><span style='font-size: 14px; line-height: 21px;'>您购买的产品《{0}》投入了{1}元；昨日的收益是：{2}元</span></p>", product.GetValue<string>("title"), content.GetValue<decimal>("amountCny").ToString("N2"), profit.ToString("N2"));

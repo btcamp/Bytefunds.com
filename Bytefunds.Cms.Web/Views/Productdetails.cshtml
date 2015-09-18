@@ -35,15 +35,17 @@
                 <hr />
                 <div class="bid-2 row">
                     <div class="col-md-2 col-xs-5 bid-2-box">
-                        <p><i class="fa fa-bar-chart"></i><span class="bid-benefit">@(content.GetPropertyValue<string>("rate"))</span></p>
+                        <p><i class="fa fa-bar-chart"></i><span class="bid-benefit">@(content.GetPropertyValue<string>("rate") + "%")</span></p>
                     </div>
                     <div class="col-md-2 col-xs-5">
-                        <p><i class="fa fa-clock-o"></i><span>@(content.GetPropertyValue<string>("cycle"))</span></p>
+                        <p><i class="fa fa-clock-o"></i><span>@(content.GetPropertyValue<string>("cycle") + "个月")</span></p>
                     </div>
                 </div>
                 <hr />
                 <p class="bid-content">@(content.GetPropertyValue<string>("introduction"))</p>
-                <div class="bid-charts" id="charts"></div>
+                <div class="bid-charts" id="charts" style="min-height:216px">
+                    <img src="~/assets/images/ajax-loader2.gif" style="margin:0 auto;padding-top:100px" alt="Alternate Text" />
+                </div>
                 <div class="bid-characteristic">
                     <ul class="nav nav-tabs style-2" role="tablist">
                         <li class="active"><a href="#h2tab1" role="tab" data-toggle="tab" aria-expanded="true">基金概况</a></li>
@@ -106,7 +108,7 @@
                 <div class="bid-right-content">
                     <h4>即刻申购</h4>
                     @*/pay?id=@content.Id&minAmount=@(content.GetPropertyValue<double>("startAmount"))*@
-                    <a href="#" class="btn-sm btn btn-gray btn-block">敬请期待</a>
+                    <a href="/pay?id=@content.Id&minAmount=@(content.GetPropertyValue<double>("startAmount"))" class="btn-sm btn btn-block btn-warning">立即购买</a>
                     <small style="line-height: 25px;">尊敬的用户您好，自2015年9月17日起，比特金服基金服务功能将全面展开。新的基金服务很快就要上线了，敬请期待。</small>
                     <hr style="border-style: dashed" />
                 </div>
@@ -127,3 +129,44 @@
         </div>
     </div>
 </section>
+
+@section scripts{
+    <script>
+        $(function () {
+            //$.get("/umbraco/Api/Member/GetProfitsByProductId?id="+@id,function (result) {
+            var money = 10000;
+            var rate =@(content.GetPropertyValue <string> ("rate"));
+            var value = ((rate/100)*money)/365;
+            var data=[];
+            for (var i = 0; i < 7; i++) {
+                data.push(parseFloat(value.toFixed(2)));
+            }
+            $('#charts').highcharts({
+                chart: {
+                },
+                title: {
+                    text: '@(content.GetPropertyValue<string>("title")) 一周收益',
+                    style: { color: "#F5B024", fontSize: "1.8em", fontFamily: '黑体', fontWeight: 600 }
+                },
+                xAxis: {
+                    //categories:result.Times
+                    categories: ['09-06', '09-07', '09-08', '09-09', '09-10', '09-11', '09-12']
+                },
+                series: [{
+                    type: 'spline',
+                    name: '一周收益',
+                    //data:  result.Datas,
+                    data: data,
+                    marker: {
+                        lineWidth: 3,
+                        lineColor: Highcharts.getOptions().colors[3],
+                        fillColor: 'white'
+                    },
+                    itemStyle: { color: 'red' }
+                }]
+            });
+            //});
+
+        });
+    </script>
+}

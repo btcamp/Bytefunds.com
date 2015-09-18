@@ -37,51 +37,57 @@
 
                 <div class="row summary-infos">
                     <div class="col-sm-6">
-                        <div class="summary-info summary-info-p2p">
-                            <div class="hd clearfix">
-                                <span>P2P账户</span>
-                                <a href="">详情</a>
-                            </div>
-                            <div class="bd clearfix">
-                                <div class="field">
-                                    <strong class="decimal">
-                                        0.00
-                                    </strong>
-                                    <label>累计收益</label>
-                                </div>
-                                <div class="field">
-                                    <div class="col-sm-3 col-xs-4 span2">
-                                        <span class="decimal">
-                                            0.00
-                                        </span>
-                                        <label>累计投资</label>
-                                    </div>
-                                    <div class="col-sm-3 col-xs-4 span2">
-                                        <span class="decimal">
-                                            0.00
-                                        </span>
-                                        <label>待收收益</label>
-                                    </div>
-                                    <div class="col-sm-3 col-xs-4 span2 last">
-                                        <span class="decimal">
-                                            0.00
-                                        </span>
-                                        <label>待收本金</label>
-                                    </div>
-                                    <div class="clearfix"></div>
+                        <div class="summary-info summary-info-p2p mt-10" style="background-color:#fff">
+                            <div id="profit_container">
+                                <div style="width:16px;margin:0 auto">
+                                    <img src="/assets/images/ajax-loader2.gif" style="width:16px; margin:auto 0;padding-top:100px"
+                                         alt="Alternate Text" />
                                 </div>
                             </div>
-                            <div class="ft clearfix">
-                                <dl>
-                                    <dt>可用余额</dt>
-                                    <dd class="decimal">0.00</dd>
-                                </dl>
-                            </div>
-                            <div class="account-unactive">
-                                <h4>开通P2P账户，最高可得1000元新手大礼包</h4>
-                                <a class="btn btn-primary btn-large" href="">立即开通</a>
-                            </div>
-                            <div class="summary-split"></div>
+                            @*<div class="hd clearfix">
+                                    <span>P2P账户</span>
+                                    <a href="">详情</a>
+                                </div>
+                                <div class="bd clearfix">
+                                    <div class="field">
+                                        <strong class="decimal">
+                                            0.00
+                                        </strong>
+                                        <label>累计收益</label>
+                                    </div>
+                                    <div class="field">
+                                        <div class="col-sm-3 col-xs-4 span2">
+                                            <span class="decimal">
+                                                0.00
+                                            </span>
+                                            <label>累计投资</label>
+                                        </div>
+                                        <div class="col-sm-3 col-xs-4 span2">
+                                            <span class="decimal">
+                                                0.00
+                                            </span>
+                                            <label>待收收益</label>
+                                        </div>
+                                        <div class="col-sm-3 col-xs-4 span2 last">
+                                            <span class="decimal">
+                                                0.00
+                                            </span>
+                                            <label>待收本金</label>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                                <div class="ft clearfix">
+                                    <dl>
+                                        <dt>可用余额</dt>
+                                        <dd class="decimal">0.00</dd>
+                                    </dl>
+                                </div>
+                                <div class="account-unactive">
+                                    <h4>开通P2P账户，最高可得1000元新手大礼包</h4>
+                                    <a class="btn btn-primary btn-large" href="">立即开通</a>
+                                </div>
+                                <div class="summary-split"></div>*@
                         </div>
                     </div>
                     <div class="col-sm-6 col-xs-12">
@@ -115,5 +121,41 @@
                 </div>
             </div>
         </section>
+
+        @section scripts{
+            <script>
+                $(function () {
+
+                    $.get("/umbraco/Api/Member/GetProfits", function (result) {
+                        var text = '一周收益';
+                        if (result.Times.length == 0) {
+                            text = "暂无收益";
+                        }
+                        $('#profit_container').highcharts({
+                            chart: {
+                            },
+                            title: {
+                                text: text,
+                                style: { color: "#F5B024", fontSize: "1.8em", fontFamily: '黑体', fontWeight: 600 }
+                            },
+                            xAxis: {
+                                categories: result.Times
+                            },
+                            series: [{
+                                type: 'spline',
+                                name: text,
+                                data: result.Datas,
+                                marker: {
+                                    lineWidth: 3,
+                                    lineColor: Highcharts.getOptions().colors[3],
+                                    fillColor: 'white'
+                                },
+                                itemStyle: { color: 'red' }
+                            }]
+                        });
+                    });
+                });
+            </script>
+        }
     }
 }

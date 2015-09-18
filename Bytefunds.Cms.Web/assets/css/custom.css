@@ -13,6 +13,9 @@ body {
 .nav {
     text-align: center;
 }
+.twitter:first-child{
+    font-size:1.1em;
+}
 @media (max-width: 768px) {
     .navbar {
         border: none;
@@ -149,14 +152,15 @@ body {
 .top-service .qq, .top-service .wechat {
     background-color: #000000;
     color: #fff;
-    padding: 7px 8px;
+    padding: 8px;
     border-radius: 50%;
 }
-
     .top-service .wechat:hover {
         background-color: #39d111;
     }
-
+    .top-service .qq {
+       padding: 8px 9px;
+    }
     .top-service .qq:hover {
         background-color: #5070ff;
     }
@@ -211,7 +215,7 @@ body {
 
     .banner-float p a {
         font-size: 1.1em;
-        font-family: "微软雅黑";
+       font-family:"黑体"
     }
 
 .banner-float-1, .banner-float-2, .banner-float-3, .banner-float-4, .banner-float-5, .banner-float-6 {
@@ -219,6 +223,7 @@ body {
     text-align: center;
     width: 85%;
     margin: auto;
+    font-family:"黑体"
 }
 
 .banner-float-1 {
@@ -278,17 +283,20 @@ body {
     color: #fff !important;
 }
 @media (min-width: 1700px) {
+     .banner-float p{
+         font-size:1.2em;
+     }
     .banner-float-3{
      font-size: 1.3em !important;
 }
     .banner-float h2, .banner-float h3 ,.banner-float-6 a{
-        font-size: 1.4em;
+        font-size: 1.3em;
     }
     .banner-float h2 strong {
-        font-size: 2.8em;
+        font-size: 2.5em;
     }
    .banner-float h2 span, .banner-float h3 span, .banner-float p a, .banner-float-3 span, .banner-float-4  {
-        font-size: 1.4em;
+        font-size: 1.3em;
     }
 }
 .banner-float .separator:after {
@@ -532,11 +540,42 @@ input:focus, textarea:focus {
 .modal {
     background-color: rgba(0, 0, 0, 0.6);
 }
-
-    .modal .modal-dialog {
-        margin-top: 6%;
+@media(min-width: 768px){
+     .modal  .modal-dialog {
+        margin-top: 7%;
     }
-
+}
+@media(max-width: 768px){
+     .modal-header{
+         padding:10px;
+     }
+     .form-group {
+        margin-bottom: 10px;
+    }
+     .modal-body {
+        padding: 10px 15px;
+    }
+     .modal-footer{
+         padding:15px 15px  0 15px;
+     }
+     form {
+        margin: 10px 0;
+    }
+}
+@media(max-width: 320px){
+     .form-group {
+        margin-bottom: 5px;
+    }
+     .modal-body {
+        padding: 5px 10px;
+    }
+     .modal-footer{
+         padding:10px 10px  0 10px;
+     }
+     form {
+        margin: 5px 0;
+    }
+}
 .hidden {
     display: none;
     z-index: -1;
@@ -1101,4 +1140,91 @@ input:focus, textarea:focus {
 }
 .icon-font.approve{
     background:#F5B024 !important;
+}
+
+/*关于我们*/
+.frame{
+    width: 100%;
+    height:300px;
+}
+.video{
+    border: 1px solid #ddd;
+}
+@media (min-width: 1700px){
+    .frame{
+        width: 90%;
+        margin-left: 5%;
+    }
+}
+@media (max-width:500px) {
+    .frame{
+        height:200px ;
+    }
+    #dituContent{
+        margin-left: -5px;
+    }
+}
+@media (min-width: 960px){
+    .ding .video{
+        margin-top: 30px;
+    }
+}
+.leader{
+    min-height: 200px;
+    padding: 0 5px;
+}
+.leader .leader-img{
+    float:left;
+    margin-right: 20px;
+}
+.leader .leader-content{;
+    width:100%;
+    position: relative;
+    top: -5px;
+}
+.leader .leader-content P{
+    line-height: 25px;
+    font-size: 0.9em;
+}
+.leader .leader-content h4{
+    color: rgb(205, 159, 59);
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+.leader .leader-content h5{
+    font-size: 1.0em;
+    font-weight: 500;
+}
+.coo-head{
+    position: relative;
+    margin-top: 20px;
+}
+.coo-head .v-block{
+    width: 30px;
+    height: 60px;
+    background:rgb(205, 159, 59);
+    border-radius: 5px;
+    float: left;
+}
+.coo-head p{
+    float: left;
+    font-size: 1.5em;
+    margin-left: 5px;
+    margin-top: 15px;
+}
+.coo-head span{
+    display: inline-block;
+    font-size: 3.0em;
+    margin-left: 5px;
+    color: rgb(205, 159, 59);
+    font-family: Arial;
+}
+.coo .company-title{
+    font-size: 1.2em;
+    color:rgb(205, 159, 59);
+    font-family: 600;
+    position: relative;
+    top: 1px;
+    margin-right: 5px;
+    font-weight: 500;
 }
