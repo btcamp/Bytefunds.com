@@ -46,11 +46,11 @@ namespace Bytefunds.Cms.Logic.Controllers
                             //保存member的信息
                             double assets = currentMember.GetValue<double>("assets");
                             double fundAccount = currentMember.GetValue<double>("fundAccount");
-                            currentMember.SetValue("assets","0");
+                            currentMember.SetValue("assets", "0");
                             currentMember.SetValue("fundAccount", (fundAccount + payModel.Amount).ToString("f2"));
                             Services.MemberService.Save(currentMember);
                         }
-                        //cny
+                        //cny 
                         content.SetValue("amountCny", payModel.Amount.ToString());
                         content.SetValue("rechargeDateTime", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                         content.SetValue("payBillno", payModel.Billno);
@@ -65,10 +65,12 @@ namespace Bytefunds.Cms.Logic.Controllers
                         content.SetValue("mobilePhone", payModel.Phone);
                     }
                     content.SetValue("amountCny", payModel.Amount.ToString());
-
                     content.SetValue("rechargeDateTime", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                     content.SetValue("payBillno", payModel.Billno);
                     content.SetValue("isdeposit", true);
+                    IContent product = Services.ContentService.GetById(content.GetValue<int>("buyproduct"));
+                    int months = product.GetValue<int>("cycle");
+                    content.SetValue("expirationtime", DateTime.Now.AddMonths(months).ToString("yyyy-MM-dd HH:mm:ss"));
                     Services.ContentService.Save(content);
                     //触发创建事件
                     EventHandlers.CustomRaiseEvent.RaiseContentCreated(content);

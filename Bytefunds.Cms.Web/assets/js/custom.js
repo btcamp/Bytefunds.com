@@ -77,7 +77,7 @@ jQuery(function ($) {
         var modal = $(".modal");
         btn.click(function () {
             modal.attr("class", "modal animated fadeOut hidden");
-        })
+        });
     };
     ByteFunds.showModal = function () {
         var btn = $(".reservation-btn");
@@ -227,6 +227,10 @@ function initAajxform() {
                 success: function (data) {
                     bootbox.hideAll();
                     if (data.Success) {
+                        var modal = $(".modal");
+                        modal.attr("class", "modal animated fadeOut hidden");
+                        $('#reservation-content input').val('');
+                        $('#reservation-content textarea').val('');
                         finAlert(data.Msg, true);
                         if (data.RedirectUrl != null && data.RedirectUrl != "" && data.IsRedirect) {
                             setTimeout(function () {
