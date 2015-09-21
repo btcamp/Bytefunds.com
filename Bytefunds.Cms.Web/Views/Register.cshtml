@@ -18,7 +18,7 @@
                         <div class="col-sm-8">
                             @*<input type="text" class="form-control" id="inputUserName" placeholder="Your Name" required onfocus="$(this).attr('placeholder','')" onblur="$(this).attr('placeholder','Your Name')">*@
                             <div>
-                                @Html.TextBoxFor(m => registerModel.Name, new { @class = "form-control", placeholder = "请输入您的昵称" })
+                                @Html.TextBoxFor(m => registerModel.Name, new { @class = "form-control", placeholder = "请输入您的姓名" })
                                 <i class="fa fa-user form-control-feedback"></i>
                             </div>
                             @Html.ValidationMessageFor(m => registerModel.Name)

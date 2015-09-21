@@ -35,6 +35,15 @@ namespace Bytefunds.Cms.Logic.Controllers
         public ActionResult Regsiter([Bind(Prefix = "registerModel")]MemberRegisterViewModel model)
         {
             ResponseModel result = new ResponseModel();
+            IMember validatemember = Services.MemberService.GetMembersByPropertyValue("tel", model.Phone).FirstOrDefault();
+
+            if (validatemember != null)
+            {
+                result.Success = false;
+                result.Msg = "该手机号已经注册，请用手机号进行登录";
+                result.IsRedirect = false;
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
             RegisterModel registerModel = RegisterModel.CreateModel();
             registerModel.Email = model.Email;
             registerModel.Password = model.Password;
@@ -115,12 +124,12 @@ namespace Bytefunds.Cms.Logic.Controllers
                     result.Success = false;
                     result.Success = true;
                     result.Msg = "用户登陆成功，页面即将跳转";
+                    result.RedirectUrl = "memberinfo";
                     //清空登陆失败次数
                     member.FailedPasswordAttempts = 0;
                     Services.MemberService.Save(member);
                 }
             }
-            result.RedirectUrl = "/";
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
@@ -245,6 +254,12 @@ namespace Bytefunds.Cms.Logic.Controllers
             return Json(responseModel, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult ValidatePhone(string phone)
+        {
+            IMember member = Services.MemberService.GetMembersByPropertyValue("tel", phone).FirstOrDefault();
+            bool flg = member == null;
+            return Json(flg, JsonRequestBehavior.AllowGet);
+        }
 
         public ActionResult Test()
         {
@@ -314,12 +329,12 @@ namespace Bytefunds.Cms.Logic.Controllers
         }
         public ActionResult Clear()
         {
-            IContentType ct = Services.ContentTypeService.GetContentType("EarningsRecordsElement");
-            IEnumerable<IContent> result = Services.ContentService.GetContentOfContentType(ct.Id);
-            foreach (var item in result)
-            {
-                Services.ContentService.Delete(item);
-            }
+            //IContentType ct = Services.ContentTypeService.GetContentType("EarningsRecordsElement");
+            //IEnumerable<IContent> result = Services.ContentService.GetContentOfContentType(ct.Id);
+            //foreach (var item in result)
+            //{
+            //    Services.ContentService.Delete(item);
+            //}
             return Content("OK");
         }
 
@@ -370,7 +385,7 @@ namespace Bytefunds.Cms.Logic.Controllers
                                                    Key = e.Key,
                                                    Value = e.Sum(a => a.GetValue<decimal>("earning"))
                                                });
-                   
+
                     foreach (var item in groupkeys.OrderBy(e => Convert.ToDateTime(e.Key)))
                     {
                         model.Times.Add(item.Key);

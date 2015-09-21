@@ -24,16 +24,16 @@
     content.SetValue("amountCny", "0");
     content.SetValue("rechargeDateTime", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
     content.SetValue("buyproduct", Request.QueryString["id"]);
-    if (!Members.GetCurrentLoginStatus().IsLoggedIn)
+    if (!Members.IsLoggedIn())
     {
-        @*<script>
+        <script>
             window.onload = function () {
-                document.getElementById("btnlogin").click();
+                window.location.href = "/login";
             }
-        </script>*@
+        </script>
 
-        ApplicationContext.Services.ContentService.Save(content);
-        email = content.Id.ToString();
+        //ApplicationContext.Services.ContentService.Save(content);
+        //email = content.Id.ToString();
     }
     else
     {
