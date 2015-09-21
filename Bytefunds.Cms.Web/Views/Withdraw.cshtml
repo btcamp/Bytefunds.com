@@ -1,0 +1,84 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "_Layout.cshtml";
+    WithdrawViewModel withdrawModel = new WithdrawViewModel();
+    Html.EnableClientValidation();
+    Html.EnableUnobtrusiveJavaScript();
+}
+
+<section class="pv-20 clearfix">
+    <div class="container register">
+        <div class="row">
+            <div class="form-block center-block p-20 light-gray-bg border-clear text-left">
+                <h2 class="title">提现申请</h2>
+                <form class="form-horizontal" role="form" action="/umbraco/Api/Member/Withdraw" method="post">
+                    <div class="form-group has-feedback">
+                        @Html.LabelFor(m => withdrawModel.Name, new { @class = "col-sm-3 control-label" })
+                        @*<label for="inputUserName" class="col-sm-3 control-label">姓名<span class="text-danger small">*</span></label>*@
+                        <div class="col-sm-8">
+                            @*<input type="text" class="form-control" id="inputUserName" placeholder="Your Name" required onfocus="$(this).attr('placeholder','')" onblur="$(this).attr('placeholder','Your Name')">*@
+                            <div>
+                                @Html.TextBoxFor(m => withdrawModel.Name, new { @class = "form-control", placeholder = "请输入您的开户人" })
+                                <i class="fa fa-user form-control-feedback"></i>
+                            </div>
+                            @Html.ValidationMessageFor(m => withdrawModel.Name)
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback">
+                        @Html.LabelFor(m => withdrawModel.BankName, new { @class = "col-sm-3 control-label" })
+                        <div class="col-sm-8">
+                            <div>
+                                @Html.TextBoxFor(m => withdrawModel.BankName, new { @class = "form-control", placeholder = "请输入开户行" })
+                                <i class="fa fa-bank form-control-feedback"></i>
+                            </div>
+                            @Html.ValidationMessageFor(m => withdrawModel.BankName)
+                        </div>
+
+                    </div>
+                    <div class="form-group has-feedback">
+                        @Html.LabelFor(m => withdrawModel.BankDetail, new { @class = "col-sm-3 control-label" })
+                        <div class="col-sm-8">
+                            <div>
+                                @Html.TextBoxFor(m => withdrawModel.BankDetail, new { @class = "form-control", placeholder = "请输入开户行分行" })
+                                <i class="fa fa-bank form-control-feedback"></i>
+                            </div>
+                            @Html.ValidationMessageFor(m => withdrawModel.BankDetail)
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback">
+                        @Html.LabelFor(m => withdrawModel.BankNumber, new { @class = "col-sm-3 control-label" })
+                        <div class="col-sm-8">
+                            <div>
+                                @Html.TextBoxFor(m => withdrawModel.BankNumber, new { @class = "form-control", placeholder = "请输入您的银行卡卡号" })
+                                <i class="fa fa-credit-card form-control-feedback"></i>
+                            </div>
+                            @Html.ValidationMessageFor(m => withdrawModel.BankNumber)
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback">
+                        @Html.LabelFor(m => withdrawModel.Amount, new { @class = "col-sm-3 control-label" })
+                        <div class="col-sm-8">
+                            <div>
+                                @Html.TextBoxFor(m => withdrawModel.Amount, new { @class = "form-control", placeholder = "请输入您的提现金额" })
+                                <i class="fa fa-money form-control-feedback"></i>
+                            </div>
+                            @Html.ValidationMessageFor(m => withdrawModel.Amount)
+                        </div>
+                    </div>
+                    @*<div class="form-group has-feedback">
+                            <label for="rePassword" class="col-sm-3 control-label">重复密码<span class="text-danger small">*</span></label>
+                            <div class="col-sm-8">
+                                <input type="password" class="form-control" id="rePassword" placeholder="Repeat Password" required onfocus="$(this).attr('placeholder','')" onblur="$(this).attr('placeholder','Repeat Password')">
+                                <i class="fa fa-lock form-control-feedback"></i>
+                            </div>
+                        </div>*@
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-8 submit-btn">
+                            <button type="submit" class="btn btn-group btn-warning btn-animated">申请提现<i class="fa fa-check"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

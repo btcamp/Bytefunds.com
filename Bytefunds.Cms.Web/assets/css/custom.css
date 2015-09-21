@@ -597,6 +597,9 @@ input:focus, textarea:focus {
 .state-error input, .state-error textarea {
     border-color: red;
 }
+.state-error .fa {
+    color:red;
+}
 
 .icon {
     display: block !important;

@@ -54,111 +54,131 @@ namespace Bytefunds.Cms.Logic.EventHandlers
         void ContentService_Created(IContentService sender, Umbraco.Core.Events.NewEventArgs<Umbraco.Core.Models.IContent> e)
         {
             #region 出入金发邮件
-
-            try
+            System.Threading.Tasks.Task.Factory.StartNew(() =>
             {
-
-                //给管理员发邮件，用户入金出金操作
-                //File.WriteAllText("d:\\" + Guid.NewGuid().ToString() + ".txt", "contentcreated");
-                if (e.Alias.ToLower().Equals("payrecords") || e.Alias.ToLower().Equals("refundtype"))
+                try
                 {
-                    string tplid = string.Empty;
-                    string title = string.Empty;
-                    string accountbuyId = string.Empty;
-                    if (e.Alias.ToLower().Equals("payrecords"))
+                    //给管理员发邮件，用户入金出金操作
+                    //File.WriteAllText("d:\\" + Guid.NewGuid().ToString() + ".txt", "contentcreated");
+                    if (e.Alias.ToLower().Equals("payrecords") || e.Alias.ToLower().Equals("withdrawelement"))
                     {
-                        tplid = SystemSettingsHelper.GetSystemSettingsByKey("manager:payment:tplid");
-                        accountbuyId = SystemSettingsHelper.GetSystemSettingsByKey("account:buy:tplid");
-                    }
-                    else if (e.Alias.ToLower().Equals("refundtype"))
-                    {
-                        tplid = SystemSettingsHelper.GetSystemSettingsByKey("manager:refund:tplid");
-                    }
-
-                    int tpl, accounttplid;
-
-                    if (int.TryParse(tplid, out tpl) && int.TryParse(accountbuyId, out accounttplid))
-                    {
-                        IMedia content = ApplicationContext.Current.Services.MediaService.GetById(tpl);
-                        IMedia accountbuytmp = ApplicationContext.Current.Services.MediaService.GetById(accounttplid);
-                        //创建Content的时候Name属性赋值的email
-                        IMember member = ApplicationContext.Current.Services.MemberService.GetById(e.Entity.GetValue<int>("memberPicker"));
-                        IContent product = ApplicationContext.Current.Services.ContentService.GetById(e.Entity.GetValue<int>("buyproduct"));
-                        if (member == null)
-                        {
-                            return;
-                            // throw new CustomException.NotFoundEmailException("邮箱不存在");
-                        }
-                        Configuration configurationFile = WebConfigurationManager.OpenWebConfiguration(HttpContext.Current.Request.ApplicationPath);
-                        MailSettingsSectionGroup mailSettings = (MailSettingsSectionGroup)configurationFile.GetSectionGroup("system.net/mailSettings");
-
+                        string tplid = string.Empty;
+                        string title = string.Empty;
+                        string accountbuyId = string.Empty, accountwithdrawId = string.Empty;
                         string managerEmail = SystemSettingsHelper.GetSystemSettingsByKey("manager:email");
-                        string oldbodycontent = content.GetValue<string>("bodytext")
-                                                .Replace("{{name}}", member.Name)
-                                                .Replace("{{product}}", product.GetValue<string>("title"))
-                                                .Replace("{{amount}}", e.Entity.GetValue<double>("amountCny").ToString("N2"));
-                        //发送邮件到管理员
-                        library.SendMail(mailSettings.Smtp.Network.UserName, managerEmail, content.GetValue<string>("title"), oldbodycontent, true);
-                        //发送邮件到用户
-                        string accountContent = accountbuytmp.GetValue<string>("bodytext")
-                                                .Replace("{{name}}", member.Name)
-                                                .Replace("{{product}}", product.GetValue<string>("title"))
-                                                .Replace("{{rate}}", product.GetValue<string>("rate"))
-                                                .Replace("{{amount}}", e.Entity.GetValue<double>("amountCny").ToString("N2"));
-                       Common.CustomLog.WriteLog(member.Username + "\r\n" + accountbuytmp.GetValue<string>("title"));
-                        library.SendMail(mailSettings.Smtp.Network.UserName, member.Username, accountbuytmp.GetValue<string>("title"), accountContent, true);
+                        if (e.Alias.ToLower().Equals("payrecords"))
+                        {
+                            tplid = SystemSettingsHelper.GetSystemSettingsByKey("manager:payment:tplid");
+                            accountbuyId = SystemSettingsHelper.GetSystemSettingsByKey("account:buy:tplid");
+
+                            int tpl, accounttplid;
+
+                            if (int.TryParse(tplid, out tpl) && int.TryParse(accountbuyId, out accounttplid))
+                            {
+                                IMedia content = ApplicationContext.Current.Services.MediaService.GetById(tpl);
+                                IMedia accountbuytmp = ApplicationContext.Current.Services.MediaService.GetById(accounttplid);
+                                //创建Content的时候Name属性赋值的email
+                                IMember member = ApplicationContext.Current.Services.MemberService.GetById(e.Entity.GetValue<int>("memberPicker"));
+                                IContent product = ApplicationContext.Current.Services.ContentService.GetById(e.Entity.GetValue<int>("buyproduct"));
+                                if (member == null)
+                                {
+                                    return;
+                                    // throw new CustomException.NotFoundEmailException("邮箱不存在");
+                                }
+                                Configuration configurationFile = WebConfigurationManager.OpenWebConfiguration(HttpContext.Current.Request.ApplicationPath);
+                                MailSettingsSectionGroup mailSettings = (MailSettingsSectionGroup)configurationFile.GetSectionGroup("system.net/mailSettings");
+
+
+                                string oldbodycontent = content.GetValue<string>("bodytext")
+                                                        .Replace("{{name}}", member.Name)
+                                                        .Replace("{{product}}", product.GetValue<string>("title"))
+                                                        .Replace("{{amount}}", e.Entity.GetValue<double>("amountCny").ToString("N2"));
+                                //发送邮件到管理员
+                                library.SendMail(mailSettings.Smtp.Network.UserName, managerEmail, content.GetValue<string>("title"), oldbodycontent, true);
+                                //发送邮件到用户
+                                string accountContent = accountbuytmp.GetValue<string>("bodytext")
+                                                        .Replace("{{name}}", member.Name)
+                                                        .Replace("{{product}}", product.GetValue<string>("title"))
+                                                        .Replace("{{rate}}", product.GetValue<string>("rate"))
+                                                        .Replace("{{amount}}", e.Entity.GetValue<double>("amountCny").ToString("N2"));
+                                Common.CustomLog.WriteLog(member.Username + "\r\n" + accountbuytmp.GetValue<string>("title"));
+                                library.SendMail(mailSettings.Smtp.Network.UserName, member.Username, accountbuytmp.GetValue<string>("title"), accountContent, true);
+                            }
+
+                        }
+                        else if (e.Alias.ToLower().Equals("withdrawelement"))
+                        {
+
+                            IMember member = ApplicationContext.Current.Services.MemberService.GetById(e.Entity.GetValue<int>("memberId"));
+                            Dictionary<string, string> managerdir = new Dictionary<string, string>();
+                            managerdir.Add("{{name}}", member.Name);
+                            managerdir.Add("{{amount}}", e.Entity.GetValue<string>("amount"));
+                            managerdir.Add("{{bankNumber}}", e.Entity.GetValue<string>("bankNumber"));
+                            managerdir.Add("{{bankName}}", e.Entity.GetValue<string>("bankName"));
+                            //发送给管理员
+                            SendmailHelper.SendEmail(managerEmail, "manager:withdraw:tplid", managerdir);
+                            Dictionary<string, string> accountdir = new Dictionary<string, string>();
+                            accountdir.Add("{{name}}", member.Name);
+                            accountdir.Add("{{amount}}", e.Entity.GetValue<string>("amount"));
+                            //发送给用户
+                            SendmailHelper.SendEmail(member.Username, "member:withdraw:tplId", accountdir);
+                        }
+
+
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                Common.CustomLog.WriteLog(ex.ToString());
-                return;
-            }
+                catch (Exception ex)
+                {
+                    Common.CustomLog.WriteLog(ex.ToString());
+                    return;
+                }
+
+            });
             #endregion
         }
 
 
         void MemberService_Created(IMemberService sender, Umbraco.Core.Events.NewEventArgs<Umbraco.Core.Models.IMember> e)
         {
-
-            try
+            System.Threading.Tasks.Task.Factory.StartNew(() =>
             {
-                int tplid;
-
-                string managerTeplateId = SystemSettingsHelper.GetSystemSettingsByKey("manager:register:tplid");
-                string rgisterTemplateId = SystemSettingsHelper.GetSystemSettingsByKey("member:register:tplid:bytefunds");
-                string managerEmail = SystemSettingsHelper.GetSystemSettingsByKey("manager:email");
-                Configuration configurationFile = WebConfigurationManager.OpenWebConfiguration(HttpContext.Current.Request.ApplicationPath);
-                MailSettingsSectionGroup mailSettings = (MailSettingsSectionGroup)configurationFile.GetSectionGroup("system.net/mailSettings");
-                if (int.TryParse(managerTeplateId, out tplid))
+                try
                 {
-                    //用户创建成功给管理员和用户自己发邮件
-                    IMedia mediatamplate =
-                        ApplicationContext.Current.Services.MediaService.GetById(tplid);
-                    string content = mediatamplate.GetValue<string>("bodytext").Replace("{{name}}", e.Entity.Name);
-                    library.SendMail(mailSettings.Smtp.Network.UserName, managerEmail, mediatamplate.GetValue<string>("title"), content, true);
+                    int tplid;
+                    string managerTeplateId = SystemSettingsHelper.GetSystemSettingsByKey("manager:register:tplid");
+                    string rgisterTemplateId = SystemSettingsHelper.GetSystemSettingsByKey("member:register:tplid:bytefunds");
+                    string managerEmail = SystemSettingsHelper.GetSystemSettingsByKey("manager:email");
+                    Configuration configurationFile = WebConfigurationManager.OpenWebConfiguration(HttpContext.Current.Request.ApplicationPath);
+                    MailSettingsSectionGroup mailSettings = (MailSettingsSectionGroup)configurationFile.GetSectionGroup("system.net/mailSettings");
+                    if (int.TryParse(managerTeplateId, out tplid))
+                    {
+                        //用户创建成功给管理员和用户自己发邮件
+                        IMedia mediatamplate =
+                            ApplicationContext.Current.Services.MediaService.GetById(tplid);
+                        string content = mediatamplate.GetValue<string>("bodytext").Replace("{{name}}", e.Entity.Name);
+                        library.SendMail(mailSettings.Smtp.Network.UserName, managerEmail, mediatamplate.GetValue<string>("title"), content, true);
+                    }
+                    if (int.TryParse(rgisterTemplateId, out tplid))
+                    {
+                        //给用户发邮件
+                        IMedia mediatamplate =
+                            ApplicationContext.Current.Services.MediaService.GetById(tplid);
+                        //string memberbodycontent = Helpers.SendmailHelper.Replace(mediatamplate.GetValue<string>("bodytext"),
+                        //    e.Entity.Key, -1);
+                        //Helpers.SendmailHelper.SendEmail(membercontent.GetValue<string>("title"), memberbodycontent,
+                        //    e.Entity.Email);
+
+                        library.SendMail(mailSettings.Smtp.Network.UserName, e.Entity.Email, mediatamplate.GetValue<string>("title"), mediatamplate.GetValue<string>("bodytext"), true);
+                    }
+
                 }
-                if (int.TryParse(rgisterTemplateId, out tplid))
+                catch (Exception ex)
                 {
-                    //给用户发邮件
-                    IMedia mediatamplate =
-                        ApplicationContext.Current.Services.MediaService.GetById(tplid);
-                    //string memberbodycontent = Helpers.SendmailHelper.Replace(mediatamplate.GetValue<string>("bodytext"),
-                    //    e.Entity.Key, -1);
-                    //Helpers.SendmailHelper.SendEmail(membercontent.GetValue<string>("title"), memberbodycontent,
-                    //    e.Entity.Email);
-
-                    library.SendMail(mailSettings.Smtp.Network.UserName, e.Entity.Email, mediatamplate.GetValue<string>("title"), mediatamplate.GetValue<string>("bodytext"), true);
+                    return;
                 }
-
-            }
-            catch (Exception ex)
-            {
-                return;
-            }
+            });
         }
 
-        
+
     }
 }

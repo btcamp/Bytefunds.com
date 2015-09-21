@@ -254,6 +254,56 @@ namespace Bytefunds.Cms.Logic.Controllers
             return Json(responseModel, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult Withdraw([Bind(Prefix = "withdrawModel")]WithdrawViewModel model)
+        {
+            ResponseModel responseModel = new ResponseModel();
+            if (!Members.IsLoggedIn())
+            {
+                responseModel.Success = false;
+                responseModel.Msg = "请先进行登录过在进行补充信息";
+            }
+            else if (!ModelState.IsValid)
+            {
+                foreach (var item in ModelState)
+                {
+                    if (item.Value.Errors.Count > 0)
+                    {
+                        responseModel.Success = false;
+                        responseModel.Msg = item.Value.Errors.FirstOrDefault().ErrorMessage;
+                    }
+                }
+            }
+            else
+            {
+                IMember member = Services.MemberService.GetById(Members.GetCurrentMemberId());
+
+                if (!member.GetValue<bool>("verified"))
+                {
+                    responseModel.Msg = "请先进行实名认证，方可进行提现申请";
+                    responseModel.Success = false;
+                    responseModel.RedirectUrl = "/memberinfo/verified";
+                }
+                else
+                {
+
+                    IContentType ct = Services.ContentTypeService.GetContentType("WithdrawElement");
+                    IContent content = Services.ContentService.CreateContent(model.Name + "[" + model.Amount + "]", ct.Id, "WithdrawElement");
+                    content.SetValue("memberId", Members.GetCurrentMemberId().ToString());
+                    content.SetValue("amount", model.Amount.ToString());
+                    content.SetValue("memberName", model.Name);
+                    content.SetValue("bankName", model.BankName);
+                    content.SetValue("bankNumber", model.BankNumber);
+                    content.SetValue("bankDetail", model.BankDetail);
+                    content.SetValue("isCheck", false);
+                    Services.ContentService.Save(content);
+                    EventHandlers.CustomRaiseEvent.RaiseContentCreated(content);
+                    responseModel.Msg = "恭喜你！已经成功提交提现申请";
+                    responseModel.Success = true;
+                }
+            }
+            return Json(responseModel, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult ValidatePhone(string phone)
         {
             IMember member = Services.MemberService.GetMembersByPropertyValue("tel", phone).FirstOrDefault();
