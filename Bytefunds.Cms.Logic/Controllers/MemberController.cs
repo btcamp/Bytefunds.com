@@ -311,6 +311,11 @@ namespace Bytefunds.Cms.Logic.Controllers
             return Json(flg, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult RenewalFund([Bind(Prefix = "renewalViewModel")]RenewalFundViewModel model)
+        {
+            return View();
+        }
+
         public ActionResult Test()
         {
             //获取所有已经购买的产品
@@ -379,12 +384,13 @@ namespace Bytefunds.Cms.Logic.Controllers
         }
         public ActionResult Clear()
         {
-            //IContentType ct = Services.ContentTypeService.GetContentType("EarningsRecordsElement");
-            //IEnumerable<IContent> result = Services.ContentService.GetContentOfContentType(ct.Id);
-            //foreach (var item in result)
-            //{
-            //    Services.ContentService.Delete(item);
-            //}
+            IContentType ct = Services.ContentTypeService.GetContentType("EarningsRecordsElement");
+            IEnumerable<IContent> result = Services.ContentService.GetContentOfContentType(ct.Id);
+            foreach (var item in result)
+            {
+                //Services.ContentService.Delete(item);
+                string str = string.Empty;
+            }
             return Content("OK");
         }
 

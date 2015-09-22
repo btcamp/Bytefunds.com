@@ -1,4 +1,67 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 @{
     Layout = "_Layout.cshtml";
+
+    if (Members.IsLoggedIn())
+    {
+        //获取购买记录
+
+        IContentType ct = ApplicationContext.Services.ContentTypeService.GetContentType("WithdrawElement");
+        IEnumerable<IContent> list = ApplicationContext.Services.ContentService.GetContentOfContentType(ct.Id)
+                                    .Where(e => e.GetValue<int>("memberId") == Members.GetCurrentMemberId())
+                                    .OrderBy(e => e.GetValue<bool>("isCheck"))
+                                    .Take(20);
+
+        <section class="pv-20 clearfix user-record mb-20">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 style="margin-bottom: 20px;">尊敬的用户： <span>@(Members.GetCurrentMember().Name)</span></h4>
+                        <div class="separator-2"></div>
+                        <p style="margin-top:20px">如下为您近期提现记录，请查阅！</p>
+                        <table class="user-record-table mt-20">
+                            <thead class="user-record-head">
+                                <tr>
+                                    <th>开户行</th>
+                                    <th>卡账号</th>
+                                    <th>提现金额</th>
+                                    <th>申请时间</th>
+                                    <th>审核时间</th>
+                                    <th>审核状态</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+        foreach (IContent content in list)
+        {
+
+            <tr>
+                <td class="td1">@(content.GetValue<string>("bankName"))</td>
+                <td class="td2">@(content.GetValue<string>("bankNumber"))</td>
+                <td class="td3">@(content.GetValue<double>("amount").ToString("f2") + "元")</td>
+                <td class="td4">@(content.CreateDate.ToString("yyyy年MM月dd月 HH:mm:ss"))</td>
+                <td class="td5">@(content.GetValue<bool>("isCheck") ? content.UpdateDate.ToString("yyyy年MM月dd月 HH:mm:ss") : "--")</td>
+                <td class="td6">@(content.GetValue<bool>("isCheck") ? "已审核" : "未审核")</td>
+
+            </tr>
+        }
+                                }
+
+                            </tbody>
+                        </table>
+                        <p style="margin-top: 35px;font-size: 1em;color:  #C6AB5C;">感谢您对我们的支持，祝你生活愉快！</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    }
+    else
+    {
+        <script>
+            window.onload = function () {
+
+                window.location.href = "/login";
+            }
+        </script>
+    }
 }

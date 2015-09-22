@@ -112,6 +112,7 @@ namespace Bytefunds.Cms.Logic.EventHandlers
                             IMember member = ApplicationContext.Current.Services.MemberService.GetById(e.Entity.GetValue<int>("memberId"));
                             Dictionary<string, string> managerdir = new Dictionary<string, string>();
                             managerdir.Add("{{name}}", member.Name);
+                            managerdir.Add("{{bankOpenName}}", e.Entity.GetValue<string>("memberName"));
                             managerdir.Add("{{amount}}", e.Entity.GetValue<string>("amount"));
                             managerdir.Add("{{bankNumber}}", e.Entity.GetValue<string>("bankNumber"));
                             managerdir.Add("{{bankName}}", e.Entity.GetValue<string>("bankName"));

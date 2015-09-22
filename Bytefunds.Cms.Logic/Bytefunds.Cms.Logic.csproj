@@ -153,8 +153,10 @@
     <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
+    <Compile Include="Controllers\WithdrawController.cs" />
     <Compile Include="CustomSection\PaymentManager.cs" />
     <Compile Include="CustomSection\SystemSettings.cs" />
+    <Compile Include="CustomSection\WithdrawManager.cs" />
     <Compile Include="EventHandlers\CustomRaiseEvent.cs" />
     <Compile Include="EventHandlers\RegisterEvents.cs" />
     <Compile Include="Extensions\UmbracoExtension.cs" />
@@ -177,6 +179,7 @@
     <Compile Include="Models\MemberRegisterViewModel.cs" />
     <Compile Include="Models\News.cs" />
     <Compile Include="Models\PaymentModel.cs" />
+    <Compile Include="Models\RenewalFundViewModel.cs" />
     <Compile Include="Models\ReservationViewModel.cs" />
     <Compile Include="Models\ResponseModel.cs" />
     <Compile Include="Models\ResposeModel.cs" />

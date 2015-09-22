@@ -1,4 +1,85 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 @{
     Layout = "_Layout.cshtml";
+
+    if (Members.IsLoggedIn())
+    {
+        //获取购买记录
+
+        IContentType ct = ApplicationContext.Services.ContentTypeService.GetContentType("PayRecords");
+        IEnumerable<IContent> list = ApplicationContext.Services.ContentService.GetContentOfContentType(ct.Id)
+                                    .Where(e => e.GetValue<int>("memberPicker") == Members.GetCurrentMemberId())
+                                    .Where(e => e.GetValue<bool>("isdeposit"))
+                                    .Take(20);
+
+        <section class="pv-20 clearfix user-record mb-20">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 style="margin-bottom: 20px;">尊敬的用户： <span>@(Members.GetCurrentMember().Name)</span></h4>
+                        <div class="separator-2"></div>
+                        <p style="margin-top:20px">如下为您近期投资记录，请查阅！</p>
+                        <table class="user-record-table mt-20">
+                            <thead class="user-record-head">
+                                <tr>
+                                    <th>名称</th>
+                                    <th>投定金额</th>
+                                    <th>年化收益</th>
+                                    <th>投定时间</th>
+                                    <th>到期时间</th>
+                                    <th>最新收益时间</th>
+                                    <th>续约</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+        foreach (IContent content in list)
+        {
+            int productId = content.GetValue<int>("buyproduct");
+
+            IContent product = ApplicationContext.Services.ContentService.GetById(productId);
+            <tr>
+                <td class="td1">@(product.GetValue<string>("title"))</td>
+                <td class="td2">@(content.GetValue<double>("amountCny").ToString("N2") + "元")</td>
+                <td class="td3">@(product.GetValue<double>("rate").ToString("f2") + "%")</td>
+                <td class="td4">@(content.CreateDate.ToString("yyyy年MM月dd月"))</td>
+                <td class="td5">@(content.GetValue<DateTime>("expirationtime").ToString("yyyy年MM月dd月"))</td>
+                <td class="td6">@(content.GetValue<DateTime>("calcTime").ToString("yyyy年MM月dd月"))</td>
+                <td class="td7">
+                    @{
+            if (content.GetValue<DateTime>("expirationtime").AddDays(-7) < DateTime.Now)
+            {
+                <a href="/memberinfo/renewfund?id=@content.Id" class="btn btn-sm btn-group btn-warning btn-animated">续约<i class="fa fa-check"></i></a>
+            }
+            else
+            {
+                <a href="/memberinfo/renewfund?id=@content.Id" class="btn btn-sm btn-group btn-warning btn-gray btn-animated">续约<i class="fa fa-check"></i></a>
+            }
 }
+
+
+                </td>
+            </tr>
+        }
+                                }
+
+                            </tbody>
+                        </table>
+                        <p style="margin-top: 35px;font-size: 1em;color:  #C6AB5C;">感谢您对我们的支持，祝你生活愉快！</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    }
+    else
+    {
+        <script>
+            window.onload = function () {
+
+                window.location.href = "/login";
+            }
+        </script>
+    }
+
+}
+

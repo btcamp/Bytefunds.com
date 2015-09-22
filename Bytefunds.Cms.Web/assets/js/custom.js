@@ -10,6 +10,7 @@ jQuery(function ($) {
         ByteFunds.showModal();
         ByteFunds.showCircle();
         //ByteFunds.showCharts();
+        ByteFunds.showUserList();
     });
     ByteFunds.qqService = function (qq) {
         var qq_list = new Array("578485754","3226588475");
@@ -128,6 +129,31 @@ jQuery(function ($) {
             });
         }
     }
+
+    ByteFunds.showUserList = function () {
+        var userCenter = $(".user-center");
+        $(".header-top-dropdown .uesr-btn").hover(
+             function () {
+                 userCenter.attr("class", "user-center list animated fadeInRight")
+             },
+             function () {
+                 var flag = true;
+                 $("body").click(function () {
+                     userCenter.attr("class", "user-center list  hidden");
+                     flag = false;
+                 });
+                 userCenter.mousemove(function (event) {
+                     flag = false;
+                 });
+                 var timer = setInterval(function () {
+                     if (flag) {
+                         userCenter.attr("class", "user-center list  hidden");
+                         clearInterval(timer);
+                     }
+                     flag = true;
+                 }, 3000)
+             })
+    };
 });
 
 
@@ -140,6 +166,7 @@ $(function () {
     initAajxform();
     $(".logout").click(function () {
         ajaxSubmit(this.href, null, "正在退出....");
+        $(this).attr("disabled", true);
         return false;
     });
 });

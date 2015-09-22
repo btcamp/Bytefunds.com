@@ -295,9 +295,6 @@ body {
     .banner-float h2 strong {
         font-size: 2.5em;
     }
-   .banner-float h2 span, .banner-float h3 span, .banner-float p a, .banner-float-3 span, .banner-float-4  {
-        font-size: 1.3em;
-    }
 }
 .banner-float .separator:after {
     background: -moz-linear-gradient(left, rgba(255,255,255,0.2) 0%, rgba(255, 255, 255, 0.7) 35%, rgba(255, 255, 255, 0.7) 70%, rgba(255,255,255, 0.2) 100%);
@@ -324,6 +321,11 @@ body {
 .form-block {
     width:500px;
 }
+@media(max-width:480px){
+    .form-block {
+        width:100%;
+    }
+}
 .register .text-danger, .sign-up .text-danger {
     padding-left: 5px;
 }
@@ -346,7 +348,7 @@ textarea::-webkit-input-placeholder {
     font-size: 13px !important;
 }
 
-input:focus, textarea:focus {
+input:focus, textarea:focus,select:focus {
     border-color: #CD9F3B !important;
 }
 
@@ -1230,4 +1232,73 @@ input:focus, textarea:focus {
     top: 1px;
     margin-right: 5px;
     font-weight: 500;
+}
+
+
+
+.header-top-dropdown  .user-center li a{
+    color:white;
+    font-size:1.1em;
+    text-decoration:none;
+    padding: 20px 23px;
+}
+.header-top-dropdown  .user-center li{
+    border-bottom:1px solid rgba(0,0,0,0.3);
+    padding:7px 0;
+}
+.header-top-dropdown  .user-center li a:hover{
+    color:#F5B024 ;
+}
+.user-center{
+    position:absolute;
+    top:39px;
+    right:0;
+    z-index:10000;
+    background-color:#2E3537;
+}
+
+/*用户中心*/
+.user-record .input-group-addon{
+    background-color: transparent;
+    border: none;
+    font-size: 0.9em;
+}
+.search-btn-box{
+    margin: 20px 0 10px 0;
+}
+
+@media (max-width: 767px) {
+    .user-record h3{
+        font-size: 1.4em;
+    }
+    .user-record h4{
+        font-size: 1.1em;
+    }
+    .search-btn-box{
+        margin-top: 20px;
+        margin-left: -20px;
+    }
+}
+.user-record-head{
+    background-color:#F5B024 ;
+}
+.user-record-table{
+    width: 100%;
+}
+.user-record-table td,.user-record-table th{
+    border: 1px solid rgba(205, 159, 59,0.5);
+    text-align: center;
+    line-height: 35px;
+    color: #2E3537;
+}
+.user-record-head th{
+    color: #fff;
+    font-size: 1.0em;
+    border: 1px solid rgba(205, 159, 59,1.0);
+}
+.user-record-table td{
+    font-size: 0.9em;
+}
+.user-record-table tbody tr:nth-child(2n){
+    background-color: #faf8ff;
 }

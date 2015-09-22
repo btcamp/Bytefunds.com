@@ -1,0 +1,19 @@
+<script src="/Scripts/umbraco.plugins.controller.js"></script>
+
+<div class="umb-dialog umb-pane" ng-controller="PaymentClear">
+    <div class="umb-dialog-body" auto-scale="90">
+
+        <p class="umb-abstract">
+            Are you sure you want to delete <strong>{{currentNode.name}}</strong> ?
+        </p>
+
+        <div class="btn-group">
+            <a class="btn btn-link" ng-click="cancel()">cancel</a>
+
+            <button type="button" data-hotkey="ctrl+s" class="btn btn-success" ng-click="clear()">
+                <localize key="buttons_save">Clear</localize>
+            </button>
+        </div>
+
+    </div>
+</div>

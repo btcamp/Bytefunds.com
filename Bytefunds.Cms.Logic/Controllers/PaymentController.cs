@@ -21,7 +21,7 @@ namespace Bytefunds.Cms.Logic.Controllers
             try
             {
                 Content = DESHelper.DecryptDES(Content);
-                WriteLog(Content);
+                CustomLog.WriteLog(Content);
                 temp = Content;
                 System.Web.Script.Serialization.JavaScriptSerializer jss = new System.Web.Script.Serialization.JavaScriptSerializer();
                 PaymentModel payModel = jss.Deserialize<Models.PaymentModel>(Content);
@@ -74,19 +74,19 @@ namespace Bytefunds.Cms.Logic.Controllers
                     Services.ContentService.Save(content);
                     //触发创建事件
                     EventHandlers.CustomRaiseEvent.RaiseContentCreated(content);
-                    WriteLog("success!!");
+                    CustomLog.WriteLog("success!!");
                     return Json("ok", JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
-                    WriteLog("重复提交" + payModel.Billno);
+                    CustomLog.WriteLog("重复提交" + payModel.Billno);
                     return new ContentResult() { Content = "重复提交" };
                 }
 
             }
             catch (Exception ex)
             {
-                WriteLog(ex.ToString());
+                CustomLog.WriteLog(ex.ToString());
                 return new ContentResult() { Content = "fail" + temp + ex };
             }
         }
@@ -95,10 +95,13 @@ namespace Bytefunds.Cms.Logic.Controllers
         public ActionResult Clear()
         {
             IContentType ct = Services.ContentTypeService.GetContentType("PayRecords");
-            IEnumerable<IContent> list = Services.ContentService.GetContentOfContentType(ct.Id);
+            IEnumerable<IContent> list = Services.ContentService.GetContentOfContentType(ct.Id).Where(e => e.GetValue<bool>("isdeposit") == false);
             foreach (IContent item in list)
             {
-                Services.ContentService.Delete(item);
+                if (item.CreateDate < DateTime.Now.AddDays(-7))
+                {
+                    Services.ContentService.Delete(item);
+                }
             }
             ResponseModel model = new ResponseModel();
             model.Success = true;
@@ -106,14 +109,6 @@ namespace Bytefunds.Cms.Logic.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
-        public void WriteLog(string msg)
-        {
-            string path = Server.MapPath("/log/");
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
-            System.IO.File.AppendAllText(Path.Combine(path, DateTime.Now.ToString("yyyyMMdd") + ".log"), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + " " + msg + "\r\n");
-        }
+
     }
 }

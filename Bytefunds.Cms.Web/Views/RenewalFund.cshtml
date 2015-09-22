@@ -1,4 +1,112 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 @{
-    Layout = "About.cshtml";
+    Layout = "_Layout.cshtml";
+
+    string queryparameter = Request.QueryString["id"];
+    int id = 0;
+    if (int.TryParse(queryparameter, out id))
+    {
+        IContent content = ApplicationContext.Services.ContentService.GetById(id);
+
+        IContent product = ApplicationContext.Services.ContentService.GetById(content.GetValue<int>("buyproduct"));
+
+        RenewalFundViewModel renewalViewModel = new RenewalFundViewModel();
+        renewalViewModel.CurrentProductId = id;
+        renewalViewModel.CurrentProductTitle = product.GetValue<string>("title");
+        renewalViewModel.Amount = content.GetValue<double>("amountCny").ToString("N2") + "元";
+        renewalViewModel.EndTime = content.GetValue<DateTime>("expirationtime").ToString("yyyy年MM月dd日");
+        renewalViewModel.StartTime = content.CreateDate.ToString("yyyy年MM月dd日");
+
+        //获取所有的产品
+
+        IContentType ct = ApplicationContext.Services.ContentTypeService.GetContentType("ProductElement");
+        IEnumerable<IContent> list = ApplicationContext.Services.ContentService.GetContentOfContentType(ct.Id).OrderBy(e => e.GetValue<int>("sort"));
+
+        List<SelectListItem> selects = new List<SelectListItem>();
+
+        int index = 0;
+        foreach (var item in list)
+        {
+            selects.Add(new SelectListItem() { Selected = index == 0, Text = item.GetValue<string>("title"), Value = item.Id.ToString() });
+            index++;
+        }
+
+
+
+        <section class="pv-20 clearfix">
+            <div class="container register">
+                <div class="row">
+                    <div class="form-block center-block p-20 light-gray-bg border-clear text-left">
+                        <h2 class="title">自动续约</h2>
+                        <form class="form-horizontal" role="form" action="/umbraco/Api/Member/RenewalFund" method="post">
+                            <div class="form-group has-feedback">
+                                @Html.LabelFor(m => renewalViewModel.CurrentProductTitle, new { @class = "col-sm-3 control-label" })
+                                <div class="col-sm-8">
+                                    <div>
+                                        @Html.TextBoxFor(m => renewalViewModel.CurrentProductTitle, new { @class = "form-control", @readonly = "readonly" })
+                                        <i class="fa fa-user form-control-feedback"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group has-feedback">
+                                @Html.LabelFor(m => renewalViewModel.Amount, new { @class = "col-sm-3 control-label" })
+                                <div class="col-sm-8">
+                                    <div>
+                                        @Html.TextBoxFor(m => renewalViewModel.Amount, new { @class = "form-control", @readonly = "readonly" })
+                                        <i class="fa fa-money form-control-feedback"></i>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="form-group has-feedback">
+                                @Html.LabelFor(m => renewalViewModel.StartTime, new { @class = "col-sm-3 control-label" })
+                                <div class="col-sm-8">
+                                    <div>
+                                        @Html.TextBoxFor(m => renewalViewModel.StartTime, new { @class = "form-control", @readonly = "readonly" })
+                                        <i class="fa fa-times form-control-feedback"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group has-feedback">
+                                @Html.LabelFor(m => renewalViewModel.EndTime, new { @class = "col-sm-3 control-label" })
+                                <div class="col-sm-8">
+                                    <div>
+                                        @Html.TextBoxFor(m => renewalViewModel.EndTime, new { @class = "form-control", @readonly = "readonly" })
+                                        <i class="fa fa-times form-control-feedback"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group has-feedback">
+                                @Html.LabelFor(m => renewalViewModel.RenewalFundId, new { @class = "col-sm-3 control-label" })
+                                <div class="col-sm-8">
+                                    <div>
+                                        @Html.DropDownListFor(m => renewalViewModel.RenewalFundId, selects, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-8 submit-btn">
+                                    <button type="submit" class="btn btn-group btn-warning btn-animated">立即续约<i class="fa fa-check"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    }
+    else
+    {
+        <section class="pv-20 clearfix">
+            <div class="container register">
+                <div class="row">
+                    <div class="form-block center-block p-20 light-gray-bg border-clear text-left">
+                        <h3>参数错误！</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+    }
+
 }
+

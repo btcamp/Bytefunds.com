@@ -52,7 +52,14 @@
                                 if (Members.IsLoggedIn())
                                 {
                                     <div class="btn-group">
-                                        <a href="/memberinfo" class="btn btn-default btn-sm"><i class="fa fa-user pr-10"></i>用户中心</a>
+                                        <a href="/memberinfo" class="btn btn-default btn-sm uesr-btn"><i class="fa fa-user pr-10"></i>用户中心</a>
+                                        <ul class="user-center list  hidden">
+                                            <li><a href="/memberinfo/buyrecord">投资记录</a></li>
+                                            <li><a href="/memberinfo/withdraw">提现申请</a></li>
+                                            <li><a href="/memberinfo/withdrawrecord">提现记录</a></li>
+                                            <li><a href="/memberinfo/verified">实名认证</a></li>
+                                            <li><a href="/memberinfo/bankcertification">绑定银行</a></li>
+                                        </ul>
                                     </div>
                                     <div class="btn-group">
                                         <a href="/umbraco/Api/Member/Logout" class="btn btn-default btn-sm logout"><i class="fa fa-sign-out pr-10"></i>退出</a>
@@ -141,9 +148,16 @@
                                                     <li class=""><a href="/news">新闻动态</a></li>
                                                     <li class="active"><a href="/about">关于我们</a></li>
                                                 }
-                                                else
+                                                else if (Request.Url.AbsolutePath == "/")
                                                 {
                                                     <li class="active"><a href="/">我要赚钱</a></li>
+                                                    <li class=""><a href="/funds">量化定期宝产品</a></li>
+                                                    <li class=""><a href="/news">新闻动态</a></li>
+                                                    <li class=""><a href="/about">关于我们</a></li>
+                                                }
+                                                else
+                                                {
+                                                    <li class=""><a href="/">我要赚钱</a></li>
                                                     <li class=""><a href="/funds">量化定期宝产品</a></li>
                                                     <li class=""><a href="/news">新闻动态</a></li>
                                                     <li class=""><a href="/about">关于我们</a></li>

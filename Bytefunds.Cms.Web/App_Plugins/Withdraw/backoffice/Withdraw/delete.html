@@ -1,0 +1,12 @@
+﻿<div class="umb-dialog umb-pane" ng-controller="Umbraco.Editors.Content.DeleteController">
+    <div class="umb-dialog-body" auto-scale="90">
+        
+        <p class="umb-abstract">
+        	确定要删除 <strong>{{currentNode.name}}</strong> 的入金记录?
+        </p>
+
+        <umb-confirm on-confirm="performDelete" on-cancel="cancel">    
+        </umb-confirm>
+
+    </div>
+</div>
