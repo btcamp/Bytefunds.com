@@ -36,26 +36,34 @@
         foreach (IContent content in list)
         {
             int productId = content.GetValue<int>("buyproduct");
-
             IContent product = ApplicationContext.Services.ContentService.GetById(productId);
             <tr>
                 <td class="td1">@(product.GetValue<string>("title"))</td>
                 <td class="td2">@(content.GetValue<double>("amountCny").ToString("N2") + "元")</td>
                 <td class="td3">@(product.GetValue<double>("rate").ToString("f2") + "%")</td>
-                <td class="td4">@(content.CreateDate.ToString("yyyy年MM月dd月"))</td>
+                <td class="td4">@(content.GetValue<DateTime>("rechargeDateTime").ToString("yyyy年MM月dd月"))</td>
                 <td class="td5">@(content.GetValue<DateTime>("expirationtime").ToString("yyyy年MM月dd月"))</td>
-                <td class="td6">@(content.GetValue<DateTime>("calcTime").ToString("yyyy年MM月dd月"))</td>
+                <td class="td6">@(string.IsNullOrEmpty(content.GetValue<string>("calcTime")) ? "--" : content.GetValue<DateTime>("calcTime").ToString("yyyy年MM月dd月"))</td>
                 <td class="td7">
                     @{
-            if (content.GetValue<DateTime>("expirationtime").AddDays(-7) < DateTime.Now)
+                        @*if (content.GetValue<DateTime>("expirationtime").AddDays(-7) < DateTime.Now)
+                            {
+                                <a href="/memberinfo/renewfund?id=@content.Id" class="btn btn-sm btn-group btn-warning btn-animated">续约<i class="fa fa-check"></i></a>
+                            }
+                            else
+                            {
+                                <a href="/memberinfo/renewfund?id=@content.Id" class="btn btn-sm btn-group btn-warning btn-gray btn-animated">续约<i class="fa fa-check"></i></a>
+                            }*@
+            if (content.GetValue<bool>("isexpired"))
             {
-                <a href="/memberinfo/renewfund?id=@content.Id" class="btn btn-sm btn-group btn-warning btn-animated">续约<i class="fa fa-check"></i></a>
+                <span>已过期</span>
             }
             else
             {
-                <a href="/memberinfo/renewfund?id=@content.Id" class="btn btn-sm btn-group btn-warning btn-gray btn-animated">续约<i class="fa fa-check"></i></a>
+                <a href="/memberinfo/renewfund?id=@content.Id" class="btn btn-sm btn-group btn-warning btn-animated">续约<i class="fa fa-check"></i></a>
             }
-}
+
+                    }
 
 
                 </td>

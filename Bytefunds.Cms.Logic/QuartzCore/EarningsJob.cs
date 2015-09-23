@@ -40,8 +40,9 @@ namespace Bytefunds.Cms.Logic.QuartzCore
                         calcCount++;
                         continue;
                     }
-                    //yyyy-MM-dd
-                    if (content.GetValue<DateTime>("expirationtime") > DateTime.Now.AddDays(1))
+                    //yyyy-MM-dd计算当前时间是在收益期范围内的产品
+                    if (content.GetValue<DateTime>("expirationtime") > DateTime.Now.AddDays(1)
+                        && DateTime.Now > content.GetValue<DateTime>("rechargeDateTime"))
                     {
                         int productId = content.GetValue<int>("buyproduct");
                         IContent product = Services.ContentService.GetById(productId);
@@ -77,6 +78,8 @@ namespace Bytefunds.Cms.Logic.QuartzCore
                         Services.ContentService.Save(content);
                     }
                 }
+
+
                 if (calcCount != currentList.Count())
                 {
                     member.SetValue("latestearnings", sumProfit.ToString("f2"));

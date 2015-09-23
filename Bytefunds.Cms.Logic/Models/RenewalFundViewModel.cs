@@ -9,7 +9,7 @@ namespace Bytefunds.Cms.Logic.Models
     public class RenewalFundViewModel
     {
 
-        public int CurrentProductId { get; set; }
+        public int CurrentPayId { get; set; }
         [Display(Name = "当前产品")]
         public string CurrentProductTitle { get; set; }
         [Display(Name = "金额")]

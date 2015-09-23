@@ -313,7 +313,77 @@ namespace Bytefunds.Cms.Logic.Controllers
 
         public ActionResult RenewalFund([Bind(Prefix = "renewalViewModel")]RenewalFundViewModel model)
         {
-            return View();
+            ResponseModel response = new ResponseModel();
+            IMember member = Services.MemberService.GetById(Members.GetCurrentMemberId());
+
+            //旧的交易记录
+            IContent oldContent = Services.ContentService.GetById(model.CurrentPayId);
+            //旧的产品
+            IContent oldProduct = Services.ContentService.GetById(oldContent.GetValue<int>("buyproduct"));
+            if (model.RenewalFundId == -1)
+            {
+                response.Success = true;
+                response.Msg = "恭喜您已经成功解约，到期将余额返回到您账户余额";
+                response.RedirectUrl = "/memberinfo";
+                System.Threading.Tasks.Task.Factory.StartNew(() =>
+                {
+                    //member:ter:tplid
+                    Dictionary<string, string> dic = new Dictionary<string, string>();
+                    dic.Add("{{name}}", member.Name);
+                    dic.Add("{{product}}", oldProduct.GetValue<string>("title"));
+                    dic.Add("{{start}}", oldContent.GetValue<DateTime>("rechargeDateTime").ToString("yyyy-MM-dd HH:mm:ss"));
+                    dic.Add("{{end}}", oldContent.GetValue<DateTime>("expirationtime").ToString("yyyy-MM-dd HH:mm:ss"));
+                    Helpers.SendmailHelper.SendEmail(member.Username, "member:ter:tplid", dic);
+                    dic.Add("{{option}}", "到期解约");
+                    string manageremail = SystemSettingsHelper.GetSystemSettingsByKey("manager:email");
+                    Helpers.SendmailHelper.SendEmail(manageremail, "manager:ter:tplid", dic);
+                });
+            }
+            else
+            {
+                //续约的产品
+                IContent product = Services.ContentService.GetById(model.RenewalFundId);
+                //新的交易记录
+                DateTime start = oldContent.GetValue<DateTime>("expirationtime").AddDays(1);
+                DateTime end = start.AddMonths(product.GetValue<int>("cycle"));
+                IContentType ct = ApplicationContext.Services.ContentTypeService.GetContentType("PayRecords");
+                IContent content = ApplicationContext.Services.ContentService.CreateContent("无用户名", ct.Id, "PayRecords");
+                
+                content.SetValue("username", member.Name);
+                content.Name = member.Email;
+                content.SetValue("email", member.Email);
+                content.SetValue("memberPicker", member.Id);
+                content.SetValue("buyproduct", product.Id);
+                content.SetValue("mobilePhone", member.GetValue<string>("tel"));
+                content.SetValue("memberPicker", member.Id.ToString());
+                content.SetValue("amountCny", oldContent.GetValue<string>("amountCny"));
+                content.SetValue("rechargeDateTime", start.ToString("yyyy-MM-dd HH:mm:ss"));
+                content.SetValue("expirationtime", end.ToString("yyyy-MM-dd HH:mm:ss"));
+                content.SetValue("payBillno", "续约订单：" + oldContent.GetValue<string>("payBillno"));
+                content.SetValue("isdeposit", true);
+                Services.ContentService.Save(content);
+
+                response.Success = true;
+                response.Msg = "恭喜你已经完成自动续约！请查收邮件";
+                response.IsRedirect = true;
+                response.RedirectUrl = "/memberinfo";
+                //发送邮件
+                System.Threading.Tasks.Task.Factory.StartNew(() =>
+                {
+                    //member:renewal:tplid
+                    Dictionary<string, string> dic = new Dictionary<string, string>();
+                    dic.Add("{{name}}", member.Name);
+                    dic.Add("{{oldproduct}}", oldProduct.GetValue<string>("title"));
+                    dic.Add("{{newproduct}}", product.GetValue<string>("title"));
+                    dic.Add("{{start}}", start.ToString("yyyy-MM-dd HH:mm:ss"));
+                    dic.Add("{{end}}", end.ToString("yyyy-MM-dd HH:mm:ss"));
+                    Helpers.SendmailHelper.SendEmail(member.Username, "member:renewal:tplid", dic);
+                    dic.Add("{{option}}", "自动续约");
+                    string manageremail = SystemSettingsHelper.GetSystemSettingsByKey("manager:email");
+                    Helpers.SendmailHelper.SendEmail(manageremail, "manager:renewal:tplid", dic);
+                });
+            }
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Test()

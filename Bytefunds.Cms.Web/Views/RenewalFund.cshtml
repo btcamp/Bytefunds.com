@@ -11,7 +11,7 @@
         IContent product = ApplicationContext.Services.ContentService.GetById(content.GetValue<int>("buyproduct"));
 
         RenewalFundViewModel renewalViewModel = new RenewalFundViewModel();
-        renewalViewModel.CurrentProductId = id;
+        renewalViewModel.CurrentPayId = id;
         renewalViewModel.CurrentProductTitle = product.GetValue<string>("title");
         renewalViewModel.Amount = content.GetValue<double>("amountCny").ToString("N2") + "元";
         renewalViewModel.EndTime = content.GetValue<DateTime>("expirationtime").ToString("yyyy年MM月dd日");
@@ -30,6 +30,7 @@
             selects.Add(new SelectListItem() { Selected = index == 0, Text = item.GetValue<string>("title"), Value = item.Id.ToString() });
             index++;
         }
+        selects.Add(new SelectListItem() { Text = "到期解约", Value = "-1" });
 
 
 
@@ -37,7 +38,7 @@
             <div class="container register">
                 <div class="row">
                     <div class="form-block center-block p-20 light-gray-bg border-clear text-left">
-                        <h2 class="title">自动续约</h2>
+                        <h2 class="title">到期续<span style="color:rgba(160,160,160,1);font-size:16px">（解）</span>约</h2>
                         <form class="form-horizontal" role="form" action="/umbraco/Api/Member/RenewalFund" method="post">
                             <div class="form-group has-feedback">
                                 @Html.LabelFor(m => renewalViewModel.CurrentProductTitle, new { @class = "col-sm-3 control-label" })
@@ -86,6 +87,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-8 submit-btn">
+                                    @Html.HiddenFor(e => renewalViewModel.CurrentPayId)
                                     <button type="submit" class="btn btn-group btn-warning btn-animated">立即续约<i class="fa fa-check"></i></button>
                                 </div>
                             </div>
