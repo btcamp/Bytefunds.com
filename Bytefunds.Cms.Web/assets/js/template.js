@@ -184,7 +184,7 @@
 				navigationHAlign:"center",
 				navigationVAlign:"bottom",
 				navigationHOffset:0,
-				navigationVOffset:20,
+				navigationVOffset:10,
 
 				soloArrowLeftHalign:"left",
 				soloArrowLeftValign:"center",

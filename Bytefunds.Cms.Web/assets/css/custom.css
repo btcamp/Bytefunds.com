@@ -566,7 +566,7 @@ input:focus, textarea:focus,select:focus {
 }
 @media(max-width: 320px){
      .form-group {
-        margin-bottom: 5px;
+        margin-bottom: 0px;
     }
      .modal-body {
         padding: 5px 10px;
@@ -645,7 +645,9 @@ input:focus, textarea:focus,select:focus {
     .guarantee .icon {
         width: 70px;
     }
-
+.guarantee  p.large{
+    font-size:1.1em;
+}
 @media (max-width: 768px) {
     .owl-pagination {
         display: none;
@@ -848,18 +850,18 @@ input:focus, textarea:focus,select:focus {
     display:inline-block;
 }
 .r_tbl{position:relative;padding-bottom:30px;}
-.r_tbl .txt{padding:30px 0 5px 0;font-size:20px;color:#162f53;font-weight:bold;}
+.r_tbl .txt{padding:10px 0 5px 0;font-size:20px;color:#162f53;font-weight:bold;}
 .r_tbl table{
     width: 100%;
 }
 .r_tbl table td{border:1px solid #858585 !important;height:44px;background:#fff; text-align: center;color:#111; }
-.r_tbl .f_tr td{background:#f2f2f2;}
-.r_tbl img{position:absolute;bottom:-40px;right:-30px;}
+.r_tbl .f_tr td{background:#f2f2f2;font-size:1.1em;}
+.r_tbl img{position:absolute;bottom:0;right:-30px;}
 .cGreen{
-    color: #080 !important;
+    color: #777 !important;
 }
 .cRed{
-    color: #FD9F3B !important;
+    color: #F5B024 !important;
 }
 .cBold{
     font-weight: 600 !important;
@@ -909,8 +911,8 @@ input:focus, textarea:focus,select:focus {
     font-size:0.9em;
 }
 .etf-2  .h_305{margin-top:30px;}
-.w525 dl{margin-top:45px;border:1px dashed #999;padding:0 16px;}
-.w525 dt{color:#142c4e;font-size:1.4em;position:relative;top:-18px;background:#fff;width:320px;}
+.w525 dl{margin-top:45px;border:1px dashed #999;padding:0 18px;}
+.w525 dt{color:#142c4e;font-size:1.4em;position:relative;top:-16px;background:#fff;display:inline-block}
 .w525 dd{position:relative;top:-5px;margin-bottom:15px;}
 .w525 dd span{font-size:20px;padding-right:15px;line-height:30px;}
 .w525 dd span i{
@@ -954,7 +956,10 @@ input:focus, textarea:focus,select:focus {
         font-size: 1.1em;
         line-height: 35px;
     }
-    .w525 dt{font-size:1.2em;}
+    .w525 dt{font-size:1.1em;}
+    .w525  dd span{
+        font-size:1.0em;
+    }
 }
 .etf3-content{
     margin-top: 30px;
@@ -991,7 +996,7 @@ input:focus, textarea:focus,select:focus {
 .etf-3 .fxts {
     color: #b0b0b0;
     display: block;
-    font-size: 12px;
+    font-size: 14px;
 }
 .default-bg  .btn-lg{
     font-family:"黑体";
