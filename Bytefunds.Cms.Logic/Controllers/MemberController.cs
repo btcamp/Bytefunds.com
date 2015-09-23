@@ -13,6 +13,7 @@ using System.Web.Configuration;
 using System.Net.Configuration;
 using System.Configuration;
 using Bytefunds.Cms.Logic.Helpers;
+using Umbraco.Core.Services;
 
 namespace Bytefunds.Cms.Logic.Controllers
 {
@@ -35,6 +36,15 @@ namespace Bytefunds.Cms.Logic.Controllers
         public ActionResult Regsiter([Bind(Prefix = "registerModel")]MemberRegisterViewModel model)
         {
             ResponseModel result = new ResponseModel();
+
+            string code = Session["code"] == null ? string.Empty : Session["code"].ToString();
+            if (code != model.Code)
+            {
+                result.Success = false;
+                result.Msg = "验证码错误，请重新获取验证码";
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+
             IMember validatemember = Services.MemberService.GetMembersByPropertyValue("tel", model.Phone).FirstOrDefault();
 
             if (validatemember != null)
@@ -91,6 +101,28 @@ namespace Bytefunds.Cms.Logic.Controllers
                         result.IsRedirect = true;
                         result.RedirectUrl = "/memberinfo";
                         EventHandlers.CustomRaiseEvent.RaiseRegistered(m);
+                        //赠送5000元定期宝一月期
+                        System.Threading.Tasks.Task.Factory.StartNew((ser) =>
+                        {
+                            ServiceContext sc = ser as ServiceContext;
+                            IContentType ct = sc.ContentTypeService.GetContentType("PayRecords");
+
+                            IContent content = sc.ContentService.CreateContent(m.Name + "赠送定期宝", ct.Id, "PayRecords");
+                            content.SetValue("username", m.Name);
+                            content.SetValue("email", m.Username);
+                            content.SetValue("amountCny", 5000);
+                            content.SetValue("mobilePhone", m.GetValue<string>("tel"));
+                            content.SetValue("rechargeDateTime", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                            content.SetValue("expirationtime", DateTime.Now.AddMonths(1).ToString("yyyy-MM-dd HH:mm:ss"));
+                            content.SetValue("memberPicker", m.Id);
+                            content.SetValue("payBillno", "注册赠送的定期宝");
+                            content.SetValue("isdeposit", true);
+                            content.SetValue("buyproduct", 2337);
+                            content.SetValue("isGive", true);
+                            sc.ContentService.Save(content);
+                            EventHandlers.CustomRaiseEvent.RaiseContentCreated(content);
+                        }, Services);
+
                         break;
                     }
 
@@ -295,6 +327,7 @@ namespace Bytefunds.Cms.Logic.Controllers
                     content.SetValue("bankNumber", model.BankNumber);
                     content.SetValue("bankDetail", model.BankDetail);
                     content.SetValue("isCheck", false);
+                    content.SetValue("okassets", Members.GetCurrentMember()["okassets"]);
                     Services.ContentService.Save(content);
                     EventHandlers.CustomRaiseEvent.RaiseContentCreated(content);
                     responseModel.Msg = "恭喜你！已经成功提交提现申请";
@@ -348,7 +381,7 @@ namespace Bytefunds.Cms.Logic.Controllers
                 DateTime end = start.AddMonths(product.GetValue<int>("cycle"));
                 IContentType ct = ApplicationContext.Services.ContentTypeService.GetContentType("PayRecords");
                 IContent content = ApplicationContext.Services.ContentService.CreateContent("无用户名", ct.Id, "PayRecords");
-                
+
                 content.SetValue("username", member.Name);
                 content.Name = member.Email;
                 content.SetValue("email", member.Email);
@@ -384,6 +417,25 @@ namespace Bytefunds.Cms.Logic.Controllers
                 });
             }
             return Json(response, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetCode(string email)
+        {
+            try
+            {
+                //member:register:code:tplid
+                Random rand = new Random();
+                int num = rand.Next(100000, 999999);
+                Session["code"] = num.ToString();
+                Dictionary<string, string> dir = new Dictionary<string, string>();
+                dir.Add("{{code}}", num.ToString());
+                Helpers.SendmailHelper.SendEmail(email, "member:register:code:tplid", dir);
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
         }
 
         public ActionResult Test()

@@ -58,6 +58,10 @@
             {
                 <span>已过期</span>
             }
+            else if (content.GetValue<bool>("isGive"))
+            {
+                <span>赠送定期宝</span>
+            }
             else
             {
                 <a href="/memberinfo/renewfund?id=@content.Id" class="btn btn-sm btn-group btn-warning btn-animated">续约<i class="fa fa-check"></i></a>

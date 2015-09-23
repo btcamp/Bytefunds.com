@@ -85,7 +85,7 @@ namespace Bytefunds.Cms.Logic.EventHandlers
                                     return;
                                     // throw new CustomException.NotFoundEmailException("邮箱不存在");
                                 }
-                                Configuration configurationFile = WebConfigurationManager.OpenWebConfiguration(HttpContext.Current.Request.ApplicationPath);
+                                Configuration configurationFile = WebConfigurationManager.OpenWebConfiguration("/");
                                 MailSettingsSectionGroup mailSettings = (MailSettingsSectionGroup)configurationFile.GetSectionGroup("system.net/mailSettings");
 
 

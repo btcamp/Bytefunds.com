@@ -25,6 +25,10 @@ namespace Bytefunds.Cms.Logic.Models
         [Required(ErrorMessage = "请输入密码")]
         public string Password { get; set; }
 
+        [Display(Name = "验证码")]
+        [Required(ErrorMessage = "请输入验证码")]
+        public string Code { get; set; }
+
         //[Display(Name = "确认密码")]
         //[Required(ErrorMessage = "请输入确认密码")]
         //[Compare("Password",ErrorMessage="两次密码不一致，请重新输入")]

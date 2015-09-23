@@ -25,7 +25,8 @@ function WithdrawController($scope, $http, navigationService, notificationsServi
     $scope.model = {
         name: $scope.currentNode.name,
         id: $scope.currentNode.id,
-        amount: $scope.currentNode.metaData.amount
+        amount: $scope.currentNode.metaData.amount,
+        okassets:$scope.currentNode.metaData.okassets
     }
 
     $scope.save = function () {

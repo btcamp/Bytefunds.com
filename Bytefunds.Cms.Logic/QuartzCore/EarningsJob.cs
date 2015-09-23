@@ -78,6 +78,24 @@ namespace Bytefunds.Cms.Logic.QuartzCore
                         Services.ContentService.Save(content);
                     }
                 }
+                //按月计算可提现收益
+                if (DateTime.Now.Day == 1)
+                {
+                    //计算上个月的收益
+                    DateTime start = DateTime.Parse(string.Format("{0}-{1}-{2} 00:00:00", DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month, 1));
+                    DateTime end = DateTime.Now.AddDays(-1);
+                    IContentType earningsContentType = Services.ContentTypeService.GetContentType("EarningsRecordsElement");
+                    IEnumerable<IContent> earnings = Services.ContentService.GetContentOfContentType(earningsContentType.Id)
+                                                 .Where(e => e.GetValue<int>("memberId") == member.Id);
+                    decimal sumEarning = earnings.Sum(e => e.GetValue<decimal>("earning"));
+                    //可提现收益
+                    decimal okassets = member.GetValue<decimal>("okassets");
+                    member.SetValue("okassets", (okassets + sumEarning).ToString("f2"));
+                    //余额
+                    decimal assets = member.GetValue<decimal>("assets");
+                    member.SetValue("assets", (assets + okassets).ToString("f2"));
+                    Services.MemberService.Save(member);
+                }
 
 
                 if (calcCount != currentList.Count())

@@ -4,6 +4,8 @@
     WithdrawViewModel withdrawModel = new WithdrawViewModel();
     Html.EnableClientValidation();
     Html.EnableUnobtrusiveJavaScript();
+
+
 }
 
 <section class="pv-20 clearfix">
@@ -75,6 +77,9 @@
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-8 submit-btn">
                             <button type="submit" class="btn btn-group btn-warning btn-animated">申请提现<i class="fa fa-check"></i></button>
+                            <small>
+                                您的可提现金额@(Members.GetCurrentMember().GetPropertyValue<decimal>("okassets").ToString("N2") + "元")
+                            </small>
                         </div>
                     </div>
                 </form>

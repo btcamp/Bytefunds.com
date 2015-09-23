@@ -1,7 +1,7 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 @{
     Layout = "_Layout.cshtml";
-    string str = "0.00", username = str, accumulatedEarnings = str, latestearnings = str, fundAccount = str, assets = str, tel = string.Empty;
+    string str = "0.00", username = str, accumulatedEarnings = str, latestearnings = str, fundAccount = str, assets = str, tel = string.Empty, okassets = str;
 
     if (!Members.IsLoggedIn())
     {
@@ -19,6 +19,7 @@
         latestearnings = member.GetValue<double>("latestearnings").ToString("f2") + "元";
         fundAccount = member.GetValue<double>("fundAccount").ToString("f2") + "元";
         assets = member.GetValue<double>("assets").ToString("N2") + "元";
+        okassets = member.GetValue<double>("okassets").ToString("N2") + "元";
         tel = member.GetValue<string>("tel");
 
         <section class="main-container pv-20">
@@ -93,27 +94,45 @@
                     <div class="col-sm-6 col-xs-12">
                         <div class="summary-info summary-info-funds">
                             <div class="hd clearfix">
-                                <span>基金账户</span>
+                                <span>您的账户</span>
                             </div>
                             <div class="bd clearfix">
                                 <div class="field">
-                                    <strong class="decimal">@latestearnings</strong><label>最新收益 </label>
+                                    <strong class="decimal" style="font-size:40px !important"> @latestearnings</strong><label>最新收益 </label>
                                 </div>
                                 <div class="field">
-                                    <div class="col-sm-3 col-xs-6 span2"><span class="decimal">@accumulatedEarnings</span><label>累计收益</label></div>
-                                    <div class="col-sm-3 col-xs-6 span2 last"><span class="decimal">@fundAccount</span><label>基金账户</label></div>
+                                    <div class="col-xs-6 span2"><span class="decimal">@accumulatedEarnings</span><label>累计收益</label></div>
+                                    <div class="col-xs-6 span2 last"><span class="decimal">@fundAccount</span><label><a href="/memberinfo/buyrecord">量化定期宝账户</a></label></div>
                                     <div class="clearfix"></div>
                                 </div>
                             </div>
                             <div class="ft clearfix">
-                                <dl>
-                                    <dt>账户余额</dt>
-                                    <dd class="decimal">@assets</dd>
-                                </dl>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <dl>
+                                            <dt>账户余额</dt>
+                                            <dd class="decimal">@assets</dd>
+                                        </dl>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <dl>
+                                            <dt>可提现余额</dt>
+                                            <dd class="decimal">@okassets</dd>
+                                        </dl>
+                                    </div>
+                                </div>
+
                             </div>
                             <div class="account-unactive">
-                                <h4>立刻赚钱</h4>
-                                <a class="btn btn-large btn-warning" href="/#product">我要赚钱</a>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <a class="btn btn-large btn-warning" href="/#product">我要赚钱</a>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <a class="btn btn-large btn-warning" href="/memberinfo/withdraw">提现到银行</a>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>

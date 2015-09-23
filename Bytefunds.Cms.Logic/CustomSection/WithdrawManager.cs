@@ -82,9 +82,10 @@ namespace Bytefunds.Cms.Logic.CustomSection
                     foreach (var curitem in currentlist)
                     {
                         string day = curitem.CreateDate.Day.ToString();
-                        var node = this.CreateTreeNode(curitem.Id.ToString(), ids[0], queryStrings, curitem.GetValue<string>("memberName") + " (" + curitem.GetValue<string>("amount") + "￥ " + day + "日)", "icon-umb-users", false);
+                        var node = this.CreateTreeNode(curitem.Id.ToString(), ids[0], queryStrings, curitem.GetValue<string>("memberName") + " (" + curitem.GetValue<decimal>("amount").ToString("N2") + "￥ " + day + "日)", "icon-umb-users", false);
 
-                        node.AdditionalData.Add("amount", curitem.GetValue<string>("amount"));
+                        node.AdditionalData.Add("amount", curitem.GetValue<decimal>("amount").ToString("N2"));
+                        node.AdditionalData.Add("okassets", curitem.GetValue<decimal>("okassets").ToString("N2"));
                         //int memberid = 0;
                         //if (int.TryParse(curitem.GetValue<string>("memberPicker"), out memberid))
                         //{
