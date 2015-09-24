@@ -18,11 +18,27 @@ namespace Bytefunds.Cms.Logic.Controllers
             try
             {
                 IContent content = Services.ContentService.GetById(id);
+                decimal amount = content.GetValue<decimal>("amount");
+
+                int memberid = content.GetValue<int>("memberId");
+                IMember member = Services.MemberService.GetById(memberid);
+                //TODO:修改账户的member的余额和可提现余额
+                decimal assets = member.GetValue<decimal>("assets");
+                decimal okassets = member.GetValue<decimal>("okassets");
+                if (amount > okassets)//提现金额高于可提现金额
+                {
+                    response.Success = false;
+                    response.Msg = "提现金额超限，请重新联系客户重新申请";
+                    return Json(response, JsonRequestBehavior.AllowGet);
+                }
+
                 content.SetValue("isCheck", true);
                 Services.ContentService.Save(content);
                 //获取memberid
-                int memberid = content.GetValue<int>("memberId");
-                IMember member = Services.MemberService.GetById(memberid);
+                decimal number = assets - amount, oknumber = okassets - amount;
+                member.SetValue("assets", number.ToString());
+                member.SetValue("onassets", oknumber.ToString());
+                Services.MemberService.Save(member);
                 //发送审核邮件member:approved:tplid
                 Dictionary<string, string> dir = new Dictionary<string, string>();
                 dir.Add("{{name}}", member.Name);

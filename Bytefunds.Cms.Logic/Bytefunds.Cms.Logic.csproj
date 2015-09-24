@@ -186,6 +186,7 @@
     <Compile Include="Models\SenMailModel.cs" />
     <Compile Include="Models\Sheet.cs" />
     <Compile Include="Models\ThreadParameter.cs" />
+    <Compile Include="Models\TransferredViewModel.cs" />
     <Compile Include="Models\TxtParamClass.cs" />
     <Compile Include="Models\UmbDictionaryModel.cs" />
     <Compile Include="Models\VerifiedViewModel.cs" />

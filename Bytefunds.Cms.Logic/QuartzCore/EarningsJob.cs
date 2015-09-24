@@ -69,9 +69,16 @@ namespace Bytefunds.Cms.Logic.QuartzCore
                     }
                     else
                     {
-                        //到期的 将余额提出到账户余额中
-                        decimal assets = member.GetValue<decimal>("assets");
-                        member.SetValue("assets", (assets + content.GetValue<decimal>("amountCny")).ToString("f2"));
+                        if (content.GetValue<bool>("isGive"))//赠送的基金账户
+                        {
+                            member.SetValue("fundAccount", "0");
+                        }
+                        else
+                        {
+                            //到期的 将余额提出到账户余额中
+                            decimal assets = member.GetValue<decimal>("assets");
+                            member.SetValue("assets", (assets + content.GetValue<decimal>("amountCny")).ToString("f2"));
+                        }
                         Services.MemberService.Save(member);
                         //修改基金到期
                         content.SetValue("isexpired", true);

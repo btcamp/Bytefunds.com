@@ -94,6 +94,7 @@ namespace Bytefunds.Cms.Logic.Controllers
                     {
                         var m = Services.MemberService.GetByUsername(member.UserName);
                         m.SetValue("tel", model.Phone);
+                        m.SetValue("fundAccount", "5000");
                         Services.MemberService.SavePassword(m, model.Password);
                         Services.MemberService.Save(m);
                         result.Success = true;
@@ -417,6 +418,77 @@ namespace Bytefunds.Cms.Logic.Controllers
                 });
             }
             return Json(response, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Transferred([Bind(Prefix = "transferredViewModel")]TransferredViewModel model)
+        {
+            ResponseModel responseModel = new ResponseModel();
+            if (!Members.IsLoggedIn())
+            {
+                responseModel.Success = false;
+                responseModel.Msg = "请先进行登录过在进行补充信息";
+            }
+            else if (!ModelState.IsValid)
+            {
+                foreach (var item in ModelState)
+                {
+                    if (item.Value.Errors.Count > 0)
+                    {
+                        responseModel.Success = false;
+                        responseModel.Msg = item.Value.Errors.FirstOrDefault().ErrorMessage;
+                    }
+                }
+            }
+            else
+            {
+
+                IMember member = Services.MemberService.GetById(Members.GetCurrentMemberId());
+
+                if (member.GetValue<double>("assets") < model.Amount)
+                {
+                    responseModel.Success = false;
+                    responseModel.Msg = "购买的金额超限，您账户余额是：" + member.GetValue<double>("assets").ToString("N2") + "元";
+                    return Json(responseModel, JsonRequestBehavior.AllowGet);
+                }
+
+
+                //新增产品数据
+                IContentType ct = ApplicationContext.Services.ContentTypeService.GetContentType("PayRecords");
+                IContent content = ApplicationContext.Services.ContentService.CreateContent("无用户名", ct.Id, "PayRecords");
+
+                IContent product = Services.ContentService.GetById(model.ProductId);
+                DateTime start = DateTime.Now, end = start.AddMonths(product.GetValue<int>("cycle"));
+                content.SetValue("username", member.Name);
+                content.Name = member.Email;
+                content.SetValue("email", member.Email);
+                content.SetValue("memberPicker", member.Id);
+                content.SetValue("buyproduct", product.Id);
+                content.SetValue("mobilePhone", member.GetValue<string>("tel"));
+                content.SetValue("memberPicker", member.Id.ToString());
+                content.SetValue("amountCny", model.Amount.ToString());
+                content.SetValue("rechargeDateTime", start.ToString("yyyy-MM-dd HH:mm:ss"));
+                content.SetValue("expirationtime", end.ToString("yyyy-MM-dd HH:mm:ss"));
+                content.SetValue("payBillno", "账户余额金额购买");
+                content.SetValue("isdeposit", true);
+                Services.ContentService.Save(content);
+                EventHandlers.CustomRaiseEvent.RaiseContentCreated(content);
+                decimal assets = member.GetValue<decimal>("assets"), okassets = member.GetValue<decimal>("okassets"), fundAccount = member.GetValue<decimal>("fundAccount");
+                assets = assets - (decimal)model.Amount;
+
+                if (assets < okassets)
+                {
+                    //如果 可提现金额小于已经转出后的余额 也应扣款
+                    member.SetValue("okassets", assets.ToString());
+                }
+                member.SetValue("assets", assets.ToString());
+                member.SetValue("fundAccount", (fundAccount + (decimal)model.Amount).ToString());
+                Services.MemberService.Save(member);
+
+                responseModel.Success = true;
+                responseModel.Msg = "恭喜你成功转入到定期宝！";
+                responseModel.RedirectUrl = "/memberinfo";
+            }
+            return Json(responseModel, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult GetCode(string email)
