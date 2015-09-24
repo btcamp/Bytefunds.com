@@ -23,6 +23,7 @@ namespace Bytefunds.Cms.Logic.Controllers
                 //获取memberid
                 int memberid = content.GetValue<int>("memberId");
                 IMember member = Services.MemberService.GetById(memberid);
+                //TODO:修改账户的member的余额和可提现余额
                 //发送审核邮件member:approved:tplid
                 Dictionary<string, string> dir = new Dictionary<string, string>();
                 dir.Add("{{name}}", member.Name);
