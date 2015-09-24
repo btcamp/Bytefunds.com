@@ -26,8 +26,8 @@
             <div class="container" id="user-summary">
                 <div class="row">
                     <div class="col-md-12">
-                        <h3 style="float:left">尊敬的用户：@username</h3>
-                        <ul class="list-inline" style=" padding-top: 15px;float:left;margin-left:10px">
+                        <h3 style="float:left;font-size:1.5em">比特金服用户：@username</h3>
+                        <ul class="list-inline" style=" padding-top: 12px;float:left;margin-left:10px">
                             <li><a href="/memberinfo/verified/" title="实名认证"><i class="icon-font @(member.GetValue<bool>("verified")?"approve":string.Empty) " title="实名认证">&#xe641;</i></a></li>
                             <li><a href="/memberinfo/bankcertification/" title="绑定银行卡"><i class="icon-font @(member.GetValue<bool>("bankCertification") ? "approve" : string.Empty)" title="绑定银行卡">&#xf00c0;</i></a></li>
                             <li><i class="icon-font @(!string.IsNullOrEmpty(member.GetValue<string>("tel")) ? "approve" : string.Empty)" title="手机认证">&#xe675;</i></li>
@@ -35,7 +35,6 @@
                         </ul>
                     </div>
                 </div>
-
                 <div class="row summary-infos">
                     <div class="col-sm-6">
                         <div class="summary-info summary-info-p2p mt-10" style="background-color:#fff">
@@ -98,11 +97,11 @@
                             </div>
                             <div class="bd clearfix">
                                 <div class="field">
-                                    <strong class="decimal" style="font-size:40px !important"> @latestearnings</strong><label>最新收益 </label>
+                                    <strong class="decimal" style="font-size:32px !important"> @latestearnings</strong><label>最新收益 </label>
                                 </div>
                                 <div class="field">
-                                    <div class="col-xs-6 span2"><span class="decimal">@accumulatedEarnings</span><label>累计收益</label></div>
-                                    <div class="col-xs-6 span2 last"><span class="decimal">@fundAccount</span><label><a href="/memberinfo/buyrecord">量化定期宝账户</a></label></div>
+                                    <div class="col-md-4 col-xs-6 span2"><span class="decimal">@accumulatedEarnings</span><label>累计收益</label></div>
+                                    <div class="col-md-7 col-md-offset-1  col-xs-6  span2 last"><span class="decimal">@fundAccount</span><label><a href="/memberinfo/buyrecord">定期宝账户</a></label></div>
                                     <div class="clearfix"></div>
                                 </div>
                             </div>
@@ -112,6 +111,7 @@
                                         <dl>
                                             <dt>账户余额</dt>
                                             <dd class="decimal">@assets</dd>
+                                            <dd class="decimal"><a href="/memberinfo/transferred" class="btn  btn-sm btn-default">转入</a></dd>
                                         </dl>
                                     </div>
                                     <div class="col-md-6">
@@ -121,15 +121,14 @@
                                         </dl>
                                     </div>
                                 </div>
-
                             </div>
                             <div class="account-unactive">
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-xs-6">
                                         <a class="btn btn-large btn-warning" href="/#product">我要赚钱</a>
                                     </div>
-                                    <div class="col-md-6">
-                                        <a class="btn btn-large btn-warning" href="/memberinfo/withdraw">提现到银行</a>
+                                    <div class="col-xs-6">
+                                        <a class="btn btn-large btn-warning" href="/memberinfo/withdraw">余额提现</a>
                                     </div>
                                 </div>
 

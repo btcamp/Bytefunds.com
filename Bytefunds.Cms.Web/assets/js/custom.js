@@ -11,6 +11,7 @@ jQuery(function ($) {
         ByteFunds.showCircle();
         //ByteFunds.showCharts();
         ByteFunds.showUserList();
+//        ByteFunds.hiddenUserList();
     });
     ByteFunds.qqService = function (qq) {
         var qq_list = new Array("578485754","3226588475");
@@ -128,31 +129,25 @@ jQuery(function ($) {
                 }]
             });
         }
-    }
-
+    };
     ByteFunds.showUserList = function () {
         var userCenter = $(".user-center");
-        $(".header-top-dropdown .uesr-btn").hover(
-             function () {
-                 userCenter.attr("class", "user-center list animated fadeInRight")
-             },
-             function () {
-                 var flag = true;
-                 $("body").click(function () {
-                     userCenter.attr("class", "user-center list  hidden");
-                     flag = false;
-                 });
-                 userCenter.mousemove(function (event) {
-                     flag = false;
-                 });
-                 var timer = setInterval(function () {
-                     if (flag) {
-                         userCenter.attr("class", "user-center list  hidden");
-                         clearInterval(timer);
-                     }
-                     flag = true;
-                 }, 3000)
-             })
+        var userBtn= $(".header-top-dropdown .uesr-btn");
+        var flag = true;
+        userBtn.click(
+            function () {
+                if(flag){
+                    userCenter.attr("class","user-center list animated fadeInRight");
+                    userBtn.css("outline","");
+                    flag=false;
+                }
+                else{
+                    userCenter.attr("class","user-center list  hidden");
+                    userBtn.css("outline","#F5B024");
+                    flag=true;
+                }
+            }
+        );
     };
 });
 
@@ -307,3 +302,6 @@ function ajaxSubmit(url, data, beforAjaxMsg) {
     });
 }
 
+$(".user-record-table td").hover(function () {
+    $("#withdraw_text").text($(this).text())
+})

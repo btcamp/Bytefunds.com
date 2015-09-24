@@ -8,8 +8,8 @@
 
 }
 
-<section class="pv-20 clearfix">
-    <div class="container register">
+<section class="clearfix">
+    <div class="container register withdraw">
         <div class="row">
             <div class="form-block center-block p-20 light-gray-bg border-clear text-left">
                 <h2 class="title">提现申请</h2>
@@ -78,7 +78,7 @@
                         <div class="col-sm-offset-3 col-sm-8 submit-btn">
                             <button type="submit" class="btn btn-group btn-warning btn-animated">申请提现<i class="fa fa-check"></i></button>
                             <small>
-                                您的可提现金额@(Members.GetCurrentMember().GetPropertyValue<decimal>("okassets").ToString("N2") + "元")
+                                您的可提现金额：@(Members.GetCurrentMember().GetPropertyValue<decimal>("okassets").ToString("N2") + "元")
                             </small>
                         </div>
                     </div>

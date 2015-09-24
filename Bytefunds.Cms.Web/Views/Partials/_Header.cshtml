@@ -26,16 +26,16 @@
                                 <button type="button" class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-share-alt"></i></button>
                                 <ul class="dropdown-menu dropdown-animation">
                                     <li class="twitter"><i class="fa fa-phone pr-10 pl-5"></i>服务热线：028-8505-7407</li>
-                                    <li class="twitter"><i class="fa pr-10 pl-10">（工作日10:00-18:00）</i></li>
+                                    <li class="twitter"><i class="fa fa-qq pr-10 pl-5"></i>QQ群号：337433883</li>
                                 </ul>
                             </div>
                         </div>
                         <ul class="list-inline hidden-md hidden-lg hidden-sm top-service" style="position: absolute;top:0;left: 60px;">
-                            <li class=""><a href="" class="wechat"><i class="fa fa-wechat"></i></a></li>
+                            <li class=""><a href="#" class="wechat"><i class="fa fa-wechat"></i></a></li>
                         </ul>
                         <ul class="list-inline hidden-xs top-service">
                             <li class="twitter"><i class="fa fa-phone pr-5 pl-5"></i>服务热线：028-8505-7407（工作日10:00-18:00）</li>
-                            <li class="twitter"><a href="#" class="qq"><i class="fa fa-qq"></i></a></li>
+                            <li class="twitter"><a href="#" class="qq" title="QQ群号：337433883"><i class="fa fa-qq"></i></a></li>
                             <li class="twitter"><a href="#" class="wechat"><i class="fa fa-wechat"></i></a></li>
                         </ul>
                     </div>
@@ -52,8 +52,9 @@
                                 if (Members.IsLoggedIn())
                                 {
                                     <div class="btn-group">
-                                        <a href="/memberinfo" class="btn btn-default btn-sm uesr-btn"><i class="fa fa-user pr-10"></i>用户中心</a>
+                                        <button  class="btn btn-default btn-sm uesr-btn"><i class="fa fa-user pr-10"></i>用户中心</button>
                                         <ul class="user-center list  hidden">
+                                            <li><a href="/memberinfo">账号信息</a></li>
                                             <li><a href="/memberinfo/buyrecord">投资记录</a></li>
                                             <li><a href="/memberinfo/withdraw">提现申请</a></li>
                                             <li><a href="/memberinfo/withdrawrecord">提现记录</a></li>
