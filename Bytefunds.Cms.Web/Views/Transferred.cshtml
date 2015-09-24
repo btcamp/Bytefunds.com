@@ -1,0 +1,75 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "_Layout.cshtml";
+
+    Html.EnableClientValidation();
+    Html.EnableUnobtrusiveJavaScript();
+    if (!Members.IsLoggedIn())
+    {
+        <script>
+            window.onload = function () {
+                window.location.href = "/login";
+            }
+        </script>
+    }
+    else
+    {
+        TransferredViewModel transferredViewModel = new TransferredViewModel();
+
+        //获取所有的产品
+
+        IContentType ct = ApplicationContext.Services.ContentTypeService.GetContentType("ProductElement");
+        IEnumerable<IContent> list = ApplicationContext.Services.ContentService.GetContentOfContentType(ct.Id).OrderBy(e => e.GetValue<int>("sort"));
+
+        List<SelectListItem> selects = new List<SelectListItem>();
+
+        int index = 0;
+        foreach (var item in list)
+        {
+            selects.Add(new SelectListItem() { Selected = index == 0, Text = item.GetValue<string>("title"), Value = item.Id.ToString() });
+            index++;
+        }
+
+
+
+        <section class="pv-20 clearfix">
+            <div class="container register">
+                <div class="row">
+                    <div class="form-block center-block p-20 light-gray-bg border-clear text-left">
+                        <h2 class="title">转入金额</h2>
+                        <form class="form-horizontal" role="form" action="/umbraco/Api/Member/Transferred" method="post">
+                            <div class="form-group has-feedback">
+                                @Html.LabelFor(m => transferredViewModel.Amount, new { @class = "col-sm-3 control-label" })
+                                <div class="col-sm-8">
+                                    <div>
+                                        @Html.TextBoxFor(m => transferredViewModel.Amount, new { @class = "form-control" })
+                                        <i class="fa fa-money form-control-feedback"></i>
+                                    </div>
+                                    @Html.ValidationMessageFor(e => transferredViewModel.Amount)
+                                </div>
+                            </div>
+                            <div class="form-group has-feedback">
+                                @Html.LabelFor(m => transferredViewModel.ProductId, new { @class = "col-sm-3 control-label" })
+                                <div class="col-sm-8">
+                                    <div>
+                                        @Html.DropDownListFor(m => transferredViewModel.ProductId, selects, new { @class = "form-control" })
+                                    </div>
+                                    @Html.ValidationMessageFor(e => transferredViewModel.ProductId)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-8 submit-btn">
+                                    <button type="submit" class="btn btn-group btn-warning btn-animated">立即续约<i class="fa fa-check"></i></button>
+                                    <small>
+                                        您的可转入金额@(Members.GetCurrentMember().GetPropertyValue<decimal>("assets").ToString("N2") + "元")
+                                    </small>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    }
+}
+

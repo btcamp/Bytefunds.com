@@ -419,6 +419,50 @@ namespace Bytefunds.Cms.Logic.Controllers
             return Json(response, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult Transferred([Bind(Prefix = "transferredViewModel")]TransferredViewModel model)
+        {
+            ResponseModel responseModel = new ResponseModel();
+            if (!Members.IsLoggedIn())
+            {
+                responseModel.Success = false;
+                responseModel.Msg = "请先进行登录过在进行补充信息";
+            }
+            else if (!ModelState.IsValid)
+            {
+                foreach (var item in ModelState)
+                {
+                    if (item.Value.Errors.Count > 0)
+                    {
+                        responseModel.Success = false;
+                        responseModel.Msg = item.Value.Errors.FirstOrDefault().ErrorMessage;
+                    }
+                }
+            }
+            else
+            {
+                //新增产品数据
+                IContentType ct = ApplicationContext.Services.ContentTypeService.GetContentType("PayRecords");
+                IContent content = ApplicationContext.Services.ContentService.CreateContent("无用户名", ct.Id, "PayRecords");
+                IMember member = Services.MemberService.GetById(Members.GetCurrentMemberId());
+                IContent product = Services.ContentService.GetById(model.ProductId);
+                DateTime start = DateTime.Now, end = start.AddMonths(2);
+                content.SetValue("username", member.Name);
+                content.Name = member.Email;
+                content.SetValue("email", member.Email);
+                content.SetValue("memberPicker", member.Id);
+                content.SetValue("buyproduct", product.Id);
+                content.SetValue("mobilePhone", member.GetValue<string>("tel"));
+                content.SetValue("memberPicker", member.Id.ToString());
+                content.SetValue("amountCny", model.Amount);
+                content.SetValue("rechargeDateTime", start.ToString("yyyy-MM-dd HH:mm:ss"));
+                content.SetValue("expirationtime", end.ToString("yyyy-MM-dd HH:mm:ss"));
+                //content.SetValue("payBillno", "续约订单：" + oldContent.GetValue<string>("payBillno"));
+                content.SetValue("isdeposit", true);
+                Services.ContentService.Save(content);
+            }
+            return Content("");
+        }
+
         public ActionResult GetCode(string email)
         {
             try
