@@ -92,6 +92,7 @@ namespace Bytefunds.Cms.Logic.EventHandlers
                                 string oldbodycontent = content.GetValue<string>("bodytext")
                                                         .Replace("{{name}}", member.Name)
                                                         .Replace("{{product}}", product.GetValue<string>("title"))
+                                                        .Replace("{{orderid}}", e.Entity.GetValue<string>("payBillno"))
                                                         .Replace("{{amount}}", e.Entity.GetValue<double>("amountCny").ToString("N2"));
                                 //发送邮件到管理员
                                 library.SendMail(mailSettings.Smtp.Network.UserName, managerEmail, content.GetValue<string>("title"), oldbodycontent, true);
