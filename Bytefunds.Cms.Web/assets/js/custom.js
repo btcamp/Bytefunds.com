@@ -11,10 +11,10 @@ jQuery(function ($) {
         ByteFunds.showCircle();
         //ByteFunds.showCharts();
         ByteFunds.showUserList();
-//        ByteFunds.hiddenUserList();
+        //        ByteFunds.hiddenUserList();
     });
     ByteFunds.qqService = function (qq) {
-        var qq_list = new Array("578485754","3226588475");
+        var qq_list = new Array("578485754", "3226588475");
         //随机
         var qq_i = Math.floor(Math.random() * qq_list.length);
         if (!qq) {
@@ -132,19 +132,20 @@ jQuery(function ($) {
     };
     ByteFunds.showUserList = function () {
         var userCenter = $(".user-center");
-        var userBtn= $(".header-top-dropdown .uesr-btn");
+        var userBtn = $(".header-top-dropdown .uesr-btn");
         var flag = true;
         userBtn.click(
             function () {
-                if(flag){
-                    userCenter.attr("class","user-center list animated fadeInRight");
-                    userBtn.css("outline","");
-                    flag=false;
+                if (flag) {
+                    userCenter.attr("class", "user-center list animated fadeInRight");
+                    userBtn.css("outline", "");
+                    flag = false;
+                    var timeout = setTimeout(function () { userCenter.attr("class", "user-center list  hidden"); userBtn.css("outline", "#F5B024"); flag = true; clearTimeout(timeout); }, 5000);
                 }
-                else{
-                    userCenter.attr("class","user-center list  hidden");
-                    userBtn.css("outline","#F5B024");
-                    flag=true;
+                else {
+                    userCenter.attr("class", "user-center list  hidden");
+                    userBtn.css("outline", "#F5B024");
+                    flag = true;
                 }
             }
         );
