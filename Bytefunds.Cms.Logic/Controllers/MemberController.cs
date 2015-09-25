@@ -118,6 +118,7 @@ namespace Bytefunds.Cms.Logic.Controllers
                             content.SetValue("memberPicker", m.Id);
                             content.SetValue("payBillno", "注册赠送的定期宝");
                             content.SetValue("isdeposit", true);
+                            content.SetValue("isexpired", false);
                             content.SetValue("buyproduct", 2337);
                             content.SetValue("isGive", true);
                             sc.ContentService.Save(content);
@@ -395,6 +396,7 @@ namespace Bytefunds.Cms.Logic.Controllers
                 content.SetValue("expirationtime", end.ToString("yyyy-MM-dd HH:mm:ss"));
                 content.SetValue("payBillno", "续约订单：" + oldContent.GetValue<string>("payBillno"));
                 content.SetValue("isdeposit", true);
+                content.SetValue("isexpired", false);
                 Services.ContentService.Save(content);
 
                 response.Success = true;
@@ -470,6 +472,7 @@ namespace Bytefunds.Cms.Logic.Controllers
                 content.SetValue("expirationtime", end.ToString("yyyy-MM-dd HH:mm:ss"));
                 content.SetValue("payBillno", "账户余额金额购买");
                 content.SetValue("isdeposit", true);
+                content.SetValue("isexpired", false);
                 Services.ContentService.Save(content);
                 EventHandlers.CustomRaiseEvent.RaiseContentCreated(content);
                 decimal assets = member.GetValue<decimal>("assets"), okassets = member.GetValue<decimal>("okassets"), fundAccount = member.GetValue<decimal>("fundAccount");
@@ -601,7 +604,7 @@ namespace Bytefunds.Cms.Logic.Controllers
                 if (result != null && result.Count() > 0)
                 {
                     var groupkeys = result.OrderByDescending(e => e.CreateDate)
-                                               .GroupBy(e => e.CreateDate.ToString("yyyy-MM-dd"))
+                                               .GroupBy(e => e.CreateDate.ToString("MM/dd"))
                                                .Select(e => new
                                                {
                                                    Key = e.Key,
@@ -629,7 +632,7 @@ namespace Bytefunds.Cms.Logic.Controllers
                 if (result != null && result.Count() > 0)
                 {
                     var groupkeys = result.OrderByDescending(e => e.CreateDate)
-                                               .GroupBy(e => e.CreateDate.ToString("yyyy-MM-dd"))
+                                               .GroupBy(e => e.CreateDate.ToString("MM/dd"))
                                                .Select(e => new
                                                {
                                                    Key = e.Key,

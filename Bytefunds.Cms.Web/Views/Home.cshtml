@@ -23,6 +23,8 @@
     decimal sumAmount = decimal.Parse(SystemSettingsHelper.GetSystemSettingsByKey("sum:amount"));
     decimal amount1 = decimal.Parse(SystemSettingsHelper.GetSystemSettingsByKey("amounted"));
     string number1 = ((amount1 / sumAmount) * 100).ToString("f2") + "%";
+
+    int count = ApplicationContext.Services.MemberService.Count() + 1569;
 }
 
 <div class="banner clearfix" style="position: relative">
@@ -72,7 +74,7 @@
     <div class="banner-float hidden-sm hidden-xs">
         <h2 class="banner-float-1">高于活期存款<strong>50</strong><span>倍</span>以上的收益</h2>
         <div class="separator banner-float-2" style="top:25%"></div>
-        <p class="banner-float-3">已有 <span>1596</span> 位高端客户在比特金服安全的获得收益</p>
+        <p class="banner-float-3">已有 <span>@count</span> 位高端客户在比特金服安全注册获得收益</p>
         <p class="banner-float-4">零钱计划为您安全快速的赚钱</p>
         <p><a class="btn btn-block banner-float-5 btn-buy" href="/productdetails?id=2336">点击立即购买</a></p>
         <p class="banner-float-6">没有账户，<a href="/register">免费注册</a></p>

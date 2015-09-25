@@ -9,8 +9,8 @@
 
     string url = Model.Content.Name != "Home" ? "/" : "";
 
-    IPublishedContent wechat = Umbraco.Media(1261);
-    IPublishedContent code = Umbraco.Media(1262);
+    //IPublishedContent wechat = Umbraco.Media(1261);
+    //IPublishedContent code = Umbraco.Media(1262);
 
 }
 <div class="header-container">
@@ -31,12 +31,12 @@
                             </div>
                         </div>
                         <ul class="list-inline hidden-md hidden-lg hidden-sm top-service" style="position: absolute;top:0;left: 60px;">
-                            <li class=""><a href="#" class="wechat"><i class="fa fa-wechat"></i></a></li>
+                            @*<li class=""><a href="#" class="wechat"><i class="fa fa-wechat"></i></a></li>*@
                         </ul>
                         <ul class="list-inline hidden-xs top-service">
                             <li class="twitter"><i class="fa fa-phone pr-5 pl-5"></i>服务热线：028-8505-7407（工作日10:00-18:00）</li>
                             <li class="twitter"><a href="#" class="qq" title="QQ群号：337433883"><i class="fa fa-qq"></i></a></li>
-                            <li class="twitter"><a href="#" class="wechat"><i class="fa fa-wechat"></i></a></li>
+                            @*<li class="twitter"><a href="#" class="wechat"><i class="fa fa-wechat"></i></a></li>*@
                         </ul>
                     </div>
                     <!-- header-top-first end -->
@@ -182,7 +182,7 @@
     <!-- header end -->
 </div>
 
-<div class="modal fade" id="weixinModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+@*<div class="modal fade" id="weixinModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-body" style="text-align:center">
@@ -208,6 +208,6 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
 
 
