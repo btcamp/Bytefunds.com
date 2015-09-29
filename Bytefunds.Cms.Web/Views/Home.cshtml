@@ -102,48 +102,11 @@
                             </tr>
                         }
                     }
-                    @*<tr>
-                            <td>2015-09-02</td>
-                            <td>#</td>
-                            <td>金融惊艳市场 你财富活期宝翻倍券半天售4亿</td>
-                        </tr>
-                        <tr>
-                            <td>2015-09-01</td>
-                            <td>#</td>
-                            <td>金融独立品牌亮相 创始人详解为何做金融业务</td>
-                        </tr>
-                        <tr>
-                            <td>2015-08-25</td>
-                            <td>#</td>
-                            <td>互联+指数上线 反映市场情绪发现市场价值</td>
-                        </tr>*@
                 </table>
             </div>
             <div class="col-md-4">
                 <a href="/news" style="color:rgb(134,134,134);text-decoration:none;line-height:30px;">更多 >></a>
             </div>
-            @*<div class="col-md-4 news-2-content">
-                    <ul class="list" id="news-2">
-                        <li class="animated fadeInUp"><span>3分钟前</span>用户: <span class="account">180000000043</span><span class="invested-content">成功投资47000元</span></li>
-                    </ul>
-                    <table class="news-content-2" style="display: none">
-                        <tr>
-                            <td>3分钟前</td>
-                            <td>130000000053</td>
-                            <td>成功投资47000元</td>
-                        </tr>
-                        <tr>
-                            <td>4分钟前</td>
-                            <td>130000000063</td>
-                            <td>成功投资60000元</td>
-                        </tr>
-                        <tr>
-                            <td>5分钟前</td>
-                            <td>150000000053</td>
-                            <td>成功投资100000元</td>
-                        </tr>
-                    </table>
-                </div>*@
         </div>
     </div>
 </section>
@@ -226,8 +189,8 @@
                         <div class="col-md-3 col-sm-6 boxed object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
                             <div class="listing-item white-bg bordered mb-20">
                                 <div class="body">
-                                    <h2 class="subject">@(item.GetValue<string>("title"))</h2>
-                                    <h4>@(item.GetValue<string>("title2"))</h4>
+                                    <h1 class="subject">@(item.GetValue<string>("title"))</h1>
+                                    <h4 style="font-size:1.0em">@(item.GetValue<string>("title2"))</h4>
                                     <div class="title">
                                         <p>@(item.GetValue<string>("title3"))</p>
                                     </div>
@@ -237,16 +200,16 @@
                                     <div class="cash">
                                         <p><span class="cash-now">@purchasedAmount.ToString("N2") 元</span> / <span>@amount.ToString("N2") 元</span></p>
                                     </div>
-                                    <p class="content">@(item.GetValue<string>("introduction"))</p>
+                                    <p class="content" style="line-height:25px;">@(item.GetValue<string>("introduction"))</p>
                                     <div class="clearfix benefit-content">
                                         <div class="col-xs-6">
                                             <h3 class="benefit-percent">@(item.GetValue<string>("rate") + "%")</h3>
-                                            <h4>年化收益</h4>
+                                            <h4 style="font-size:1.0em">年化收益</h4>
                                         </div>
                                         <div class="v-line"></div>
                                         <div class="col-xs-6">
                                             <h3>@(item.GetValue<string>("cycle") + "个月")</h3>
-                                            <h4>项目期限</h4>
+                                            <h4 style="font-size:1.0em">项目期限</h4>
                                         </div>
                                         <div class="col-xs-12">
                                             <h4>起投金额：@(item.GetValue<double>("startAmount").ToString("N2")) 元</h4>
@@ -354,7 +317,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion-4" href="#collapseTwo-4">
+                                <a data-toggle="collapse" data-parent="#accordion-2" href="#collapseTwo-4">
                                     4、什么是固定年化收益？
                                 </a>
                             </h4>
@@ -368,7 +331,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion-4" href="#collapseTwo-5" class="collapsed">
+                                <a data-toggle="collapse" data-parent="#accordion-2" href="#collapseTwo-5" class="collapsed">
                                     5、什么是产品期限？
                                 </a>
                             </h4>
@@ -382,7 +345,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion-4" href="#collapseTwo-6" class="collapsed">
+                                <a data-toggle="collapse" data-parent="#accordion-2" href="#collapseTwo-6" class="collapsed">
                                     6、若已购买产品需要续期，如何计算收益？
                                 </a>
                             </h4>
