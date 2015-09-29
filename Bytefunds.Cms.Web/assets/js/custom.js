@@ -11,7 +11,6 @@ jQuery(function ($) {
         ByteFunds.showCircle();
         //ByteFunds.showCharts();
         ByteFunds.showUserList();
-        //        ByteFunds.hiddenUserList();
     });
     ByteFunds.qqService = function (qq) {
         var qq_list = new Array("578485754", "3226588475");
@@ -76,14 +75,14 @@ jQuery(function ($) {
     };
     ByteFunds.hiddenModal = function () {
         var btn = $(".closed");
-        var modal = $(".modal");
+        var modal = $("#reservation-content");
         btn.click(function () {
             modal.attr("class", "modal animated fadeOut hidden");
         });
     };
     ByteFunds.showModal = function () {
         var btn = $(".reservation-btn");
-        var modal = $(".modal");
+        var modal = $("#reservation-content");
         btn.click(function () {
             modal.attr("class", "modal animated fadeIn");
         })
@@ -107,8 +106,7 @@ jQuery(function ($) {
         var chart = $('#charts');
         if (chart.length) {
             $('#charts').highcharts({
-                chart: {
-                },
+                chart: {},
                 title: {
                     text: '零钱计划第一季 一周收益',
                     style: { color: "#F5B024", fontSize: "1.8em", fontFamily: '黑体', fontWeight: 600 }
@@ -133,19 +131,22 @@ jQuery(function ($) {
     ByteFunds.showUserList = function () {
         var userCenter = $(".user-center");
         var userBtn = $(".header-top-dropdown .uesr-btn");
-        var flag = true;
+        var flag = true,timeout;
         userBtn.click(
             function () {
                 if (flag) {
                     userCenter.attr("class", "user-center list animated fadeInRight");
                     userBtn.css("outline", "");
                     flag = false;
-                    var timeout = setTimeout(function () { userCenter.attr("class", "user-center list  hidden"); userBtn.css("outline", "#F5B024"); flag = true; clearTimeout(timeout); }, 5000);
+                    timeout = setTimeout(function () {
+                        userCenter.attr("class", "user-center list  hidden"); userBtn.css("outline", "#F5B024");
+                        flag = true; clearTimeout(timeout);
+                    }, 6000);
                 }
                 else {
                     userCenter.attr("class", "user-center list  hidden");
                     userBtn.css("outline", "#F5B024");
-                    flag = true;
+                    clearTimeout(timeout); flag = true;
                 }
             }
         );
@@ -158,12 +159,42 @@ $(function () {
 
         $("body").css("min-height", $("html").height() + "px");
     }
-
     initAajxform();
     $(".logout").click(function () {
         ajaxSubmit(this.href, null, "正在退出....");
         $(this).attr("disabled", true);
         return false;
+    });
+    $(".btnregister").click(function () {
+        $("#myregisterModal").modal("show");
+    });
+    $(".newsbtn").click(function () {
+        $.get("/umbraco/Api/News/Get?key=" + $(this).data("id"), function (result) {
+            $("#myLargeModalLabel").text(result.title);
+            $("#content").html(result.content);
+            $("#myModal").modal("show");
+        }, "json");
+    });
+    $(".productBtn").click(function () {
+        $.get("/umbraco/Api/News/Get?key=" + $(this).data("id"), function (result) {
+            $("#myProductModalLabel").text(result.title);
+            $("#productcontent").html(result.content);
+            if (result.canbuy) {
+                $("#buyaction").show()
+                $("#buyaction").attr("href", "/Pay?id=" + result.id);
+            } else {
+                $("#buyaction").hide();
+            }
+            $("#myModalproduct").modal("show");
+        }, "json");
+    });
+    $('#myModal').on('hidden.bs.modal', function (e) {
+        $("#myLargeModalLabel").text("比特金服");
+        $("#content").html('<div><img style="margin:0 auto" src="/assets/images/loading.jpg" alt="loading" /></div>');
+    });
+    $("#myModalproduct").on('hidden.bs.modal', function (e) {
+        $("#myProductModalLabel").text("产品信息");
+        $("#productcontent").html('<div><img style="margin:0 auto" src="/assets/images/loading.jpg" alt="loading" /></div>');
     });
 });
 
