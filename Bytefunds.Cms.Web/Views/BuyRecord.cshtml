@@ -10,6 +10,7 @@
         IEnumerable<IContent> list = ApplicationContext.Services.ContentService.GetContentOfContentType(ct.Id)
                                     .Where(e => e.GetValue<int>("memberPicker") == Members.GetCurrentMemberId())
                                     .Where(e => e.GetValue<bool>("isdeposit"))
+                                    .Where(e => e.GetValue<DateTime>("rechargeDateTime") < DateTime.Now)
                                     .Take(20);
 
         <section class="pv-20 clearfix user-record mb-20">

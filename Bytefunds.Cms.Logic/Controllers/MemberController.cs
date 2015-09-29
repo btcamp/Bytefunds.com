@@ -98,9 +98,10 @@ namespace Bytefunds.Cms.Logic.Controllers
                         Services.MemberService.SavePassword(m, model.Password);
                         Services.MemberService.Save(m);
                         result.Success = true;
-                        result.Msg = "欢迎您的加入";
+                        result.Msg = "欢迎您的加入，您成功注册，我们额外赠送5000元定期宝一个月";
                         result.IsRedirect = true;
                         result.RedirectUrl = "/memberinfo";
+                        ViewBag.IsShowDialog = true;
                         EventHandlers.CustomRaiseEvent.RaiseRegistered(m);
                         //赠送5000元定期宝一月期
                         System.Threading.Tasks.Task.Factory.StartNew((ser) =>

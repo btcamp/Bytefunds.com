@@ -3,6 +3,9 @@
     Layout = "_Layout.cshtml";
     Html.EnableClientValidation();
     Html.EnableUnobtrusiveJavaScript();
+
+    IContentType ct = ApplicationContext.Services.ContentTypeService.GetContentType("ProductElement");
+    IEnumerable<IContent> contents = ApplicationContext.Services.ContentService.GetContentOfContentType(ct.Id).Where(c => c.Status != ContentStatus.Trashed).OrderBy(e => e.GetValue<int>("sort"));
 }
 <div class="etf-bg" data-animation-effect="fadeIn" data-effect-delay="50">
     <img src="/assets/images/banner/banner02.jpg" alt="" style="width:100%;" />
@@ -37,31 +40,28 @@
                     <p class="txt">应对市场极端情况，有一类产品表现不俗！</p>
                     <table>
                         <tbody>
+
+
                             <tr class="f_tr ">
-                                <td width="150"></td>
-                                <td width="140">产品期限</td>
-                                <td width="140">年化收益</td>
+                                <td width="">产品</td>
+                                <td width="">产品期限</td>
+                                <td width="">年化收益</td>
+                                <td>狗买买</td>
                             </tr>
-                            <tr>
-                                <td>量化定期宝 （1月期）</td>
-                                <td class="cGreen cBold">1个月</td>
-                                <td class="cRed cBold">12.0%</td>
-                            </tr>
-                            <tr>
-                                <td>量化定期宝 （3月期）</td>
-                                <td class="cGreen cBold">3个月</td>
-                                <td class="cRed cBold">14.0%</td>
-                            </tr>
-                            <tr>
-                                <td>量化定期宝 （6月期）</td>
-                                <td class="cGreen cBold">16个月</td>
-                                <td class="cRed cBold">16.0%</td>
-                            </tr>
-                            <tr>
-                                <td>量化定期宝 （12月期）</td>
-                                <td class="cGreen cBold">12个月</td>
-                                <td class="cRed cBold">18.0%</td>
-                            </tr>
+
+                            @{
+
+                                foreach (IContent item in contents)
+                                {
+                                    <tr>
+                                        <td>@(item.GetValue<string>("title"))</td>
+                                        <td class="cGreen cBold">@(item.GetValue<string>("cycle"))</td>
+                                        <td class="cRed cBold">@(item.GetValue<decimal>("rate").ToString("f2"))%</td>
+                                        <td class="cRed cBold"><a href="/productdetails?id=@item.Id" class="btn  btn-warning">立即投标</a></td>
+                                    </tr>
+                                }
+                            }
+                            
                         </tbody>
                     </table>
                     <img src="/assets/images/ico.png" alt="" class="hidden-xs">

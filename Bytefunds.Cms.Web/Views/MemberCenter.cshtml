@@ -139,10 +139,34 @@
                 </div>
             </div>
         </section>
+        <input type="hidden" value="@ViewBag.IsShowDialog" id="hiddialog" />
 
         @section scripts{
             <script>
                 $(function () {
+                    if ($("#hiddialog").val() == "true") {
+                        bootbox.dialog({
+                            message: "恭喜你注册成功，获得我们赠送的5000元【量化定期宝 （1月期）】",
+                            title: title,
+                            buttons: {
+                                success: {
+                                    label: "立即查看",
+                                    className: "btn-success",
+                                    callback: function () {
+                                        location = "/memberinfo/buyrecord";
+                                    }
+                                },
+                                danger: {
+                                    label: "取消",
+                                    className: "btn-danger",
+                                    callback: function () {
+                                    }
+                                }
+                            }
+                        });
+                    }
+
+
 
                     $.get("/umbraco/Api/Member/GetProfits", function (result) {
                         var text = '一周收益';
@@ -161,7 +185,7 @@
                             },
                             series: [{
                                 type: 'spline',
-                                name:"当日收益",
+                                name: "当日收益",
                                 data: result.Datas,
                                 marker: {
                                     lineWidth: 3,
