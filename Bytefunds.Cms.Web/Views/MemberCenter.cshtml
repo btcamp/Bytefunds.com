@@ -13,6 +13,7 @@
     }
     else
     {
+        string show = Request.QueryString["show"];
         IMember member = ApplicationContext.Services.MemberService.GetById(Members.GetCurrentMemberId());
         username = member.Name;
         accumulatedEarnings = member.GetValue<double>("accumulatedEarnings").ToString("f2") + "元";
@@ -139,7 +140,7 @@
                 </div>
             </div>
         </section>
-        <input type="hidden" value="@ViewBag.IsShowDialog" id="hiddialog" />
+        <input type="hidden" value="@show" id="hiddialog" />
 
         @section scripts{
             <script>
@@ -147,11 +148,11 @@
                     if ($("#hiddialog").val() == "true") {
                         bootbox.dialog({
                             message: "恭喜你注册成功，获得我们赠送的5000元【量化定期宝 （1月期）】",
-                            title: title,
+                            title: document.title,
                             buttons: {
                                 success: {
                                     label: "立即查看",
-                                    className: "btn-success",
+                                    className: "btn-warning",
                                     callback: function () {
                                         location = "/memberinfo/buyrecord";
                                     }

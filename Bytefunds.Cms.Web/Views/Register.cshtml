@@ -101,7 +101,7 @@
                 $(this).attr("disabled", true);
                 $.get($(this).data("href"), { email: $("#registerModel_Email").val() }, function (result) {
                     if (result) {
-                        finAlert("验证码发送成功", true);
+                        finAlert("验证码发送成功，请在您的邮箱里查收验证码！", true);
                         var times = 120;
                         var interval = setInterval(function () {
                             $("#btncode").text(times + "s后重新发送");
