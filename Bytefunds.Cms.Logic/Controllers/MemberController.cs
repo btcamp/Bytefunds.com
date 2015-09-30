@@ -633,6 +633,7 @@ namespace Bytefunds.Cms.Logic.Controllers
                 {
                     var groupkeys = result.OrderByDescending(e => e.CreateDate)
                                                .GroupBy(e => e.CreateDate.ToString("MM/dd"))
+                                               .Take(7)
                                                .Select(e => new
                                                {
                                                    Key = e.Key,
