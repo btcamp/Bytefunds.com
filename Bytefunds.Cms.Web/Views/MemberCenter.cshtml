@@ -13,6 +13,7 @@
     }
     else
     {
+        string show = Request.QueryString["show"];
         IMember member = ApplicationContext.Services.MemberService.GetById(Members.GetCurrentMemberId());
         username = member.Name;
         accumulatedEarnings = member.GetValue<double>("accumulatedEarnings").ToString("f2") + "元";
@@ -26,7 +27,7 @@
             <div class="container" id="user-summary">
                 <div class="row">
                     <div class="col-md-12">
-                        <h3 style="float:left;font-size:1.5em">比特金服用户：@username</h3>
+                        <h3 style="float:left;font-size:1.4em">比特金服用户：@username</h3>
                         <ul class="list-inline" style=" padding-top: 12px;float:left;margin-left:10px">
                             <li><a href="/memberinfo/verified/" title="实名认证"><i class="icon-font @(member.GetValue<bool>("verified")?"approve":string.Empty) " title="实名认证">&#xe641;</i></a></li>
                             <li><a href="/memberinfo/bankcertification/" title="绑定银行卡"><i class="icon-font @(member.GetValue<bool>("bankCertification") ? "approve" : string.Empty)" title="绑定银行卡">&#xf00c0;</i></a></li>
@@ -135,15 +136,20 @@
                             </div>
                         </div>
                     </div>
-                    <div class="clearfix"></div>
+                    <div class="clearfix" style="position:relative;top:3px;"></div>
                 </div>
             </div>
         </section>
+        <input type="hidden" value="@show" id="hiddialog" />
 
         @section scripts{
             <script>
                 $(function () {
-
+                    if ($("#hiddialog").val() == "true") {
+                        bootbox.dialog({
+                            message: "<img src='/assets/images/hongbao.png'  alt='红包'  style='width:100%;' /><img src='/assets/images/hongbao 5000.png'  alt=' ' class='hongbao5000' /><a class='hongbao-btn'  href='/memberinfo/buyrecord'></a>"
+                        });
+                    }
                     $.get("/umbraco/Api/Member/GetProfits", function (result) {
                         var text = '一周收益';
                         if (result.Times.length == 0) {
@@ -161,7 +167,7 @@
                             },
                             series: [{
                                 type: 'spline',
-                                name:"当日收益",
+                                name: "当日收益",
                                 data: result.Datas,
                                 marker: {
                                     lineWidth: 3,

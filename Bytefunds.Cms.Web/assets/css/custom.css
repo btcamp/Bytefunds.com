@@ -351,6 +351,10 @@ body {
     .hot-product .body {
         padding: 3px 15px;
     }
+
+    .raise-funds-content {
+        margin-bottom: 13px;
+    }
 }
 
 @media (min-width:1900px) {
@@ -1034,6 +1038,10 @@ input:focus, select:focus, textarea:focus {
 }
 
 @media (max-width:768px) {
+    .r_tbl td .btn {
+        padding: 5px 10px;
+    }
+
     .online-product {
         margin: 0;
     }
@@ -1191,7 +1199,7 @@ input:focus, select:focus, textarea:focus {
     .r_tbl img {
         position: absolute;
         bottom: 0;
-        right: -30px;
+        right: -50px;
     }
 
 .cGreen {
@@ -1776,4 +1784,93 @@ input:focus, select:focus, textarea:focus {
 
 .progress.style-1 {
     height: 10px;
+}
+
+.bootbox  .modal-content{
+    width:55%;
+    margin:auto;
+    border-radius:10px;
+}
+@media(max-width:500px){
+    .bootbox  .modal-content{
+        width:75%;
+    }
+}
+.bootbox .modal-body{
+    padding:0;
+}
+.bootbox .bootbox-close-button {
+    position:absolute;
+    right:8px;
+    top:10px;
+    outline:none;
+}
+.bootbox  .hongbao-btn{
+    width:31%;
+    height:23%;
+    border-radius:50%;
+    display:inline-block;
+    position:absolute;
+    bottom:14%;
+    left:35%;
+}
+.bootbox  .hongbao5000{
+    position:absolute;
+    top:35%;
+    width:70%;
+    left:14%;
+    -webkit-animation:hongbao 2s linear infinite ;
+    -ms-animation:hongbao 2s linear infinite ;
+    -moz-animation:hongbao 2s linear infinite ;
+    -o-animation:hongbao 2s linear infinite ;
+}
+@media(max-width:768px){
+    .bootbox .modal-dialog{
+        margin-top:30%;
+    }
+}
+
+@-webkit-keyframes  hongbao{
+    from{
+        -webkit-transform:scale(1.0) ;
+    }
+    50%{
+        -webkit-transform:scale(1.1) ;
+    }
+    to{
+        -webkit-transform:scale(1.0) ;
+    }
+}
+@-ms-keyframes  hongbao{
+    from{
+        -ms-transform:scale(1.0) ;
+    }
+    50%{
+        -ms-transform:scale(1.1) ;
+    }
+    to{
+        -ms-transform:scale(1.0) ;
+    }
+}
+@-moz-keyframes  hongbao{
+    from{
+        -moz-transform:scale(1.0) ;
+    }
+    50%{
+        -moz-transform:scale(1.1) ;
+    }
+    to{
+        -moz-transform:scale(1.0) ;
+    }
+}
+@-o-keyframes  hongbao{
+    from{
+        -o-transform:scale(1.0) ;
+    }
+    50%{
+        -o-transform:scale(1.1) ;
+    }
+    to{
+        -o-transform:scale(1.0) ;
+    }
 }

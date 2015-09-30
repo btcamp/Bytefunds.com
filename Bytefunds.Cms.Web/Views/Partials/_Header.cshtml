@@ -13,7 +13,7 @@
     //IPublishedContent code = Umbraco.Media(1262);
 
 }
-<div class="header-container">
+<div class="header-container" id="header">
     <div class="header-top dark ">
         <div class="container">
             <div class="row">
@@ -31,12 +31,12 @@
                             </div>
                         </div>
                         <ul class="list-inline hidden-md hidden-lg hidden-sm top-service" style="position: absolute;top:0;left: 60px;">
-                            <li class=""><a href="#" class="wechat" data-toggle="modal" data-target="#myModal"><i class="fa fa-wechat"></i></a></li>
+                            @*<li class=""><a href="#" class="wechat" data-toggle="modal" data-target="#myModal"><i class="fa fa-wechat"></i></a></li>*@
                         </ul>
                         <ul class="list-inline hidden-xs top-service">
                             <li class="twitter"><i class="fa fa-phone pr-5 pl-5"></i>服务热线：028-8505-7407（工作日10:00-18:00）</li>
                             <li class="twitter"><a href="#" class="qq" title="QQ群号：337433883"><i class="fa fa-qq"></i></a></li>
-                            <li class="twitter"><a href="#" class="wechat" data-toggle="modal" data-target="#myModal"><i class="fa fa-wechat"></i></a></li>
+                            @*<li class="twitter"><a href="#" class="wechat" data-toggle="modal" data-target="#myModal"><i class="fa fa-wechat"></i></a></li>*@
                         </ul>
                     </div>
                     <!-- header-top-first end -->
@@ -52,7 +52,7 @@
                                 if (Members.IsLoggedIn())
                                 {
                                     <div class="btn-group">
-                                        <button  class="btn btn-default btn-sm uesr-btn"><i class="fa fa-user pr-10"></i>用户中心</button>
+                                        <button class="btn btn-default btn-sm uesr-btn"><i class="fa fa-user pr-10"></i>用户中心</button>
                                         <ul class="user-center list  hidden">
                                             <li><a href="/memberinfo">账号信息</a></li>
                                             <li><a href="/memberinfo/buyrecord">投资记录</a></li>
@@ -103,13 +103,7 @@
                     <!-- header-right start -->
                     <!-- ================ -->
                     <div class="header-right clearfix">
-                        <!-- main-navigation start -->
-                        <!-- classes: -->
-                        <!-- "onclick": Makes the dropdowns open on click, this the default bootstrap behavior e.g. class="main-navigation onclick" -->
-                        <!-- "animated": Enables animations on dropdowns opening e.g. class="main-navigation animated" -->
-                        <!-- "with-dropdown-buttons": Mandatory class that adds extra space, to the main navigation, for the search and cart dropdowns -->
-                        <!-- ================ -->
-                        <div class="main-navigation  animated with-dropdown-buttons">
+                        <div class="main-navigation animated">
                             <!-- navbar start -->
                             <!-- ================ -->
                             <nav class="navbar navbar-default" role="navigation">
@@ -117,7 +111,7 @@
                                     <!-- Toggle get grouped for better mobile display -->
                                     <div class="navbar-header">
                                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
-                                            <span class="sr-only"></span>
+                                            <span class="sr-only">Toggle navigation</span>
                                             <span class="icon-bar"></span>
                                             <span class="icon-bar"></span>
                                             <span class="icon-bar"></span>
@@ -125,46 +119,49 @@
                                     </div>
                                     <!-- Collect the nav links, forms, and other content for toggling -->
                                     <div class="collapse navbar-collapse scrollspy smooth-scroll" id="navbar-collapse-1">
-                                        <!-- main-menu -->
                                         <ul class="nav navbar-nav navbar-right">
                                             @{
                                                 if (Request.Url.AbsolutePath.Contains("/funds"))
                                                 {
-                                                    <li class=""><a href="/">我要赚钱</a></li>
+                                                    <li class=""><a href="/">首页</a></li>
+                                                    <li class=""><a href="/#product">我要赚钱</a></li>
                                                     <li class="active"><a href="/funds">量化定期宝产品</a></li>
                                                     <li class=""><a href="/news">新闻动态</a></li>
                                                     <li class=""><a href="/about">关于我们</a></li>
                                                 }
                                                 else if (Request.Url.AbsolutePath.Contains("/news"))
                                                 {
-                                                    <li class=""><a href="/">我要赚钱</a></li>
+                                                    <li class=""><a href="/">首页</a></li>
+                                                    <li class=""><a href="/#product">我要赚钱</a></li>
                                                     <li class=""><a href="/funds">量化定期宝产品</a></li>
                                                     <li class="active"><a href="/news">新闻动态</a></li>
                                                     <li class=""><a href="/about">关于我们</a></li>
                                                 }
                                                 else if (Request.Url.AbsolutePath.Contains("/about"))
                                                 {
-                                                    <li class=""><a href="/">我要赚钱</a></li>
+                                                    <li class=""><a href="/">首页</a></li>
+                                                    <li class=""><a href="/#product">我要赚钱</a></li>
                                                     <li class=""><a href="/funds">量化定期宝产品</a></li>
                                                     <li class=""><a href="/news">新闻动态</a></li>
                                                     <li class="active"><a href="/about">关于我们</a></li>
                                                 }
                                                 else if (Request.Url.AbsolutePath == "/")
                                                 {
-                                                    <li class="active"><a href="/">我要赚钱</a></li>
-                                                    <li class=""><a href="/funds">量化定期宝产品</a></li>
-                                                    <li class=""><a href="/news">新闻动态</a></li>
-                                                    <li class=""><a href="/about">关于我们</a></li>
+                                                        <li class="active"><a href="#header">首页</a></li>
+                                                        <li class=""><a href="#product">我要赚钱</a></li>
+                                                        <li class=""><a href="/funds">量化定期宝产品</a></li>
+                                                        <li class=""><a href="/news">新闻动态</a></li>
+                                                        <li class=""><a href="/about">关于我们</a></li>
                                                 }
                                                 else
                                                 {
-                                                    <li class=""><a href="/">我要赚钱</a></li>
+                                                    <li class=""><a href="/">首页</a></li>
+                                                    <li class=""><a href="/#product">我要赚钱</a></li>
                                                     <li class=""><a href="/funds">量化定期宝产品</a></li>
                                                     <li class=""><a href="/news">新闻动态</a></li>
                                                     <li class=""><a href="/about">关于我们</a></li>
                                                 }
                                             }
-                                            @*<li class=""><a href="#">新手指南</a></li>*@
                                         </ul>
                                     </div>
                                 </div>
@@ -178,33 +175,32 @@
             </div>
         </div>
     </header>
-    <!-- header end -->
 </div>
-<div class="modal fade in" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="myModalLabel">比特金服微信公众号</h4>
-            </div>
-            <div class="modal-body">
-                <img src="~/assets/images/code.jpg" alt="code" style="margin:0 auto" />
-            </div>
-            <div class="modal-footer mb-10">
-                <div class="row" style="text-align:left">
-                    <div class="col-xs-3 col-sm-2" style="text-align:right">
-                        <img  src="~/assets/images/weixin.png" alt="We chat"style="display:inline-block">
-                    </div>
-                    <div class="col-xs-9 col-sm-10" style="padding-left:10px;">
-                        <div>
-                            <b>微信扫描二维码</b>
+@*<div class="modal fade in" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">比特金服微信公众号</h4>
+                </div>
+                <div class="modal-body">
+                    <img src="~/assets/images/code.jpg" alt="code" style="margin:0 auto" />
+                </div>
+                <div class="modal-footer mb-10">
+                    <div class="row" style="text-align:left">
+                        <div class="col-xs-3 col-sm-2" style="text-align:right">
+                            <img  src="~/assets/images/weixin.png" alt="We chat"style="display:inline-block">
                         </div>
-                        <div>
-                            打开微信 &gt; 点击 "发现" &gt; "扫一扫",您也可以搜索微信号:<b > Bytefunds</b>
+                        <div class="col-xs-9 col-sm-10" style="padding-left:10px;">
+                            <div>
+                                <b>微信扫描二维码</b>
+                            </div>
+                            <div>
+                                打开微信 &gt; 点击 "发现" &gt; "扫一扫",您也可以搜索微信号:<b > Bytefunds</b>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+</div>*@
