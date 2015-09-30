@@ -94,11 +94,11 @@ namespace Bytefunds.Cms.Logic.Controllers
                     {
                         var m = Services.MemberService.GetByUsername(member.UserName);
                         m.SetValue("tel", model.Phone);
-                        m.SetValue("fundAccount", "5000");
+                        m.SetValue("fundAccount", "1000");
                         Services.MemberService.SavePassword(m, model.Password);
                         Services.MemberService.Save(m);
                         result.Success = true;
-                        result.Msg = "欢迎您的加入，您成功注册，我们额外赠送5000元定期宝一个月";
+                        result.Msg = "欢迎您的加入，您成功注册，我们额外赠送1000元定期宝一个月";
                         result.IsRedirect = true;
                         result.RedirectUrl = "/memberinfo?show=true";
                         EventHandlers.CustomRaiseEvent.RaiseRegistered(m);
@@ -111,7 +111,7 @@ namespace Bytefunds.Cms.Logic.Controllers
                             IContent content = sc.ContentService.CreateContent(m.Name + "赠送定期宝", ct.Id, "PayRecords");
                             content.SetValue("username", m.Name);
                             content.SetValue("email", m.Username);
-                            content.SetValue("amountCny", 5000);
+                            content.SetValue("amountCny", 1000);
                             content.SetValue("mobilePhone", m.GetValue<string>("tel"));
                             content.SetValue("rechargeDateTime", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                             content.SetValue("expirationtime", DateTime.Now.AddMonths(1).ToString("yyyy-MM-dd HH:mm:ss"));

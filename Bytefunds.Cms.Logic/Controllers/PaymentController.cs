@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Umbraco.Core.Models;
+using Umbraco.Core.Services;
 using Umbraco.Web.Mvc;
 
 namespace Bytefunds.Cms.Logic.Controllers
@@ -30,11 +31,12 @@ namespace Bytefunds.Cms.Logic.Controllers
                 if (Helpers.UmbPayRecordsHelper.IsExistsBillno(payModel.Billno))
                 {
                     IContent content = null;
+                    IMember currentMember = null;
                     if (payModel.Email.Contains("^_^"))
                     {
                         string[] array = payModel.Email.Split(new string[] { "^_^" }, StringSplitOptions.RemoveEmptyEntries);
 
-                        IMember currentMember = Services.MemberService.GetByEmail(array[0]);
+                        currentMember = Services.MemberService.GetByEmail(array[0]);
                         content = Services.ContentService.GetById(int.Parse(array[1]));
                         if (currentMember != null)
                         {
@@ -74,6 +76,38 @@ namespace Bytefunds.Cms.Logic.Controllers
                     Services.ContentService.Save(content);
                     //触发创建事件
                     EventHandlers.CustomRaiseEvent.RaiseContentCreated(content);
+
+                    //赠送5000元定期宝一月期
+                    System.Threading.Tasks.Task.Factory.StartNew((ser) =>
+                    {
+                        try
+                        {
+                            ServiceContext sc = ser as ServiceContext;
+                            int num = payModel.Amount >= 5000 ? 5000 : 1000;
+                            IContentType ct = sc.ContentTypeService.GetContentType("PayRecords");
+
+                            IContent createContent = sc.ContentService.CreateContent(currentMember.Name + "赠送定期宝", ct.Id, "PayRecords");
+                            createContent.SetValue("username", currentMember.Name);
+                            createContent.SetValue("email", currentMember.Username);
+                            createContent.SetValue("amountCny", num);
+                            createContent.SetValue("mobilePhone", currentMember.GetValue<string>("tel"));
+                            createContent.SetValue("rechargeDateTime", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                            createContent.SetValue("expirationtime", DateTime.Now.AddMonths(1).ToString("yyyy-MM-dd HH:mm:ss"));
+                            createContent.SetValue("memberPicker", currentMember.Id);
+                            createContent.SetValue("payBillno", payModel.Billno + ":购买产品赠送的定期宝");
+                            createContent.SetValue("isdeposit", true);
+                            createContent.SetValue("isexpired", false);
+                            createContent.SetValue("buyproduct", 2337);
+                            createContent.SetValue("isGive", true);
+                            sc.ContentService.Save(createContent);
+                            EventHandlers.CustomRaiseEvent.RaiseContentCreated(createContent);
+                            CustomLog.WriteLog("赠送成功！");
+                        }
+                        catch (Exception ex)
+                        {
+                            CustomLog.WriteLog(ex.ToString());
+                        }
+                    }, Services);
                     CustomLog.WriteLog("success!!");
                     return Json("ok", JsonRequestBehavior.AllowGet);
                 }

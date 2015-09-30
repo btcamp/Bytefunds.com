@@ -28,7 +28,7 @@
                     </div>
                     <div class="col-sm-10">
                         <h4 class="bid-title">项目金额： <span class="">@(sumAmount.ToString("N2")) 元</span>最低起投： <span>@(content.GetPropertyValue<double>("startAmount").ToString("N2")) 元</span></h4>
-                        <p>已经完成投标<span class="bid-now">@(purchasedAmount.ToString("N2"))</span>元 , 即刻投资收益自<span class="bid-date">2015-09-10</span>起算，每万元预期收益<span class="bid-benefit">133.70</span>元</p>
+                        <p>已经完成投标<span class="bid-now">@(purchasedAmount.ToString("N2"))</span>元 , 即刻投资收益自<span class="bid-date">@(DateTime.Now.AddDays(1).ToString("yyyy-MM-dd"))</span>起算，每万元预期收益<span class="bid-benefit" id="rate">0.00</span>元</p>
                         <input type="hidden" id="indicatorValue" value="@number" />
                     </div>
                 </div>
@@ -141,6 +141,7 @@
             for (var i = 0; i < 7; i++) {
                 data.push(parseFloat(value.toFixed(2)));
             }
+            $("#rate").text(value.toFixed(2));
             $('#charts').highcharts({
                 chart: {
                 },
