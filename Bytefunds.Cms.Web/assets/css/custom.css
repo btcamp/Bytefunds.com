@@ -1786,26 +1786,26 @@ input:focus, select:focus, textarea:focus {
     height: 10px;
 }
 
-.bootbox  .modal-content{
+.hongbao  .modal-content{
     width:55%;
     margin:auto;
     border-radius:10px;
 }
 @media(max-width:500px){
-    .bootbox  .modal-content{
+    .hongbao  .modal-content{
         width:75%;
     }
 }
-.bootbox .modal-body{
+.hongbao  .modal-body{
     padding:0;
 }
-.bootbox .bootbox-close-button {
+.hongbao  .bootbox-close-button {
     position:absolute;
     right:8px;
     top:10px;
     outline:none;
 }
-.bootbox  .hongbao-btn{
+.hongbao   .hongbao-btn{
     width:31%;
     height:23%;
     border-radius:50%;
@@ -1814,7 +1814,7 @@ input:focus, select:focus, textarea:focus {
     bottom:14%;
     left:35%;
 }
-.bootbox  .hongbao5000{
+.hongbao  .hongbao5000{
     position:absolute;
     top:35%;
     width:70%;
@@ -1825,7 +1825,7 @@ input:focus, select:focus, textarea:focus {
     -o-animation:hongbao 2s linear infinite ;
 }
 @media(max-width:768px){
-    .bootbox .modal-dialog{
+    .hongbao s .modal-dialog{
         margin-top:30%;
     }
 }

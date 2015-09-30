@@ -136,7 +136,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="clearfix" style="position:relative;top:3px;"></div>
+                    <div class="clearfix"></div>
                 </div>
             </div>
         </section>
@@ -145,11 +145,15 @@
         @section scripts{
             <script>
                 $(function () {
-                    if ($("#hiddialog").val() == "true") {
+                    //if ($("#hiddialog").val() == "true") {
+                    
+                    console.log($(".bootbox"));
                         bootbox.dialog({
-                            message: "<img src='/assets/images/hongbao.png'  alt='红包'  style='width:100%;' /><img src='/assets/images/hongbao 5000.png'  alt=' ' class='hongbao5000' /><a class='hongbao-btn'  href='/memberinfo/buyrecord'></a>"
+                            message: "<img src='/assets/images/hongbao.png'  alt='红包'  style='width:100%;' /><img src='/assets/images/hongbao 5000.png'  alt=' ' class='hongbao5000' /><a class='hongbao-btn'  href='/memberinfo/buyrecord'></a>",
+                            className: 'hongbao'
                         });
-                    }
+
+                    //}
                     $.get("/umbraco/Api/Member/GetProfits", function (result) {
                         var text = '一周收益';
                         if (result.Times.length == 0) {
