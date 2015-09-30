@@ -12,7 +12,7 @@
     IEnumerable<IPublishedContent> newsList = null;
     if (news != null && news.Children.Count() > 0)
     {
-        newsList = news.Children().OrderByDescending(e => e.UpdateDate).Skip(0).Take(10);
+        newsList = news.Children().OrderByDescending(e =>  e.UpdateDate).Skip(0).Take(10);
     }
     Html.EnableClientValidation();
     Html.EnableUnobtrusiveJavaScript();
@@ -40,7 +40,7 @@
                     <!-- ================ -->
                     <li data-transition="fade" data-slotamount="1" data-masterspeed="500" data-saveperformance="on">
                         <!-- main image -->
-                        <img src="/assets/images/banner/banner01.jpg" alt="slidebg1" data-bgposition="center top" data-bgrepeat="no-repeat" data-bgfit="cover">
+                        <img src="/assets/images/banner/banner03.jpg" alt="slidebg1" data-bgposition="center top" data-bgrepeat="no-repeat" data-bgfit="cover">
                         <!-- Transparent Background -->
                         <div class="tp-caption dark-translucent-bg"
                              data-x="center"
@@ -72,7 +72,7 @@
     </div>
     <!-- slideshow end -->
     <div class="banner-float hidden-sm hidden-xs">
-        <h2 class="banner-float-1">高于活期存款<strong>50</strong><span>倍</span>以上的收益</h2>
+        <h2 class="banner-float-1">高于活期存款<strong>40</strong><span>倍</span>以上的收益</h2>
         <div class="separator banner-float-2" style="top:25%"></div>
         <p class="banner-float-3">已有 <span>@count</span> 位高端客户在比特金服安全注册获得收益</p>
         <p class="banner-float-4">零钱计划为您安全快速的赚钱</p>
