@@ -634,7 +634,9 @@ body {
 .register .text-danger, .sign-up .text-danger {
     padding-left: 5px;
 }
-
+..sign-up .forget-password{
+    color: #555 !important;
+}
 input:-moz-placeholder, textarea:-moz-placeholder {
     color: #c8c8c8 !important;
     font-size: 13px !important;
