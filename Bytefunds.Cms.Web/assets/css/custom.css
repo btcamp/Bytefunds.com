@@ -489,7 +489,7 @@ body {
 .banner-float {
     height: 100%;
     width: 24%;
-    background-color: rgba(0,0,0,.4);
+    background-color: rgba(0,0,0,.3);
     z-index: 1000;
     position: absolute;
     top: 0;
@@ -508,19 +508,15 @@ body {
             font-size: 2.5em;
             font-family: Arial;
         }
-
-        .banner-float h2 span, .banner-float h3 span {
-            font-size: 1.3em;
-        }
-
     .banner-float p {
         color: #fff;
         text-align: center;
+        font-size:1.1em;
     }
 
         .banner-float p a {
-            font-size: 1.1em;
             font-family: "黑体";
+            font-size:1.0em;
         }
 
 .banner-float-1, .banner-float-2, .banner-float-3, .banner-float-4, .banner-float-5, .banner-float-6 {
@@ -542,22 +538,18 @@ body {
 .banner-float-3 {
     top: 30%;
     line-height: 30px;
-    ;
 }
 
     .banner-float-3 span {
-        font-size: 1.1em;
         color: #ffe333;
+        font-size:1.1em;
     }
-
 .banner-float-4 {
     top: 52%;
 }
-
 .banner-float-5 {
     top: 67%;
     border: 1px solid #a3a3a3;
-    font-size: 1.0em !important;
 }
 
     .banner-float-5:hover {
@@ -590,20 +582,17 @@ body {
 }
 
 @media (min-width:1700px) {
-    .banner-float p {
-        font-size: 1.2em;
-    }
-
-    .banner-float-3 {
-        font-size: 1.3em !important;
-    }
-
-    .banner-float h2, .banner-float h3, .banner-float-6 a {
+   .banner-float h2, .banner-float h3 {
         font-size: 1.3em;
     }
-
-        .banner-float h2 strong {
-            font-size: 2.5em;
+    .banner-float p {
+        font-size:1.3em;
+    }
+        .banner-float p a {
+            font-size:0.9em;
+        }
+       .banner-float  .banner-float-6 a{
+           font-size:1.0em;
         }
 }
 
@@ -1796,6 +1785,11 @@ input:focus, select:focus, textarea:focus {
         width:75%;
     }
 }
+@media(min-width:1700px){
+    .hongbao  .modal-content{
+        width:65%;
+    }
+}
 .hongbao  .modal-body{
     padding:0;
 }
@@ -1814,18 +1808,25 @@ input:focus, select:focus, textarea:focus {
     bottom:14%;
     left:35%;
 }
+.hongbao   .hongbao-btn:hover{
+    background-color:rgba(255,255,255,0.2);
+}
 .hongbao  .hongbao5000{
     position:absolute;
     top:35%;
     width:70%;
     left:14%;
+    animation:hongbao 2s linear infinite ;
     -webkit-animation:hongbao 2s linear infinite ;
     -ms-animation:hongbao 2s linear infinite ;
     -moz-animation:hongbao 2s linear infinite ;
     -o-animation:hongbao 2s linear infinite ;
 }
+ .hongbao .modal-dialog{
+        margin-top:9%;
+    }
 @media(max-width:768px){
-    .hongbao s .modal-dialog{
+    .hongbao .modal-dialog{
         margin-top:30%;
     }
 }
@@ -1873,4 +1874,34 @@ input:focus, select:focus, textarea:focus {
     to{
         -o-transform:scale(1.0) ;
     }
+}
+
+/*购买协议*/
+.agreement .content p{
+    line-height: 25px;
+}
+.agreement .content dl{
+    margin-bottom:-5px;
+}
+.agreement .content dl dt,.agreement .content ul li{
+    margin-left: -5px;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+.agreement .content dl dd{
+    line-height: 30px;
+    text-indent: 2em;
+}
+.agreement .content h5{
+    margin-bottom: 15px;
+}
+.agreement .span{
+    margin: 0 5px;
+    font-size: 15px;
+    color: black;
+}
+.agreement .seal{
+    position: absolute;
+    left: 120px;
+    top: -30px;
 }

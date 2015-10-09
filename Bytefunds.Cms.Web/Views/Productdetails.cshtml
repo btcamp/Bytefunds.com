@@ -106,20 +106,20 @@
             </div>
             <div class="col-sm-3 bid-right">
                 <div class="bid-right-content">
-                    <h4>即刻申购</h4>
+                    <h4 class="mb-20">即刻申购</h4>
                     @*/pay?id=@content.Id&minAmount=@(content.GetPropertyValue<double>("startAmount"))*@
                     <a href="/pay?id=@content.Id&minAmount=@(content.GetPropertyValue<double>("startAmount"))" class="btn-sm btn btn-block btn-warning">立即购买</a>
                     <small style="line-height: 25px;">尊敬的用户您好，自2015年9月17日起，比特金服基金服务功能将全面展开。</small>
                     <hr style="border-style: dashed" />
                 </div>
                 <div class="bid-right-content hidden-xs">
-                    <h4>了解更多？</h4>
+                    <h4 class="mb-20">了解更多？</h4>
                     <p>请点击右侧QQ图标在线咨询，我们将竭诚为你服务 --->></p>
                     <hr style="border-style: dashed" />
                 </div>
                 <div class="bid-right-content">
-                    <h4>火热销售，值得您期待</h4>
-                    <a href="#" class="btn-sm btn btn-warning btn-block reservation-btn">立即预约</a>
+                    <h4 class="mb-20">大客户专享渠道</h4>
+                    <a href="#" class="btn-sm btn btn-default btn-block reservation-btn">立即预约</a>
                     <hr style="border-style: dashed" />
                 </div>
                 <div class="bid-right-content">
@@ -151,7 +151,7 @@
                 },
                 xAxis: {
                     //categories:result.Times
-                    categories: ['09-06', '09-07', '09-08', '09-09', '09-10', '09-11', '09-12']
+                    categories: [GetDateStr(-6), GetDateStr(-5), GetDateStr(-4), GetDateStr(-3), GetDateStr(-2),GetDateStr(-1), GetDateStr(0)]
                 },
                 series: [{
                     type: 'spline',
@@ -167,7 +167,15 @@
                 }]
             });
             //});
-
         });
+        function GetDateStr(AddDayCount) 
+        { 
+            var dd = new Date(); 
+            dd.setDate(dd.getDate()+AddDayCount);//获取AddDayCount天后的日期 
+            //var y = dd.getYear(); 
+            var m = (dd.getMonth()+1)<10?"0"+(dd.getMonth()+1):(dd.getMonth()+1);//获取当前月份的日期，不足10补0
+            var d = dd.getDate()<10?"0"+dd.getDate():dd.getDate(); //获取当前几号，不足10补0
+            return m+"-"+d; 
+        }
     </script>
 }
