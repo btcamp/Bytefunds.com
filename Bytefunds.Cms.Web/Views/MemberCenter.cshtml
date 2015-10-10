@@ -32,7 +32,7 @@
                             <li><a href="/memberinfo/verified/" title="实名认证"><i class="icon-font @(member.GetValue<bool>("verified")?"approve":string.Empty) " title="实名认证">&#xe641;</i></a></li>
                             <li><a href="/memberinfo/bankcertification/" title="绑定银行卡"><i class="icon-font @(member.GetValue<bool>("bankCertification") ? "approve" : string.Empty)" title="绑定银行卡">&#xf00c0;</i></a></li>
                             <li><i class="icon-font @(!string.IsNullOrEmpty(member.GetValue<string>("tel")) ? "approve" : string.Empty)" title="手机认证">&#xe675;</i></li>
-                            <li><i class="icon-font @(!string.IsNullOrEmpty(member.Username) ? "approve" : string.Empty)" title="邮箱认证">&#xe61a;</i></li>
+                            @*<li><i class="icon-font @(!string.IsNullOrEmpty(member.Username) ? "approve" : string.Empty)" title="邮箱认证">&#xe61a;</i></li>*@
                         </ul>
                     </div>
                 </div>
