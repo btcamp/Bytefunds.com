@@ -12,7 +12,7 @@ namespace Bytefunds.Cms.Logic.Models
         [Required(ErrorMessage = "请输入姓名")]
         public string Name { get; set; }
         [Display(Name = "邮箱")]
-        [Required(ErrorMessage = "请输入邮箱")]
+        //[Required(ErrorMessage = "请输入邮箱")]
         [RegularExpression(@"^.+@.+\..+$", ErrorMessage = "请输入正确的邮箱地址")]
         public string Email { get; set; }
 

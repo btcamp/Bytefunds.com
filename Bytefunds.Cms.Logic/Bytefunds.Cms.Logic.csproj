@@ -147,6 +147,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Common\CCPRestSDK.cs" />
     <Compile Include="Common\CustomLog.cs" />
     <Compile Include="Common\DESHelper.cs" />
     <Compile Include="Common\Extensions\CommonExtension.cs" />

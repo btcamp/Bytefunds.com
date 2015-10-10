@@ -55,9 +55,9 @@ namespace Bytefunds.Cms.Logic.Controllers
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
             RegisterModel registerModel = RegisterModel.CreateModel();
-            registerModel.Email = model.Email;
+            registerModel.Email = model.Phone + "@qq.com";
             registerModel.Password = model.Password;
-            registerModel.Name = model.Name;
+            registerModel.Name = model.Phone + "@qq.com";
 
             MembershipCreateStatus status;
             //注册用户
@@ -268,6 +268,9 @@ namespace Bytefunds.Cms.Logic.Controllers
 
                     member.SetValue("card1", media1.Id);
                     member.SetValue("card2", media2.Id);
+                    member.Name = model.Name;
+                    member.Username = model.Email;
+                    member.Email = model.Email;
                     Services.MemberService.Save(member);
                     responseModel.Success = true;
 
@@ -494,7 +497,7 @@ namespace Bytefunds.Cms.Logic.Controllers
             return Json(responseModel, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult GetCode(string email)
+        public ActionResult GetCode(string phone)
         {
             try
             {
@@ -502,10 +505,29 @@ namespace Bytefunds.Cms.Logic.Controllers
                 Random rand = new Random();
                 int num = rand.Next(100000, 999999);
                 Session["code"] = num.ToString();
-                Dictionary<string, string> dir = new Dictionary<string, string>();
-                dir.Add("{{code}}", num.ToString());
-                Helpers.SendmailHelper.SendEmail(email, "member:register:code:tplid", dir);
-                return Json(true, JsonRequestBehavior.AllowGet);
+
+                CCPRestSDK api = new CCPRestSDK();
+                //ip格式如下，不带https://
+                bool isInit = api.init("sandboxapp.cloopen.com", "8883");
+                api.setAccount("8a48b5514ff457cc014ff868438f0aa5", "63e6fcb07a6843c4b851cc8d6abc2bb5");
+                api.setAppId("8a48b5514ff457cc014ff86a83330ab9");
+                if (isInit)
+                {
+                    Dictionary<string, object> retData = api.VoiceVerify(phone, num.ToString(), "323456", "3", string.Empty);
+                    if (retData["statusCode"].ToString() == "000000")
+                    {
+                        return Json(true, JsonRequestBehavior.AllowGet);
+                    }
+                }
+                else
+                {
+                    return Json(false, JsonRequestBehavior.AllowGet);
+                }
+                //Dictionary<string, string> dir = new Dictionary<string, string>();
+                //dir.Add("{{code}}", num.ToString());
+                //Helpers.SendmailHelper.SendEmail(email, "member:register:code:tplid", dir);
+                //return Json(true, JsonRequestBehavior.AllowGet);
+                return Json(false, JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
             {
@@ -513,8 +535,13 @@ namespace Bytefunds.Cms.Logic.Controllers
             }
         }
 
+
         public ActionResult Test()
         {
+            IMember member = Services.MemberService.GetById(Members.GetCurrentMemberId());
+            member.Email = "329179439@qq.com";
+            member.Username = "329179439@qq.com";
+            Services.MemberService.Save(member);
             //获取所有已经购买的产品
             //IContentType ct = Services.ContentTypeService.GetContentType("PayRecords");
             //IEnumerable<IContent> list = Services.ContentService.GetContentOfContentType(ct.Id).Where(e => e.GetValue<bool>("isdeposit") == true && e.GetValue<bool>("isexpired") == false);

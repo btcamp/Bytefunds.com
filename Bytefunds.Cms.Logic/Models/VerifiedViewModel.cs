@@ -13,6 +13,16 @@ namespace Bytefunds.Cms.Logic.Models
         [RegularExpression(@"^\d{18}|\d{17}[X,x]$", ErrorMessage = "请输入正确的身份证号")]
         public string IDCard { get; set; }
 
+        [Display(Name = "姓名")]
+        [Required(ErrorMessage = "请输入姓名")]
+        public string Name { get; set; }
+
+
+        [Display(Name = "邮箱")]
+        [Required(ErrorMessage = "请输入邮箱")]
+        [RegularExpression(@"^.+@.+\..+$", ErrorMessage = "请输入正确的邮箱地址")]
+        public string Email { get; set; }
+
         [Display(Name = "身份证正面")]
         [Required(ErrorMessage = "请选择身份证正面照")]
         public HttpPostedFileWrapper Card1 { get; set; }
