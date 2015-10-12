@@ -298,7 +298,9 @@ body {
 .twitter:first-child {
     font-size: 1.1em;
 }
-
+.navbar{
+    min-height:60px;
+}
 @media (max-width:768px) {
     .navbar {
         border: none;
@@ -508,15 +510,16 @@ body {
             font-size: 2.5em;
             font-family: Arial;
         }
+
     .banner-float p {
         color: #fff;
         text-align: center;
-        font-size:1.1em;
+        font-size: 1.1em;
     }
 
         .banner-float p a {
             font-family: "黑体";
-            font-size:1.0em;
+            font-size: 1em;
         }
 
 .banner-float-1, .banner-float-2, .banner-float-3, .banner-float-4, .banner-float-5, .banner-float-6 {
@@ -542,11 +545,13 @@ body {
 
     .banner-float-3 span {
         color: #ffe333;
-        font-size:1.1em;
+        font-size: 1.1em;
     }
+
 .banner-float-4 {
     top: 52%;
 }
+
 .banner-float-5 {
     top: 67%;
     border: 1px solid #a3a3a3;
@@ -582,18 +587,17 @@ body {
 }
 
 @media (min-width:1700px) {
-   .banner-float h2, .banner-float h3 {
+    .banner-float h2, .banner-float h3, .banner-float p {
         font-size: 1.3em;
     }
-    .banner-float p {
-        font-size:1.3em;
-    }
+
         .banner-float p a {
-            font-size:0.9em;
+            font-size: .9em;
         }
-       .banner-float  .banner-float-6 a{
-           font-size:1.0em;
-        }
+
+    .banner-float .banner-float-6 a {
+        font-size: 1em;
+    }
 }
 
 .banner-float .separator:after {
@@ -604,22 +608,7 @@ body {
     background: -ms-linear-gradient(left,rgba(255,255,255,.2) 0,rgba(255,255,255,.7) 35%,rgba(255,255,255,.7) 70%,rgba(255,255,255,.2) 100%);
     background: linear-gradient(to right,rgba(255,255,255,.2) 0,rgba(255,255,255,.7) 35%,rgba(255,255,255,.7) 70%,rgba(255,255,255,.2) 100%);
 }
-
-.clients-img {
-    -filter: grayscale(1);
-    -webkit-filter: grayscale(1);
-    -moz-filter: grayscale(1);
-    -ms-filter: grayscale(1);
-    -o-filter: grayscale(1);
-}
-
-    .clients-img:hover {
-        -filter: grayscale(0);
-        -webkit-filter: grayscale(0);
-        -moz-filter: grayscale(0);
-        -ms-filter: grayscale(0);
-        -o-filter: grayscale(0);
-    }
+/*.clients-img{-filter:grayscale(1);-webkit-filter:grayscale(1);-moz-filter:grayscale(1);-ms-filter:grayscale(1);-o-filter:grayscale(1)}.clients-img:hover{-filter:grayscale(0);-webkit-filter:grayscale(0);-moz-filter:grayscale(0);-ms-filter:grayscale(0);-o-filter:grayscale(0)}*/
 
 .form-block {
     width: 500px;
@@ -634,9 +623,7 @@ body {
 .register .text-danger, .sign-up .text-danger {
     padding-left: 5px;
 }
-..sign-up .forget-password{
-    color: #555 !important;
-}
+
 input:-moz-placeholder, textarea:-moz-placeholder {
     color: #c8c8c8 !important;
     font-size: 13px !important;
@@ -716,6 +703,10 @@ input:focus, select:focus, textarea:focus {
         font-weight: 500;
         text-align: center;
     }
+
+.earnings, .raise-funds p .raise-funds-title {
+    font-weight: 600;
+}
 
 .campbell-table, .campbell-table2 {
     width: 100%;
@@ -921,10 +912,6 @@ input:focus, select:focus, textarea:focus {
     margin: 0;
 }
 
-    .raise-funds p .raise-funds-title {
-        font-weight: 600;
-    }
-
 .raise-funds .style-1 {
     margin: 10px 0;
 }
@@ -971,7 +958,6 @@ input:focus, select:focus, textarea:focus {
 .earnings {
     font-size: 1.2em;
     color: #F5B024;
-    font-weight: 600;
     font-family: Arial;
 }
 
@@ -1777,132 +1763,145 @@ input:focus, select:focus, textarea:focus {
     height: 10px;
 }
 
-.hongbao  .modal-content{
-    width:55%;
-    margin:auto;
-    border-radius:10px;
+.hongbao .modal-content {
+    width: 55%;
+    margin: auto;
+    border-radius: 10px;
 }
-@media(max-width:500px){
-    .hongbao  .modal-content{
-        width:75%;
-    }
-}
-@media(min-width:1700px){
-    .hongbao  .modal-content{
-        width:65%;
-    }
-}
-.hongbao  .modal-body{
-    padding:0;
-}
-.hongbao  .bootbox-close-button {
-    position:absolute;
-    right:8px;
-    top:10px;
-    outline:none;
-}
-.hongbao   .hongbao-btn{
-    width:31%;
-    height:23%;
-    border-radius:50%;
-    display:inline-block;
-    position:absolute;
-    bottom:14%;
-    left:35%;
-}
-.hongbao   .hongbao-btn:hover{
-    background-color:rgba(255,255,255,0.2);
-}
-.hongbao  .hongbao5000{
-    position:absolute;
-    top:35%;
-    width:70%;
-    left:14%;
-    animation:hongbao 2s linear infinite ;
-    -webkit-animation:hongbao 2s linear infinite ;
-    -ms-animation:hongbao 2s linear infinite ;
-    -moz-animation:hongbao 2s linear infinite ;
-    -o-animation:hongbao 2s linear infinite ;
-}
- .hongbao .modal-dialog{
-        margin-top:9%;
-    }
-@media(max-width:768px){
-    .hongbao .modal-dialog{
-        margin-top:30%;
+
+@media(max-width:500px) {
+    .hongbao .modal-content {
+        width: 75%;
     }
 }
 
-@-webkit-keyframes  hongbao{
-    from{
-        -webkit-transform:scale(1.0) ;
-    }
-    50%{
-        -webkit-transform:scale(1.1) ;
-    }
-    to{
-        -webkit-transform:scale(1.0) ;
-    }
-}
-@-ms-keyframes  hongbao{
-    from{
-        -ms-transform:scale(1.0) ;
-    }
-    50%{
-        -ms-transform:scale(1.1) ;
-    }
-    to{
-        -ms-transform:scale(1.0) ;
-    }
-}
-@-moz-keyframes  hongbao{
-    from{
-        -moz-transform:scale(1.0) ;
-    }
-    50%{
-        -moz-transform:scale(1.1) ;
-    }
-    to{
-        -moz-transform:scale(1.0) ;
-    }
-}
-@-o-keyframes  hongbao{
-    from{
-        -o-transform:scale(1.0) ;
-    }
-    50%{
-        -o-transform:scale(1.1) ;
-    }
-    to{
-        -o-transform:scale(1.0) ;
+@media(min-width:1700px) {
+    .hongbao .modal-content {
+        width: 65%;
     }
 }
 
-/*购买协议*/
-.agreement .content p{
+.hongbao .modal-body {
+    padding: 0;
+}
+
+.hongbao .bootbox-close-button {
+    position: absolute;
+    right: 8px;
+    top: 10px;
+    outline: 0;
+}
+
+.hongbao .hongbao-btn {
+    width: 31%;
+    height: 23%;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    bottom: 14%;
+    left: 35%;
+}
+
+    .hongbao .hongbao-btn:hover {
+        background-color: rgba(255,255,255,.2);
+    }
+
+.hongbao .hongbao5000 {
+    position: absolute;
+    top: 35%;
+    width: 70%;
+    left: 14%;
+    animation: hongbao 2s linear infinite;
+    -webkit-animation: hongbao 2s linear infinite;
+    -ms-animation: hongbao 2s linear infinite;
+    -moz-animation: hongbao 2s linear infinite;
+    -o-animation: hongbao 2s linear infinite;
+}
+
+.hongbao .modal-dialog {
+    margin-top: 9%;
+}
+
+@media(max-width:768px) {
+    .hongbao .modal-dialog {
+        margin-top: 30%;
+    }
+}
+
+@-webkit-keyframes hongbao {
+    from,to {
+        -webkit-transform: scale(1);
+    }
+
+    50% {
+        -webkit-transform: scale(1.1);
+    }
+}
+
+@-ms-keyframes hongbao {
+    from,to {
+        -ms-transform: scale(1);
+    }
+
+    50% {
+        -ms-transform: scale(1.1);
+    }
+}
+
+@-moz-keyframes hongbao {
+    from,to {
+        -moz-transform: scale(1);
+    }
+
+    50% {
+        -moz-transform: scale(1.1);
+    }
+}
+
+@-o-keyframes hongbao {
+    from,to {
+        -o-transform: scale(1);
+    }
+
+    50% {
+        -o-transform: scale(1.1);
+    }
+}
+
+.agreement .content p {
     line-height: 25px;
 }
-.agreement .content dl{
-    margin-bottom:-5px;
+
+.agreement .content dl {
+    margin-bottom: -5px;
 }
-.agreement .content dl dt,.agreement .content ul li{
-    margin-left: -5px;
-    font-weight: 500;
-    margin-bottom: 5px;
-}
-.agreement .content dl dd{
-    line-height: 30px;
-    text-indent: 2em;
-}
-.agreement .content h5{
+
+    .agreement .content dl dt, .agreement .content ul li {
+        margin-left: -5px;
+        font-weight: 500;
+        margin-bottom: 5px;
+    }
+
+    .agreement .content dl dd {
+        line-height: 30px;
+        text-indent: 2em;
+    }
+
+.agreement .content h5 {
     margin-bottom: 15px;
 }
-.agreement .span{
+
+.sign-up .forget-password {
+    color: #555 !important;
+}
+
+.agreement .span {
     margin: 0 5px;
     font-size: 15px;
-    color: black;
+    color: #000;
 }
-.agreement .seal{
+
+.agreement .seal {
     position: absolute;
     left: 120px;
     top: -30px;
