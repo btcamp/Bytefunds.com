@@ -167,12 +167,12 @@
 				hideAllCaptionAtLilmit:0,
 				startWithSlide:0
 			});
-            var height;
-            if($(window).width()>=1800){
-                height = 450;
-            }else{
-                height = 320;
-            }
+			var height;
+			if($(window).width()>=1800){
+				height = 450;
+			}else{
+				height = 320;
+			}
 			$('.slider-banner-container .slider-banner-fullwidth').show().revolution({
 				delay:8000,
 				startwidth:1140,
