@@ -105,11 +105,11 @@
                 <p class="bid-warning"><i class="icon-warning-empty"></i> 比特金服提醒您：投资有风险</p>
             </div>
             <div class="col-sm-3 bid-right">
-                <div class="bid-right-content">
-                    <h4 class="mb-20">即刻申购</h4>
+                <div class="bid-right-content content1">
+                    <h4 class="mb-20 ">即刻申购</h4>
                     @*/pay?id=@content.Id&minAmount=@(content.GetPropertyValue<double>("startAmount"))*@
                     <a href="/pay?id=@content.Id&minAmount=@(content.GetPropertyValue<double>("startAmount"))" class="btn-sm btn btn-block btn-warning">立即购买</a>
-                    <small style="line-height: 25px;">尊敬的用户您好，自2015年9月17日起，比特金服基金服务功能将全面展开。</small>
+                    <p style="line-height: 25px;" class="mt-10">尊敬的用户您好，自2015年9月17日起，比特金服基金服务功能将全面展开。</p> 
                     <hr style="border-style: dashed" />
                 </div>
                 <div class="bid-right-content hidden-xs">
@@ -117,7 +117,7 @@
                     <p>请点击右侧QQ图标在线咨询，我们将竭诚为你服务 --->></p>
                     <hr style="border-style: dashed" />
                 </div>
-                <div class="bid-right-content">
+                <div class="bid-right-content mt-20">
                     <h4 class="mb-20">大客户专享通道</h4>
                     <a href="#" class="btn-sm btn btn-default btn-block reservation-btn">立即预约</a>
                     <hr style="border-style: dashed" />

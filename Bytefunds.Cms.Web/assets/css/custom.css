@@ -298,9 +298,7 @@ body {
 .twitter:first-child {
     font-size: 1.1em;
 }
-.navbar{
-    min-height:60px;
-}
+
 @media (max-width:768px) {
     .navbar {
         border: none;
@@ -1295,6 +1293,10 @@ input:focus, select:focus, textarea:focus {
 }
 
 @media (max-width:768px) {
+    .bid-right-content.content1 {
+        padding: 10px;
+    }
+
     .r_tbl img {
         position: absolute;
         bottom: 0;
@@ -1440,8 +1442,8 @@ input:focus, select:focus, textarea:focus {
 }
 
 .bid-warning {
-    margin-top: 20px;
-    margin-left: 10px;
+    margin: 10px 0;
+    margin-left: 5px;
     font-size: .9em;
 }
 
@@ -1905,4 +1907,11 @@ input:focus, select:focus, textarea:focus {
     position: absolute;
     left: 120px;
     top: -30px;
+}
+
+.bid-right-content.content1 {
+    padding-top: 10px;
+    border: 2px solid #F0AD4E;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px 0 #F9D4A0;
 }
