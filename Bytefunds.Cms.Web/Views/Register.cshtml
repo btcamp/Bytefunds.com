@@ -6,7 +6,7 @@
     Html.EnableUnobtrusiveJavaScript();
 }
 
-<section class="clearfix">
+<section class="clearfix" style="height:775px;background-image:url('/assets/images/bg01.jpg');background-size:100% 100%">
     <div class="container register">
         <div class="row">
             <div class="form-block center-block p-20 light-gray-bg border-clear text-left">
@@ -43,7 +43,16 @@
                                 @Html.ValidationMessageFor(m => registerModel.Email)
                             </div>
                         </div>*@
-                    
+                    <div class="form-group has-feedback">
+                        @Html.LabelFor(m => registerModel.Password, new { @class = "col-sm-3 control-label" })
+                        <div class="col-sm-8">
+                            <div>
+                                @Html.PasswordFor(m => registerModel.Password, new { @class = "form-control", placeholder = "请输入您的密码" })
+                                <i class="fa fa-lock form-control-feedback"></i>
+                            </div>
+                            @Html.ValidationMessageFor(m => registerModel.Password)
+                        </div>
+                    </div>
                     <div class="form-group has-feedback">
                         <label class="col-sm-3 control-label" for="registerModel_Code">图形码</label>
                         <div class="col-sm-8">
@@ -74,16 +83,6 @@
                                     <button class="btn btn-group btn-warning margin-clear" sdata-href="/umbraco/Api/Member/GetCode" id="btncode">获取验证码</button>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="form-group has-feedback">
-                        @Html.LabelFor(m => registerModel.Password, new { @class = "col-sm-3 control-label" })
-                        <div class="col-sm-8">
-                            <div>
-                                @Html.PasswordFor(m => registerModel.Password, new { @class = "form-control", placeholder = "请输入您的密码" })
-                                <i class="fa fa-lock form-control-feedback"></i>
-                            </div>
-                            @Html.ValidationMessageFor(m => registerModel.Password)
                         </div>
                     </div>
                     @*<div class="form-group has-feedback">
@@ -345,7 +344,6 @@
             this.lineDoms = [];
             for (var i = 0; i < this.options.lines; i++) {
                 var dom = document.createElement("div");
-
                 dom.style.cssText = [
                     "position: absolute",
                             "opacity: " + randint(3, 8) / 10,

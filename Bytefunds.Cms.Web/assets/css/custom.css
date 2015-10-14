@@ -344,7 +344,7 @@ body {
 }
 
     .hot-product h3 {
-        margin-top: -6px !important;
+        margin-top: -10px !important;
     }
 
 @media (min-width:960px) and (max-width:1900px) {
@@ -363,7 +363,7 @@ body {
     }
 
     .raise-funds-content {
-        margin-top: 30px;
+        margin-top: 20px;
     }
 
     .raise-funds {
@@ -393,10 +393,6 @@ body {
     .hot-product .hot-product-content {
         margin-top: 30px !important;
     }
-
-    .hot-product .btn {
-        margin-top: 20px !important;
-    }
 }
 
 @media (min-width:1920px) {
@@ -405,7 +401,7 @@ body {
     }
 
     .hot-product .btn {
-        margin-top: 35px !important;
+        margin-top: 30px !important;
     }
 }
 
@@ -552,7 +548,6 @@ body {
 
 .banner-float-5 {
     top: 67%;
-    border: 1px solid #a3a3a3;
 }
 
     .banner-float-5:hover {
@@ -590,7 +585,7 @@ body {
     }
 
         .banner-float p a {
-            font-size: .9em;
+            font-size: 1.0em;
         }
 
     .banner-float .banner-float-6 a {
@@ -1075,7 +1070,7 @@ input:focus, select:focus, textarea:focus {
 }
 
 .btn-buy {
-    background-color: rgba(255,255,255,.5) !important;
+    background-color: #EE9921 !important;
     color: #fff;
 }
 
@@ -1915,3 +1910,65 @@ input:focus, select:focus, textarea:focus {
     border-radius: 10px;
     box-shadow: 5px 5px 5px 0 #F9D4A0;
 }
+
+.unionlj .chengjiaoliang {
+    height: 100px;
+    line-height: 100px;
+    font-size: 18px;
+    color: #1c3a54;
+    font-weight: bold;
+}
+
+    .unionlj .chengjiaoliang img {
+        vertical-align: middle;
+    }
+
+    .unionlj .chengjiaoliang .red {
+        color: #ff0003;
+        font-size: 28px;
+    }
+
+    .unionlj .chengjiaoliang .fontw {
+        display: inline-block;
+        padding: 0 20px;
+    }
+.invest-table{
+    width:100%;
+    border:1px solid #ccc;
+}
+.invest-table thead tr{
+    background:#f5a900;
+    color:white;
+    border:1px solid #f5a900;
+}
+.invest-table thead th{
+    height:30px;
+    padding:0 5px;
+    font-size:1.1em
+}
+.invest-table tbody td{
+    height:28px;
+   text-align:center;
+}
+
+@media(max-width:1400px){
+    .invest-table tbody td{
+        font-size:0.9em;
+    }
+     .hot-product h3 {
+        font-size:1.3em;
+        margin-top:-6px !important;
+    }
+}
+@media(min-width:1700px){
+}
+.invest-table tbody .td1{
+    width:15%;
+}
+.invest-table tbody .td2{
+    width:25%;
+}
+.invest-table tbody .td3{
+    width:60%;
+}
+
