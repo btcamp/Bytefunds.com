@@ -54,10 +54,10 @@
                                 foreach (IContent item in contents)
                                 {
                                     <tr>
-                                        <td>@(item.GetValue<string>("title"))</td>
+                                        <td><a href="/productdetails?id=@item.Id">@(item.GetValue<string>("title"))</a></td>
                                         <td class="cGreen cBold">@(item.GetValue<string>("cycle"))</td>
                                         <td class="cRed cBold">@(item.GetValue<decimal>("rate").ToString("f2"))%</td>
-                                        <td class="cRed cBold"><a href="/productdetails?id=@item.Id" class="btn  btn-warning">立即投标</a></td>
+                                        <td class="cRed cBold"><a href="/pay?id=@item.Id&minAmount=@(item.GetValue<double>("startAmount"))" class="btn  btn-warning">立即购买</a></td>
                                     </tr>
                                 }
                             }

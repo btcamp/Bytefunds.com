@@ -57,7 +57,7 @@ namespace Bytefunds.Cms.Logic.Controllers
             RegisterModel registerModel = RegisterModel.CreateModel();
             registerModel.Email = model.Phone + "@qq.com";
             registerModel.Password = model.Password;
-            registerModel.Name = model.Phone + "@qq.com";
+            registerModel.Name = "匿名";
 
             MembershipCreateStatus status;
             //注册用户
@@ -449,10 +449,10 @@ namespace Bytefunds.Cms.Logic.Controllers
 
                 IMember member = Services.MemberService.GetById(Members.GetCurrentMemberId());
 
-                if (member.GetValue<double>("assets") < model.Amount)
+                if (member.GetValue<double>("okassets") < model.Amount)
                 {
                     responseModel.Success = false;
-                    responseModel.Msg = "购买的金额超限，您账户余额是：" + member.GetValue<double>("assets").ToString("N2") + "元";
+                    responseModel.Msg = "购买的金额超限，您账户余额是：" + member.GetValue<double>("okassets").ToString("N2") + "元";
                     return Json(responseModel, JsonRequestBehavior.AllowGet);
                 }
 
@@ -478,15 +478,15 @@ namespace Bytefunds.Cms.Logic.Controllers
                 content.SetValue("isexpired", false);
                 Services.ContentService.Save(content);
                 EventHandlers.CustomRaiseEvent.RaiseContentCreated(content);
-                decimal assets = member.GetValue<decimal>("assets"), okassets = member.GetValue<decimal>("okassets"), fundAccount = member.GetValue<decimal>("fundAccount");
-                assets = assets - (decimal)model.Amount;
+                decimal okassets = member.GetValue<decimal>("okassets"), fundAccount = member.GetValue<decimal>("fundAccount");
+                //assets = assets - (decimal)model.Amount;
 
-                if (assets < okassets)
-                {
-                    //如果 可提现金额小于已经转出后的余额 也应扣款
-                    member.SetValue("okassets", assets.ToString());
-                }
-                member.SetValue("assets", assets.ToString());
+                //if (assets < okassets)
+                //{
+                //    //如果 可提现金额小于已经转出后的余额 也应扣款
+                //    member.SetValue("okassets", assets.ToString());
+                //}
+                member.SetValue("okassets", (okassets - (decimal)model.Amount).ToString());
                 member.SetValue("fundAccount", (fundAccount + (decimal)model.Amount).ToString());
                 Services.MemberService.Save(member);
 
@@ -535,13 +535,39 @@ namespace Bytefunds.Cms.Logic.Controllers
             }
         }
 
-
-        public ActionResult Test()
+        public ActionResult tRequest()
         {
-            IMember member = Services.MemberService.GetById(Members.GetCurrentMemberId());
-            member.Email = "329179439@qq.com";
-            member.Username = "329179439@qq.com";
-            Services.MemberService.Save(member);
+            StringBuilder sb = new StringBuilder();
+            foreach (var item in Request.QueryString.AllKeys)
+            {
+                sb.AppendFormat("{0}={1}", item, Request.QueryString[item]);
+            }
+            foreach (var item in Request.Form.AllKeys)
+            {
+                sb.AppendFormat("{0}={1}", item, Request.Form[item]);
+            }
+            Common.CustomLog.WriteLog(sb.ToString());
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Test(string phone)
+        {
+            CCPRestSDK api = new CCPRestSDK();
+            bool isInit = api.init("sandboxapp.cloopen.com", "8883");
+            api.setAccount("8a48b5514ff457cc014ff868438f0aa5", "63e6fcb07a6843c4b851cc8d6abc2bb5");
+            api.setAppId("8a48b5514ff457cc014ff86a83330ab9");
+            if (isInit)
+            {
+                Dictionary<string, object> retData = api.VoiceVerify(phone, "17635823", "323456", "3", "http://www.bytefunds.com/Umbraco/Api/Member/tRequest");
+                if (retData["statusCode"].ToString() == "000000")
+                {
+                    return Json(true, JsonRequestBehavior.AllowGet);
+                }
+            }
+            else
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
             //获取所有已经购买的产品
             //IContentType ct = Services.ContentTypeService.GetContentType("PayRecords");
             //IEnumerable<IContent> list = Services.ContentService.GetContentOfContentType(ct.Id).Where(e => e.GetValue<bool>("isdeposit") == true && e.GetValue<bool>("isexpired") == false);

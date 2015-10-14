@@ -56,60 +56,69 @@ namespace Bytefunds.Cms.Logic.Controllers
                         content.SetValue("amountCny", payModel.Amount.ToString());
                         content.SetValue("rechargeDateTime", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                         content.SetValue("payBillno", payModel.Billno);
+                        content.SetValue("amountCny", payModel.Amount.ToString());
+                        content.SetValue("rechargeDateTime", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                        content.SetValue("isdeposit", true);
+                        IContent product = Services.ContentService.GetById(content.GetValue<int>("buyproduct"));
+                        int months = product.GetValue<int>("cycle");
+                        content.SetValue("expirationtime", DateTime.Now.AddMonths(months).ToString("yyyy-MM-dd HH:mm:ss"));
+                        Services.ContentService.Save(content);
+                        //触发创建事件
+                        EventHandlers.CustomRaiseEvent.RaiseContentCreated(content);
+
+                        //赠送5000元定期宝一月期
+                        System.Threading.Tasks.Task.Factory.StartNew((ser) =>
+                        {
+                            try
+                            {
+                                ServiceContext sc = ser as ServiceContext;
+                                int num = payModel.Amount >= 5000 ? 5000 : 1000;
+                                IContentType ct = sc.ContentTypeService.GetContentType("PayRecords");
+
+                                IContent createContent = sc.ContentService.CreateContent(currentMember.Name + "赠送定期宝", ct.Id, "PayRecords");
+                                createContent.SetValue("username", currentMember.Name);
+                                createContent.SetValue("email", currentMember.Username);
+                                createContent.SetValue("amountCny", num);
+                                createContent.SetValue("mobilePhone", currentMember.GetValue<string>("tel"));
+                                createContent.SetValue("rechargeDateTime", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                                createContent.SetValue("expirationtime", DateTime.Now.AddMonths(1).ToString("yyyy-MM-dd HH:mm:ss"));
+                                createContent.SetValue("memberPicker", currentMember.Id);
+                                createContent.SetValue("payBillno", payModel.Billno + ":购买产品赠送的定期宝");
+                                createContent.SetValue("isdeposit", true);
+                                createContent.SetValue("isexpired", false);
+                                createContent.SetValue("buyproduct", 2337);
+                                createContent.SetValue("isGive", true);
+                                sc.ContentService.Save(createContent);
+                                EventHandlers.CustomRaiseEvent.RaiseContentCreated(createContent);
+                                CustomLog.WriteLog("赠送成功！");
+                            }
+                            catch (Exception ex)
+                            {
+                                CustomLog.WriteLog(ex.ToString());
+                            }
+                        }, Services);
+                        CustomLog.WriteLog("success!!");
+                        return Json("ok", JsonRequestBehavior.AllowGet);
                     }
                     else
                     {
-                        IContentType ct = Services.ContentTypeService.GetContentType("PayRecords");
-                        content = Services.ContentService.CreateContent(payModel.Username, ct.Id, "PayRecords");
-                        content.SetValue("username", payModel.Username);
-                        content.Name = payModel.Username;
-                        content.SetValue("email", payModel.Email);
-                        content.SetValue("mobilePhone", payModel.Phone);
+                        //充值到余额
+                        IContentType ct = Services.ContentTypeService.GetContentType("DepositRecords");
+                        IContent depositcontent = Services.ContentService.CreateContent(payModel.Username, ct.Id, "DepositRecords");
+                        depositcontent.SetValue("username", payModel.Username);
+                        depositcontent.Name = payModel.Username;
+                        depositcontent.SetValue("email", payModel.Email);
+                        depositcontent.SetValue("mobilePhone", payModel.Phone);
+                        depositcontent.SetValue("amountCny", payModel.Amount.ToString());
+                        depositcontent.SetValue("payBillno", payModel.Billno);
+                        currentMember = Services.MemberService.GetByEmail(payModel.Email);
+                        decimal assets = currentMember.GetValue<decimal>("okassets");
+                        currentMember.SetValue("okasstes", (assets + (decimal)payModel.Amount).ToString());
+                        Services.ContentService.Save(depositcontent);
+                        Services.MemberService.Save(currentMember);
+                        return Json("ok", JsonRequestBehavior.AllowGet);
                     }
-                    content.SetValue("amountCny", payModel.Amount.ToString());
-                    content.SetValue("rechargeDateTime", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-                    content.SetValue("payBillno", payModel.Billno);
-                    content.SetValue("isdeposit", true);
-                    IContent product = Services.ContentService.GetById(content.GetValue<int>("buyproduct"));
-                    int months = product.GetValue<int>("cycle");
-                    content.SetValue("expirationtime", DateTime.Now.AddMonths(months).ToString("yyyy-MM-dd HH:mm:ss"));
-                    Services.ContentService.Save(content);
-                    //触发创建事件
-                    EventHandlers.CustomRaiseEvent.RaiseContentCreated(content);
 
-                    //赠送5000元定期宝一月期
-                    System.Threading.Tasks.Task.Factory.StartNew((ser) =>
-                    {
-                        try
-                        {
-                            ServiceContext sc = ser as ServiceContext;
-                            int num = payModel.Amount >= 5000 ? 5000 : 1000;
-                            IContentType ct = sc.ContentTypeService.GetContentType("PayRecords");
-
-                            IContent createContent = sc.ContentService.CreateContent(currentMember.Name + "赠送定期宝", ct.Id, "PayRecords");
-                            createContent.SetValue("username", currentMember.Name);
-                            createContent.SetValue("email", currentMember.Username);
-                            createContent.SetValue("amountCny", num);
-                            createContent.SetValue("mobilePhone", currentMember.GetValue<string>("tel"));
-                            createContent.SetValue("rechargeDateTime", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-                            createContent.SetValue("expirationtime", DateTime.Now.AddMonths(1).ToString("yyyy-MM-dd HH:mm:ss"));
-                            createContent.SetValue("memberPicker", currentMember.Id);
-                            createContent.SetValue("payBillno", payModel.Billno + ":购买产品赠送的定期宝");
-                            createContent.SetValue("isdeposit", true);
-                            createContent.SetValue("isexpired", false);
-                            createContent.SetValue("buyproduct", 2337);
-                            createContent.SetValue("isGive", true);
-                            sc.ContentService.Save(createContent);
-                            EventHandlers.CustomRaiseEvent.RaiseContentCreated(createContent);
-                            CustomLog.WriteLog("赠送成功！");
-                        }
-                        catch (Exception ex)
-                        {
-                            CustomLog.WriteLog(ex.ToString());
-                        }
-                    }, Services);
-                    CustomLog.WriteLog("success!!");
-                    return Json("ok", JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
