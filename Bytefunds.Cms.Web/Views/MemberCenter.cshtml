@@ -102,7 +102,18 @@
                                 </div>
                                 <div class="field">
                                     <div class="col-md-4 col-xs-6 span2"><span class="decimal">@accumulatedEarnings</span><label>累计收益</label></div>
-                                    <div class="col-md-7 col-md-offset-1  col-xs-6  span2 last"><span class="decimal">@fundAccount</span><label><a href="/memberinfo/buyrecord">定期宝账户</a></label></div>
+                                    <div class="col-md-7 col-md-offset-1  col-xs-6  span2 last">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <span class="decimal">@fundAccount</span>
+                                                <label><a href="/memberinfo/buyrecord">定期宝账户</a></label>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <a href="/memberinfo/transferred" class="btn  btn-sm btn-default">转入定期宝</a>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
                                     <div class="clearfix"></div>
                                 </div>
                             </div>
@@ -110,14 +121,14 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-md-6">
                                         <dl>
-                                            <dt>账户余额</dt>
-                                            <dd class="decimal">@assets</dd>
-                                            <dd class="decimal"><a href="/memberinfo/transferred" class="btn  btn-sm btn-default">转入</a></dd>
+                                            <dt>余额</dt>
+                                            <dd class="decimal">@okassets</dd>
+                                            <dd class="decimal"><a href="/pay" class="btn  btn-sm btn-default">转入</a></dd>
                                         </dl>
                                     </div>
                                     <div class="col-xs-12 col-md-6">
                                         <dl>
-                                            <dt>可提现余额</dt>
+                                            <dt>未到期收益</dt>
                                             <dd class="decimal">@okassets</dd>
                                         </dl>
                                     </div>

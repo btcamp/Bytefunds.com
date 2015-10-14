@@ -449,10 +449,10 @@ namespace Bytefunds.Cms.Logic.Controllers
 
                 IMember member = Services.MemberService.GetById(Members.GetCurrentMemberId());
 
-                if (member.GetValue<double>("assets") < model.Amount)
+                if (member.GetValue<double>("okassets") < model.Amount)
                 {
                     responseModel.Success = false;
-                    responseModel.Msg = "购买的金额超限，您账户余额是：" + member.GetValue<double>("assets").ToString("N2") + "元";
+                    responseModel.Msg = "购买的金额超限，您账户余额是：" + member.GetValue<double>("okassets").ToString("N2") + "元";
                     return Json(responseModel, JsonRequestBehavior.AllowGet);
                 }
 
@@ -478,15 +478,15 @@ namespace Bytefunds.Cms.Logic.Controllers
                 content.SetValue("isexpired", false);
                 Services.ContentService.Save(content);
                 EventHandlers.CustomRaiseEvent.RaiseContentCreated(content);
-                decimal assets = member.GetValue<decimal>("assets"), okassets = member.GetValue<decimal>("okassets"), fundAccount = member.GetValue<decimal>("fundAccount");
-                assets = assets - (decimal)model.Amount;
+                decimal okassets = member.GetValue<decimal>("okassets"), fundAccount = member.GetValue<decimal>("fundAccount");
+                //assets = assets - (decimal)model.Amount;
 
-                if (assets < okassets)
-                {
-                    //如果 可提现金额小于已经转出后的余额 也应扣款
-                    member.SetValue("okassets", assets.ToString());
-                }
-                member.SetValue("assets", assets.ToString());
+                //if (assets < okassets)
+                //{
+                //    //如果 可提现金额小于已经转出后的余额 也应扣款
+                //    member.SetValue("okassets", assets.ToString());
+                //}
+                member.SetValue("okassets", (okassets - (decimal)model.Amount).ToString());
                 member.SetValue("fundAccount", (fundAccount + (decimal)model.Amount).ToString());
                 Services.MemberService.Save(member);
 

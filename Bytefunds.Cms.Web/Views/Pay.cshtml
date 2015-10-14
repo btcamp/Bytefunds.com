@@ -11,19 +11,11 @@
     string payfailurl = SystemSettingsHelper.GetSystemSettingsByKey("pay:failurl");
     string[] array = paytype.Split(new string[] { "||" }, StringSplitOptions.RemoveEmptyEntries);
 
+    //购买产品和充值到余额
 
-    string username = string.Empty, phone = string.Empty, email = string.Empty;
-    string minAmount = Request.QueryString["minAmount"];
-    int id = int.Parse(Request.QueryString["id"]);
-    IContent product = ApplicationContext.Services.ContentService.GetById(id);
 
-    IContentType ct = ApplicationContext.Services.ContentTypeService.GetContentType("PayRecords");
-    IContent content = ApplicationContext.Services.ContentService.CreateContent("无用户名", ct.Id, "PayRecords");
-    content.SetValue("isdeposit", false);
+    string url = string.Empty;
 
-    content.SetValue("amountCny", "0");
-    content.SetValue("rechargeDateTime", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-    content.SetValue("buyproduct", Request.QueryString["id"]);
     if (!Members.IsLoggedIn())
     {
         <script>
@@ -37,20 +29,44 @@
     }
     else
     {
+        string username = string.Empty, phone = string.Empty, email = string.Empty;
         IMember member = ApplicationContext.Services.MemberService.GetByEmail(Members.GetCurrentLoginStatus().Email);
         username = Members.GetCurrentLoginStatus().Name;
         email = Members.GetCurrentLoginStatus().Email;
         phone = member.GetValue<string>("tel");
+        if (!string.IsNullOrEmpty(Request.QueryString["id"]) && !string.IsNullOrEmpty(Request.QueryString["minAmount"]))
+        {
+           
+            string minAmount = Request.QueryString["minAmount"];
+            int id = int.Parse(Request.QueryString["id"]);
+            IContent product = ApplicationContext.Services.ContentService.GetById(id);
 
-        content.SetValue("username", username);
-        content.SetValue("email", email);
-        content.SetValue("mobilePhone", phone);
-        content.SetValue("memberPicker", member.Id.ToString());
-        ApplicationContext.Services.ContentService.Save(content);
-        email = email + "^_^" + content.Id;
+            IContentType ct = ApplicationContext.Services.ContentTypeService.GetContentType("PayRecords");
+            IContent content = ApplicationContext.Services.ContentService.CreateContent("无用户名", ct.Id, "PayRecords");
+            content.SetValue("isdeposit", false);
+
+            content.SetValue("amountCny", "0");
+            content.SetValue("rechargeDateTime", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            content.SetValue("buyproduct", Request.QueryString["id"]);
+
+           
+
+            content.SetValue("username", username);
+            content.SetValue("email", email);
+            content.SetValue("mobilePhone", phone);
+            content.SetValue("memberPicker", member.Id.ToString());
+            ApplicationContext.Services.ContentService.Save(content);
+            email = email + "^_^" + content.Id;
+            url = string.Format("{0}?Username={1}&Phone={2}&Email={3}&Linkphone=0&Successurl={4}&Failurl={5}&Paytype={6}&Formurl={7}&Amount={8}&cny=0&minAmount={9}", payurl, username, phone, email, successurl, payfailurl, array[0], array[1], product.GetValue<string>("amount"), minAmount);
+        }
+        else
+        {
+            url = string.Format("{0}?Username={1}&Phone={2}&Email={3}&Linkphone=0&Successurl={4}&Failurl={5}&Paytype={6}&Formurl={7}&Amount=0&cny=0", payurl, username, phone, email, successurl, payfailurl, array[0], array[1]);
+        }
+
     }
 
-    string url = string.Format("{0}?Username={1}&Phone={2}&Email={3}&Linkphone=0&Successurl={4}&Failurl={5}&Paytype={6}&Formurl={7}&Amount={8}&cny=0&minAmount={9}", payurl, username, phone, email, successurl, payfailurl, array[0], array[1], product.GetValue<string>("amount"), minAmount);
+
 }
 <section class="section clearfix">
     <div class="container">
