@@ -96,16 +96,19 @@ namespace Bytefunds.Cms.Logic.QuartzCore
                         //计算上个月的收益
                         DateTime start = DateTime.Parse(string.Format("{0}-{1}-{2} 00:00:00", DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month, 1));
                         DateTime end = DateTime.Now.AddDays(-1);
-                        IContentType earningsContentType = Services.ContentTypeService.GetContentType("EarningsRecordsElement");
-                        IEnumerable<IContent> earnings = Services.ContentService.GetContentOfContentType(earningsContentType.Id)
-                                                     .Where(e => e.GetValue<int>("memberId") == member.Id);
-                        decimal sumEarning = earnings.Sum(e => e.GetValue<decimal>("earning"));
+                        //IContentType earningsContentType = Services.ContentTypeService.GetContentType("EarningsRecordsElement");
+                        //IEnumerable<IContent> earnings = Services.ContentService.GetContentOfContentType(earningsContentType.Id)
+                        //                             .Where(e => e.GetValue<int>("memberId") == member.Id);
+                        //decimal sumEarning = earnings.Sum(e => e.GetValue<decimal>("earning"));
+
+                        //余额
+                        //decimal assets = member.GetValue<decimal>("assets");
+                        //member.SetValue("assets", (assets + okassets).ToString("f2"));
+                        decimal notmaturity = member.GetValue<decimal>("notmaturity");
                         //可提现收益
                         decimal okassets = member.GetValue<decimal>("okassets");
-                        member.SetValue("okassets", (okassets + sumEarning).ToString("f2"));
-                        //余额
-                        decimal assets = member.GetValue<decimal>("assets");
-                        member.SetValue("assets", (assets + okassets).ToString("f2"));
+                        member.SetValue("okassets", (okassets + notmaturity).ToString("f2"));
+                        member.SetValue("notmaturity", "0");
                         Services.MemberService.Save(member);
                     }
 
@@ -114,7 +117,9 @@ namespace Bytefunds.Cms.Logic.QuartzCore
                     {
                         member.SetValue("latestearnings", sumProfit.ToString("f2"));
                         decimal accumulatedEarnings = member.GetValue<decimal>("accumulatedEarnings");
+                        decimal notmaturity = member.GetValue<decimal>("notmaturity");
                         member.SetValue("accumulatedEarnings", (accumulatedEarnings + sumProfit).ToString("f2"));
+                        member.SetValue("notmaturity", (notmaturity + sumProfit).ToString());
                         Services.MemberService.Save(member);
                     }
                     //发送邮件通知

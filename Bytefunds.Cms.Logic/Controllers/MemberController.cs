@@ -513,7 +513,8 @@ namespace Bytefunds.Cms.Logic.Controllers
                 api.setAppId("8a48b5514ff457cc014ff86a83330ab9");
                 if (isInit)
                 {
-                    Dictionary<string, object> retData = api.VoiceVerify(phone, num.ToString(), "323456", "3", string.Empty);
+                    string[] array = new string[] { num.ToString(), "2" };
+                    Dictionary<string, object> retData = api.SendTemplateSMS(phone, "41259", array);
                     if (retData["statusCode"].ToString() == "000000")
                     {
                         return Json(true, JsonRequestBehavior.AllowGet);
@@ -558,7 +559,8 @@ namespace Bytefunds.Cms.Logic.Controllers
             api.setAppId("8a48b5514ff457cc014ff86a83330ab9");
             if (isInit)
             {
-                Dictionary<string, object> retData = api.VoiceVerify(phone, "17635823", "323456", "3", "http://www.bytefunds.com/Umbraco/Api/Member/tRequest");
+                string[] array = new string[] { "123456", "3" };
+                Dictionary<string, object> retData = api.SendTemplateSMS(phone, "41259", array);
                 if (retData["statusCode"].ToString() == "000000")
                 {
                     return Json(true, JsonRequestBehavior.AllowGet);

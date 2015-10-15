@@ -102,21 +102,31 @@ namespace Bytefunds.Cms.Logic.Controllers
                     }
                     else
                     {
-                        //充值到余额
-                        IContentType ct = Services.ContentTypeService.GetContentType("DepositRecords");
-                        IContent depositcontent = Services.ContentService.CreateContent(payModel.Username, ct.Id, "DepositRecords");
-                        depositcontent.SetValue("username", payModel.Username);
-                        depositcontent.Name = payModel.Username;
-                        depositcontent.SetValue("email", payModel.Email);
-                        depositcontent.SetValue("mobilePhone", payModel.Phone);
-                        depositcontent.SetValue("amountCny", payModel.Amount.ToString());
-                        depositcontent.SetValue("payBillno", payModel.Billno);
-                        currentMember = Services.MemberService.GetByEmail(payModel.Email);
-                        decimal assets = currentMember.GetValue<decimal>("okassets");
-                        currentMember.SetValue("okasstes", (assets + (decimal)payModel.Amount).ToString());
-                        Services.ContentService.Save(depositcontent);
-                        Services.MemberService.Save(currentMember);
-                        return Json("ok", JsonRequestBehavior.AllowGet);
+                        try
+                        {
+                            //充值到余额
+                            IContentType ct = Services.ContentTypeService.GetContentType("DepositRecords");
+                            IContent depositcontent = Services.ContentService.CreateContent(payModel.Email, ct.Id, "DepositRecords");
+                            currentMember = Services.MemberService.GetByEmail(payModel.Email);
+                            depositcontent.SetValue("username", payModel.Email);
+                            depositcontent.Name = payModel.Email;
+                            depositcontent.SetValue("email", payModel.Email);
+                            depositcontent.SetValue("mobilePhone", payModel.Phone);
+                            depositcontent.SetValue("amountCny", payModel.Amount.ToString());
+                            depositcontent.SetValue("payBillno", payModel.Billno);
+                            depositcontent.SetValue("memberPicker", currentMember.Id.ToString());
+                            decimal assets = currentMember.GetValue<decimal>("okassets");
+                            currentMember.SetValue("okassets", (assets + (decimal)payModel.Amount).ToString());
+                            Services.ContentService.Save(depositcontent);
+                            Services.MemberService.Save(currentMember);
+                            return Json("ok", JsonRequestBehavior.AllowGet);
+                        }
+                        catch (Exception ex)
+                        {
+                            CustomLog.WriteLog("1:" + ex.StackTrace);
+                            CustomLog.WriteLog("2:" + ex.ToString());
+                            return Json("ok", JsonRequestBehavior.AllowGet);
+                        }
                     }
 
                 }
