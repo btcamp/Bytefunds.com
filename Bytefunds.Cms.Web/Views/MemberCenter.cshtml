@@ -1,7 +1,7 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 @{
     Layout = "_Layout.cshtml";
-    string str = "0.00", username = str, accumulatedEarnings = str, latestearnings = str, fundAccount = str, assets = str, tel = string.Empty, okassets = str;
+    string str = "0.00", username = str, accumulatedEarnings = str, latestearnings = str, fundAccount = str, assets = str, tel = string.Empty, okassets = str, notmaturity = str;
 
     if (!Members.IsLoggedIn())
     {
@@ -22,6 +22,7 @@
         assets = member.GetValue<double>("assets").ToString("N2") + "元";
         okassets = member.GetValue<double>("okassets").ToString("N2") + "元";
         tel = member.GetValue<string>("tel");
+        notmaturity = member.GetValue<double>("notmaturity").ToString("N2");
 
         <section class="main-container pv-20">
             <div class="container" id="user-summary">
@@ -112,7 +113,7 @@
                                                 <a href="/memberinfo/transferred" class="btn  btn-sm btn-default">转入定期宝</a>
                                             </div>
                                         </div>
-                                        
+
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
@@ -129,7 +130,7 @@
                                     <div class="col-xs-12 col-md-6">
                                         <dl>
                                             <dt>未到期收益</dt>
-                                            <dd class="decimal">@okassets</dd>
+                                            <dd class="decimal">@notmaturity</dd>
                                         </dl>
                                     </div>
                                 </div>
