@@ -508,13 +508,15 @@ namespace Bytefunds.Cms.Logic.Controllers
 
                 CCPRestSDK api = new CCPRestSDK();
                 //ip格式如下，不带https://
-                bool isInit = api.init("sandboxapp.cloopen.com", "8883");
+                bool isInit = api.init("app.cloopen.com", "8883");
                 api.setAccount("8a48b5514ff457cc014ff868438f0aa5", "63e6fcb07a6843c4b851cc8d6abc2bb5");
                 api.setAppId("8a48b5514ff457cc014ff86a83330ab9");
+                Common.CustomLog.WriteLog(isInit.ToString());
                 if (isInit)
                 {
                     string[] array = new string[] { num.ToString(), "2" };
                     Dictionary<string, object> retData = api.SendTemplateSMS(phone, "41259", array);
+                    Common.CustomLog.WriteLog(Newtonsoft.Json.JsonConvert.SerializeObject(retData));
                     if (retData["statusCode"].ToString() == "000000")
                     {
                         return Json(true, JsonRequestBehavior.AllowGet);
@@ -554,12 +556,14 @@ namespace Bytefunds.Cms.Logic.Controllers
         public ActionResult Test(string phone)
         {
             CCPRestSDK api = new CCPRestSDK();
-            bool isInit = api.init("sandboxapp.cloopen.com", "8883");
+            bool isInit = api.init("app.cloopen.com", "8883");
             api.setAccount("8a48b5514ff457cc014ff868438f0aa5", "63e6fcb07a6843c4b851cc8d6abc2bb5");
             api.setAppId("8a48b5514ff457cc014ff86a83330ab9");
             if (isInit)
             {
-                string[] array = new string[] { "123456", "3" };
+                Random rand = new Random();
+                int num = rand.Next(100000, 999999);
+                string[] array = new string[] { num.ToString(), "3" };
                 Dictionary<string, object> retData = api.SendTemplateSMS(phone, "41259", array);
                 if (retData["statusCode"].ToString() == "000000")
                 {
@@ -570,6 +574,7 @@ namespace Bytefunds.Cms.Logic.Controllers
             {
                 return Json(false, JsonRequestBehavior.AllowGet);
             }
+            return Content("test");
             //获取所有已经购买的产品
             //IContentType ct = Services.ContentTypeService.GetContentType("PayRecords");
             //IEnumerable<IContent> list = Services.ContentService.GetContentOfContentType(ct.Id).Where(e => e.GetValue<bool>("isdeposit") == true && e.GetValue<bool>("isexpired") == false);
@@ -632,7 +637,7 @@ namespace Bytefunds.Cms.Logic.Controllers
             //        Helpers.SendmailHelper.SendEmail(member.Username, "member:newprofit", dic);
             //    }
             //}
-            return Content("test");
+            //return Content("test");
         }
         public ActionResult Clear()
         {
