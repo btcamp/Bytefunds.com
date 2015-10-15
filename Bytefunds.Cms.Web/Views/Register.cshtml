@@ -6,7 +6,7 @@
     Html.EnableUnobtrusiveJavaScript();
 }
 
-<section class="clearfix" style="height:775px;background-image:url('/assets/images/bg01.jpg');background-size:100% 100%">
+<section class="clearfix loadPage">
     <div class="container register">
         <div class="row">
             <div class="form-block center-block p-20 light-gray-bg border-clear text-left">
@@ -106,6 +106,7 @@
 @section scripts{
 <script>
     $(function () {
+        loadHeight("$('#rigest')");
         var container = document.getElementById("vCode");
         var code = new vCode(container, {
             len: 4,
@@ -118,7 +119,6 @@
                 "#EEEE00"
             ]
         });
-        console.log(code)
         $("#btncode").click(function () {
             console.log($("#code").val())
 			if ($("#registerModel_Phone").val() == "") {
@@ -134,7 +134,7 @@
 			$(this).attr("disabled", true);
 			$.get($(this).data("href"), { phone: $("#registerModel_Phone").val() }, function (result) {
 				if (result) {
-					finAlert("验证码发送成功，请注意查收你的手机来电！", true);
+					finAlert("验证码发送成功，请注意查收你的手机短信！", true);
 					var times = 60;
 					var interval = setInterval(function () {
 					    $("#btncode").text(times + "s后再发送");

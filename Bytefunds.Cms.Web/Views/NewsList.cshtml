@@ -7,22 +7,38 @@
 <section id="news" class="light-gray-bg pv-30 clearfix news-page">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                @{
-                    foreach (IPublishedContent content in Model.Content.Children.OrderByDescending(e => e.CreateDate).Take(20))
-                    {
-                        <section>
-                            <h4>
-                                <i class="fa fa-dot-circle-o"></i>
-                                <a href="@content.Url" style="font-size:16px">@(content.GetPropertyValue<string>("title"))</a>
-                            </h4>
-                            <small>@(content.CreateDate.ToString("yyyy-MM-dd HH:mm:ss"))</small>
-                            <p></p>
-                            <hr style="margin: 20px 0; border: 0;border-top: 1px dashed #e3e3e3;border-bottom: 1px dashed #ffffff;" />
-                        </section>
+            <div class="col-sm-8">
+                <div style="margin-top:-20px;">
+                    <div class="description-title">
+                        <h4>财经新闻</h4>
+                    </div>
+                    @{
+                        foreach (IPublishedContent content in Model.Content.Children.OrderByDescending(e => e.CreateDate).Take(20))
+                        {
+                            <section>
+                                <h4>
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <a href="@content.Url" style="font-size:16px">@(content.GetPropertyValue<string>("title"))</a>
+                                </h4>
+                                <small>@(content.CreateDate.ToString("yyyy-MM-dd HH:mm:ss"))</small>
+                                <p></p>
+                                <hr style="margin: 20px 0; border: 0;border-top: 1px dashed #e3e3e3;border-bottom: 1px dashed #ffffff;" />
+                            </section>
+                        }
                     }
-                }
+                </div>
+                <div>
+                    <div class="description-title">
+                        <h4>公司动态</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="description-title">
+                        <h4>平台公告</h4>
+                    </div>
+                </div>
             </div>
+            <div class="col-sm-4"></div>
         </div>
     </div>
 </section>

@@ -17,7 +17,7 @@
 <section class="pv-30 clearfix">
     <div class="container">
         <div class="row">
-            <div class="col-sm-9 bid-left">
+            <div class="col-md-8 bid-left">
                 <div class="description-title">
                     <h4>@(content.GetPropertyValue<string>("title"))</h4>
                 </div>
@@ -43,13 +43,15 @@
                 </div>
                 <hr />
                 <p class="bid-content">@(content.GetPropertyValue<string>("introduction"))</p>
-                <div class="bid-charts" id="charts" style="min-height:216px">
+                <div class="bid-charts" id="charts" style="min-height:300px">
                     <img src="~/assets/images/ajax-loader2.gif" style="margin:0 auto;padding-top:100px" alt="Alternate Text" />
                 </div>
                 <div class="bid-characteristic">
                     <ul class="nav nav-tabs style-2" role="tablist">
                         <li class="active"><a href="#h2tab1" role="tab" data-toggle="tab" aria-expanded="true">基金概况</a></li>
                         <li class=""><a href="#h2tab2" role="tab" data-toggle="tab" aria-expanded="false">产品特色</a></li>
+                        <li class=""><a href="#h2tab3" role="tab" data-toggle="tab" aria-expanded="false">风险规避</a></li>
+                        <li class=""><a href="#h2tab4" role="tab" data-toggle="tab" aria-expanded="false">客户评价</a></li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="h2tab1">
@@ -80,7 +82,7 @@
                         </div>
                         <div class="tab-pane" id="h2tab2">
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-5">
                                     <div class="tab-pane-content">
                                         <h6>豪门定制，只为您</h6>
                                         <p><i class="icon-ok"></i>本产品由中国量化学会理事长--丁鹏博士操刀策划，给您真正的高大上体验</p>
@@ -93,10 +95,78 @@
                                         <h6>让利更明显</h6>
                                         <p><i class="icon-ok"></i>费率较传统货币基金明显降低，更多让利投资人</p>
                                     </div>
-                                    <div class="tab-pane-content">
-                                        <h6>风险小，收益高</h6>
-                                        <p><i class="icon-ok"></i>产品最大回撤0.67%，收益历史最高可达66.9%</p>
+                                </div>
+                                <div class="col-md-7">
+                                    <h5>收益对比</h5>
+                                    <div class="mt-20" id="compare">
+                                        <img src="~/assets/images/ajax-loader2.gif" style="margin:0 auto;padding-top:100px" alt="Alternate Text" />
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="h2tab3">
+                            <div class="row fxgb_introduce clearfix" style="padding-top:20px;">
+                                <div class="col-sm-4">
+                                    <div class="list01 hover"></div>
+                                    <h3>双重保障</h3>
+                                    <p>比特金服1天闪电垫付，平安融资担保80天本息赔付</p>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="list02 hover"></div>
+                                    <h3>分散投资</h3>
+                                    <p>一百元投资近万份平安融资 <br />担保债权</p>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="list03 hover"></div>
+                                    <h3>资金流转</h3>
+                                    <p>资金流转100% <br />通过第三方支付</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane " id="h2tab4">
+                            <div class="row  pj clearfix" style="padding:10px 0;">
+                                <div class="col-md-12">
+                                    <table class="table">
+                                        <tr>
+                                            <td class="td1">恭喜发财</td>
+                                            <td class="td2">投资金额：1000.000元</td>
+                                            <td class="td3">赵**</td>
+                                            <td class="td4">2015-10-15 00:00:00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>还可以</td>
+                                            <td>投资金额：400.00元</td>
+                                            <td>张**</td>
+                                            <td>2015-10-15 00:00:00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>不错</td>
+                                            <td>投资金额：3000.00元</td>
+                                            <td>海**</td>
+                                            <td>2015-10-15 00:00:00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>安全可靠</td>
+                                            <td>投资金额：200.00元</td>
+                                            <td>王**</td>
+                                            <td>2015-10-15 00:00:00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>转入很顺利，期待定期宝收益中</td>
+                                            <td>投资金额：5000.00元</td>
+                                            <td>李**</td>
+                                            <td>2015-10-15 00:00:00</td>
+                                        </tr>
+                                    </table>
+                                    <ul class="list-inline page" style="text-align:center">
+                                        <li><a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+                                        <li><a href="#">1</a></li>
+                                        <li><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li>
+                                        <li><a href="#">4</a></li>
+                                        <li><a href="#">5</a></li>
+                                        <li><a href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -104,12 +174,17 @@
                 </div>
                 <p class="bid-warning"><i class="icon-warning-empty"></i> 比特金服提醒您：投资有风险</p>
             </div>
-            <div class="col-sm-3 bid-right">
+            <div class="col-md-4 bid-right">
                 <div class="bid-right-content content1">
                     <h4 class="mb-20 ">即刻申购</h4>
+                    <p>可投资金额：<span class="bid-now">100,000</span>元</p>
+                    <div class="input-group mb-20">
+                        <span class="input-group-addon" id="inverst-onney" style="color:#000;">投资金额（元）</span>
+                        <input type="text" class="form-control" placeholder="请输入投资金额" aria-describedby="sizing-addon2">
+                    </div>
                     @*/pay?id=@content.Id&minAmount=@(content.GetPropertyValue<double>("startAmount"))*@
-                    <a href="/pay?id=@content.Id&minAmount=@(content.GetPropertyValue<double>("startAmount"))" class="btn-sm btn btn-block btn-warning">立即购买</a>
-                    <p style="line-height: 25px;" class="mt-10">尊敬的用户您好，自2015年9月17日起，比特金服基金服务功能将全面展开。</p> 
+                    <a href="/pay?id=@content.Id&minAmount=@(content.GetPropertyValue<double>("startAmount"))" class="btn-sm btn btn-block btn-warning">开始赚钱</a>
+                    <p style="line-height: 25px;" class="mt-10">尊敬的用户您好，自2015年9月17日起，比特金服基金服务功能将全面展开。</p>
                     <hr style="border-style: dashed" />
                 </div>
                 <div class="bid-right-content hidden-xs">
@@ -122,57 +197,26 @@
                     <a href="#" class="btn-sm btn btn-default btn-block reservation-btn">立即预约</a>
                     <hr style="border-style: dashed" />
                 </div>
-                    <table class="invest-table">
-                        <thead class="invest-head">
-                            <tr>
-                                <th colspan="3">最新投资记录</th>
-                            </tr>
-                        </thead>
-                        <tbody class="invest-body">
-                            <tr>
-                                <td class="td1">张*</td>
-                                <td class="td2">1000.00元</td>
-                                <td class="td3">2015-10-14 15:54:13</td>
-                            </tr>
-                            <tr>
-                                <td class="td1">张*</td>
-                                <td class="td2">1000.00元</td>
-                                <td class="td3">2015-10-14 15:54:13</td>
-                            </tr>
-                            <tr>
-                                <td class="td1">张*</td>
-                                <td class="td2">1000.00元</td>
-                                <td class="td3">2015-10-14 15:54:13</td>
-                            </tr>
-                            <tr>
-                                <td class="td1">张*</td>
-                                <td class="td2">1000.00元</td>
-                                <td class="td3">2015-10-14 15:54:13</td>
-                            </tr>
-                            <tr>
-                                <td class="td1">张*</td>
-                                <td class="td2">1000.00元</td>
-                                <td class="td3">2015-10-14 15:54:13</td>
-                            </tr>
-                            <tr>
-                                <td class="td1">张*</td>
-                                <td class="td2">1000.00元</td>
-                                <td class="td3">2015-10-14 15:54:13</td>
-                            </tr>
-                            <tr>
-                                <td class="td1">张*</td>
-                                <td class="td2">1000.00元</td>
-                                <td class="td3">2015-10-14 15:54:13</td>
-                            </tr>
-                            <tr>
-                                <td class="td1">张*</td>
-                                <td class="td2">1000.00元</td>
-                                <td class="td3">2015-10-14 15:54:13</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="bid-right-content mt-20 mb-20">
+                    <div class="invest">
+                        <div style="border:2px solid #f5a900;">
+                            <table class="invest-table" style="width:101%">
+                                <thead class="invest-head">
+                                    <tr>
+                                        <th colspan="3">最新投资记录</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="invest-div">
+                            <table class="invest-table" style="position:relative">
+                                <tbody class="invest-body"></tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
     </div>
 </section>
 
@@ -192,36 +236,113 @@
                 chart: {
                 },
                 title: {
-                    text: '@(content.GetPropertyValue<string>("title")) 一周收益',
+                    text:'@(content.GetPropertyValue<string>("title"))每日收益',
                     style: { color: "#F5B024", fontSize: "1.8em", fontFamily: '黑体', fontWeight: 600 }
                 },
                 xAxis: {
-                    //categories:result.Times
-                    categories: [GetDateStr(-6), GetDateStr(-5), GetDateStr(-4), GetDateStr(-3), GetDateStr(-2),GetDateStr(-1), GetDateStr(0)]
+                    gridLineColor: '#EBEBEB',
+                    gridLineWidth: 1,
+                    gridLineDashStyle: 'dot',
+                    categories: [GetDateStr(-6), GetDateStr(-5), GetDateStr(-4), GetDateStr(-3), GetDateStr(-2),GetDateStr(-1), GetDateStr(0)]                                },
+                yAxis: {
+                    gridLineDashStyle: 'dot',
+                    title: {
+                        text: ''
+                    },
+                    labels: {
+                        formatter: function() {
+                            return this.value;
+                        }
+                    }
+                },
+                tooltip: {
+                    valueSuffix: ' 元',
+                    crosshairs: true,
+                    shared: true,
+                },
+                credits:{
+                    enabled:false
+                },
+                exporting:{
+                    enabled:false
+                },
+                legend: {
+                    borderRadius:5,
+                    x: - 10,
+                    y:0
                 },
                 series: [{
-                    type: 'spline',
-                    name: '当日收益',
+                    color:'#F5B024',
+                    name: '每万元收益 ',
                     //data:  result.Datas,
                     data: data,
-                    marker: {
-                        lineWidth: 3,
-                        lineColor: Highcharts.getOptions().colors[3],
-                        fillColor: 'white'
-                    },
-                    itemStyle: { color: 'red' }
+                    marker:{
+                        symbol:'circle'
+                    }
                 }]
             });
-            //});
+            var h=280,w=400;
+            if($(window).width()<350){
+                w = 250;
+                h=200;
+            }else if($(window).width()<500){
+                w =320;
+                h=210;
+            }
+            $('#compare').highcharts({
+                chart: {
+                    type: 'column',
+                    backgroundColor:'none',
+                    width:w,
+                    height:h,
+                },
+                title: {
+                    text: ''
+                },
+                xAxis: {
+                    categories: ['@(content.GetPropertyValue<string>("title")) ', '余额宝', '银行理财']
+                },
+                yAxis: {
+                    title: {
+                        text: ''
+                    },
+                    gridLineDashStyle: 'dot',
+                    labels: {
+                        formatter: function() {
+                            return this.value + '%';
+                        }
+                    }
+                },
+                tooltip: {
+                    formatter: function() {
+                        var s = this.y + '%';
+                        return s;
+                    }
+                },
+                credits:{
+                    enabled:false
+                },
+                exporting:{
+                    enabled:false
+                },
+                legend: {
+                    enabled:false
+                },
+                series: [{
+                    name: '',
+                    color:'#34BDE2',
+                    data:[rate,3.3,5.18]
+                },]
+            });
         });
-        function GetDateStr(AddDayCount) 
-        { 
-            var dd = new Date(); 
-            dd.setDate(dd.getDate()+AddDayCount);//获取AddDayCount天后的日期 
-            //var y = dd.getYear(); 
+        function GetDateStr(AddDayCount)
+        {
+            var dd = new Date();
+            dd.setDate(dd.getDate()+AddDayCount);//获取AddDayCount天后的日期
+            //var y = dd.getYear();
             var m = (dd.getMonth()+1)<10?"0"+(dd.getMonth()+1):(dd.getMonth()+1);//获取当前月份的日期，不足10补0
             var d = dd.getDate()<10?"0"+dd.getDate():dd.getDate(); //获取当前几号，不足10补0
-            return m+"-"+d; 
+            return m+"-"+d;
         }
     </script>
 }
