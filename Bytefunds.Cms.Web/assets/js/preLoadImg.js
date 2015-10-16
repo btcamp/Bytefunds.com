@@ -155,7 +155,7 @@ jQuery(function ($) {
         );
     };
     ByteFunds.changeVersetList = function () {
-        var name_list = ["蒋", "沈", "韩", "李", "张", "王", "赵", "钱", "孙", "何", "王", "许", "秦", "朱", "郑", "冯", "易", "邓", "周", "杨", "曹", "孔", "汪", "杜", "范", "彭", "杜", "严", "袁", "唐"];
+        var name_list = ["蒋", "沈", "韩", "李", "张", "王", "赵", "钱", "孙", "何", "王", "许", "秦", "朱", "郑", "冯", "易", "邓", "周", "杨", "曹", "孔"];
         var top = 0;
         var invest_tablle = $(".invest-div table");
         var dom = ""
@@ -164,20 +164,7 @@ jQuery(function ($) {
             var name = name_list[name_i];
             var invest_tablle = $(".invest-div table");
             var money = Math.round(Math.random() * 200 + 1) * 100;
-            var date = new Date().Format("yyyy-MM-dd");
-            var h = new Date().getHours() - 1;
-            if (h < 8) {
-                h = 23;
-            }
-            var m = Math.round(Math.random() * 59);
-            if (m < 10) {
-                m = "0" + m;
-            }
-            var s = Math.round(Math.random() * 59);
-            if (s < 10) {
-                s = "0" + s;
-            }
-            var time = date + " " + h + ":" + m + ":" + s;
+            var time = new Date().Format("yyyy-MM-dd hh:mm:ss");
             dom += '<tr><td class="td1">' + name + '*</td><td class="td2">' + money + '.00元</td><td class="td3">' + time + '</td></tr>'
         }
         $(".invest-body").html(dom);
@@ -186,20 +173,7 @@ jQuery(function ($) {
             var name = name_list[name_i];
             var invest_tablle = $(".invest-div table");
             var money = Math.round(Math.random() * 200 + 1) * 100;
-            var date = new Date().Format("yyyy-MM-dd");
-            var h = new Date().getHours() - 1;
-            if (h < 8) {
-                h = 23;
-            }
-            var m = Math.round(Math.random() * 59);
-            if (m < 10) {
-                m = "0" + m;
-            }
-            var s = Math.round(Math.random() * 59);
-            if (s < 10) {
-                s = "0" + s;
-            }
-            var time = date + " " + h + ":" + m + ":" + s;
+            var time = new Date().Format("yyyy-MM-dd hh:mm:ss");
             invest_tablle.animate({
                 top: "-30px"
             }, 1500, function () {
@@ -230,10 +204,6 @@ jQuery(function ($) {
             })
         }
     }
-    setInterval(function () {
-        var h = new Date().getHours();
-        console.log(h)
-    },500)
 });
 $(function () {
     if (window.location.href.indexOf("Admin") >= 0) {

@@ -822,7 +822,7 @@ input:focus, select:focus, textarea:focus {
 }
 
 .modal {
-    background-color: rgba(0,0,0,.7);
+    background-color: rgba(0,0,0,.6);
 }
 
 @media(min-width:768px) {
@@ -1995,7 +1995,6 @@ input:focus, select:focus, textarea:focus {
             font-size: 24px;
         }
 }
-
 .invest-table tbody .td1 {
     width: 15%;
 }
@@ -2014,11 +2013,9 @@ input:focus, select:focus, textarea:focus {
         padding-right: 0 !important;
     }
 }
-@media(min-width:960px ){
-   .loadPage{
-        background-size:100% 100%;
-        background-image:url('/assets/images/bg03.jpg');
-    }
+.loadBg{
+    background-size:100% 100%;
+
 }
 .fxgb_introduce > div > div {
     width: 100px;
@@ -2114,4 +2111,10 @@ input:focus, select:focus, textarea:focus {
 
 .news-right .coo img {
     margin-bottom: 20px;
+}
+@media (min-width: 768px){
+   #resetPassword .modal-dialog {
+        width: 500px;
+        margin-top:10%;
+    }
 }
