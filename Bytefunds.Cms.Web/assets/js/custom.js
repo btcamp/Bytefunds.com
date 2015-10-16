@@ -230,10 +230,6 @@ jQuery(function ($) {
             })
         }
     }
-    setInterval(function () {
-        var h = new Date().getHours();
-        console.log(h)
-    },500)
 });
 $(function () {
     if (window.location.href.indexOf("Admin") >= 0) {

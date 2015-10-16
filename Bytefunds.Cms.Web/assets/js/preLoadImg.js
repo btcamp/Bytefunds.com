@@ -1,410 +1,66 @@
-/* Theme Name: The Project - Responsive Website */
-jQuery(function ($) {
-    var ByteFunds = window.ByteFunds || {};
-    $(document).ready(function () {
-        $(".qqService").click(function () { ByteFunds.qqService(); });
-        $(".qq").click(function () { ByteFunds.qqService(); });
-        ByteFunds.ObtainNews1();
-        ByteFunds.ObtainNews2();
-        ByteFunds.hiddenModal();
-        ByteFunds.showModal();
-        ByteFunds.showCircle();
-        //ByteFunds.showCharts();
-        ByteFunds.showUserList();
-        ByteFunds.changeVersetList();
-        ByteFunds.loadHeight();
-        ByteFunds.loadBackgroundImg();
-    });
-    ByteFunds.qqService = function (qq) {
-        var qq_list = new Array("578485754", "3226588475");
-        //随机
-        var qq_i = Math.floor(Math.random() * qq_list.length);
-        if (!qq) {
-            qq = qq_list[qq_i];
-        }
-        var element = "<iframe style='display:none;' class='qq_iframe' src='tencent://message/?uin=" + qq + "&Site=&menu=yes'></iframe>";
-        $("body").append(element);
+var imgReady = (function () {
+    var list = [], intervalId = null,
+    // 用来执行队列
+    tick = function () {
+        var i = 0;
+        for (; i < list.length; i++) {
+            list[i].end ? list.splice(i--, 1) : list[i]();
+        };
+        !list.length && stop();
+    },
+    // 停止所有定时器队列
+    stop = function () {
+        clearInterval(intervalId);
+        intervalId = null;
     };
-    ByteFunds.ObtainNews1 = function () {
-        var trs = $(".news-content-1").find("tr");
-        if (trs.length) {
-            var trIndex = 0;
-            var date = trs.eq(trIndex).children("td").eq(0).html();
-            var url = trs.eq(trIndex).children("td").eq(1).html();
-            var content = trs.eq(trIndex).children("td").eq(2).html();
-            var temp = '<li class="animated fadeInUp"><span>' + date + '</span><a href="' + url + '">' + content + '</a></li>';
-            $("#news-1").html(temp);
-            setInterval(function () {
-                trIndex++;
-                if (trIndex >= trs.length) {
-                    trIndex = 0;
-                }
-                var date = trs.eq(trIndex).children("td").eq(0).html();
-                var url = trs.eq(trIndex).children("td").eq(1).html();
-                var content = trs.eq(trIndex).children("td").eq(2).html();
-                var temp = '<li class="animated fadeInUp"><span>' + date + '</span><a href="' + url + '">' + content + '</a></li>';
-                $("#news-1").html(temp);
-            }, 6000);
-        }
-
+    return function (url, ready, load, error) {
+        var onready, width, height, newWidth, newHeight,
+        img = new Image();
+        img.src = url;
+        // 如果图片被缓存，则直接返回缓存数据
+        if (img.complete) {
+            ready.call(img);
+            load && load.call(img);
+            return;
+        };
+        width = img.width;
+        height = img.height;
+        // 加载错误后的事件
+        img.onerror = function () {
+            error && error.call(img);
+            onready.end = true;
+            img = img.onload = img.onerror = null;
+        };
+        // 图片尺寸就绪
+        onready = function () {
+            newWidth = img.width;
+            newHeight = img.height;
+            if (newWidth !== width || newHeight !== height ||
+                // 如果图片已经在其他地方加载可使用面积检测
+                newWidth * newHeight > 1024
+            ) {
+                ready.call(img);
+                onready.end = true;
+            };
+        };
+        onready();
+        // 完全加载完毕的事件
+        img.onload = function () {
+            // onload在定时器时间差范围内可能比onready快
+            // 这里进行检查并保证onready优先执行
+            !onready.end && onready();
+            load && load.call(img);
+            // IE gif动画会循环执行onload，置空onload即可
+            img = img.onload = img.onerror = null;
+        };
+        // 加入队列中定期执行
+        if (!onready.end) {
+            list.push(onready);
+            // 无论何时只允许出现一个定时器，减少浏览器性能损耗
+            if (intervalId === null) intervalId = setInterval(tick, 40);
+        };
     };
-    ByteFunds.ObtainNews2 = function () {
-        var trs = $(".news-content-2").find("tr");
-        if (trs.length) {
-            var trIndex = 0;
-            var time = trs.eq(trIndex).children("td").eq(0).html();
-            var account = trs.eq(trIndex).children("td").eq(1).html();
-            if (account) {
-                account = account.replace(/(.{3}).*(.{3})/, "$1*****$2");
-            }
-            var content = trs.eq(trIndex).children("td").eq(2).html();
-            var temp = '<li class="animated fadeInUp"><span>' + time + '</span>用户: <span>' + account + '</span><span>' + content + '</span></li>';
-            $("#news-2").html(temp);
-            setInterval(function () {
-                trIndex++;
-                if (trIndex >= trs.length) {
-                    trIndex = 0;
-                }
-                var time = trs.eq(trIndex).children("td").eq(0).html();
-                var account = trs.eq(trIndex).children("td").eq(1).html();
-                if (account) {
-                    account = account.replace(/(.{3}).*(.{3})/, "$1*****$2");
-                }
-                var content = trs.eq(trIndex).children("td").eq(2).html();
-                var temp = '<li class="animated fadeInUp"><span>' + time + '</span>用户: <span>' + account + '</span><span>' + content + '</span></li>';
-                $("#news-2").html(temp);
-            }, 5000);
-        }
-    };
-    ByteFunds.hiddenModal = function () {
-        var btn = $(".closed");
-        var modal = $("#reservation-content");
-        btn.click(function () {
-            modal.attr("class", "modal animated fadeOut hidden");
-        });
-    };
-    ByteFunds.showModal = function () {
-        var btn = $(".reservation-btn");
-        var modal = $("#reservation-content");
-        btn.click(function () {
-            modal.attr("class", "modal animated fadeIn");
-        })
-    };
-    ByteFunds.showCircle = function () {
-        var indicatorContainer = $('#indicatorContainer');
-        if (indicatorContainer.length) {
-            var value = $("#indicatorValue").val();
-            $('#indicatorContainer').radialIndicator({
-                barColor: '#F5B024',
-                barWidth: 5,
-                initValue: value,
-                roundCorner: true,
-                percentage: true,
-                radius: 30,
-                fontFamily: 'Calibri'
-            });
-        }
-    };
-    ByteFunds.showCharts = function () {
-        var chart = $('#charts');
-        if (chart.length) {
-            $('#charts').highcharts({
-                chart: {},
-                title: {
-                    text: '零钱计划第一季 一周收益',
-                    style: { color: "#F5B024", fontSize: "1.8em", fontFamily: '黑体', fontWeight: 600 }
-                },
-                xAxis: {
-                    categories: ['09-06', '09-07', '09-08', '09-09', '09-10', '09-11', '09-12']
-                },
-                series: [{
-                    type: 'spline',
-                    name: '当日收益',
-                    data: [0.121, 0.125, 0.123, 0.124, 0.131, 0.134, 0.135],
-                    marker: {
-                        lineWidth: 3,
-                        lineColor: Highcharts.getOptions().colors[3],
-                        fillColor: 'white'
-                    },
-                    itemStyle: { color: 'red' }
-                }]
-            });
-        }
-    };
-    ByteFunds.showUserList = function () {
-        var userCenter = $(".user-center");
-        var userBtn = $(".header-top-dropdown .uesr-btn");
-        var flag = true, timeout;
-        userBtn.click(
-            function () {
-                if (flag) {
-                    userCenter.attr("class", "user-center list animated fadeInRight");
-                    userBtn.css("outline", "");
-                    flag = false;
-                    timeout = setTimeout(function () {
-                        userCenter.attr("class", "user-center list  hidden"); userBtn.css("outline", "#F5B024");
-                        flag = true; clearTimeout(timeout);
-                    }, 6000);
-                }
-                else {
-                    userCenter.attr("class", "user-center list  hidden");
-                    userBtn.css("outline", "#F5B024");
-                    clearTimeout(timeout); flag = true;
-                }
-            }
-        );
-    };
-    ByteFunds.changeVersetList = function () {
-        var name_list = ["蒋", "沈", "韩", "李", "张", "王", "赵", "钱", "孙", "何", "王", "许", "秦", "朱", "郑", "冯", "易", "邓", "周", "杨", "曹", "孔"];
-        var top = 0;
-        var invest_tablle = $(".invest-div table");
-        var dom = ""
-        for (var i = 0; i < 8; i++) {
-            var name_i = Math.floor(Math.random() * name_list.length);
-            var name = name_list[name_i];
-            var invest_tablle = $(".invest-div table");
-            var money = Math.round(Math.random() * 200 + 1) * 100;
-            var time = new Date().Format("yyyy-MM-dd hh:mm:ss");
-            dom += '<tr><td class="td1">' + name + '*</td><td class="td2">' + money + '.00元</td><td class="td3">' + time + '</td></tr>'
-        }
-        $(".invest-body").html(dom);
-        setInterval(function () {
-            var name_i = Math.floor(Math.random() * name_list.length);
-            var name = name_list[name_i];
-            var invest_tablle = $(".invest-div table");
-            var money = Math.round(Math.random() * 200 + 1) * 100;
-            var time = new Date().Format("yyyy-MM-dd hh:mm:ss");
-            invest_tablle.animate({
-                top: "-30px"
-            }, 1500, function () {
-                invest_tablle.css("top", "0");
-                var temp = '<tr><td class="td1">' + name + '*</td><td class="td2">' + money + '.00元</td><td class="td3">' + time + '</td></tr>'
-                $(".invest-body").append(temp);
-                $(".invest-body").children().eq(0).remove();
-            });
-        }, 3000);
-    };
-    ByteFunds.loadHeight=function() {
-        var header = $("#header").innerHeight();
-        var footer = $("#footer").innerHeight();
-        var win = $(window).height();
-        var height = win - footer - header;
-        $(".loadPage").css({
-            minHeight: height + "px",
-        })
-    }
-    ByteFunds.loadBackgroundImg = function () {
-        var bg = $(".loadBg");
-        var url = ["/assets/images/bg01.jpg", "/assets/images/bg02.jpg", "/assets/images/bg03.jpg"];
-        var i = Math.floor(Math.random() * url.length);
-        if (bg.length > 0 && $(window).width()>960) {
-            bg.css({
-                background: "url(" + url[i] + ")",
-                backgroundSize:"100% 100%"
-            })
-        }
-    }
-});
-$(function () {
-    if (window.location.href.indexOf("Admin") >= 0) {
-
-        $("body").css("min-height", $("html").height() + "px");
-    }
-    initAajxform();
-    $(".logout").click(function () {
-        ajaxSubmit(this.href, null, "正在退出....");
-        $(this).attr("disabled", true);
-        return false;
-    });
-    $(".btnregister").click(function () {
-        $("#myregisterModal").modal("show");
-    });
-    $(".newsbtn").click(function () {
-        $.get("/umbraco/Api/News/Get?key=" + $(this).data("id"), function (result) {
-            $("#myLargeModalLabel").text(result.title);
-            $("#content").html(result.content);
-            $("#myModal").modal("show");
-        }, "json");
-    });
-    $(".productBtn").click(function () {
-        $.get("/umbraco/Api/News/Get?key=" + $(this).data("id"), function (result) {
-            $("#myProductModalLabel").text(result.title);
-            $("#productcontent").html(result.content);
-            if (result.canbuy) {
-                $("#buyaction").show()
-                $("#buyaction").attr("href", "/Pay?id=" + result.id);
-            } else {
-                $("#buyaction").hide();
-            }
-            $("#myModalproduct").modal("show");
-        }, "json");
-    });
-    $('#myModal').on('hidden.bs.modal', function (e) {
-        $("#myLargeModalLabel").text("比特金服");
-        $("#content").html('<div><img style="margin:0 auto" src="/assets/images/loading.jpg" alt="loading" /></div>');
-    });
-    $("#myModalproduct").on('hidden.bs.modal', function (e) {
-        $("#myProductModalLabel").text("产品信息");
-        $("#productcontent").html('<div><img style="margin:0 auto" src="/assets/images/loading.jpg" alt="loading" /></div>');
-    });
-});
-
-function modalLoading(msg) {
-    if ('undefined' == typeof (document.body.style.maxHeight)) {
-        return;
-    }
-    if (msg == null) {
-        msg = "正在提交数据，请稍候...";
-    }
-    bootbox.dialog({
-        title: $(document).attr('title'),
-        message: '<img src="/assets/images/ajax-loader2.gif" style="float:left;margin:4px 5px 0 0" />' + msg,
-        animate: false,
-        buttons: {
-        }
-    });
-}
-
-function modalConfirm(title, message, callback) {
-    bootbox.dialog({
-        message: message,
-        title: title,
-        buttons: {
-            success: {
-                label: "取消",
-                className: "btn-success",
-                callback: function () {
-                    callback(false);
-                }
-            },
-            main: {
-                label: "确定",
-                className: "btn-primary",
-                callback: function () {
-                    callback(true);
-                }
-            }
-        }
-    });
-}
-
-function finAlert(message, issuccess, config) {
-    if ('undefined' == typeof (document.body.style.maxHeight)) {
-        alert(message);
-        return;
-    }
-    Messenger.options = {
-        extraClasses: 'messenger-fixed messenger-theme-flat messenger-on-top',
-        theme: 'future'
-    }
-    var msgConfig = $.extend({
-        message: message,
-        type: 'error',
-        hideAfter: 10,
-        hideOnNavigate: true,
-        showCloseButton: true
-    }, config);
-    if (issuccess == false) {
-        Messenger().post(msgConfig);
-    }
-    else {
-        msgConfig.type = "success";
-        Messenger().post(msgConfig);
-    }
-}
-
-function initAajxform() {
-    $("form").each(function (index, ele) {
-        if ($(ele).attr("id") != "search") {
-            $(ele).ajaxForm({
-                beforeSubmit: function () {
-                    if ($(ele).valid()) {
-                        modalLoading();
-                    } else {
-                        return false;
-                    }
-                },
-                error: function () {
-                    bootbox.hideAll();
-                    finAlert("提交数据过程中出现错误，请检查数据后重试提交", false);
-                },
-                dataType: "JSON",
-                success: function (data) {
-                    bootbox.hideAll();
-                    if (data.Success) {
-                        var modal = $(".modal");
-                        modal.attr("class", "modal animated fadeOut hidden");
-                        $('#reservation-content input').val('');
-                        $('#reservation-content textarea').val('');
-                        finAlert(data.Msg, true);
-                        if (data.RedirectUrl != null && data.RedirectUrl != "" && data.IsRedirect) {
-                            setTimeout(function () {
-                                location = data.RedirectUrl;
-                            }, 1000);
-                        }
-                        if ($("#myModal").length > 0) {
-                            $("#myModal").modal("hide");
-                        }
-                    }
-                    else {
-                        finAlert(data.Msg, false);
-                    }
-                }
-            });
-        }
-    });
-}
-
-function ajaxSubmit(url, data, beforAjaxMsg) {
-    $.ajax({
-        url: url,
-        data: data,
-        beforeSend: function myfunction() {
-            beforAjaxMsg = beforAjaxMsg == null ? "正在提交数据...." : beforAjaxMsg;
-            modalLoading(beforAjaxMsg);
-        },
-        error: function () {
-            bootbox.hideAll();
-            finAlert("提交数据过程中出现错误，请检查数据后重试提交", false);
-        },
-        dataType: "json",
-        success: function (data) {
-            bootbox.hideAll();
-            if (data.Success) {
-                finAlert(data.Msg, true);
-                if (data.RedirectUrl != null && data.IsRedirect) {
-                    setTimeout(function () {
-                        location = data.RedirectUrl;
-                    }, 1000);
-                }
-            }
-            else {
-                finAlert(data.Msg, false);
-            }
-        }
-    });
-}
-Date.prototype.Format = function (formatStr) {
-    var str = formatStr;
-    var Week = ['日', '一', '二', '三', '四', '五', '六'];
-
-    str = str.replace(/yyyy|YYYY/, this.getFullYear());
-    str = str.replace(/yy|YY/, (this.getYear() % 100) > 9 ? (this.getYear() % 100).toString() : '0' + (this.getYear() % 100));
-    var month = this.getMonth() + 1;
-    str = str.replace(/MM/, month > 9 ? month.toString() : '0' + month);
-    str = str.replace(/M/g, month);
-
-    str = str.replace(/w|W/g, Week[this.getDay()]);
-
-    str = str.replace(/dd|DD/, this.getDate() > 9 ? this.getDate().toString() : '0' + this.getDate());
-    str = str.replace(/d|D/g, this.getDate());
-
-    str = str.replace(/hh|HH/, this.getHours() > 9 ? this.getHours().toString() : '0' + this.getHours());
-    str = str.replace(/h|H/g, this.getHours());
-    str = str.replace(/mm/, this.getMinutes() > 9 ? this.getMinutes().toString() : '0' + this.getMinutes());
-    str = str.replace(/m/g, this.getMinutes());
-
-    str = str.replace(/ss|SS/, this.getSeconds() > 9 ? this.getSeconds().toString() : '0' + this.getSeconds());
-    str = str.replace(/s|S/g, this.getSeconds());
-    return str;
-}
+})();
+imgReady('/assets/images/bg01.jpg', function () {});
+imgReady('/assets/images/bg02.jpg', function () {});
+imgReady('/assets/images/bg03.jpg', function () {});

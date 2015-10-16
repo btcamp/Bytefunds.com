@@ -1,7 +1,12 @@
 .news, .news ul {
     overflow: hidden;
 }
-
+.underline{
+    text-decoration:underline;
+}
+.underline:hover{
+    text-decoration:none;
+}
 .bid-content, .f_dd, .indent, .product p {
     text-indent: 2em;
 }
