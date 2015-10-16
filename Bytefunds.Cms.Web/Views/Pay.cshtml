@@ -15,7 +15,7 @@
 
 
     string url = string.Empty;
-
+    string title = "购买产品";
     if (!Members.IsLoggedIn())
     {
         <script>
@@ -36,7 +36,7 @@
         phone = member.GetValue<string>("tel");
         if (!string.IsNullOrEmpty(Request.QueryString["id"]) && !string.IsNullOrEmpty(Request.QueryString["minAmount"]))
         {
-           
+
             string minAmount = Request.QueryString["minAmount"];
             int id = int.Parse(Request.QueryString["id"]);
             IContent product = ApplicationContext.Services.ContentService.GetById(id);
@@ -49,7 +49,7 @@
             content.SetValue("rechargeDateTime", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
             content.SetValue("buyproduct", Request.QueryString["id"]);
 
-           
+
 
             content.SetValue("username", username);
             content.SetValue("email", email);
@@ -61,6 +61,7 @@
         }
         else
         {
+            title = "用户充值";
             url = string.Format("{0}?Username={1}&Phone={2}&Email={3}&Linkphone=0&Successurl={4}&Failurl={5}&Paytype={6}&Formurl={7}&Amount=0&cny=0", payurl, username, phone, email, successurl, payfailurl, array[0], array[1]);
         }
 
@@ -70,7 +71,7 @@
 }
 <section class="section clearfix">
     <div class="container">
-        <h2 class="text-center">购买产品</h2>
+        <h2 class="text-center">@title</h2>
         <div class="separator"></div>
         <div class="row grid-space-10">
             <iframe src="@url" style="border:none;width:100%;min-height:630px"></iframe>
