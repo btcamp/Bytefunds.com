@@ -12,7 +12,7 @@
     IEnumerable<IPublishedContent> newsList = null;
     if (news != null && news.Children.Count() > 0)
     {
-        newsList = news.Children().OrderByDescending(e =>  e.UpdateDate).Skip(0).Take(10);
+        newsList = news.Children().OrderByDescending(e => e.UpdateDate).Skip(0).Take(10);
     }
     Html.EnableClientValidation();
     Html.EnableUnobtrusiveJavaScript();
@@ -42,12 +42,14 @@
                         <!-- main image -->
                         <img src="/assets/images/banner/slider01.jpg" alt="slidebg1" data-bgposition="center top" data-bgrepeat="no-repeat" data-bgfit="cover">
                         <!-- Transparent Background -->
-                        <div class="tp-caption dark-translucent-bg"
-                             data-x="center"
-                             data-y="bottom"
-                             data-speed="600"
-                             data-start="0">
-                        </div>
+                        <a href="/#product" class="scrollspy smooth-scroll">
+                            <div class="tp-caption dark-translucent-bg"
+                                 data-x="center"
+                                 data-y="bottom"
+                                 data-speed="600"
+                                 data-start="0">
+                            </div>
+                        </a>
                     </li>
                     <!-- slide 1 end -->
                     <!-- slide 2 start -->
@@ -56,12 +58,14 @@
                         <!-- main image -->
                         <img src="/assets/images/banner/slider02.jpg" alt="slidebg2" data-bgposition="center top" data-bgrepeat="no-repeat" data-bgfit="cover">
                         <!-- Transparent Background -->
-                        <div class="tp-caption dark-translucent-bg"
-                             data-x="center"
-                             data-y="bottom"
-                             data-speed="600"
-                             data-start="0">
-                        </div>
+                        <a href="/register">
+                            <div class="tp-caption dark-translucent-bg"
+                                 data-x="center"
+                                 data-y="bottom"
+                                 data-speed="600"
+                                 data-start="0">
+                            </div>
+                        </a>
                     </li>
                     <!-- slide 2 end -->
                     <!-- slide 3 start -->
@@ -70,12 +74,14 @@
                         <!-- main image -->
                         <img src="/assets/images/banner/slider03.jpg" alt="slidebg2" data-bgposition="center top" data-bgrepeat="no-repeat" data-bgfit="cover">
                         <!-- Transparent Background -->
-                        <div class="tp-caption dark-translucent-bg"
-                             data-x="center"
-                             data-y="bottom"
-                             data-speed="600"
-                             data-start="0">
-                        </div>
+                        <a href="/about">
+                            <div class="tp-caption dark-translucent-bg"
+                                 data-x="center"
+                                 data-y="bottom"
+                                 data-speed="600"
+                                 data-start="0">
+                            </div>
+                        </a>
                     </li>
                     <!-- slide 3 end -->
                 </ul>
@@ -90,12 +96,12 @@
         <div class="separator banner-float-2" style="top:25%"></div>
         <p class="banner-float-3">已有 <span style="margin:0 -5px">@count</span> 位高端客户在比特金服安全注册获得收益</p>
         <p class="banner-float-4">零钱计划为您安全快速的赚钱</p>
-        <p><a class="btn btn-block banner-float-5 btn-buy" href="/productdetails?id=2336">点击立即购买</a></p>
-        <p class="banner-float-6">没有账户，<a href="/register">免费注册</a></p>
+        <p><a class="btn btn-block banner-float-5 btn-buy" href="/funds">立即购买</a></p>
+        <p class="banner-float-6"><a href="/register" style="color:#fff;text-decoration:underline;">没有账户？免费注册</a></p>
     </div>
 </div>
 <div id="page-start"></div>
-<section class="clearfix news">
+<section class="clearfix news" id="news">
     <div class="container">
         <div class="row">
             <div class="col-md-2 news-title">
@@ -124,22 +130,29 @@
         </div>
     </div>
 </section>
-
-<section class="clearfix pv-20">
-    <div class="container hot-product">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <h2 class="text-center">热销产品</h2>
-                <div class="separator"></div>
+<section class="clearfix mt-20 mb-20 " style="background:#edf5f8;">
+    <div class="container unionlj" style="background:url('/assets/images/11.jpg');background-size:80% 100%;height:100%;background-repeat:no-repeat">
+        <div class="row chengjiaoliang Main">
+            <div class="col-md-2 hidden-xs hidden-sm"></div>
+            <div class="col-md-5 col-sm-6">
+                累计成交<span class="red" id="billion">41</span><span id="yizi">亿</span><span class="red" id="million">2771.34</span> 万元 <span class="fontw"></span>
             </div>
-            <div class="col-xs-12" style="height: 10px;"></div>
+            <div class="col-md-5  col-sm-6">
+                累计创造投资人收益<span class="red" id="total_million">6434.42</span>万元
+            </div>
+        </div>
+    </div>
+</section>
+<section class="clearfix pv-20 " id="hot_product">
+    <div class=" container hot-product">
+        <div class="row">
             <div class="image-box">
                 <div class="col-md-5">
-                    <img src="/assets/images/hot/bytejinfu.jpg" alt="" style="width: 100%">
+                    <a href="/product"><img src="/assets/images/hot/bytejinfu.jpg" alt="" style="width: 100%"></a>
                 </div>
-                <div class="col-md-7">
+                <div class="col-md-4">
                     <div class="body">
-                        <h3>鹏华资产实盈量化复兴资产管理计划（主推）</h3>
+                        <h3>鹏华资产实盈量化复兴资产管理计划</h3>
                         <div class="separator-2"></div>
                         <div class="raise-funds">
                             <p><span class="raise-funds-title">开 放 额 度：</span><span class="cash">@(sumAmount.ToString("N2"))</span>元</p>
@@ -154,7 +167,25 @@
                         <p class="raise-funds-content">本私募产品是由鹏华资产管理有限公司发行的ETF期现套利对冲基金产品，仅接受合格投资人购买。预期收益可达<span class="earnings">66.9%</span>最大回撤1.5%，属于低风险高收益量化投资产品。</p>
                         <div style="position: relative">
                             <span class="btn btn-animated btn-warning margin-clear reservation-btn">立即预约<i class="fa fa-arrow-right pl-10"></i></span>
-                            <a href="/funds" class="reservation-more">了解更多>></a>
+                            <a href="/product" class="reservation-more">了解更多>></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 ">
+                    <div class="invest">
+                        <div style="border:2px solid #f5a900;">
+                            <table class="invest-table" style="width:101%">
+                                <thead class="invest-head">
+                                    <tr>
+                                        <th colspan="3">最新投资记录</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="invest-div">
+                            <table class="invest-table" style="position:relative">
+                                <tbody class="invest-body"></tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -203,7 +234,7 @@
                         <div class="col-md-3 col-sm-6 boxed object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
                             <div class="listing-item white-bg bordered mb-20">
                                 <div class="body">
-                                    <h1 class="subject">@(item.GetValue<string>("title"))</h1>
+                                    <h1 class="subject"><a href="/productdetails?id=@item.Id">@(item.GetValue<string>("title"))</a></h1>
                                     <h4 style="font-size:1.0em">@(item.GetValue<string>("title2"))</h4>
                                     <div class="title">
                                         <p>@(item.GetValue<string>("title3"))</p>
@@ -262,7 +293,7 @@
                             <h4>方正副邦-合生强债（量化部分）</h4>
                             <p class="benefit">年化收益率: <strong>12.96%</strong></p>
                         </div>
-                        <a href="/assets/images/achievement/ach01.jpg" class="popup-img overlay-link hidden-xs" title="方正副邦-合生强债（量化部分）"><i class="icon-zoom-in"></i></a>
+                        @*<a href="/assets/images/achievement/ach01.jpg" class="popup-img overlay-link hidden-xs" title="方正副邦-合生强债（量化部分）"><i class="icon-zoom-in"></i></a>*@
                     </div>
                     <div class="overlay-container overlay-visible">
                         <img src="/assets/images/achievement/ach02.jpg" alt="">
@@ -271,7 +302,7 @@
                             <h4>东航金融-自营盘1号</h4>
                             <p class="benefit">年化收益率: <strong>15.06%</strong></p>
                         </div>
-                        <a href="/assets/images/achievement/ach02.jpg" class="popup-img overlay-link hidden-xs" title="东航金融-自营盘1号"><i class="icon-zoom-in"></i></a>
+                        @*<a href="/assets/images/achievement/ach02.jpg" class="popup-img overlay-link hidden-xs" title="东航金融-自营盘1号"><i class="icon-zoom-in"></i></a>*@
                     </div>
                     <div class="overlay-container overlay-visible">
                         <img src="/assets/images/achievement/ach03.jpg" alt="">
@@ -280,7 +311,7 @@
                             <h4>东航金融-小金牛-固收2号</h4>
                             <p class="benefit">年化收益率: <strong>19.05%</strong></p>
                         </div>
-                        <a href="/assets/images/achievement/ach03.jpg" class="popup-img overlay-link hidden-xs" title="东航金融-小金牛-固收2号"><i class="icon-zoom-in"></i></a>
+                        @*<a href="/assets/images/achievement/ach03.jpg" class="popup-img overlay-link hidden-xs" title="东航金融-小金牛-固收2号"><i class="icon-zoom-in"></i></a>*@
                     </div>
                 </div>
             </div>

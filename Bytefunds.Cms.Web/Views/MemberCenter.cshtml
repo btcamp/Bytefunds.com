@@ -28,8 +28,8 @@
             <div class="container" id="user-summary">
                 <div class="row">
                     <div class="col-md-12">
-                        <h3 style="float:left;font-size:1.4em">比特金服用户：@username</h3>
-                        <ul class="list-inline" style=" padding-top: 12px;float:left;margin-left:15px">
+                        <h3 style="float:left;font-size:1.3em">比特金服用户：@username</h3>
+                        <ul class="list-inline" style=" padding-top: 10px;float:left;margin-left:15px">
                             <li><a href="/memberinfo/verified/" title="实名认证"><i class="icon-font @(member.GetValue<bool>("verified")?"approve":string.Empty) " title="实名认证">&#xe641;</i></a></li>
                             <li><a href="/memberinfo/bankcertification/" title="绑定银行卡"><i class="icon-font @(member.GetValue<bool>("bankCertification") ? "approve" : string.Empty)" title="绑定银行卡">&#xf00c0;</i></a></li>
                             <li><i class="icon-font @(!string.IsNullOrEmpty(member.GetValue<string>("tel")) ? "approve" : string.Empty)" title="手机认证">&#xe675;</i></li>
@@ -39,7 +39,7 @@
                 </div>
                 <div class="row summary-infos">
                     <div class="col-sm-6">
-                        <div class="summary-info summary-info-p2p mt-10" style="background-color:#fff">
+                        <div class="summary-info summary-info-p2p mt-20" style="background-color:#fff">
                             <div id="profit_container">
                                 <div style="width:16px;margin:0 auto">
                                     <img src="/assets/images/ajax-loader2.gif" style="width:16px; margin:auto 0;padding-top:100px"
@@ -95,7 +95,7 @@
                     <div class="col-sm-6 col-xs-12">
                         <div class="summary-info summary-info-funds">
                             <div class="hd clearfix">
-                                <span>您的账户</span>
+                                <span>您账户总资产为：XXXX元</span>
                             </div>
                             <div class="bd clearfix">
                                 <div class="field">
@@ -117,28 +117,27 @@
                                                 <span class="decimal">@fundAccount</span>
                                                 <label><a href="/memberinfo/buyrecord">定期宝账户</a></label>
                                             </div>
-                                            <div class="col-md-4">
+                                            @*<div class="col-md-4">
                                                 <a href="/memberinfo/transferred" class="btn  btn-sm btn-default">转入定期宝</a>
-                                            </div>
+                                            </div>*@
                                         </div>
-
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
                             </div>
                             <div class="ft clearfix">
                                 <div class="row">
-                                    <div class="col-xs-12 col-md-6">
+                                    <div class="col-xs-12 col-md-7">
                                         <dl>
-                                            <dt>余额</dt>
+                                            <dt>可用余额：</dt>
                                             <dd class="decimal">@okassets</dd>
-                                            <dd class="decimal"><a href="/pay" class="btn  btn-sm btn-default">转入</a></dd>
+                                            <dd class="decimal"><a href="/pay" class="btn  btn-sm btn-default">充值</a></dd>
                                         </dl>
                                     </div>
-                                    <div class="col-xs-12 col-md-6">
+                                    <div class="col-xs-12 col-md-5">
                                         <dl>
-                                            <dt>未到期收益</dt>
-                                            <dd class="decimal">@notmaturity</dd>
+                                            <dt>未到期收益：</dt>
+                                            <dd class="decimal">@notmaturity 元</dd>
                                         </dl>
                                     </div>
                                 </div>
@@ -178,6 +177,7 @@
                         }
                         $('#profit_container').highcharts({
                             chart: {
+                                type: 'spline'
                             },
                             title: {
                                 text: text,
@@ -186,16 +186,42 @@
                             xAxis: {
                                 categories: result.Times
                             },
+                            yAxis: {
+                                gridLineDashStyle: 'dot',
+                                title: {
+                                    text: ''
+                                },
+                                labels: {
+                                    formatter: function () {
+                                        return this.value;
+                                    }
+                                },
+                                allowDecimals: true
+                            },
+                            tooltip: {
+                                valueSuffix: ' 元',
+                                crosshairs: false,
+                                shared: true,
+                            },
+                            credits: {
+                                enabled: false
+                            },
+                            exporting: {
+                                enabled: false
+                            },
+                            legend: {
+                                borderRadius: 5,
+                                x: -10,
+                                y: 0
+                            },
                             series: [{
-                                type: 'spline',
+                                color: '#F5B024',
                                 name: "当日收益",
                                 data: result.Datas,
                                 marker: {
-                                    lineWidth: 3,
-                                    lineColor: Highcharts.getOptions().colors[3],
-                                    fillColor: 'white'
-                                },
-                                itemStyle: { color: 'red' }
+                                    lineWidth: 2,
+                                    lineColor: '#F5B024',
+                                }
                             }]
                         });
                     });

@@ -183,7 +183,6 @@ a {
 }
 
 img {
-    display: block;
     max-width: 100%;
     height: auto;
 }
@@ -2626,7 +2625,7 @@ h3 + .separator, h4 + .separator, h5 + .separator {
 @media (min-width:481px) and (max-width:767px) {
     .nav-tabs > li > a {
         padding: 12px 10px;
-        font-size: 11px;
+        font-size: 15px;
         margin-right: 0;
     }
 }
@@ -2852,18 +2851,20 @@ ul.pager, ul.pagination {
 
 .nav-pills > li > a {
     border-radius: 0;
-    padding: 7px 10px;
+    padding:0 0 5px 0;
     border: 1px solid transparent;
-    color: #999;
-    font-size: 13px;
+    color: #555;
+    font-size:1.1em;
     text-transform: uppercase;
     font-weight: 400;
+    margin-right:20px;
+    font-family:Calibri;
 }
 
     .nav-pills > li.active > a, .nav-pills > li.active > a:focus, .nav-pills > li.active > a:hover, .nav-pills > li > a:focus, .nav-pills > li > a:hover {
         color: #777;
         background-color: transparent;
-        border-bottom: 1px solid #777;
+        border-bottom: 2px solid  #F5B024;
     }
 
 .nav-pills.style-2 > li > a {
@@ -4504,7 +4505,7 @@ header.full-width .animated.main-navigation .dropdown-menu .open .dropdown-menu.
 
 @media (min-width:960px) {
     .main-navigation .navbar-nav > li {
-        margin: 0 0 0 20px;
+        margin: 0 0 0 18px;
     }
 
         .main-navigation .navbar-nav > li:first-child {

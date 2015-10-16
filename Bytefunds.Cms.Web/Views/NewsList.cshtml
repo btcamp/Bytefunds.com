@@ -4,25 +4,74 @@
 }
 
 @*@Html.Partial("_Breadcrumb", Model)*@
-<section id="news" class="light-gray-bg pv-30 clearfix news-page">
+<section id="news" class="light-gray-bg pv-30 clearfix news-page loadPage">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                @{
-                    foreach (IPublishedContent content in Model.Content.Children.OrderByDescending(e => e.CreateDate).Take(20))
-                    {
-                        <section>
-                            <h4>
-                                <i class="fa fa-dot-circle-o"></i>
-                                <a href="@content.Url" style="font-size:16px">@(content.GetPropertyValue<string>("title"))</a>
-                            </h4>
-                            <small>@(content.CreateDate.ToString("yyyy-MM-dd HH:mm:ss"))</small>
-                            <p></p>
-                            <hr style="margin: 20px 0; border: 0;border-top: 1px dashed #e3e3e3;border-bottom: 1px dashed #ffffff;" />
-                        </section>
-                    }
-                }
+            <div class="col-sm-9 news-left">
+                <ul class="nav nav-pills" role="tablist" style="margin-top:-10px;">
+                    <li class=" active"><a href="#pill-1" role="tab" data-toggle="tab" title="images" aria-expanded="true">财经新闻</a></li>
+                    <li class=""><a href="#pill-2" role="tab" data-toggle="tab" title="video" aria-expanded="false">公司动态</a></li>
+                    <li class=""><a href="#pill-3" role="tab" data-toggle="tab" title="text" aria-expanded="false">平台公告</a></li>
+                </ul>
+                <div class="tab-content clear-style mt-20">
+                    <div class="tab-pane active" id="pill-1">
+                        @{
+                            foreach (IPublishedContent content in Model.Content.Children.OrderByDescending(e => e.CreateDate).Take(15))
+                            {
+                                <div>
+                                    <h4>
+                                        <i class="fa fa-dot-circle-o" style="position:relative;top:1px;"></i>
+                                        <a href="@content.Url" style="font-size:15px">@(content.GetPropertyValue<string>("title"))</a>
+                                    </h4>
+                                    <small>@(content.CreateDate.ToString("yyyy-MM-dd HH:mm:ss"))</small>
+                                    <p></p>
+                                    <hr style="margin: 15px 0; border: 0;border-top: 1px dashed #e3e3e3;border-bottom: 1px dashed #ffffff;" />
+                                </div>
+                            }
+                        }
+                    </div>
+                    <div class="tab-pane" id="pill-2"></div>
+                    <div class="tab-pane" id="pill-3"></div>
+                </div>
+            </div>
+            <div class="col-sm-3 mb-20  news-right">
+                <div class="row">
+                    <div class="col-md-12">
+                        <img src="/assets/images/ad.jpg" alt="" />
+                        <hr style="border-style: dashed" />
+                    </div>
+                    <div class="col-md-12">
+                        <a href="/register" class="btn-lg  btn btn-block btn-warning" style="font-size:1.1em;font-family:'黑体'">  没有账号，免费注册</a>
+                        <hr style="border-style: dashed" />
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row coo" style="border:1px dashed #ccc;margin:0">
+                            <h3 class="text-center">合作机构</h3>
+                            <hr />
+                            <div class="col-xs-6">
+                                <img src="/assets/images/cooperation/04.png" class="clients-img" alt="" style="width:100%">
+                            </div>
+                            <div class="col-xs-6">
+                                <img src="/assets/images/cooperation/05.png" class="clients-img" alt="" style="width:100%">
+                            </div>
+                            <div class="col-xs-6">
+                                <img src="/assets/images/cooperation/06.png" class="clients-img" alt="" style="width:100%">
+                            </div>
+                            <div class=" col-xs-6">
+                                <img src="/assets/images/cooperation/01.png" class="clients-img" alt="" style="width:100%">
+                            </div>
+                            <div class="col-xs-6">
+                                <img src="/assets/images/cooperation/02.png" class="clients-img" alt="" style="width:100%">
+                            </div>
+                            <div class="col-xs-6">
+                                <img src="/assets/images/cooperation/03.png" class="clients-img" alt="" style="width:100%">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
 </section>
+
+@section scripts{
+}

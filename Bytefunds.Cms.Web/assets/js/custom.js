@@ -11,6 +11,8 @@ jQuery(function ($) {
         ByteFunds.showCircle();
         //ByteFunds.showCharts();
         ByteFunds.showUserList();
+        ByteFunds.changeVersetList();
+        ByteFunds.loadHeight();
     });
     ByteFunds.qqService = function (qq) {
         var qq_list = new Array("578485754", "3226588475");
@@ -131,7 +133,7 @@ jQuery(function ($) {
     ByteFunds.showUserList = function () {
         var userCenter = $(".user-center");
         var userBtn = $(".header-top-dropdown .uesr-btn");
-        var flag = true,timeout;
+        var flag = true, timeout;
         userBtn.click(
             function () {
                 if (flag) {
@@ -151,9 +153,46 @@ jQuery(function ($) {
             }
         );
     };
+    ByteFunds.changeVersetList = function () {
+        var name_list = ["蒋", "沈", "韩", "李", "张", "王", "赵", "钱", "孙", "何", "王", "许", "秦", "朱", "郑", "冯", "易", "邓", "周", "杨", "曹", "孔"];
+        var top = 0;
+        var invest_tablle = $(".invest-div table");
+        var dom = ""
+        for (var i = 0; i < 8; i++) {
+            var name_i = Math.floor(Math.random() * name_list.length);
+            var name = name_list[name_i];
+            var invest_tablle = $(".invest-div table");
+            var money = Math.round(Math.random() * 200 + 1) * 100;
+            var time = new Date().Format("yyyy-MM-dd hh:mm:ss");
+            dom += '<tr><td class="td1">' + name + '*</td><td class="td2">' + money + '.00元</td><td class="td3">' + time + '</td></tr>'
+        }
+        $(".invest-body").html(dom);
+        setInterval(function () {
+            var name_i = Math.floor(Math.random() * name_list.length);
+            var name = name_list[name_i];
+            var invest_tablle = $(".invest-div table");
+            var money = Math.round(Math.random() * 200 + 1) * 100;
+            var time = new Date().Format("yyyy-MM-dd hh:mm:ss");
+            invest_tablle.animate({
+                top: "-30px"
+            }, 1500, function () {
+                invest_tablle.css("top", "0");
+                var temp = '<tr><td class="td1">' + name + '*</td><td class="td2">' + money + '.00元</td><td class="td3">' + time + '</td></tr>'
+                $(".invest-body").append(temp);
+                $(".invest-body").children().eq(0).remove();
+            });
+        }, 3000);
+    };
+    ByteFunds.loadHeight=function() {
+        var header = $("#header").innerHeight();
+        var footer = $("#footer").innerHeight();
+        var win = $(window).height();
+        var height = win - footer - header;
+        $(".loadPage").css({
+            minHeight: height + "px",
+        })
+    }
 });
-
-
 $(function () {
     if (window.location.href.indexOf("Admin") >= 0) {
 
@@ -333,7 +372,27 @@ function ajaxSubmit(url, data, beforAjaxMsg) {
         }
     });
 }
+Date.prototype.Format = function (formatStr) {
+    var str = formatStr;
+    var Week = ['日', '一', '二', '三', '四', '五', '六'];
 
-$(".user-record-table td").hover(function () {
-    $("#withdraw_text").text($(this).text())
-})
+    str = str.replace(/yyyy|YYYY/, this.getFullYear());
+    str = str.replace(/yy|YY/, (this.getYear() % 100) > 9 ? (this.getYear() % 100).toString() : '0' + (this.getYear() % 100));
+    var month = this.getMonth() + 1;
+    str = str.replace(/MM/, month > 9 ? month.toString() : '0' + month);
+    str = str.replace(/M/g, month);
+
+    str = str.replace(/w|W/g, Week[this.getDay()]);
+
+    str = str.replace(/dd|DD/, this.getDate() > 9 ? this.getDate().toString() : '0' + this.getDate());
+    str = str.replace(/d|D/g, this.getDate());
+
+    str = str.replace(/hh|HH/, this.getHours() > 9 ? this.getHours().toString() : '0' + this.getHours());
+    str = str.replace(/h|H/g, this.getHours());
+    str = str.replace(/mm/, this.getMinutes() > 9 ? this.getMinutes().toString() : '0' + this.getMinutes());
+    str = str.replace(/m/g, this.getMinutes());
+
+    str = str.replace(/ss|SS/, this.getSeconds() > 9 ? this.getSeconds().toString() : '0' + this.getSeconds());
+    str = str.replace(/s|S/g, this.getSeconds());
+    return str;
+}
