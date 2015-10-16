@@ -23,7 +23,7 @@
         okassets = member.GetValue<double>("okassets").ToString("N2") + "元";
         tel = member.GetValue<string>("tel");
         notmaturity = member.GetValue<double>("notmaturity").ToString("N2");
-
+        string totalAssets = (member.GetValue<double>("okassets") + member.GetValue<double>("notmaturity") + member.GetValue<double>("fundAccount")).ToString("N2") + "元";
         <section class="main-container pv-20">
             <div class="container" id="user-summary">
                 <div class="row">
@@ -99,7 +99,15 @@
                             </div>
                             <div class="bd clearfix">
                                 <div class="field">
-                                    <strong class="decimal" style="font-size:32px !important"> @latestearnings</strong><label>最新收益 </label>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <strong class="decimal" style="font-size:32px !important"> @latestearnings</strong><label>最新收益 </label>
+                                        </div>
+                                        <div>
+                                            <strong class="decimal" style="font-size:32px !important"> @totalAssets</strong><label>总资产 </label>
+                                        </div>
+                                    </div>
+
                                 </div>
                                 <div class="field">
                                     <div class="col-md-4 col-xs-6 span2"><span class="decimal">@accumulatedEarnings</span><label>累计收益</label></div>
