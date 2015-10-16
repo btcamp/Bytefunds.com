@@ -7,8 +7,10 @@
 
     string id = Request.QueryString["id"];
     IPublishedContent content = Umbraco.Content(int.Parse(id));
-    double sumAmount = content.GetPropertyValue<double>("sumAmount");
-    double purchasedAmount = content.GetPropertyValue<double>("purchasedAmount");
+    double sumAmount = content.GetPropertyValue<double>
+    ("sumAmount");
+    double purchasedAmount = content.GetPropertyValue<double>
+        ("purchasedAmount");
     string number = ((purchasedAmount / sumAmount) * 100).ToString("f0");
 }
 
@@ -54,7 +56,7 @@
                         <li class=""><a href="#h2tab4" role="tab" data-toggle="tab" aria-expanded="false">客户评价</a></li>
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane active" id="h2tab1">
+                        <div class="tab-pane active" id="h2tab1" style="padding-left:15px;">
                             <div class="row tab-pane1">
                                 <div class="col-md-12">
                                     <ul class="list clearfix">
@@ -65,7 +67,8 @@
                                         <li class="col-sm-6"><span class="span1">基金简称</span><span class="span2">零钱计划</span></li>
                                         <li class="col-sm-6"><span class="span1">币种</span><span class="span2">CNY</span></li>
                                         <li class="col-sm-6"><span class="span1">成立时间</span><span class="span2">2015-09-07</span></li>
-                                        @*<li class="col-sm-6"><span class="span1">基金代码</span><span class="span2">000709</span></li>*@
+                                        @*
+                                            <li class="col-sm-6"><span class="span1">基金代码</span><span class="span2">000709</span></li>*@
                                         <li class="col-sm-6"><span class="span1">托管人</span><span class="span2">招商银行</span></li>
                                         <li class="col-sm-6"><span class="span1">管理人</span><span class="span2">鹏华资产深圳有限公司</span></li>
                                     </ul>
@@ -80,7 +83,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane" id="h2tab2">
+                        <div class="tab-pane" id="h2tab2" style="padding-left:15px;">
                             <div class="row">
                                 <div class="col-md-5">
                                     <div class="tab-pane-content">
@@ -172,18 +175,18 @@
                         </div>
                     </div>
                 </div>
-                <p class="bid-warning"><i class="icon-warning-empty"></i> 比特金服提醒您：投资有风险</p>
             </div>
             <div class="col-md-4 bid-right">
                 <div class="bid-right-content content1">
                     <h4 class="mb-20 ">即刻申购</h4>
-                    <p>可投资金额：<span class="bid-now">100,000</span>元</p>
+                    <p>可投资金额：<span class="bid-now" id="nowAmount"></span>元</p>
                     <div class="input-group mb-20">
                         <span class="input-group-addon" id="inverst-onney" style="color:#000;">投资金额（元）</span>
                         <input type="text" class="form-control" placeholder="请输入投资金额" aria-describedby="sizing-addon2">
                     </div>
-                    @*/pay?id=@content.Id&minAmount=@(content.GetPropertyValue<double>("startAmount"))*@
-                    <a href="/pay?id=@content.Id&minAmount=@(content.GetPropertyValue<double>("startAmount"))" class="btn-sm btn btn-block btn-warning">开始赚钱</a>
+                    @*/pay?id=@content.Id&minAmount=@(content.GetPropertyValue<double>
+                        ("startAmount"))*@
+                    <a href="/pay?id=@content.Id&minAmount=@(content.GetPropertyValue<double>(" startamount"))" class="btn-sm btn btn-block btn-warning">开始赚钱</a>
                     <p style="line-height: 25px;" class="mt-10">尊敬的用户您好，自2015年9月17日起，比特金服基金服务功能将全面展开。</p>
                     <hr style="border-style: dashed" />
                 </div>
@@ -215,6 +218,7 @@
                         </div>
                     </div>
                 </div>
+                <p class="bid-warning"><i class="icon-warning-empty"></i> 比特金服提醒您：入金有有风险，投资需谨慎</p>
             </div>
         </div>
     </div>
@@ -224,7 +228,8 @@
     <script>
         $(function () {
             //$.get("/umbraco/Api/Member/GetProfitsByProductId?id="+@id,function (result) {
-            var money = 10000;
+            $("#nowAmount").html(@(sumAmount.ToString())-@(purchasedAmount.ToString()))
+            var money=10000;
             var rate =@(content.GetPropertyValue <string> ("rate"));
             var value = ((rate/100)*money)/365;
             var data=[];
@@ -236,14 +241,15 @@
                 chart: {
                 },
                 title: {
-                    text:'@(content.GetPropertyValue<string>("title"))每日收益',
+                    text:' @(content.GetPropertyValue<string>("title"))每日收益',
                     style: { color: "#F5B024", fontSize: "1.8em", fontFamily: '黑体', fontWeight: 600 }
                 },
                 xAxis: {
                     gridLineColor: '#EBEBEB',
                     gridLineWidth: 1,
                     gridLineDashStyle: 'dot',
-                    categories: [GetDateStr(-6), GetDateStr(-5), GetDateStr(-4), GetDateStr(-3), GetDateStr(-2),GetDateStr(-1), GetDateStr(0)]                                },
+                    categories: [GetDateStr(-6), GetDateStr(-5), GetDateStr(-4), GetDateStr(-3), GetDateStr(-2),GetDateStr(-1), GetDateStr(0)]
+                },
                 yAxis: {
                     gridLineDashStyle: 'dot',
                     title: {
@@ -253,7 +259,8 @@
                         formatter: function() {
                             return this.value;
                         }
-                    }
+                    },
+                    min:0
                 },
                 tooltip: {
                     valueSuffix: ' 元',

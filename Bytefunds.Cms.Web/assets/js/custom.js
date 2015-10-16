@@ -12,6 +12,7 @@ jQuery(function ($) {
         //ByteFunds.showCharts();
         ByteFunds.showUserList();
         ByteFunds.changeVersetList();
+        ByteFunds.loadHeight();
     });
     ByteFunds.qqService = function (qq) {
         var qq_list = new Array("578485754", "3226588475");
@@ -156,14 +157,14 @@ jQuery(function ($) {
         var name_list = ["蒋", "沈", "韩", "李", "张", "王", "赵", "钱", "孙", "何", "王", "许", "秦", "朱", "郑", "冯", "易", "邓", "周", "杨", "曹", "孔"];
         var top = 0;
         var invest_tablle = $(".invest-div table");
-        var dom=""
+        var dom = ""
         for (var i = 0; i < 8; i++) {
             var name_i = Math.floor(Math.random() * name_list.length);
             var name = name_list[name_i];
             var invest_tablle = $(".invest-div table");
             var money = Math.round(Math.random() * 200 + 1) * 100;
             var time = new Date().Format("yyyy-MM-dd hh:mm:ss");
-             dom += '<tr><td class="td1">' + name + '*</td><td class="td2">' + money + '.00元</td><td class="td3">' + time + '</td></tr>'
+            dom += '<tr><td class="td1">' + name + '*</td><td class="td2">' + money + '.00元</td><td class="td3">' + time + '</td></tr>'
         }
         $(".invest-body").html(dom);
         setInterval(function () {
@@ -181,6 +182,15 @@ jQuery(function ($) {
                 $(".invest-body").children().eq(0).remove();
             });
         }, 3000);
+    };
+    ByteFunds.loadHeight=function() {
+        var header = $("#header").innerHeight();
+        var footer = $("#footer").innerHeight();
+        var win = $(window).height();
+        var height = win - footer - header;
+        $(".loadPage").css({
+            minHeight: height + "px",
+        })
     }
 });
 $(function () {
@@ -385,16 +395,4 @@ Date.prototype.Format = function (formatStr) {
     str = str.replace(/ss|SS/, this.getSeconds() > 9 ? this.getSeconds().toString() : '0' + this.getSeconds());
     str = str.replace(/s|S/g, this.getSeconds());
     return str;
-}
-function loadHeight() {
-    var header = $("#header").innerHeight();
-    var footer = $("#footer").innerHeight();
-    var win = $(window).height();
-    var height = win - footer - header;
-    var url="/assets/images/bg01.jpg";
-    console.log(height)
-    $(".loadPage").css({
-        minHeight: height + "px",
-        backgroud: 'url(url)'
-    })
 }

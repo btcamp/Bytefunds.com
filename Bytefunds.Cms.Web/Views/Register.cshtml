@@ -7,7 +7,7 @@
 }
 
 <section class="clearfix loadPage">
-    <div class="container register">
+    <div class="container register mb-20">
         <div class="row">
             <div class="form-block center-block p-20 light-gray-bg border-clear text-left">
                 <h2 class="title">注册</h2>
@@ -106,7 +106,6 @@
 @section scripts{
 <script>
     $(function () {
-        loadHeight("$('#rigest')");
         var container = document.getElementById("vCode");
         var code = new vCode(container, {
             len: 4,
@@ -120,7 +119,6 @@
             ]
         });
         $("#btncode").click(function () {
-            console.log($("#code").val())
 			if ($("#registerModel_Phone").val() == "") {
 				finAlert("请先输入注册手机！", false);
 				return false;
