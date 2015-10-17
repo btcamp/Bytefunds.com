@@ -14,6 +14,7 @@ jQuery(function ($) {
         ByteFunds.changeVersetList();
         ByteFunds.loadHeight();
         ByteFunds.loadBackgroundImg();
+
     });
     ByteFunds.qqService = function (qq) {
         var qq_list = new Array("578485754", "3226588475");

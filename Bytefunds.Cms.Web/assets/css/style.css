@@ -732,7 +732,7 @@ ul {
         }
 
 .default-bg {
-    background-color: #CD9F3B !important;
+    background-color:#D7A154 !important;
     color: #fff;
 }
 
@@ -3808,7 +3808,7 @@ input[type=radio], input[type=checkbox] {
 }
 
 .image-box .body {
-    padding: 15px;
+    padding: 15px 0;
 }
 
     .image-box .body p:last-child {

@@ -167,7 +167,7 @@
         }
 
         #user-summary .summary-info .bd .field {
-            margin-top: 30px;
+            margin-top: 20px;
         }
 
         #user-summary .summary-info .bd .span2 {
@@ -347,7 +347,7 @@ body {
 
 @media (min-width:960px) and (max-width:1900px) {
     .hot-product .body {
-        padding: 3px 15px;
+        padding: 3px 0;
     }
 
     .raise-funds-content {
@@ -2000,18 +2000,6 @@ input:focus, select:focus, textarea:focus {
             font-size: 24px;
         }
 }
-.invest-table tbody .td1 {
-    width: 15%;
-}
-
-.invest-table tbody .td2 {
-    width: 30%;
-}
-
-.invest-table tbody .td3 {
-    width: 55%;
-}
-
 @media(min-width:768px ) and (max-width:1400px) {
     .invest {
         padding-left: 0 !important;
@@ -2122,4 +2110,7 @@ input:focus, select:focus, textarea:focus {
         width: 500px;
         margin-top:10%;
     }
+}
+.disabled{
+    background-color:#FCFCFC !important;
 }

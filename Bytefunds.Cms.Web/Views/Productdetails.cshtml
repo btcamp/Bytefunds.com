@@ -45,7 +45,7 @@
                 </div>
                 <hr />
                 <p class="bid-content">@(content.GetPropertyValue<string>("introduction"))</p>
-                <div class="bid-charts" id="charts" style="min-height:300px">
+                <div class="bid-charts text-center" id="charts" style="min-height:300px">
                     <img src="~/assets/images/ajax-loader2.gif" style="margin:0 auto;padding-top:100px" alt="Alternate Text" />
                 </div>
                 <div class="bid-characteristic">
@@ -101,8 +101,8 @@
                                 </div>
                                 <div class="col-md-7">
                                     <h5>收益对比</h5>
-                                    <div class="mt-20" id="compare">
-                                        <img src="~/assets/images/ajax-loader2.gif" style="margin:0 auto;padding-top:100px" alt="Alternate Text" />
+                                    <div class="mt-20" id="compare" style="margin-left:-10px;">
+                                        <img src="~/assets/images/ajax-loader2.gif" style="margin:0 auto;padding-top:100px" alt="" />
                                     </div>
                                 </div>
                             </div>
@@ -241,7 +241,7 @@
                 chart: {
                 },
                 title: {
-                    text:' @(content.GetPropertyValue<string>("title"))每日收益',
+                    text:' @(content.GetPropertyValue<string>("title"))收益',
                     style: { color: "#F5B024", fontSize: "1.8em", fontFamily: '黑体', fontWeight: 600 }
                 },
                 xAxis: {

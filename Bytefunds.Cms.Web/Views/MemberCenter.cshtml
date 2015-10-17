@@ -24,12 +24,12 @@
         tel = member.GetValue<string>("tel");
         notmaturity = member.GetValue<double>("notmaturity").ToString("N2");
         string totalAssets = (member.GetValue<double>("okassets") + member.GetValue<double>("notmaturity") + member.GetValue<double>("fundAccount")).ToString("N2") + "元";
-        <section class="main-container pv-20">
+        <section class="main-container pv-20 mb-20">
             <div class="container" id="user-summary">
                 <div class="row">
                     <div class="col-md-12">
                         <h3 style="float:left;font-size:1.3em">比特金服用户：@username</h3>
-                        <ul class="list-inline" style=" padding-top: 10px;float:left;margin-left:15px">
+                        <ul class="list-inline renzheng" style=" padding-top: 10px;float:left;margin-left:5px">
                             <li><a href="/memberinfo/verified/" title="实名认证"><i class="icon-font @(member.GetValue<bool>("verified")?"approve":string.Empty) " title="实名认证">&#xe641;</i></a></li>
                             <li><a href="/memberinfo/bankcertification/" title="绑定银行卡"><i class="icon-font @(member.GetValue<bool>("bankCertification") ? "approve" : string.Empty)" title="绑定银行卡">&#xf00c0;</i></a></li>
                             <li><i class="icon-font @(!string.IsNullOrEmpty(member.GetValue<string>("tel")) ? "approve" : string.Empty)" title="手机认证">&#xe675;</i></li>
@@ -41,7 +41,7 @@
                     <div class="col-sm-6">
                         <div class="summary-info summary-info-p2p mt-20" style="background-color:#fff">
                             <div id="profit_container">
-                                <div style="width:16px;margin:0 auto">
+                                <div style="text-align:center">
                                     <img src="/assets/images/ajax-loader2.gif" style="width:16px; margin:auto 0;padding-top:100px"
                                          alt="Alternate Text" />
                                 </div>
@@ -51,7 +51,7 @@
                     <div class="col-sm-6 col-xs-12">
                         <div class="summary-info summary-info-funds">
                             <div class="hd clearfix text-center">
-                                <span>您账户总资产为：<strong style="font-size:1.3em">@totalAssets</strong></span>
+                                <span>您账户总资产为：<strong style="font-size:1.4em">@totalAssets</strong></span>
                             </div>
                             <div class="bd clearfix">
                                 <div class="field">
