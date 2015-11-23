@@ -161,7 +161,7 @@ jQuery(function ($) {
         var top = 0;
         var invest_tablle = $(".invest-div table");
         var dom = ""
-        for (var i = 0; i < 8; i++) {
+        for (var i = 0; i < 7; i++) {
             var name_i = Math.floor(Math.random() * name_list.length);
             var name = name_list[name_i];
             var invest_tablle = $(".invest-div table");
@@ -240,6 +240,7 @@ jQuery(function ($) {
                 var top = parseInt($(this).offset().top)-5;
                 var element = '<div id="zan"><b>+1<\/b></div>';
                 var obj = $(this);
+                obj.css("color", "#fff");
                 $("body").append(element);
                 $('#zan').css({
                     'position': 'absolute', 'z-index': '500', 'color': '#C30',

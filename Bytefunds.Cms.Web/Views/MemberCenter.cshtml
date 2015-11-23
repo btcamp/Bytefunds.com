@@ -28,7 +28,7 @@
             <div class="container" id="user-summary">
                 <div class="row">
                     <div class="col-md-12">
-                        <h3 style="float:left;font-size:1.3em">比特金服用户：@username</h3>
+                        <h3 style="float:left;font-size:1.3em;margin-left:1px">比特金服用户：@username</h3>
                         <ul class="list-inline renzheng" style=" padding-top: 10px;float:left;margin-left:5px">
                             <li><a href="/memberinfo/verified/" title="实名认证"><i class="icon-font @(member.GetValue<bool>("verified")?"approve":string.Empty) " title="实名认证">&#xe641;</i></a></li>
                             <li><a href="/memberinfo/bankcertification/" title="绑定银行卡"><i class="icon-font @(member.GetValue<bool>("bankCertification") ? "approve" : string.Empty)" title="绑定银行卡">&#xf00c0;</i></a></li>

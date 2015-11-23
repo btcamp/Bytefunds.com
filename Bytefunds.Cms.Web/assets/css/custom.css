@@ -6,7 +6,7 @@
     text-decoration: underline;
 }
 
-    .underline:hover {
+    .btn130_grey, .header-top-dropdown .user-center li a, .money-box a, .online-product h1 a:hover, .page a, .underline:hover {
         text-decoration: none;
     }
 
@@ -202,7 +202,7 @@
         }
 
         #user-summary .summary-info .ft dd {
-            margin-left: 5px;
+            margin-left:6px;
             font-size: 18px;
         }
 
@@ -346,24 +346,11 @@ body {
 }
 
     .hot-product h3 {
-        margin-top: -10px !important;
+        margin-top: -15px !important;
+        font-size:22px;
     }
-
-@media (min-width:960px) and (max-width:1900px) {
-    .hot-product .body {
-        padding: 3px 0;
-    }
-
-    .raise-funds-content {
-        margin-bottom: 13px;
-    }
-}
 
 @media (min-width:1900px) {
-    .hot-product .body {
-        padding: 10px 15px;
-    }
-
     .raise-funds, .raise-funds-content {
         margin-top: 20px;
     }
@@ -960,7 +947,6 @@ input:focus, select:focus, textarea:focus {
 
     .online-product h1 a:hover {
         color: #F5B024;
-        text-decoration: none;
     }
 
     .online-product .btn, .online-product h4 {
@@ -1119,7 +1105,7 @@ input:focus, select:focus, textarea:focus {
     }
 }
 
-.bid-2 > div p, .etf-1 dl dd i, .fxgb_introduce h3, .fxgb_introduce p, .h_title, .invest-table tbody td, .page a, .r_tbl table td, .w525 dd span i {
+.bid-2 > div p, .btn130_grey, .etf-1 dl dd i, .fxgb_introduce h3, .fxgb_introduce p, .h_title, .icon_pag, .imgHolder span, .invest-table tbody td, .page a, .r_tbl table td, .tab_ul li, .text_cen, .w525 dd span i {
     text-align: center;
 }
 
@@ -1660,7 +1646,6 @@ input:focus, select:focus, textarea:focus {
 .header-top-dropdown .user-center li a {
     color: #fff;
     font-size: 1.1em;
-    text-decoration: none;
     padding: 5px 23px;
 }
 
@@ -1939,7 +1924,7 @@ input:focus, select:focus, textarea:focus {
 
 .invest-div {
     padding-top: 2px;
-    height: 243px;
+    height: 215px;
     overflow: hidden !important;
     border: 1px solid #ccc;
 }
@@ -2087,8 +2072,12 @@ input:focus, select:focus, textarea:focus {
     line-height: 29px;
     background-color: #fff;
     color: #777;
-    text-decoration: none;
     border-radius: 2px;
+}
+
+.attention, .icon_pag, .praise {
+    color: #FFF;
+    display: inline-block;
 }
 
 .news-right .coo img {
@@ -2108,7 +2097,7 @@ input:focus, select:focus, textarea:focus {
 
 @media(min-width:1280px) {
     .wanda .row {
-        width: 1140px;
+        width: 1150px;
         margin: auto;
     }
 
@@ -2122,7 +2111,6 @@ input:focus, select:focus, textarea:focus {
     border: 1px solid #ddd;
     border-radius: 2px;
     padding: 20px;
-    ;
     margin-bottom: 20px;
 }
 
@@ -2138,21 +2126,27 @@ input:focus, select:focus, textarea:focus {
         height: 58px;
         border-right: 1px solid #dedbdb;
         line-height: 45px;
-        text-align: center;
         font-size: 16px;
         cursor: pointer;
         font-weight: 400;
     }
 
 .attention, .praise {
-    display: inline-block;
     width: 140px;
     height: 48px;
     padding-left: 45px;
     margin-left: 3px;
-    background: url("/assets//images/btn135.png") no-repeat;
-    color: #FFF;
-    font: normal 14px/48px "Microsoft Yahei";
+    background: url(/assets//images/btn135.png) no-repeat;
+    font: 400 14px/48px "Microsoft Yahei";
+}
+
+.font18, .icon_pag {
+    font-size: 18px;
+    font-family: "Microsoft Yahei";
+}
+
+.co666, .font18_hm, .font45 {
+    font-weight: 400;
 }
 
 .attention {
@@ -2175,7 +2169,6 @@ input:focus, select:focus, textarea:focus {
     background-position: 0 -144px;
 }
 
-/*背景图片定位star*/
 .sns-icon-32 .sns-iconshare-panel .bounded .i-jianghu {
     background-position: 0 0;
 }
@@ -2212,22 +2205,15 @@ input:focus, select:focus, textarea:focus {
 }
 
 .icon_pag {
-    background: url(/assets/images/icons.png) no-repeat -17px -50px;
+    background: url(/assets/images/icons.png) -17px -50px no-repeat;
     line-height: 32px;
     position: absolute;
     right: -14px;
-    text-align: center;
-    color: #FFF;
-    font-family: "Microsoft Yahei";
-    font-size: 18px;
     font-style: normal;
     top: 30px;
     width: 83px;
     height: 42px;
-    display: inline-block;
 }
-/*背景图片定位end*/
-
 
 .mtb10 {
     margin: 15px 0;
@@ -2247,13 +2233,6 @@ input:focus, select:focus, textarea:focus {
 
 .mr15 {
     margin-right: 15px;
-}
-
-.co666 {
-    color: #666;
-    font-weight: normal;
-    font-size: 12px;
-    font-weight: normal;
 }
 
 .mtb20 {
@@ -2277,8 +2256,6 @@ input:focus, select:focus, textarea:focus {
 }
 
 .font18 {
-    font-size: 18px;
-    font-family: "Microsoft Yahei";
     color: #333;
 }
 
@@ -2286,7 +2263,10 @@ input:focus, select:focus, textarea:focus {
     font-size: 45px;
     color: #333;
     font-family: Arial;
-    font-weight: normal;
+}
+
+.btn130_grey, .font14 {
+    font-family: "Microsoft Yahei";
 }
 
 .font27 {
@@ -2294,21 +2274,17 @@ input:focus, select:focus, textarea:focus {
     color: #333;
 }
 
-.f_red {
-    color: #f35d5d;
-}
-
-.font12 {
+.font12, .font14 {
     font-size: 14px;
-}
-
-.font14 {
-    font-size: 14px;
-    font-family: "Microsoft Yahei";
 }
 
 .font16 {
     font-size: 16px;
+}
+
+.font18_hm, .imgHolder span {
+    font-size: 18px;
+    cursor: pointer;
 }
 
 .pr60 {
@@ -2317,6 +2293,10 @@ input:focus, select:focus, textarea:focus {
 
 .pt5 {
     padding-top: 5px;
+}
+
+.ptb, .ptb20 {
+    padding: 20px 0;
 }
 
 .mt40 {
@@ -2342,21 +2322,24 @@ input:focus, select:focus, textarea:focus {
     top: 0;
 }
 
-    .imgHolder span {
-        position: absolute;
-        right: -30px;
-        top: 0;
-        background: #000;
-        opacity: .5;
-        filter: alpha(opacity=50);
-        width: 30px;
-        height: 30px;
-        font-size: 18px;
-        text-align: center;
-        line-height: 30px;
-        cursor: pointer;
-        color: #fff;
-    }
+.b_pic, .loading {
+    left: 50%;
+    position: absolute;
+    display: none;
+}
+
+.imgHolder span {
+    position: absolute;
+    right: -30px;
+    top: 0;
+    background: #000;
+    opacity: .5;
+    filter: alpha(opacity=50);
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    color: #fff;
+}
 
 .jPageExtra02 {
     height: 175px;
@@ -2364,27 +2347,18 @@ input:focus, select:focus, textarea:focus {
 
 .jPageExtra01 a.goHelp {
     height: 57px;
-    background: url("i/goHelp.png") 0 0;
+    background: url(i/goHelp.png);
 }
 
     .jPageExtra01 a.goHelp:hover {
-        background: url("i/goHelp.png") -59px 0;
+        background: url(i/goHelp.png) -59px 0;
     }
 
 .loading {
     width: 50px;
     height: 50px;
-    position: absolute;
-    left: 50%;
     margin-left: -25px;
     background: #ccc;
-    display: none;
-}
-
-.b_pic {
-    left: 50%;
-    position: absolute;
-    display: none;
 }
 
 .f_black {
@@ -2398,20 +2372,8 @@ textarea {
     overflow: auto;
 }
 
-.ptb {
-    padding: 20px 0;
-}
-
 .bor_t_d {
     border-top: 1px dashed #e3e3e3;
-}
-
-.text_cen {
-    text-align: center;
-}
-
-.ptb20 {
-    padding: 20px 0;
 }
 
 .f_333 {
@@ -2429,11 +2391,7 @@ textarea {
 .font18_hm {
     text-indent: 20px;
     border-left: 2px solid #f35d5d;
-    font-size: 18px;
-    font-weight: normal;
     color: #333;
-    cursor: pointer;
-    margin-top: 0px;
     background-color: #fff;
     margin: 0 -20px;
 }
@@ -2444,9 +2402,7 @@ textarea {
 
 .co666 {
     color: #666;
-    font-weight: normal;
     font-size: 12px;
-    font-weight: normal;
     float: right;
     margin-right: 30px;
 }
@@ -2456,21 +2412,17 @@ textarea {
     width: 130px;
     display: block;
     height: 48px;
-    text-align: center;
     line-height: 45px;
     cursor: pointer;
-    font-family: "Microsoft Yahei";
     font-size: 20px;
     border: 0;
-    color: #FFFFFF;
-    text-decoration: none;
+    color: #FFF;
 }
-.now-sustain{
-    margin:0 2px;
+
+.now-sustain {
+    margin: 0 2px;
 }
-.cont_hm{
-    margin-top:25px;
-}
-.money-box a{
-    text-decoration:none;
+
+.cont_hm {
+    margin-top: 25px;
 }
