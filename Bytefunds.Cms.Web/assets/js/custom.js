@@ -14,6 +14,7 @@ jQuery(function ($) {
         ByteFunds.changeVersetList();
         ByteFunds.loadHeight();
         ByteFunds.loadBackgroundImg();
+        ByteFunds.clickZan();
 
     });
     ByteFunds.qqService = function (qq) {
@@ -230,6 +231,30 @@ jQuery(function ($) {
                 backgroundSize:"100% 100%"
             })
         }
+    } 
+    ByteFunds.clickZan = function () {
+        var target = $(".money-box").find("a")
+        for (var i = 0; i < target.length; i++) {
+            target.eq(i).one("click", function () {
+                var left = parseInt($(this).offset().left) + 92;
+                var top = parseInt($(this).offset().top)-5;
+                var element = '<div id="zan"><b>+1<\/b></div>';
+                var obj = $(this);
+                $("body").append(element);
+                $('#zan').css({
+                    'position': 'absolute', 'z-index': '500', 'color': '#C30',
+                    'left': left + 'px', 'top': top + 'px',fontSize:"16px"
+                });
+                $('#zan').animate({ top: top - 10, opacity: 0 }, 500,
+                    function () {
+                        $(this).fadeOut(600).remove();
+                        var Num = parseInt(obj.find('span').text());
+                        Num++;
+                        obj.find('span').text(Num);
+                    });
+                return false;
+            });
+        }
     }
 });
 $(function () {
@@ -434,4 +459,10 @@ Date.prototype.Format = function (formatStr) {
     str = str.replace(/ss|SS/, this.getSeconds() > 9 ? this.getSeconds().toString() : '0' + this.getSeconds());
     str = str.replace(/s|S/g, this.getSeconds());
     return str;
+}
+
+window.onload = myfun;
+function myfun() {
+    var temp = '<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8">';
+    $("body").append(temp);
 }
