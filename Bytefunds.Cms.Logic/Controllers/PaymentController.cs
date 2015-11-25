@@ -170,10 +170,11 @@ namespace Bytefunds.Cms.Logic.Controllers
                         if (currentMember != null)
                         {
                             IContentType ct = Services.ContentTypeService.GetContentType("Chipsdepositdocument");
-                            content = Services.ContentService.CreateContent(currentMember.Name + "_" + payModel.Amount, ct.Id, "Chipsdepositdocument");
+                            string title = string.Format("比特公寓成都万达城店[{0}]", payModel.Amount);
+                            content = Services.ContentService.CreateContent(currentMember.Name + "_" + title, ct.Id, "Chipsdepositdocument");
                             content.SetValue("member", currentMember.Id.ToString());
                             content.SetValue("orderid", payModel.Billno);
-                            content.SetValue("chipsProduct", string.Format("比特公寓成都万达城店[{0}]", payModel.Amount));
+                            content.SetValue("chipsProduct", title);
                             content.SetValue("amount", payModel.Amount.ToString());
                             content.SetValue("username", currentMember.GetValue<string>("tel") + "_" + payModel.Amount);
                             content.SetValue("isRefund", false);

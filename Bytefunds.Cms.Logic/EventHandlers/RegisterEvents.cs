@@ -32,7 +32,7 @@ namespace Bytefunds.Cms.Logic.EventHandlers
             //umbraco.cms.businesslogic.member.Member.AfterSave+=Member_AfterSave;
 
             ContentService.Saved += ContentService_Saved;
-            QuartzCore.QuartzJobUtils.Instance.StartQuartz();
+            //QuartzCore.QuartzJobUtils.Instance.StartQuartz();
         }
 
 

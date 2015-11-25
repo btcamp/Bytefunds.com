@@ -156,6 +156,7 @@
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\PraiseController.cs" />
+    <Compile Include="Controllers\RefundController.cs" />
     <Compile Include="Controllers\WithdrawController.cs" />
     <Compile Include="CustomSection\RefundManager.cs" />
     <Compile Include="CustomSection\ChipsManager.cs" />

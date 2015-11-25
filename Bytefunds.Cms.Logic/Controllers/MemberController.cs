@@ -581,6 +581,7 @@ namespace Bytefunds.Cms.Logic.Controllers
                 content.SetValue("bankName", model.BankName);
                 content.SetValue("bankNumber", model.BankNumber);
                 content.SetValue("bankNamedetail", model.BankDetail);
+                content.SetValue("amount", contentchIps.GetValue<string>("amount"));
                 content.SetValue("isOk", false);
                 Services.ContentService.Save(contentchIps);
                 Services.ContentService.Save(content);

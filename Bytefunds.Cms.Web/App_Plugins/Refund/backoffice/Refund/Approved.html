@@ -26,38 +26,15 @@
                 width: auto;
             }
 </style>
-<script>
-    //$(function () {
-    //    $("#btnsave").click(function () {
-    //        if ($("#memberKey").val() == "") {
-    //            alert("请先与Member关联，在进行入金审核操作");
-    //        }
-    //        else {
-    //            $("#form1").ajaxSubmit({
-    //                success: function (data) {
-    //                    if (data == "ok") {
-    //                        if (confirm("账户通过入金申请，是否跳转到发送邮件？")) {
-    //                            window.location.href = $("#emailtpl").val();
-    //                            UmbClientMgr.closeModalWindow();
-    //                        }
-    //                    }
-    //                    else {
-    //                        alert(data);
-    //                    }
-    //                }
-    //            });
-    //        }
-    //    });
-    //})action="/umbraco/API/Payment/PayApproved" method="post" id="form1"
-</script>
-<div ng-controller="PaymentApproved">
+<script src="/Scripts/umbraco.plugins.controller.js"></script>
+<div ng-controller="RefundApproved">
     <div class="umbracoDialog umb-dialog" ng-show="loaded">
         <form ng-submit="save()">
             <div class="control-group umb-control-group" style=''>
-                <p class="umb-abstract">入金审核</p>
+                <p class="umb-abstract">退款审核</p>
 
                 <p class="help">
-                    {{model.name}} 用户入金.            
+                    {{model.name}} 用户退款.            
                 </p>
                 <input type="hidden" name="OperType" value="0" />
                 <div class="umb-el-wrap ">
@@ -71,25 +48,12 @@
                     </div>
                 </div>
                 <div class="umb-el-wrap ">
-                    <label class="control-label">入金金额</label>
+                    <label class="control-label">退款金额</label>
                     <div class="controls controls-row">
-                        <span id="Span1">{{model.balance}}元</span>
+                        <span id="Span1">{{model.amount}}元</span>
                     </div>
                 </div>
-                <div class="umb-el-wrap ">
-                    <label class="control-label">入金凭证</label>
-                    <div class="controls controls-row">
-                        <img ng-click="imgclick()" id="minimg" src="{{imgModel.Path}}" width="120px" alt="Alternate Text" />
-                    </div>
-                </div>
-                <div class="umb-el-wrap ">
-                    <label class="control-label" for="inputPassword">邮件模版</label>
-                    <div class="controls controls-row">
-                        <select id="emailtpl">
-                            <option ng-repeat="item in templates | orderBy:'name':false" value="/umbraco/#/UserManager/UserManager/mail/{{model.memberKey}}?tpl={{item.id}}&recordid={{model.contentid}}">{{item.name}}</option>
-                        </select>
-                    </div>
-                </div>
+               
             </div>
 
             <!-- <h5>{{currentNode.name}} {{currentNode.id}} </h5>

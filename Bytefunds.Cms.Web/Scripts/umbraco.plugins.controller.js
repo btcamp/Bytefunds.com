@@ -47,3 +47,31 @@ function WithdrawController($scope, $http, navigationService, notificationsServi
     }
 }
 angular.module("umbraco").controller("WithdrawController", WithdrawController);
+
+
+function RefundApproved($scope, $http, navigationService, notificationsService) {
+    $scope.loaded = true;
+    $scope.model = {
+        name: $scope.currentNode.name,
+        id: $scope.currentNode.id,
+        amount: $scope.currentNode.metaData.amount
+    }
+
+    $scope.save = function () {
+        $scope.loaded = false;
+        $http.post("/umbraco/Api/Refund/Approved", { id: $scope.model.id }).success(function (result) {
+            $scope.loaded = true;
+            if (result.Success) {
+                notificationsService.success(result.Msg);
+                navigationService.hideDialog();
+            }
+            else {
+                notificationsService.error(result.Msg);
+            }
+        }).error(function () {
+            $scope.loaded = true;
+            notificationsService.error("网络错误，请重试！");
+        });
+    }
+}
+angular.module("umbraco").controller("RefundApproved", RefundApproved);

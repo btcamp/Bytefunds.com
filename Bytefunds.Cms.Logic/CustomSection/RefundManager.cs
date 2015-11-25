@@ -25,6 +25,11 @@ namespace Bytefunds.Cms.Logic.CustomSection
         protected override MenuItemCollection GetMenuForNode(string id, FormDataCollection queryStrings)
         {
             var menu = new MenuItemCollection();
+            int contentId;
+            if (int.TryParse(id, out contentId))
+            {
+                menu.Items.Add(new MenuItem("Approved", "通过退款审核"));
+            }
             menu.Items.Add<RefreshNode, ActionRefresh>("刷新节点");
             menu.Items.Add<ActionDelete>("Delete");
             return menu;
@@ -33,13 +38,13 @@ namespace Bytefunds.Cms.Logic.CustomSection
         protected override TreeNodeCollection GetTreeNodes(string id, FormDataCollection queryStrings)
         {
             var nodes = new TreeNodeCollection();
-            IContentType ct = Services.ContentTypeService.GetContentType("ChipsDepositDocument");
+            IContentType ct = Services.ContentTypeService.GetContentType("RefundDocumnet");
             IEnumerable<IContent> list = Services.ContentService.GetContentOfContentType(ct.Id);
             bool isRefund;
             if (string.Compare(id, "-1") == 0)
             {
                 //根节点
-                var node = this.CreateTreeNode(ct.Id.ToString(), id, queryStrings, "众筹用户", "icon-folder", true);
+                var node = this.CreateTreeNode(ct.Id.ToString(), id, queryStrings, "退款申请", "icon-folder", true);
                 nodes.Add(node);
 
             }
@@ -74,7 +79,7 @@ namespace Bytefunds.Cms.Logic.CustomSection
                     foreach (var curitem in currentlist)
                     {
                         var node = this.CreateTreeNode(curitem.Id.ToString(), ids[0], queryStrings, curitem.GetValue<string>("username"), "icon-umb-users", false);
-
+                        node.AdditionalData.Add("amount", curitem.GetValue<string>("amount"));
                         nodes.Add(node);
                     }
                 }
