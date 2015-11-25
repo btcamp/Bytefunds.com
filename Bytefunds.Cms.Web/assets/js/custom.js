@@ -212,7 +212,7 @@ jQuery(function ($) {
             });
         }, 3000);
     };
-    ByteFunds.loadHeight=function() {
+    ByteFunds.loadHeight = function () {
         var header = $("#header").innerHeight();
         var footer = $("#footer").innerHeight();
         var win = $(window).height();
@@ -225,34 +225,46 @@ jQuery(function ($) {
         var bg = $(".loadBg");
         var url = ["/assets/images/bg01.jpg", "/assets/images/bg02.jpg", "/assets/images/bg03.jpg"];
         var i = Math.floor(Math.random() * url.length);
-        if (bg.length > 0 && $(window).width()>960) {
+        if (bg.length > 0 && $(window).width() > 960) {
             bg.css({
                 background: "url(" + url[i] + ")",
-                backgroundSize:"100% 100%"
+                backgroundSize: "100% 100%"
             })
         }
-    } 
+    }
     ByteFunds.clickZan = function () {
         var target = $(".money-box").find("a")
         for (var i = 0; i < target.length; i++) {
             target.eq(i).one("click", function () {
-                var left = parseInt($(this).offset().left) + 92;
-                var top = parseInt($(this).offset().top)-5;
-                var element = '<div id="zan"><b>+1<\/b></div>';
-                var obj = $(this);
-                obj.css("color", "#fff");
-                $("body").append(element);
-                $('#zan').css({
-                    'position': 'absolute', 'z-index': '500', 'color': '#C30',
-                    'left': left + 'px', 'top': top + 'px',fontSize:"16px"
+                var $this = $(this);
+                var url = $this.attr("href");
+                $.get(url, function (data) {
+                    if (data.Success) {
+                        //$this.find(".fonttext").text("已" + $this.find(".fonttext").text());
+                        var left = parseInt($this.offset().left) + 92;
+                        var top = parseInt($this.offset().top) - 5;
+                        var element = '<div id="zan"><b>+1<\/b></div>';
+                        var obj = $this;
+                        obj.css("color", "#fff");
+                        $("body").append(element);
+                        $('#zan').css({
+                            'position': 'absolute', 'z-index': '500', 'color': '#C30',
+                            'left': left + 'px', 'top': top + 'px', fontSize: "16px"
+                        });
+                        $('#zan').animate({ top: top - 10, opacity: 0 }, 500,
+                            function () {
+                                $(element).fadeOut(600).remove();
+                                var Num = parseInt(obj.find('span').text());
+                                Num++;
+                                obj.find('span').text(Num);
+                            });
+                    }
+                    else {
+                        finAlert(data.Msg, false);
+                    }
+                    $this.attr("href", "#");
                 });
-                $('#zan').animate({ top: top - 10, opacity: 0 }, 500,
-                    function () {
-                        $(this).fadeOut(600).remove();
-                        var Num = parseInt(obj.find('span').text());
-                        Num++;
-                        obj.find('span').text(Num);
-                    });
+
                 return false;
             });
         }
@@ -460,10 +472,4 @@ Date.prototype.Format = function (formatStr) {
     str = str.replace(/ss|SS/, this.getSeconds() > 9 ? this.getSeconds().toString() : '0' + this.getSeconds());
     str = str.replace(/s|S/g, this.getSeconds());
     return str;
-}
-
-window.onload = myfun;
-function myfun() {
-    var temp = '<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8">';
-    $("body").append(temp);
 }

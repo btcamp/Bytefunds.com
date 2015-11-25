@@ -125,8 +125,11 @@ namespace Bytefunds.Cms.Logic.EventHandlers
                             //发送给用户
                             SendmailHelper.SendEmail(member.Username, "member:withdraw:tplId", accountdir);
                         }
-
-
+                    }
+                    else if (e.Alias.ToLower().Equals("ChipsDepositDocument", StringComparison.OrdinalIgnoreCase))
+                    {
+                        IMember member = ApplicationContext.Current.Services.MemberService.GetById(e.Entity.GetValue<int>("member"));
+                        //DOTO 
                     }
                 }
                 catch (Exception ex)

@@ -144,6 +144,69 @@ namespace Bytefunds.Cms.Logic.Controllers
             }
         }
 
+        public ActionResult ChipsSuccess(string Content, bool isServerCall = false)
+        {
+            string temp = Content;
+            try
+            {
+                Content = DESHelper.DecryptDES(Content);
+                CustomLog.WriteLog(Content);
+                temp = Content;
+                System.Web.Script.Serialization.JavaScriptSerializer jss = new System.Web.Script.Serialization.JavaScriptSerializer();
+                PaymentModel payModel = jss.Deserialize<Models.PaymentModel>(Content);
+
+                //判断订单是否存在
+                if (Helpers.UmbPayRecordsHelper.IsExistsBillno(payModel.Billno))
+                {
+                    IContent content = null;
+                    IMember currentMember = null;
+                    if (payModel.Email.Contains("^_^"))
+                    {
+                        string[] array = payModel.Email.Split(new string[] { "^_^" }, StringSplitOptions.RemoveEmptyEntries);
+                        //memberid
+                        currentMember = Services.MemberService.GetById(int.Parse(array[0]));
+                        //content = Services.ContentService.GetById(int.Parse(array[1]));
+                        //chips:pay:successurl
+                        if (currentMember != null)
+                        {
+                            IContentType ct = Services.ContentTypeService.GetContentType("Chipsdepositdocument");
+                            content = Services.ContentService.CreateContent(currentMember.Name + "_" + payModel.Amount, ct.Id, "Chipsdepositdocument");
+                            content.SetValue("member", currentMember.Id.ToString());
+                            content.SetValue("orderid", payModel.Billno);
+                            content.SetValue("chipsProduct", string.Format("比特公寓成都万达城店[{0}]", payModel.Amount));
+                            content.SetValue("amount", payModel.Amount.ToString());
+                            content.SetValue("username", currentMember.GetValue<string>("tel") + "_" + payModel.Amount);
+                            content.SetValue("isRefund", false);
+                            content.SetValue("isOk", false);
+                            Services.ContentService.Save(content);
+                            //触发创建事件
+                            //EventHandlers.CustomRaiseEvent.RaiseContentCreated(content);
+                            CustomLog.WriteLog("success!!");
+                        }
+                        else
+                        {
+                            CustomLog.WriteLog("不存在此用户!! memberid :" + array[0]);
+                        }
+                    }
+                    else
+                    {
+
+                    }
+                    return Json("ok", JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    CustomLog.WriteLog("重复提交" + payModel.Billno);
+                    return new ContentResult() { Content = "重复提交" };
+                }
+
+            }
+            catch (Exception ex)
+            {
+                CustomLog.WriteLog(ex.ToString());
+                return new ContentResult() { Content = "fail" + temp + ex };
+            }
+        }
 
         public ActionResult Clear()
         {

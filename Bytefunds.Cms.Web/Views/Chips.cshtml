@@ -1,0 +1,214 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "_Layout.cshtml";
+    IContentType ct = ApplicationContext.Services.ContentTypeService.GetContentType("AttentionDocument");
+    int contentAttention = ApplicationContext.Services.ContentService.GetContentOfContentType(ct.Id).Count();
+
+    IContentType ct1 = ApplicationContext.Services.ContentTypeService.GetContentType("PraiseDocument");
+    int contentPrais = ApplicationContext.Services.ContentService.GetContentOfContentType(ct1.Id).Count();
+
+    contentAttention = contentAttention < 1251 ? 1251 + contentAttention : contentAttention;
+    contentPrais = contentPrais < 3652 ? 3652 + contentPrais : contentPrais;
+}
+
+
+<section id="wanda" class="pv-20 clearfix wanda light-gray-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 style="margin:20px 0;">众筹买下万达城做全民老爸！</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-8 wanda-left">
+                <div>
+                    <img data-pinit="registered" src="/assets/images/wanda/5644686eN64d7dc9f.jpg" class="cover-img">
+                </div>
+                <div class="box" style=" background: #fff;border: 1px solid #ddd;  border-radius: 2px;padding: 3px;margin:20px 0">
+                    <ul class="tab_ul list" id="detailNav">
+                        <li class="bg_write">项目主页</li>
+                    </ul>
+                    <div>
+                        <img src="/assets/images/wanda/1.jpg" alt="万达众筹" />
+                        <img src="/assets/images/wanda/2.jpg" alt="万达众筹" />
+                        <img src="/assets/images/wanda/3.jpg" alt="万达众筹" />
+                        <img src="/assets/images/wanda/4.jpg" alt="万达众筹" />
+                        <img src="/assets/images/wanda/5.jpg" alt="万达众筹" />
+                        <img src="/assets/images/wanda/6.jpg" alt="万达众筹" />
+                        <img src="/assets/images/wanda/7.jpg" alt="万达众筹" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="box schedule-box h145">
+                    <div class="money-box pr clearfix">
+                        <a id="a_focus" href="/Umbraco/Api/Attention/Chips" class="attention a-all" style="color: #eee">关注 (<span class="font14">@contentAttention</span>)</a>
+                        <a id="a_prais" href="/Umbraco/Api/Praise/Chips" class="praise p-all" style="color: #eee">点赞 (<span class="font14">@contentPrais</span>)</a>
+                    </div>
+                    <hr style="border-style:dashed;border-color:#ccc;" />
+                    <div class="reserve" style="margin-bottom:-15px;">
+                        <div class="share">
+                            <div class=" sns-icon-20">
+                                <div class="sns-iconshare-panel  sns-iconshare-expand ">
+                                    <div class="sns-iconshare-content">
+                                        <label title="" class="" data-id="0" data-url="" data-name="" data-sign="jianghu">
+                                            <a target="_blank" clstag="jr|keycount|zc_detail|zc_fxwb" href="http://service.weibo.com/share/share.php?url=http://z.jd.com/project/details/30087.html&amp;title=众筹买下万达城做全民老爸！ 王健林先生献给世界550亿成都万达城，那我们呢？！众筹买下他整栋公寓，打造好玩新潮的青年聚集地，做老板当房东随便你，现在开始你就是全民老爸。&amp;source=京东金融&amp;sourceUrl=http://z.jd.com/project/details/30087.html&amp;pic=http://img30.360buyimg.com/cf/jfs/t2401/340/1163385460/78741/896a46ed/5644686eN64d7dc9f.jpg"><i class="i-sina"></i></a>
+                                        </label>
+                                        <label title="" class=" " data-id="4" data-url="" data-name="" data-sign="sina">
+                                            <a target="_blank" clstag="jr|keycount|zc_detail|zc_fxwb" href="http://share.v.t.qq.com/index.php?c=share&amp;a=index&amp;title=众筹买下万达城做全民老爸！王健林先生献给世界550亿成都万达城，那我们呢？！众筹买下他整栋公寓，打造好玩新潮的青年聚集地，做老板当房东随便你，现在开始你就是全民老爸。&amp;site=http://z.jd.com/&amp;pic=http://img30.360buyimg.com/cf/jfs/t2401/340/1163385460/78741/896a46ed/5644686eN64d7dc9f.jpg&amp;url=http://z.jd.com/project/details/30087.html&amp;title=众筹买下万达城做全民老爸！&amp;pics=http://img30.360buyimg.com/cf/jfs/t2401/340/1163385460/78741/896a46ed/5644686eN64d7dc9f.jpg&amp;summary=王健林先生献给世界550亿成都万达城，那我们呢？！众筹买下他整栋公寓，打造好玩新潮的青年聚集地，做老板当房东随便你，现在开始你就是全民老爸。"><i class="i-weibo"></i></a>
+                                        </label>
+                                        <label title="" class="" data-id="3" data-url="" data-name="" data-sign="renren">
+                                            <a target="_blank" clstag="jr|keycount|zc_detail|zc_fxkj" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://z.jd.com/project/details/30087.html&amp;title=众筹买下万达城做全民老爸！&amp;pics=http://img30.360buyimg.com/cf/jfs/t2401/340/1163385460/78741/896a46ed/5644686eN64d7dc9f.jpg&amp;summary=王健林先生献给世界550亿成都万达城，那我们呢？！众筹买下他整栋公寓，打造好玩新潮的青年聚集地，做老板当房东随便你，现在开始你就是全民老爸。"><i class="i-zoom"></i></a>
+                                        </label>
+                                        <label title="" class=" " data-id="5" data-url="" data-name="" data-sign="sohu">
+                                            <a target="_blank" clstag="jr|keycount|zc_detail|zc_fxdb" href="http://www.douban.com/share/service?image=http://img30.360buyimg.com/cf/jfs/t2401/340/1163385460/78741/896a46ed/5644686eN64d7dc9f.jpg&amp;href=http://z.jd.com/project/details/30087.html&amp;name=众筹买下万达城做全民老爸！&amp;text=王健林先生献给世界550亿成都万达城，那我们呢？！众筹买下他整栋公寓，打造好玩新潮的青年聚集地，做老板当房东随便你，现在开始你就是全民老爸。"><i class="i-dou"></i></a>
+                                        </label>
+                                        <label title="" class=" " data-id="1" data-url="" data-name="" data-sign="mail">
+                                            <a target="_blank" clstag="jr|keycount|zc_detail|zc_fxrr" href="http://widget.renren.com/dialog/share?resourceUrl=http://z.jd.com/project/details/30087.html&amp;title=众筹买下万达城做全民老爸！&amp;images=http://img30.360buyimg.com/cf/jfs/t2401/340/1163385460/78741/896a46ed/5644686eN64d7dc9f.jpg&amp;description=王健林先生献给世界550亿成都万达城，那我们呢？！众筹买下他整栋公寓，打造好玩新潮的青年聚集地，做老板当房东随便你，现在开始你就是全民老爸。"><i class="i-ren"></i></a>
+                                        </label>
+                                        <label title="" class="" data-id="8" data-url="" data-name="" data-sign="sms">
+                                            <a href="#" class="jiathis_button_weixin"><i clstag="jr|keycount|zc_detail|zc_fxwx" class="i-wei"></i></a>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="box clearfix pr" style="position:relative">
+                    <div class="font14">
+                        <p class="font18" style="font-weight:500">已筹到</p>
+                        <p style="margin:5px 0;"><span class="font27">￥</span><span class="font45">12100</span></p>
+                        <a class="btn btn-animated btn-warning margin-clear reservation-btn" href="http://u.eqxiu.com/s/4T5DDbxb" style="position:absolute;bottom:15px;right:20px;">立即预约<i class="fa fa-arrow-right pl-10"></i></a>
+                        <p class="lh24" id="projectMessage">
+                            此项目必须在<span class="f_red">
+                                2015年12月07日
+                            </span>前得到
+                            <span class="f_red">￥20000</span>的支持才可成功！剩余
+                            <span class="f_red" id="remainTime"> 20   </span>
+                            天！
+                        </p>
+                        <i class="icon_pag">
+                            预热中
+                        </i>
+                    </div>
+                    <div class="progress  style-1" style="margin:20px 0;">
+                        <span class="text"></span>
+                        <div class="progress-bar progress-bar-warning progress-bar-striped active" data-animate-width="60%" style="width: 60%;">
+                            <span class="label object-non-visible animated object-visible fadeInLeftSmall" data-animation-effect="fadeInLeftSmall" data-effect-delay="500"></span>
+                        </div>
+                    </div>
+                    <p class="font14"><strong>1452</strong> 名支持者</p>
+                </div>
+                <div class="box">
+                    <h1 class="font18_hm mtb10  pospr">
+                        <span class="fl">支持￥ 1  </span>
+                        <span name="support_div" class="fr co666 pr35 " clstag="jr|keycount|zc_detail_201504172|12"><span class="now-sustain">241</span>位支持者</span>
+                    </h1>
+                    <hr style="margin:15px -20px; border-color:#ddd" />
+                    <div class="cont_hm clearfix">
+                        <p>无限额<span class="new-tag tag-award">抽奖档</span></p>
+                        <p class="lh24">
+                            1.比特公寓成都万达城店封闭式发布会入场券1张，具体时间我们将在众筹成功后通过电话/邮箱联系您。
+                            2.成都万达城1288元乐园套票1张，发布会当天就可以体验电影科技乐园7D影院、顶级室内冰雪场、超大型主题乐园等。
+                            3.万达吉祥物“万仔”衍生品创意设计资格，优胜者将获得神秘万达基金奖励，同时，由您设计的衍生品每卖出1个都将获得1元分红！
+                            （京东将会从所有参与者中抽奖，每满200人抽一人。
+                        </p>
+                        <p class="lh24"><img class="alertPic img-s" src="/assets/images/wanda/5644698cN4fda1ee3.jpg" style="height: 80px;"></p>
+                        <p class="lh24">
+                            <strong>配送费用：</strong>
+                            免运费
+                        </p>
+                        <p class="lh24"><strong>预计回报发送时间：</strong>项目成功结束后20天内</p>
+                        <p class="mt10">
+                            <a href="/chips/pay?amount=1" class="btn btn-warning">立即支持</a>
+                            @*<button type="button" class="btn130_grey" disabled>敬请期待</button>*@
+                        </p>
+                    </div>
+                </div>
+                <div class="box">
+                    <h1 class="font18_hm mtb10  pospr">
+                        <span class="fl">支持￥ 100  </span>
+                        <span name="support_div" class="fr co666 pr35 " clstag="jr|keycount|zc_detail_201504172|12"><span class="now-sustain">379</span>位支持者</span>
+                    </h1>
+                    <hr style="margin:15px -20px; border-color:#ddd" />
+                    <div class="cont_hm clearfix">
+                        <p class="mb20 pr">无限额</p>
+                        <p class="lh24">
+                            1.比特公寓成都万达城店封闭式发布会入场券1张，具体时间我们将在众筹成功后通过电话/邮箱联系您。
+                            2.成都万达城1288元乐园套票1张，发布会当天就可以体验电影科技乐园7D影院、顶级室内冰雪场、超大型主题乐园等。
+                            3.万达吉祥物“万仔” 衍生品创意设计资格，优胜者将获得神秘万达基金奖励，同时，由您设计的衍生品每卖出1个都将获得1元分红！
+                            4.仅次于2000元回报档的万达城公寓零购资格。
+                        </p>
+                        <p class="lh24"><img class="alertPic img-s" src="/assets/images/wanda/56446a18N393f222d.jpg" style="height: 80px;"></p>
+                        <p class="lh24">
+                            <strong>配送费用：</strong>
+                            免运费
+                        </p>
+                        <p class="lh24"><strong>预计回报发送时间：</strong>项目成功结束后20天内</p>
+                        <p class="mt10">
+                            <a href="/chips/pay?amount=100" class="btn btn-warning">立即支持</a>
+                            @*<button type="button" class="btn130_grey" disabled>敬请期待</button>*@
+                        </p>
+                    </div>
+                </div>
+                <div class="box">
+                    <h1 class="font18_hm mtb10  pospr">
+                        <span class="fl">支持￥ 2000 </span>
+                        <span name="support_div" class="fr co666 pr35 " clstag="jr|keycount|zc_detail_201504172|12"><span class="now-sustain">832</span>位支持者</span>
+                    </h1>
+                    <hr style="margin:15px -20px; border-color:#ddd" />
+                    <div class="cont_hm clearfix">
+                        <p class="mb20 pr">限额 <strong>600位</strong> | 剩余 <strong>600位</strong></p>
+                        <p class="lh24">
+                            1认筹1套成都万达城公寓，发布会当天现场选房，可抵扣首付款10000元；
+                            2若项目结束后未购买公寓，本认筹金在发布会后30天内全额退还；
+                            3申请成为比特公寓酒店老板的自主权，精品装修、BOSS特权、每月收益在向你招手；
+                            4比特公寓成都万达城店封闭式发布会入场券1张，具体时间我们将在众筹成功后通过电话/邮箱联系您；
+                            5成都万达城1288元乐园套票1张；
+                            6万达吉祥物“万仔” 衍生品设计资格
+                        </p>
+                        <p class="lh24"><img class="alertPic img-s" src="/assets/images/wanda/56446acbN77dc58e3.jpg" style="height: 80px;"></p>
+                        <p class="lh24">
+                            <strong>配送费用：</strong>
+                            免运费
+                        </p>
+                        <p class="lh24"><strong>预计回报发送时间：</strong>项目成功结束后20天内</p>
+                        <p class="mt10">
+                            <a href="/chips/pay?amount=2000" class="btn btn-warning">立即支持</a>
+                            @*<button type="button" class="btn130_grey" disabled>敬请期待</button>*@
+                        </p>
+                    </div>
+                </div>
+                <div class="box">
+                    <h1 class="font18_hm mtb10  pospr">
+                        <span class="fl">无私奉献</span>
+                        <span name="support_div" class="fr co666 pr35 " clstag="jr|keycount|zc_detail_201504172|12"><span class="now-sustain">0</span>位支持者</span>
+                    </h1>
+                    <hr style="margin:15px -20px; border-color:#ddd" />
+                    <div class="cont_hm clearfix">
+                        <p class=" lh24">不需要给回报,选择此项，项目成功后发起人将不会给您发送回报</p>
+                    </div>
+                </div>
+                <div class="box" style="background-color:#EFFBFF">
+                    <h1 class="font18_hm mtb10  pospr" style="background-color:#EFFBFF">
+                        关于支持与退款
+                    </h1>
+                    <hr style="margin:15px -20px; border-color:#ddd" />
+                    <div class="cont_hm clearfix">
+                        <p class="lh24">
+                            这个项目必须在
+                            <strong class="f_red">
+                                2015年12月07日
+                            </strong>之前达到<strong class="f_red">￥20000</strong>的目标才算成功，否则已经支持的订单将取消。
+                        </p>
+                        <p class="lh24">订单取消时，您的支持金额，除了京东钱包退款到钱包账户外，储蓄卡和信用卡都是原路返回。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>

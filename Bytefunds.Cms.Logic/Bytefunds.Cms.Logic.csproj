@@ -151,10 +151,14 @@
     <Compile Include="Common\CustomLog.cs" />
     <Compile Include="Common\DESHelper.cs" />
     <Compile Include="Common\Extensions\CommonExtension.cs" />
+    <Compile Include="Controllers\AttentionController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
+    <Compile Include="Controllers\PraiseController.cs" />
     <Compile Include="Controllers\WithdrawController.cs" />
+    <Compile Include="CustomSection\RefundManager.cs" />
+    <Compile Include="CustomSection\ChipsManager.cs" />
     <Compile Include="CustomSection\PaymentManager.cs" />
     <Compile Include="CustomSection\SystemSettings.cs" />
     <Compile Include="CustomSection\WithdrawManager.cs" />

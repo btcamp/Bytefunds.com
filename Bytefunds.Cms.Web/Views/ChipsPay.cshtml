@@ -1,0 +1,85 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+
+@using Bytefunds.Cms.Logic.Helpers;
+
+@{
+    Layout = "_Layout.cshtml";
+    //"http://shypet.cn/Payment/Index?Username=测试&amp;Phone=15208377468&amp;Email=22335114101112@qq.com&amp;Linkphone=88163584&amp;Successurl=http://www.fino.trade/umbraco/Api/Payment/PaySuccess&amp;Failurl=http://www.fino.trade/umbraco/Api/Payment/PayFailure&amp;Paytype=2&amp;Formurl=https://pay.ecpss.com/sslpayment&amp;USD=1.00&amp;CNY=6.390"
+    string payurl = SystemSettingsHelper.GetSystemSettingsByKey("pay:url");
+    string paytype = SystemSettingsHelper.GetSystemSettingsByKey("pay:paytype");
+    string successurl = SystemSettingsHelper.GetSystemSettingsByKey("chips:pay:successurl");
+    string payfailurl = SystemSettingsHelper.GetSystemSettingsByKey("pay:failurl");
+    string[] array = paytype.Split(new string[] { "||" }, StringSplitOptions.RemoveEmptyEntries);
+
+    //购买产品和充值到余额
+
+
+    string url = string.Empty;
+    string title = "众筹支付";
+    if (!Members.IsLoggedIn())
+    {
+        <script>
+            window.onload = function () {
+                location.href = "/login";
+            }
+        </script>
+
+        //ApplicationContext.Services.ContentService.Save(content);
+        //email = content.Id.ToString();
+    }
+    else
+    {
+        string username = string.Empty, phone = string.Empty, email = string.Empty;
+        IMember member = ApplicationContext.Services.MemberService.GetByEmail(Members.GetCurrentLoginStatus().Email);
+        username = Members.GetCurrentLoginStatus().Name;
+        email = Members.GetCurrentMemberId().ToString();
+        phone = member.GetValue<string>("tel");
+        if (!string.IsNullOrEmpty(Request.QueryString["amount"]))
+        {
+
+            string amount = Request.QueryString["amount"];
+            email = email + "^_^0";
+            url = string.Format("{0}?Username={1}&Phone={2}&Email={3}&Linkphone=0&Successurl={4}&Failurl={5}&Paytype={6}&Formurl={7}&minAmount={8}&cny=0&readonlay=true", payurl, username, phone, email, successurl, payfailurl, array[0], array[1], amount);
+        }
+    }
+
+
+}
+<section class="section clearfix">
+    <div class="container">
+        <h2 class="text-center">@title</h2>
+        <div class="separator"></div>
+        <div class="row grid-space-10">
+            <iframe src="@url" style="border:none;width:100%;min-height:630px"></iframe>
+        </div>
+    </div>
+</section>
+@section scripts{
+    <script>
+        function openWaitingModal() {
+            if ('undefined' == typeof (document.body.style.maxHeight)) {
+                return;
+            }
+            bootbox.dialog({
+                message: "请在弹出的页面中支付，支付完成后请点击完成按钮",//
+                title: "购买基金",//
+                buttons: {
+                    success: {
+                        label: "支付完成",//
+                        className: "btn-warning",
+                        callback: function () {
+                            location = "/memberinfo";
+                        }
+                    },
+                    danger: {
+                        label: "支付失败",//
+                        className: "btn-danger",
+                        callback: function () {
+
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+}

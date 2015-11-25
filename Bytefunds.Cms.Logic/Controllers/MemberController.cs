@@ -94,36 +94,38 @@ namespace Bytefunds.Cms.Logic.Controllers
                     {
                         var m = Services.MemberService.GetByUsername(member.UserName);
                         m.SetValue("tel", model.Phone);
-                        m.SetValue("fundAccount", "1000");
+                        //m.SetValue("fundAccount", "1000");
                         Services.MemberService.SavePassword(m, model.Password);
                         Services.MemberService.Save(m);
                         result.Success = true;
-                        result.Msg = "欢迎您的加入，您成功注册，我们额外赠送1000元定期宝一个月";
+                        //result.Msg = "欢迎您的加入，您成功注册，我们额外赠送1000元定期宝一个月";
+                        result.Msg = "欢迎您的加入，您成功注册";
                         result.IsRedirect = true;
-                        result.RedirectUrl = "/memberinfo?show=true";
+                        //result.RedirectUrl = "/memberinfo?show=true";
+                        result.RedirectUrl = "/memberinfo";
                         EventHandlers.CustomRaiseEvent.RaiseRegistered(m);
                         //赠送5000元定期宝一月期
-                        System.Threading.Tasks.Task.Factory.StartNew((ser) =>
-                        {
-                            ServiceContext sc = ser as ServiceContext;
-                            IContentType ct = sc.ContentTypeService.GetContentType("PayRecords");
+                        //System.Threading.Tasks.Task.Factory.StartNew((ser) =>
+                        //{
+                        //    ServiceContext sc = ser as ServiceContext;
+                        //    IContentType ct = sc.ContentTypeService.GetContentType("PayRecords");
 
-                            IContent content = sc.ContentService.CreateContent(m.Name + "赠送定期宝", ct.Id, "PayRecords");
-                            content.SetValue("username", m.Name);
-                            content.SetValue("email", m.Username);
-                            content.SetValue("amountCny", 1000);
-                            content.SetValue("mobilePhone", m.GetValue<string>("tel"));
-                            content.SetValue("rechargeDateTime", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-                            content.SetValue("expirationtime", DateTime.Now.AddMonths(1).ToString("yyyy-MM-dd HH:mm:ss"));
-                            content.SetValue("memberPicker", m.Id);
-                            content.SetValue("payBillno", "注册赠送的定期宝");
-                            content.SetValue("isdeposit", true);
-                            content.SetValue("isexpired", false);
-                            content.SetValue("buyproduct", 2337);
-                            content.SetValue("isGive", true);
-                            sc.ContentService.Save(content);
-                            EventHandlers.CustomRaiseEvent.RaiseContentCreated(content);
-                        }, Services);
+                        //    IContent content = sc.ContentService.CreateContent(m.Name + "赠送定期宝", ct.Id, "PayRecords");
+                        //    content.SetValue("username", m.Name);
+                        //    content.SetValue("email", m.Username);
+                        //    content.SetValue("amountCny", 1000);
+                        //    content.SetValue("mobilePhone", m.GetValue<string>("tel"));
+                        //    content.SetValue("rechargeDateTime", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                        //    content.SetValue("expirationtime", DateTime.Now.AddMonths(1).ToString("yyyy-MM-dd HH:mm:ss"));
+                        //    content.SetValue("memberPicker", m.Id);
+                        //    content.SetValue("payBillno", "注册赠送的定期宝");
+                        //    content.SetValue("isdeposit", true);
+                        //    content.SetValue("isexpired", false);
+                        //    content.SetValue("buyproduct", 2337);
+                        //    content.SetValue("isGive", true);
+                        //    sc.ContentService.Save(content);
+                        //    EventHandlers.CustomRaiseEvent.RaiseContentCreated(content);
+                        //}, Services);
 
                         break;
                     }
@@ -536,6 +538,58 @@ namespace Bytefunds.Cms.Logic.Controllers
             {
                 return Json(false, JsonRequestBehavior.AllowGet);
             }
+        }
+
+        public ActionResult Refund([Bind(Prefix = "withdrawModel")]WithdrawViewModel model, int? chipsId)
+        {
+            ResponseModel response = new ResponseModel();
+            //model.Amount = 230;
+            ModelState.Remove("withdrawModel.Amount");
+            if (chipsId == null)
+            {
+                response.Success = false;
+                response.Msg = "您提交的信息有误！";
+                return Json(response, JsonRequestBehavior.AllowGet);
+            }
+            if (!Members.IsLoggedIn())
+            {
+                response.Success = false;
+                response.Msg = "请先进行登录过在进行补充信息";
+            }
+            else if (!ModelState.IsValid)
+            {
+                foreach (var item in ModelState)
+                {
+                    if (item.Value.Errors.Count > 0)
+                    {
+                        response.Success = false;
+                        response.Msg = item.Value.Errors.FirstOrDefault().ErrorMessage;
+                    }
+                }
+            }
+            else
+            {
+                IMember member = Services.MemberService.GetById(Members.GetCurrentMemberId());
+                IContent contentchIps = Services.ContentService.GetById(chipsId.Value);
+                contentchIps.SetValue("isRefund", true);
+                contentchIps.SetValue("isOk", false);
+                IContentType ct = Services.ContentTypeService.GetContentType("Refunddocumnet");
+                IContent content = Services.ContentService.CreateContent(member.Name, ct.Id, "Refunddocumnet");
+                content.SetValue("member", member.Id.ToString());
+                content.SetValue("chipsid", chipsId.Value.ToString());
+                content.SetValue("username", model.Name);
+                content.SetValue("bankName", model.BankName);
+                content.SetValue("bankNumber", model.BankNumber);
+                content.SetValue("bankNamedetail", model.BankDetail);
+                content.SetValue("isOk", false);
+                Services.ContentService.Save(contentchIps);
+                Services.ContentService.Save(content);
+                response.Success = true;
+                response.Msg = "您已经成功提交退款申请";
+                response.RedirectUrl = "/memberinfo";
+
+            }
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult tRequest()
