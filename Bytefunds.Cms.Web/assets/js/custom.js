@@ -235,7 +235,7 @@ jQuery(function ($) {
     ByteFunds.clickZan = function () {
         var target = $(".money-box").find("a")
         for (var i = 0; i < target.length; i++) {
-            target.eq(i).one("click", function () {
+            target.eq(i).on("click", function () {
                 var $this = $(this);
                 var url = $this.attr("href");
                 $.get(url, function (data) {

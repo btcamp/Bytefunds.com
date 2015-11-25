@@ -1,0 +1,80 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "_Layout.cshtml";
+}
+@Html.Partial("_Breadcrumb", Model)
+
+<style>
+    .imgbottom {
+        color: #FFF;
+        background-color: #373737;
+    }
+
+        .imgbottom > h2,.imgbottom > h5 {
+            color: #FFF;
+        }
+</style>
+<div class="container">
+    <div class="row">
+        <h2 class="col-sm-12">@(Model.Content.GetPropertyValue<string>("pageTitle"))</h2>
+    </div>
+    <div class="row" style="padding-bottom:15px">
+        <img class="col-sm-12" src="/media/1066/line.png" alt="Alternate Text" />
+    </div>
+    <div class="row">
+        @{
+            foreach (IPublishedContent item in Model.Content.Children.Skip(0).Take(3))
+            {
+                IPublishedContent img = Umbraco.Media(item.GetPropertyValue<int>("img"));
+
+                <div class="col-sm-4">
+
+                    <div class="row" style="text-align:center">
+                        <div class="col-sm-12 ">
+                            <div class="imgbottom">
+                                <div>
+                                    <img src="@img.Url" style="width:100%" />
+                                </div>
+                                <h2>@(item.GetPropertyValue<string>("name"))</h2>
+                                <h5>@(item.GetPropertyValue<string>("office"))</h5>
+                                <div class="line"></div>
+                                <p style="padding:20px">
+                                    @(item.GetPropertyValue<string>("description"))
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+
+    </div>
+    <div class="row">
+        @{
+            foreach (IPublishedContent item in Model.Content.Children.Skip(3).Take(4))
+            {
+                IPublishedContent img = Umbraco.Media(item.GetPropertyValue<int>("img"));
+
+                <div class="col-sm-3">
+                    
+                    <div class="row" style="text-align:center">
+                        <div class="col-sm-12 ">
+                            <div class="imgbottom">
+                                <div>
+                                    <img src="@img.Url" style="width:100%" />
+                                </div>
+                                <h2>@(item.GetPropertyValue<string>("name"))</h2>
+                                <h5>@(item.GetPropertyValue<string>("office"))</h5>
+                                <div class="line"></div>
+                                <p style="padding:20px">
+                                    @(item.GetPropertyValue<string>("description"))
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+
+    </div>
+</div>

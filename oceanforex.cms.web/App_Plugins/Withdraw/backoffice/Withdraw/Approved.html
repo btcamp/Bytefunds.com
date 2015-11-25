@@ -1,0 +1,87 @@
+﻿<style type="text/css">
+    body.umbracoDialog {
+        overflow: auto;
+    }
+
+    .umb-dialog .umb-control-group .umb-el-wrap {
+        overflow: hidden;
+    }
+
+        .umb-dialog .umb-control-group .umb-el-wrap label {
+            float: left;
+            width: 140px;
+        }
+
+            .umb-dialog .umb-control-group .umb-el-wrap label:after {
+                content: ":";
+            }
+
+        .umb-dialog .umb-control-group .umb-el-wrap .controls-row {
+            float: left;
+            width: 280px;
+            padding-top: 8px;
+        }
+
+            .umb-dialog .umb-control-group .umb-el-wrap .controls-row select {
+                width: auto;
+            }
+</style>
+<script src="/Scripts/umbraco.plugins.controller.js"></script>
+<div ng-controller="WithdrawController">
+    <div class="umbracoDialog umb-dialog" ng-show="loaded">
+        <form ng-submit="save()">
+            <div class="control-group umb-control-group" style=''>
+                <p class="umb-abstract">提现审核</p>
+
+                <p class="help">
+                    {{model.name}} 用户提现.
+                </p>
+                <input type="hidden" name="OperType" value="0" />
+                <div class="umb-el-wrap ">
+                    <label class="control-label">用户名</label>
+                    <div class="controls controls-row">
+                        <span id="body_ContentNameLabel">{{model.name}}</span>
+                        <!-- <input type="hidden" name="name" value="{{model.name}}" />
+                        <input type="hidden" name="contentid" value="{{model.id}}" />
+                        <input type="hidden" name="balance" value="{{currentNode.metaData.money}}" />ng-controller="templateselect_onDeposit"
+                        <input type="hidden" name="memberKey" id="memberKey" value="{{currentNode.metaData.memberKey}}" />-->
+                    </div>
+                </div>
+                <div class="umb-el-wrap ">
+                    <label class="control-label">提现金额</label>
+                    <div class="controls controls-row">
+                        <span id="Span1">{{model.amount}}元</span>
+                    </div>
+                </div>
+
+                <div class="umb-el-wrap ">
+                    <label class="control-label">可提现金额</label>
+                    <div class="controls controls-row">
+                        <span id="Span1">{{model.okassets}}元</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- <h5>{{currentNode.name}} {{currentNode.id}} </h5>
+            <ul class="umb-actions umb-actions-child">
+                <li>审核用户{{currentNode.metaData.money}} 元
+                </li>umb-dialog-footer btn-toolbar umb-btn-toolbar
+            </ul>-->
+            <div class="umb-dialog-footer btn-toolbar umb-btn-toolbar" ng-class="{'umb-dimmed': busy}">
+                <!--<input type="button" name="save" value="Save" id="btnsave" />-->
+                <!--<div class="umb-tab-buttons" detect-fold >
+                    <div class="btn-group">-->
+                <a id="closeWindowButton" class="btn btn-link" onclick="UmbClientMgr.closeModalWindow()">Cancel</a>
+                <input type="submit" data-hotkey="ctrl+s" id="btnsaveAuthorize1" class="btn btn-success" value="Save">
+                <!--<localize key="buttons_save">Save</localize>-->
+                <!--   </div>
+                </div>-->
+                <!--<input type="button" name="name" value="Cancel" onclick="UmbClientMgr.closeModalWindow()" />-->
+            </div>
+        </form>
+    </div>
+    <div class="loading" ng-hide="loaded">
+        <img style="display: block; margin: 0 auto; padding-top: 200px;" src="/Umbraco/assets/img/loader.gif" />
+    </div>
+</div>

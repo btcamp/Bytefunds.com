@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+# Visual Studio Express 2013 for Web
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Bytefunds.Cms.Web", "http://localhost:46488", "{0C5604D4-5481-420D-A459-397DABBD8E6A}"
 	ProjectSection(WebsiteProperties) = preProject
@@ -26,6 +26,27 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Bytefunds.Cms.Web", "http:/
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bytefunds.Cms.Logic", "Bytefunds.Cms.Logic\Bytefunds.Cms.Logic.csproj", "{5021F4C4-B543-40EB-82C7-0AE4F59F12D9}"
 EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "oceanforex.cms.web", "http://localhost:61919", "{D3F1F0E2-A06E-4094-81C0-67499C18D771}"
+	ProjectSection(WebsiteProperties) = preProject
+		UseIISExpress = "true"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_61919"
+		Debug.AspNetCompiler.PhysicalPath = "oceanforex.cms.web\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_61919\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_61919"
+		Release.AspNetCompiler.PhysicalPath = "oceanforex.cms.web\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_61919\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "oceanforex.cms.web\"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +61,10 @@ Global
 		{5021F4C4-B543-40EB-82C7-0AE4F59F12D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5021F4C4-B543-40EB-82C7-0AE4F59F12D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5021F4C4-B543-40EB-82C7-0AE4F59F12D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3F1F0E2-A06E-4094-81C0-67499C18D771}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3F1F0E2-A06E-4094-81C0-67499C18D771}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3F1F0E2-A06E-4094-81C0-67499C18D771}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3F1F0E2-A06E-4094-81C0-67499C18D771}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

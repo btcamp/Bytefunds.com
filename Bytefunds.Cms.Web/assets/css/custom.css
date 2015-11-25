@@ -202,7 +202,7 @@
         }
 
         #user-summary .summary-info .ft dd {
-            margin-left:6px;
+            margin-left: 6px;
             font-size: 18px;
         }
 
@@ -347,7 +347,7 @@ body {
 
     .hot-product h3 {
         margin-top: -15px !important;
-        font-size:22px;
+        font-size: 22px;
     }
 
 @media (min-width:1900px) {
@@ -1107,6 +1107,20 @@ input:focus, select:focus, textarea:focus {
 
 .bid-2 > div p, .btn130_grey, .etf-1 dl dd i, .fxgb_introduce h3, .fxgb_introduce p, .h_title, .icon_pag, .imgHolder span, .invest-table tbody td, .page a, .r_tbl table td, .tab_ul li, .text_cen, .w525 dd span i {
     text-align: center;
+}
+
+.btn130, .btn130:link, .btn130:visited {
+    background: url(/assets/images/btn130.png) 0 0 no-repeat;
+    width: 130px;
+    display: block;
+    height: 48px;
+    line-height: 48px;
+    cursor: pointer;
+    font-size: 20px;
+    border: 0;
+    color: #FFF;
+    text-align:center;
+    text-decoration:none;
 }
 
 .etf-1 dl {
@@ -2095,10 +2109,9 @@ input:focus, select:focus, textarea:focus {
     background-color: #FCFCFC !important;
 }
 
-@media(min-width:1280px) {
+@media(min-width:1200px) {
     .wanda .row {
-        width: 1150px;
-        margin: auto;
+        margin: 0 -10px;
     }
 
     .wanda-left img {

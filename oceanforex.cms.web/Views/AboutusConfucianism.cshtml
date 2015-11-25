@@ -1,0 +1,32 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "_Layout.cshtml";
+
+    IPublishedContent imgservice = null;
+
+    try
+    {
+        int id = Model.Content.GetPropertyValue<int>("img");
+        imgservice = Umbraco.Media(id);
+    }
+    catch (Exception)
+    {
+    }
+}
+@Html.Partial("_Breadcrumb", Model)
+<div class="container">
+    <div class="row">
+        <h2 class="col-sm-12">@(Model.Content.GetPropertyValue<string>("title"))</h2>
+    </div>
+    <div class="row imgline" style="padding-bottom:15px;">
+        <img class="col-sm-12" src="/media/1066/line.png" />
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-xs-12">
+            @(Html.Raw(Model.Content.GetPropertyValue<string>("content")))
+        </div>
+        <div class="col-md-6 col-xs-12">
+            <img src="@(imgservice==null?"":imgservice.Url)" />
+        </div>
+    </div>
+</div>

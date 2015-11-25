@@ -1,0 +1,116 @@
+﻿<style type="text/css">
+    body.umbracoDialog {
+        overflow: auto;
+    }
+
+    .umb-dialog .umb-control-group .umb-el-wrap {
+        overflow: hidden;
+    }
+
+        .umb-dialog .umb-control-group .umb-el-wrap label {
+            float: left;
+            width: 140px;
+        }
+
+            .umb-dialog .umb-control-group .umb-el-wrap label:after {
+                content: ":";
+            }
+
+        .umb-dialog .umb-control-group .umb-el-wrap .controls-row {
+            float: left;
+            width: 280px;
+            padding-top: 8px;
+        }
+
+            .umb-dialog .umb-control-group .umb-el-wrap .controls-row select {
+                width: auto;
+            }
+</style>
+<script>
+    //$(function () {
+    //    $("#btnsave").click(function () {
+    //        if ($("#memberKey").val() == "") {
+    //            alert("请先与Member关联，在进行入金审核操作");
+    //        }
+    //        else {
+    //            $("#form1").ajaxSubmit({
+    //                success: function (data) {
+    //                    if (data == "ok") {
+    //                        if (confirm("账户通过入金申请，是否跳转到发送邮件？")) {
+    //                            window.location.href = $("#emailtpl").val();
+    //                            UmbClientMgr.closeModalWindow();
+    //                        }
+    //                    }
+    //                    else {
+    //                        alert(data);
+    //                    }
+    //                }
+    //            });
+    //        }
+    //    });
+    //})action="/umbraco/API/Payment/PayApproved" method="post" id="form1"
+</script>
+<div ng-controller="PaymentApproved">
+    <div class="umbracoDialog umb-dialog" ng-show="loaded">
+        <form ng-submit="save()">
+            <div class="control-group umb-control-group" style=''>
+                <p class="umb-abstract">入金审核</p>
+
+                <p class="help">
+                    {{model.name}} 用户入金.            
+                </p>
+                <input type="hidden" name="OperType" value="0" />
+                <div class="umb-el-wrap ">
+                    <label class="control-label">用户名</label>
+                    <div class="controls controls-row">
+                        <span id="body_ContentNameLabel">{{model.name}}</span>
+                        <!-- <input type="hidden" name="name" value="{{model.name}}" />
+                        <input type="hidden" name="contentid" value="{{model.id}}" />
+                        <input type="hidden" name="balance" value="{{currentNode.metaData.money}}" />ng-controller="templateselect_onDeposit"
+                        <input type="hidden" name="memberKey" id="memberKey" value="{{currentNode.metaData.memberKey}}" />-->
+                    </div>
+                </div>
+                <div class="umb-el-wrap ">
+                    <label class="control-label">入金金额</label>
+                    <div class="controls controls-row">
+                        <span id="Span1">{{model.balance}}元</span>
+                    </div>
+                </div>
+                <div class="umb-el-wrap ">
+                    <label class="control-label">入金凭证</label>
+                    <div class="controls controls-row">
+                        <img ng-click="imgclick()" id="minimg" src="{{imgModel.Path}}" width="120px" alt="Alternate Text" />
+                    </div>
+                </div>
+                <div class="umb-el-wrap ">
+                    <label class="control-label" for="inputPassword">邮件模版</label>
+                    <div class="controls controls-row">
+                        <select id="emailtpl">
+                            <option ng-repeat="item in templates | orderBy:'name':false" value="/umbraco/#/UserManager/UserManager/mail/{{model.memberKey}}?tpl={{item.id}}&recordid={{model.contentid}}">{{item.name}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <h5>{{currentNode.name}} {{currentNode.id}} </h5>
+        <ul class="umb-actions umb-actions-child">
+            <li>审核用户{{currentNode.metaData.money}} 元
+            </li>umb-dialog-footer btn-toolbar umb-btn-toolbar
+        </ul>-->
+            <div class="umb-dialog-footer btn-toolbar umb-btn-toolbar" ng-class="{'umb-dimmed': busy}">
+                <!--<input type="button" name="save" value="Save" id="btnsave" />-->
+                <!--<div class="umb-tab-buttons" detect-fold >
+                    <div class="btn-group">-->
+                <a id="closeWindowButton" class="btn btn-link" onclick="UmbClientMgr.closeModalWindow()">Cancel</a>
+                <input type="submit" data-hotkey="ctrl+s" id="btnsaveAuthorize1" class="btn btn-success" value="Save">
+                <!--<localize key="buttons_save">Save</localize>-->
+                <!--   </div>
+                </div>-->
+                <!--<input type="button" name="name" value="Cancel" onclick="UmbClientMgr.closeModalWindow()" />-->
+            </div>
+        </form>
+    </div>
+    <div class="loading" ng-hide="loaded">
+        <img style="display: block; margin: 0 auto; padding-top: 200px;" src="/Umbraco/assets/img/loader.gif" />
+    </div>
+</div>

@@ -1,0 +1,205 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+
+@{
+    var rootweb = Model.Content.Ancestor(1);
+    string email = rootweb.GetPropertyValue<string>("email");
+    string tel = rootweb.GetPropertyValue<string>("tel");
+    int logoid = rootweb.GetPropertyValue<int>("logo");
+    IPublishedContent logo = Umbraco.Media(logoid);
+
+    string url = Model.Content.Name != "Home" ? "/" : "";
+
+    //IPublishedContent wechat = Umbraco.Media(1261);
+    //IPublishedContent code = Umbraco.Media(1262);
+
+}
+<div class="header-container" id="header">
+    <div class="header-top dark ">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-3 col-sm-8 col-md-9">
+                    <!-- header-top-first start -->
+                    <!-- ================ -->
+                    <div class="header-top-first clearfix">
+                        <div class="social-links hidden-lg hidden-md hidden-sm small">
+                            <div class="btn-group dropdown">
+                                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-share-alt"></i></button>
+                                <ul class="dropdown-menu dropdown-animation">
+                                    <li class="twitter"><i class="fa fa-phone pr-10 pl-5"></i>服务热线：028-8505-7407</li>
+                                    <li class="twitter"><i class="fa fa-qq pr-10 pl-5"></i>QQ群号：337433883</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <ul class="list-inline hidden-md hidden-lg hidden-sm top-service" style="position: absolute;top:0;left: 60px;">
+                            <li class=""><a href="#" class="wechat" data-toggle="modal" data-target="#myModal"><i class="fa fa-wechat"></i></a></li>
+                        </ul>
+                        <ul class="list-inline hidden-xs top-service">
+                            <li class="twitter"><i class="fa fa-phone pr-5 pl-5"></i>：028-8505-7407</li>
+                            <li class="twitter" style="font-size: 1.1em"><i class="fa fa-envelope-o pr-5 pl-10"></i>: cs@balance.com</li>
+                        </ul>
+                    </div>
+                    <!-- header-top-first end -->
+                </div>
+                <div class="col-xs-9 col-sm-4 col-md-3">
+                    <!-- header-top-second start -->
+                    <!-- ================ -->
+                    <div id="header-top-second" class="clearfix">
+                        <!-- header top dropdowns start -->
+                        <!-- ================ -->
+                        <div class="header-top-dropdown text-right">
+                            @{
+                                if (Members.IsLoggedIn())
+                                {
+                                    <div class="btn-group">
+                                        <button class="btn btn-default btn-sm uesr-btn"><i class="fa fa-user pr-10"></i>用户中心</button>
+                                        <ul class="user-center list  hidden">
+                                            <li><a href="/memberinfo">账号信息</a></li>
+                                            <li><a href="/memberinfo/buyrecord">投资记录</a></li>
+                                            <li><a href="/memberinfo/withdraw">提现申请</a></li>
+                                            <li><a href="/memberinfo/withdrawrecord">提现记录</a></li>
+                                            <li><a href="/memberinfo/verified">实名认证</a></li>
+                                            <li><a href="/memberinfo/bankcertification">绑定银行</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="btn-group">
+                                        <a href="/umbraco/Api/Member/Logout" class="btn btn-default btn-sm logout"><i class="fa fa-sign-out pr-10"></i>退出</a>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="btn-group">
+                                        <a href="/register" class="btn btn-default btn-sm"><i class="fa fa-user pr-10"></i>注册</a>
+                                    </div>
+                                    <div class="btn-group">
+                                        <a href="/login" class="btn btn-default btn-sm"><i class="fa fa-lock pr-10"></i>登录</a>
+                                    </div>
+                                }
+                            }
+                        </div>
+                        <!--  header top dropdowns end -->
+                    </div>
+                    <!-- header-top-second end -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ================ -->
+    <header class="header  fixed   clearfix">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-6  col-sm-4 col-md-5">
+                    <!-- header-left start -->
+                    <!-- ================ -->
+                    <div class="header-left clearfix">
+                        <!-- logo -->
+                        <div id="logo" class="logo">
+                            <a href="/"><img id="logo_img" src="~/assets/images/logo.png" alt="比特金服" style=""></a>
+                        </div>
+                    </div>
+                    <!-- header-left end -->
+                </div>
+                <div class="col-xs-6 col-sm-8 col-md-7">
+                    <!-- header-right start -->
+                    <!-- ================ -->
+                    <div class="header-right clearfix">
+                        <div class="main-navigation animated">
+                            <!-- navbar start -->
+                            <!-- ================ -->
+                            <nav class="navbar navbar-default" role="navigation">
+                                <div class="container-fluid">
+                                    <!-- Toggle get grouped for better mobile display -->
+                                    <div class="navbar-header">
+                                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
+                                            <span class="sr-only">Toggle navigation</span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                        </button>
+                                    </div>
+                                    <!-- Collect the nav links, forms, and other content for toggling -->
+                                    <div class="collapse navbar-collapse scrollspy smooth-scroll" id="navbar-collapse-1">
+                                        <ul class="nav navbar-nav navbar-right">
+                                            @{
+                                                if (Request.Url.AbsolutePath.Contains("/funds"))
+                                                {
+                                                    <li class=""><a href="/">首页</a></li>
+                                                    <li class=""><a href="#">定期宝</a></li>
+                                                    <li class=""><a href="#">娱乐宝</a></li>
+                                                    <li class=""><a href="#">活期宝</a></li>
+                                                    <li class=""><a href="#">关于我们</a></li>
+                                                }
+                                                else if (Request.Url.AbsolutePath.Contains("/news"))
+                                                {
+                                                    <li class=""><a href="/">首页</a></li>
+                                                    <li class=""><a href="#">定期宝</a></li>
+                                                    <li class=""><a href="#">娱乐宝</a></li>
+                                                    <li class=""><a href="#">活期宝</a></li>
+                                                    <li class=""><a href="#">关于我们</a></li>
+                                                }
+                                                else if (Request.Url.AbsolutePath.Contains("/about"))
+                                                {
+                                                    <li class=""><a href="/">首页</a></li>
+                                                    <li class=""><a href="#">定期宝</a></li>
+                                                    <li class=""><a href="#">娱乐宝</a></li>
+                                                    <li class=""><a href="#">活期宝</a></li>
+                                                    <li class=""><a href="#">关于我们</a></li>
+                                                }
+                                                else if (Request.Url.AbsolutePath == "/")
+                                                {
+                                                    <li class="active"><a href="#header">首页</a></li>
+                                                    <li class=""><a href="#">定期宝</a></li>
+                                                    <li class=""><a href="#">娱乐宝</a></li>
+                                                    <li class=""><a href="#">活期宝</a></li>
+                                                    <li class=""><a href="#">关于我们</a></li>
+                                                }
+                                                else
+                                                {
+                                                    <li class=""><a href="/">首页</a></li>
+                                                    <li class=""><a href="#">定期宝</a></li>
+                                                    <li class=""><a href="#">娱乐宝</a></li>
+                                                    <li class=""><a href="#">活期宝</a></li>
+                                                    <li class=""><a href="#">关于我们</a></li>
+                                                }
+}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </nav>
+                            <!-- navbar end -->
+                        </div>
+                        <!-- main-navigation end -->
+                    </div>
+                    <!-- header-right end -->
+                </div>
+            </div>
+        </div>
+    </header>
+</div>
+<div class="modal fade in" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content" style="margin-top:40%">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">天平金服微信公众号</h4>
+            </div>
+            <div class="modal-body text-center">
+                <img src="/assets/images/liantu.png" alt="code" />
+            </div>
+            <div class="modal-footer">
+                <div class="row" style="text-align:left">
+                    <div class="col-xs-3 col-sm-2" style="text-align:right">
+                        <img src="/assets/images/weixin.png" alt="Wechat" style="display:inline-block">
+                    </div>
+                    <div class="col-xs-9 col-sm-10" style="padding-left:3px;">
+                        <div style="margin-bottom: 3px;">
+                            <b>微信扫描二维码</b>
+                        </div>
+                        <div>
+                            打开微信 &gt; 点击 "发现" &gt; "扫一扫"，或者搜索微信号：<b>天平金服</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

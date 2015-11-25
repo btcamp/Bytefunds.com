@@ -1,0 +1,28 @@
+﻿<div class="umb-dialog-body with-footer" ng-controller="Umbraco.Editors.Content.CreateController">
+	
+	<div class="umb-pane">
+	<h5><localize key="create_createUnder">Create a Setting under</localize> {{currentNode.name}}</h5>
+
+	<p class="abstract" ng-hide="allowedTypes">
+		<localize key="create_noDocumentTypes" />
+	</p>
+
+	<ul class="umb-actions umb-actions-child">
+
+		<li >
+            <a href="#SystemSettings/SystemSettings/edit/{{currentNode.id}}?doctype=setting&create=true" ng-click="nav.hideNavigation()">
+
+                <i class="large icon-setting"></i>
+
+                <span class="menu-label">
+                    System Setting
+                    <small>
+                        Key与Value
+                    </small>
+                </span>
+            </a>
+		</li>
+	</ul>
+	</div>		
+</div>
+	

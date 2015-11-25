@@ -1,0 +1,112 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+
+@using Bytefunds.Cms.Logic.Helpers;
+
+@{
+    Layout = "_Layout.cshtml";
+
+    IContentType ct = ApplicationContext.Services.ContentTypeService.GetContentType("ProductElement");
+    IEnumerable<IContent> contents = ApplicationContext.Services.ContentService.GetContentOfContentType(ct.Id).Where(c => c.Status != ContentStatus.Trashed);
+
+    IPublishedContent news = Model.Content.Ancestor(1).Children.Where(e => e.Name.Contains("News")).FirstOrDefault();
+    IEnumerable<IPublishedContent> newsList = null;
+    if (news != null && news.Children.Count() > 0)
+    {
+        newsList = news.Children().OrderByDescending(e => e.UpdateDate).Skip(0).Take(10);
+    }
+    Html.EnableClientValidation();
+    Html.EnableUnobtrusiveJavaScript();
+    MemberLoginViewModel loginModel = new MemberLoginViewModel();
+    decimal sumAmount = decimal.Parse(SystemSettingsHelper.GetSystemSettingsByKey("sum:amount"));
+    decimal amount1 = decimal.Parse(SystemSettingsHelper.GetSystemSettingsByKey("amounted"));
+    string number1 = ((amount1 / sumAmount) * 100).ToString("f2") + "%";
+
+    int count = ApplicationContext.Services.MemberService.Count() + 1569;
+}
+<div class="banner clearfix" style="position: relative">
+    <!-- slideshow start -->
+    <!-- ================ -->
+    <div class="slideshow">
+        <!-- slider revolution start -->
+        <!-- ================ -->
+        <div class="slider-banner-container">
+            <div class=" slider-banner-fullscreen">
+                <ul class="slides">
+                    <!-- slide 1 start -->
+                    <!-- ================ -->
+                    <li data-transition="fade" data-slotamount="1" data-masterspeed="500" data-saveperformance="on">
+                        <!-- main image -->
+                        <img src="~/assets/images/banner/banner01.jpg" alt="slidebg4" data-bgposition="center top" data-bgrepeat="no-repeat" data-bgfit="cover">
+                        <!-- Transparent Background -->
+                        <div class="tp-caption dark-translucent-bg"
+                             data-x="center"
+                             data-y="bottom"
+                             data-speed="600"
+                             data-start="0">
+                        </div>
+
+                        <!-- LAYER NR. 1 -->
+                        <div class="tp-caption fade fadeout"
+                             data-x="center"
+                             data-y="bottom"
+                             data-voffset="100"
+                             data-speed="500"
+                             data-easing="easeOutQuad"
+                             data-start="1000"
+                             data-end="10000"
+                             data-endspeed="200">
+                            <a href="#page-start" class="btn btn-lg moving smooth-scroll"><i class="icon-down-open-big"></i><i class="icon-down-open-big"></i><i class="icon-down-open-big"></i></a>
+                        </div>
+                        <!-- LAYER NR. 1-->
+                    </li>
+                    <!-- slide 1 end -->
+                    <!-- slide 2 start -->
+                    <!-- ================ -->
+                    <li data-transition="fade" data-slotamount="1" data-masterspeed="500" data-saveperformance="on">
+                        <!-- main image -->
+                        <img src="~/assets/images/banner/banner03.jpg" alt="slidebg4" data-bgposition="center top" data-bgrepeat="no-repeat" data-bgfit="cover">
+                        <!-- Transparent Background -->
+                        <div class="tp-caption dark-translucent-bg"
+                             data-x="center"
+                             data-y="bottom"
+                             data-speed="600"
+                             data-start="0">
+                        </div>
+                        <!-- LAYER NR. 1 -->
+                        <div class="tp-caption fade fadeout"
+                             data-x="center"
+                             data-y="bottom"
+                             data-voffset="100"
+                             data-speed="500"
+                             data-easing="easeOutQuad"
+                             data-start="1000"
+                             data-end="10000"
+                             data-endspeed="200">
+                            <a href="#page-start" class="btn btn-lg moving smooth-scroll"><i class="icon-down-open-big"></i><i class="icon-down-open-big"></i><i class="icon-down-open-big"></i></a>
+                        </div>
+                        <!-- LAYER NR. 1-->
+                    </li>
+                    <!-- slide 2 end -->
+                </ul>
+                <div class="tp-bannertimer"></div>
+                <img src="~/assets/images/logo2.png" alt="Alternate Text" style="position:absolute;left:50%;top:50%;z-index:1000;margin:-180px 0 0 -110px;" />
+            </div>
+        </div>
+        <!-- slider revolution end -->
+    </div>
+    <!-- slideshow end -->
+</div>
+<div id="page-start"></div>
+<section class="index_product" id="page-start">
+    <div class="page page01" id="page01">
+        <div class="down"><a class="glyphicon glyphicon-chevron-down smooth-scroll" href="#page02" ></a></div>
+    </div>
+    <div class="page page02" id="page02">
+        <div class="down"><a class="glyphicon glyphicon-chevron-down smooth-scroll" href="#page03"></a></div>
+    </div>
+    <div class="page page03" id="page03">
+        <div class="down"><a class="glyphicon glyphicon-chevron-down smooth-scroll" href="#footer"></a></div>
+    </div>
+</section>
+@Html.Partial("ModalReservation")
+<!-- section end -->

@@ -1,0 +1,14 @@
+{
+  "id": "87895f0c-656a-4232-b41e-00fddb4840a0",
+  "name": "Send email to pph@umbraco.dk when submitted",
+  "form": "b2851704-795c-4e08-8f6c-914dd3a3a2f1",
+  "active": true,
+  "workflowTypeId": "e96badd7-05be-4978-b8d9-b3d733de70a5",
+  "executesOn": 3,
+  "settings": {
+    "Email": "pph@umbraco.dk",
+    "Subject": "the form asdasdasdasasasd was submitted",
+    "Message": "the form asdasdasdasasasd was submitted, this is the list of values it contained, you can turn this email off under workflows in Umbraco Contour"
+  },
+  "sortOrder": 0
+}

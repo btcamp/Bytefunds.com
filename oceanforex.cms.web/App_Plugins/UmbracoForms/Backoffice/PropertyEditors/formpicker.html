@@ -1,0 +1,12 @@
+﻿ <div ng-controller="UmbracoForms.FormPickerController">
+
+     <div class="radio" ng-repeat="form in forms">
+         <label>
+             <input ng-model="model.value" value="{{form.id}}" type="radio" name="form">
+             {{form.name}}
+             <small>{{form.fields}}</small>
+         </label>
+     </div>
+     
+     <a ng-click="clear()" ng-show="model.value">Clear</a>
+ </div>

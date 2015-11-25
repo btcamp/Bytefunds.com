@@ -1,0 +1,48 @@
+﻿<div ng-controller="UmbracoForms.SettingTypes.FieldMapperController">
+    <h5>Mappings</h5>
+    
+    <table>
+        <thead>
+            <tr>
+                <td>Alias</td>
+                <td>Form value</td>
+                <td>Static Val</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="mapping in mappings">
+                <td><input type="text" placeholder="Alias" ng-model="mapping.alias" /></td>
+                <td><select ng-options="field.id as field.value for field in fields" ng-model="mapping.value"></select></td>
+                <td><input type="text" placeholder="Static value" ng-model="mapping.staticValue" /></td>
+                <td><a ng-click="deleteMapping($index)"><i class="icon-trash"></i></a></td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <h5>Add Mapping</h5>
+    <table>
+        <!--<thead>
+            <tr>
+                <td>Alias</td>
+                <td>Form value</td>
+                <td>Static Val</td>
+                <td></td>
+            </tr>
+        </thead> -->
+        <tbody>
+            <tr>
+                <td><input type="text" placeholder="Alias" ng-model="alias" /></td>
+                <td>
+                    <select ng-model="value">
+                        <option value="">Map a field</option>
+                        <option ng-repeat="field in fields" value="{{field.id}}">{{field.value}}</option>
+                    </select>
+                </td>
+                <td><input type="text" placeholder="Static value" ng-model="staticValue" /></td>
+                <td><a ng-click="addMapping()"><i class="icon-add"></i></a></td>
+            </tr>
+        </tbody>
+    </table>
+    
+</div>

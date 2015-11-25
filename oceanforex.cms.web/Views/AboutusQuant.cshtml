@@ -1,0 +1,15 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "_Layout.cshtml";
+}
+@Html.Partial("_Breadcrumb", Model)
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <div style="max-width:700px;margin:0 auto" id="content">
+                @(Html.Raw(Model.Content.GetPropertyValue<string>("content")))
+            </div>
+        </div>
+    </div>
+</div>

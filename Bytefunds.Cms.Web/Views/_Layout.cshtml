@@ -1,5 +1,4 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
-
 @{
     
     var supwinConent = Model.Content.Ancestor(1);
@@ -28,7 +27,6 @@
     <meta name="description" content="@ViewBag.description" />
     <meta name="keywords" content="@ViewBag.keywords" />
     <!-- Mobile Specifics -->
-
     <!-- Mobile Meta -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Favicon -->
@@ -47,12 +45,9 @@
     <!-- page wrapper start -->
     <!-- ================ -->
     <div class="page-wrapper">
-
         <!-- header-container start -->
         @{Html.RenderPartial("_Header", Model);}
         <!-- header-container end -->
-        <!-- banner start -->
-        <!-- ================ -->
         @RenderBody()
     </div>
     <!-- footer top end -->
@@ -64,7 +59,6 @@
     <!-- JavaScript files placed at the end of the document so the pages load faster -->
     <!-- ================================================== -->
     @{Html.RenderPartial("_Script");}
-
     @RenderSection("scripts", false)
 </body>
 </html>

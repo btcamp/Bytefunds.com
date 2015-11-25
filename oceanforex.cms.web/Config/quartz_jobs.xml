@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- This file contains job definitions in schema version 2.0 format -->
+
+<job-scheduling-data xmlns="http://quartznet.sourceforge.net/JobSchedulingData" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0">
+
+  <processing-directives>
+    <overwrite-existing-data>true</overwrite-existing-data>
+  </processing-directives>
+
+  <schedule>
+    <!--定义示例任务1 Job-->
+    <job>
+      <name>EarningsJob</name>
+      <group>EarningsJobGroup</group>
+      <description>计算用户最新收益任务</description>
+      <job-type>Bytefunds.Cms.Logic.QuartzCore.DemoJob1,Bytefunds.Cms.Logic</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+
+    <!--定义示例任务2 Job-->
+    <!--<job>
+      <name>DemoJob2</name>
+      <group>DeomJobGroup</group>
+      <description>Quartz.Net示例任务2</description>
+      <job-type>Quartz.Net.Demo.DemoJob2,Quartz.Net.Demo</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>-->
+
+    <!--定义示例任务1 触发器 每30秒执行一次DemoJob1任务-->
+    <trigger>
+      <cron>
+        <name>EarningsJobTrigger</name>
+        <group>EarningsJobTriggerGroup</group>
+        <job-name>EarningsJob</job-name>
+        <job-group>DeomJobGroup</job-group>
+        <cron-expression>0 * * * * ?</cron-expression>
+      </cron>
+    </trigger>
+
+    <!--定义示例任务2 触发器 每分钟执行一次DemoJob2任务-->
+    <!--<trigger>
+      <cron>
+        <name>DemoJob2Trigger1</name>
+        <group>DeomJobTriggerGroup</group>
+        <job-name>DemoJob2</job-name>
+        <job-group>DeomJobGroup</job-group>
+        <cron-expression>0 * * * * ?</cron-expression>
+      </cron>
+    </trigger>-->
+
+    <!--定义示例任务2 触发器 每天凌晨01:00执行一次DemoJob2任务-->
+    <!--<trigger>
+      <cron>
+        <name>DemoJob2Trigger2</name>
+        <group>DeomJobTriggerGroup</group>
+        <job-name>DemoJob2</job-name>
+        <job-group>DeomJobGroup</job-group>
+        <cron-expression>0 0 1 * * ?</cron-expression>
+      </cron>
+    </trigger>-->
+  </schedule>
+</job-scheduling-data>
+

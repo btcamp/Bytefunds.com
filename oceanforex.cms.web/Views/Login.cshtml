@@ -1,0 +1,99 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "_Layout.cshtml";
+
+    Html.EnableClientValidation();
+    Html.EnableUnobtrusiveJavaScript();
+
+    MemberLoginViewModel loginModel = new MemberLoginViewModel();
+}
+<section class="clearfix loadPage loadBg">
+    <div class="container sign-up" style="margin-bottom:30px">
+        <div class=" row">
+        <div class="form-block center-block p-30 light-gray-bg border-clear text-left" style="">
+            <h2 class="title">登录</h2>
+            <form class="form-horizontal" role="form" method="post" action="/umbraco/Api/Member/Login">
+                <div class="form-group has-feedback">
+                    @Html.LabelFor(m => loginModel.Phone, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-8">
+                        <div>
+                            @Html.TextBoxFor(m => loginModel.Phone, new { @class = "form-control", placeholder = "请输入您的手机号码" })
+                            <i class="fa fa-phone form-control-feedback"></i>
+                        </div>
+                        @Html.ValidationMessageFor(m => loginModel.Phone)
+                    </div>
+                </div>
+                <div class="form-group has-feedback">
+                    @Html.LabelFor(m => loginModel.Password, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-8">
+                        <div>
+                            @Html.PasswordFor(m => loginModel.Password, new { @class = "form-control", placeholder = "请输入您的密码" })
+                            <i class="fa fa-lock form-control-feedback"></i>
+                        </div>
+                        @Html.ValidationMessageFor(m => loginModel.Password)
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="col-sm-offset-3 col-sm-8 submit-btn">
+                        <button type="submit" class="btn btn-group btn-warning btn-animated">登录<i class="fa fa-check"></i></button>
+                        <span><a href="#" class="forget-password underline" data-toggle="modal" data-target="#resetPassword">忘记密码</a>？ <a href="/register">免费注册</a></span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    </div>
+</section>
+<div class="modal fade in" id="resetPassword" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="myModalLabel">修改密码</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group has-feedback">
+                                <label for="rePhone" class="col-sm-3 control-label">手机号码</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="rePhone" placeholder="请输入您的手机号码">
+                                    <i class="fa fa-phone form-control-feedback"></i>
+                                </div>
+                            </div>
+                            <div class="form-group has-feedback">
+                                <label for="reVesert" class="col-sm-3 control-label">短信验证</label>
+                                <div class="col-sm-8">
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <input type="password" class="form-control" id="reVeserts" placeholder="请输入验证码">
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <button class="btn btn-group btn-warning margin-clear" data-href="/umbraco/Api/Member/GetCode" id="btncode">获取验证码</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group has-feedback">
+                                <label for="newPassword" class="col-sm-3 control-label">新的密码</label>
+                                <div class="col-sm-8">
+                                    <input type="password" class="form-control" id="newPassword" placeholder="请输入新的密码">
+                                    <i class="fa fa-lock form-control-feedback"></i>
+                                </div>
+                            </div>
+                            <div class="form-group has-feedback">
+                                <label for="repeatPassword" class="col-sm-3 control-label">确认密码</label>
+                                <div class="col-sm-8">
+                                    <input type="password" class="form-control" id="repeatPassword" placeholder="请再次输入新的密码">
+                                    <i class="fa fa-lock form-control-feedback"></i>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-9">
+                                    <button  class="btn btn-group btn-warning btn-animated">提交<i class="fa fa-check"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+    </div>

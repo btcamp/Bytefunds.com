@@ -1,0 +1,128 @@
+<form novalidate name="contentForm"
+      ng-controller="UmbracoForms.Editors.Form.EntriesController"
+      ng-show="loaded"
+      ng-submit="save()">
+    <umb-panel>
+        <umb-header>
+            <div class="span12">
+                <h1>{{form.name}} form entries</h1>
+            </div>
+
+        </umb-header>
+
+        <div class="umb-panel-body umb-scrollable row-fluid umb-forms-entries">
+            <div class="tab-content form-horizontal" style="padding-bottom: 90px">
+                <div class="umb-pane">
+
+                    <div class="row">
+
+                        <button class="btn pull-right" ng-click="edit(records.schema)">
+                            Export
+                        </button>
+
+                        <input type="text" placeholder="Filter entries..." ng-model="filter.filter" class="pull-left"/>
+
+                        <div ng-model="filter" umb-forms-date-range-picker class="date-filter pull-left">
+                        </div>
+                        
+                        <label ng-repeat="recordState in states">
+                            <input type="checkbox"
+                                   name="selectedrecordStates[]"
+                                   value="{{recordState}}"
+                                   ng-checked="filter.states.indexOf(recordState) > -1"
+                                   ng-click="toggleRecordStateSelection(recordState)"> {{recordState}}
+                        </label>
+
+                      
+
+                        <div class="clearfix"></div>
+                        <hr />
+                    </div>
+
+                    <div class="row" ng-if="selectedRows.length > 0">
+                            <strong>{{selectedRows.length}}</strong> entries selected
+
+                            <div class="pull-right">
+
+                                <a href class="btn btn-link" ng-click="executeRecordSetAction(action)" title="{{action.description}}" ng-repeat="action in recordSetActions">
+                                    <i class="icon {{action.icon}}" style="font-size: 16px"></i>
+                                </a>
+                            </div>
+                            <hr/>
+                    </div>
+
+                    <div class="umb-listview entries-table-wrapper">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <td class="header-col">
+                                        <input type="checkbox"
+                                            ng-click="toggleAll($event)"
+                                            ng-checked="allIsChecked">
+                                    </td>
+
+                                    <td class="spacer" style="width: 35px"><div style="width: 35px">
+                                    </div></td>
+
+                                    <td ng-show="hiddenFields.indexOf($index) === -1"
+                                        ng-repeat="field in records.schema track by $index">{{field.name}}</td>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr ng-repeat="row in records.results" ng-class="{selected:row.selected}">
+
+                                    <td class="header-col">
+                                        <i class="icon icon-checkbox-dotted"></i>
+                                        <input type="checkbox" ng-model="row.selected" ng-change="toggleRow(row)">
+                                    </td>
+
+                                    <td></td>
+
+
+                                    <td ng-show="hiddenFields.indexOf($index) === -1"
+                                        title="{{field}}"
+                                        ng-click="viewdetail(records.schema, row)"
+                                        ng-repeat="field in row.fields track by $index">
+                                            {{ field | limitTo:20 }}<span ng-if="field.length>20">...</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot ng-show="pagination.length > 1">
+                                <tr>
+                                    <th colspan="{{2+records.schema.length - hiddenFields.length}}">
+                                        <div class="pagination pagination-right">
+                                            <ul>
+                                                <li ng-class="{disabled:filter.startIndex <= 1}">
+                                                    <a href="#" ng-click="prev()" prevent-default>
+                                                        <localize key="general_previous">Previous</localize>
+                                                    </a>
+                                                </li>
+
+                                                <li ng-repeat="pgn in pagination track by $index"
+                                                    ng-class="{active:filter.startIndex === $index+1}">
+
+                                                    <a href="#" ng-click="goToPage($index+1)" prevent-default
+                                                       ng-if="pgn.val != '...'">{{$index+1}}</a>
+
+                                                </li>
+
+                                                <li ng-class="{disabled:filter.startIndex >= records.totalNumberOfPages}">
+                                                    <a href="#" ng-click="next()" prevent-default>
+                                                        <localize key="general_next">Next</localize>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </umb-panel>
+</form>

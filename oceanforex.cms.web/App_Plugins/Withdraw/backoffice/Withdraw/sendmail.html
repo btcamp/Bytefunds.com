@@ -1,0 +1,23 @@
+﻿<script src="/Scripts/umbraco.appplugins.controllers.js"></script>
+<div class="umb-dialog-body with-footer" ng-controller="templateselect_onDeposit">
+    <div class="umb-pane">
+        <h5> 用户  {{currentNode.name}}的操作</h5>
+        <ul class="umb-actions umb-actions-child">
+            <li ng-repeat="item in templates | orderBy:'name':false">
+                <a href="#/UserManager/UserManager/mail/{{selectedmember.Key}}?tpl={{item.id}}&recordid={{currentNode.id}}" ng-click="nav.hideNavigation()">
+                    <i class="large {{item.icon}}"></i>
+                    <span class="menu-label">
+                        {{item.name}}
+                        <small>
+                            {{item.description}}
+                        </small>
+                    </span>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</div>
+<div class="umb-dialog-footer btn-toolbar umb-btn-toolbar">
+
+</div>

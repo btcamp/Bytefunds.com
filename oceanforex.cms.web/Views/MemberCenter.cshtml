@@ -1,0 +1,184 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "_Layout.cshtml";
+    string str = "0.00", username = str, accumulatedEarnings = str, latestearnings = str, fundAccount = str, assets = str, tel = string.Empty, okassets = str, notmaturity = str;
+
+    if (!Members.IsLoggedIn())
+    {
+        <script>
+            window.onload = function () {
+                location.href = "/login";
+            }
+        </script>
+    }
+    else
+    {
+        string show = Request.QueryString["show"];
+        IMember member = ApplicationContext.Services.MemberService.GetById(Members.GetCurrentMemberId());
+        username = member.Name;
+        accumulatedEarnings = member.GetValue<double>("accumulatedEarnings").ToString("f2") + "元";
+        latestearnings = member.GetValue<double>("latestearnings").ToString("f2") + "元";
+        fundAccount = member.GetValue<double>("fundAccount").ToString("f2") + "元";
+        assets = member.GetValue<double>("assets").ToString("N2") + "元";
+        okassets = member.GetValue<double>("okassets").ToString("N2") + "元";
+        tel = member.GetValue<string>("tel");
+        notmaturity = member.GetValue<double>("notmaturity").ToString("N2");
+        string totalAssets = (member.GetValue<double>("okassets") + member.GetValue<double>("notmaturity") + member.GetValue<double>("fundAccount")).ToString("N2") + "元";
+        <section class="main-container pv-20 mb-20">
+            <div class="container" id="user-summary">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3 style="float:left;font-size:1.3em;margin-left:1px">比特金服用户：@username</h3>
+                        <ul class="list-inline renzheng" style=" padding-top: 10px;float:left;margin-left:5px">
+                            <li><a href="/memberinfo/verified/" title="实名认证"><i class="icon-font @(member.GetValue<bool>("verified")?"approve":string.Empty) " title="实名认证">&#xe641;</i></a></li>
+                            <li><a href="/memberinfo/bankcertification/" title="绑定银行卡"><i class="icon-font @(member.GetValue<bool>("bankCertification") ? "approve" : string.Empty)" title="绑定银行卡">&#xf00c0;</i></a></li>
+                            <li><i class="icon-font @(!string.IsNullOrEmpty(member.GetValue<string>("tel")) ? "approve" : string.Empty)" title="手机认证">&#xe675;</i></li>
+                            @*<li><i class="icon-font @(!string.IsNullOrEmpty(member.Username) ? "approve" : string.Empty)" title="邮箱认证">&#xe61a;</i></li>*@
+                        </ul>
+                    </div>
+                </div>
+                <div class="row summary-infos">
+                    <div class="col-sm-6">
+                        <div class="summary-info summary-info-p2p mt-20" style="background-color:#fff">
+                            <div id="profit_container">
+                                <div style="text-align:center">
+                                    <img src="/assets/images/ajax-loader2.gif" style="width:16px; margin:auto 0;padding-top:100px"
+                                         alt="Alternate Text" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                        <div class="summary-info summary-info-funds">
+                            <div class="hd clearfix text-center">
+                                <span>您账户总资产为：<strong style="font-size:1.4em">@totalAssets</strong></span>
+                            </div>
+                            <div class="bd clearfix">
+                                <div class="field">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <strong class="decimal" style="font-size:32px !important"> @latestearnings</strong><label>最新收益 </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <div class="col-md-4 col-xs-6 span2"><span class="decimal">@accumulatedEarnings</span><label>累计收益</label></div>
+                                    <div class="col-md-7 col-md-offset-1  col-xs-6  span2 last">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <span class="decimal">@fundAccount</span>
+                                                <label><a href="/memberinfo/buyrecord">定期宝账户</a></label>
+                                            </div>
+                                            @*<div class="col-md-4">
+                                                <a href="/memberinfo/transferred" class="btn  btn-sm btn-default">转入定期宝</a>
+                                            </div>*@
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <div class="ft clearfix">
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-7">
+                                        <dl>
+                                            <dt>可用余额：</dt>
+                                            <dd class="decimal">@okassets</dd>
+                                            <dd class="decimal"><a href="/pay" class="btn  btn-sm btn-default">充值</a></dd>
+                                        </dl>
+                                    </div>
+                                    <div class="col-xs-12 col-md-5">
+                                        <dl>
+                                            <dt>未到期收益：</dt>
+                                            <dd class="decimal">@notmaturity 元</dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="account-unactive">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <a class="btn btn-large btn-warning" href="/#product">我要赚钱</a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a class="btn btn-large btn-warning" href="/memberinfo/withdraw">余额提现</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </section>
+        <input type="hidden" value="@show" id="hiddialog" />
+
+        @section scripts{
+            <script>
+                $(function () {
+                    if ($("#hiddialog").val() == "true") {
+                        bootbox.dialog({
+                            message: "<img src='/assets/images/hongbao.png'  alt='红包'  style='width:100%;' /><img src='/assets/images/hongbao1000.png'  alt=' ' class='hongbao5000' /><a class='hongbao-btn'  href='/memberinfo/buyrecord'></a>",
+                            className: 'hongbao'
+                        });
+                    }
+                    $.get("/umbraco/Api/Member/GetProfits", function (result) {
+                        var text = '一周收益';
+                        if (result.Times.length == 0) {
+                            text = "暂无收益";
+                        }
+                        $('#profit_container').highcharts({
+                            chart: {
+                                type: 'spline'
+                            },
+                            title: {
+                                text: text,
+                                style: { color: "#F5B024", fontSize: "1.8em", fontFamily: '黑体', fontWeight: 600 }
+                            },
+                            xAxis: {
+                                categories: result.Times
+                            },
+                            yAxis: {
+                                gridLineDashStyle: 'dot',
+                                title: {
+                                    text: ''
+                                },
+                                labels: {
+                                    formatter: function () {
+                                        return this.value;
+                                    }
+                                },
+                                allowDecimals: true
+                            },
+                            tooltip: {
+                                valueSuffix: ' 元',
+                                crosshairs: false,
+                                shared: true,
+                            },
+                            credits: {
+                                enabled: false
+                            },
+                            exporting: {
+                                enabled: false
+                            },
+                            legend: {
+                                borderRadius: 5,
+                                x: -10,
+                                y: 0
+                            },
+                            series: [{
+                                color: '#F5B024',
+                                name: "当日收益",
+                                data: result.Datas,
+                                marker: {
+                                    lineWidth: 2,
+                                    lineColor: '#F5B024',
+                                }
+                            }]
+                        });
+                    });
+                });
+            </script>
+        }
+    }
+}

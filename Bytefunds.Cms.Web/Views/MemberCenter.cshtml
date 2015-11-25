@@ -112,24 +112,19 @@
                     </div>
                     <div class="clearfix"></div>
                 </div>
-
                 <div class="row">
                     <div class="col-md-12">
-                        <h3 style="float:left;font-size:1.3em;margin-left:1px">比特金服众筹用户：@username</h3>
-                    </div>
-                </div>
-                <div class="row summary-infos">
-                    <table class="user-record-table mt-20 user-record-table1">
-                        <thead class="user-record-head">
-                            <tr>
-                                <th>众筹产品</th>
-                                <th>金额</th>
-                                <th>众筹时间</th>
-                                <th>是否退款</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @{
+                        <table class="user-record-table mt-10 user-record-table1">
+                            <thead class="user-record-head">
+                                <tr>
+                                    <th>众筹产品</th>
+                                    <th>金额</th>
+                                    <th>众筹时间</th>
+                                    <th>是否退款</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
         foreach (IContent content in list)
         {
             <tr>
@@ -150,11 +145,12 @@
                 </td>
             </tr>
         }
-                            }
+                                }
 
-                        </tbody>
-                    </table>
-                    <p style="margin-top: 35px;font-size: 1em;color:  #C6AB5C;">感谢您对我们的支持，祝你生活愉快！</p>
+                            </tbody>
+                        </table>
+                        <p style="margin-top: 35px;font-size: 1em;color:  #C6AB5C;">感谢您对我们的支持，祝你生活愉快！</p>
+                    </div>
                 </div>
             </div>
         </section>
