@@ -4,8 +4,8 @@ jQuery(function ($) {
     $(document).ready(function () {
         $(".qqService").click(function () { ByteFunds.qqService(); });
         $(".qq").click(function () { ByteFunds.qqService(); });
-        ByteFunds.ObtainNews1();
-        ByteFunds.ObtainNews2();
+        //ByteFunds.ObtainNews1();
+        //ByteFunds.ObtainNews2();
         ByteFunds.hiddenModal();
         ByteFunds.showModal();
         ByteFunds.showCircle();
@@ -96,7 +96,7 @@ jQuery(function ($) {
         if (indicatorContainer.length) {
             var value = $("#indicatorValue").val();
             $('#indicatorContainer').radialIndicator({
-                barColor: '#F5B024',
+                barColor: '#55ACEE',
                 barWidth: 5,
                 initValue: value,
                 roundCorner: true,
@@ -160,7 +160,7 @@ jQuery(function ($) {
         var top = 0;
         var invest_tablle = $(".invest-div table");
         var dom = ""
-        for (var i = 0; i < 7; i++) {
+        for (var i = 0; i < 8; i++) {
             var name_i = Math.floor(Math.random() * name_list.length);
             var name = name_list[name_i];
             var invest_tablle = $(".invest-div table");
@@ -211,7 +211,7 @@ jQuery(function ($) {
             });
         }, 3000);
     };
-    ByteFunds.loadHeight=function() {
+    ByteFunds.loadHeight = function () {
         var header = $("#header").innerHeight();
         var footer = $("#footer").innerHeight();
         var win = $(window).height();
@@ -224,26 +224,26 @@ jQuery(function ($) {
         var bg = $(".loadBg");
         var url = ["/assets/images/bg01.jpg", "/assets/images/bg02.jpg", "/assets/images/bg03.jpg"];
         var i = Math.floor(Math.random() * url.length);
-        if (bg.length > 0 && $(window).width()>960) {
+        if (bg.length > 0 && $(window).width() > 960) {
             bg.css({
                 background: "url(" + url[i] + ")",
-                backgroundSize:"100% 100%"
+                backgroundSize: "100% 100%"
             })
         }
-    } 
+    }
     ByteFunds.clickZan = function () {
         var target = $(".money-box").find("a")
         for (var i = 0; i < target.length; i++) {
             target.eq(i).one("click", function () {
                 var left = parseInt($(this).offset().left) + 92;
-                var top = parseInt($(this).offset().top)-5;
+                var top = parseInt($(this).offset().top) - 5;
                 var element = '<div id="zan"><b>+1<\/b></div>';
                 var obj = $(this);
                 obj.css("color", "#fff");
                 $("body").append(element);
                 $('#zan').css({
                     'position': 'absolute', 'z-index': '500', 'color': '#C30',
-                    'left': left + 'px', 'top': top + 'px',fontSize:"16px"
+                    'left': left + 'px', 'top': top + 'px', fontSize: "16px"
                 });
                 $('#zan').animate({ top: top - 10, opacity: 0 }, 500,
                     function () {
@@ -260,18 +260,26 @@ jQuery(function ($) {
         var w = $(window).width();
         var h = $(window).height();
         var hh = $(".header").innerHeight();
-        $(".index_product .page").css({
+        var textbg = $(".index_product .textbg");
+        var textbgH = textbg.innerHeight();
+        $(".index_product .indexPage").css({
             width: w + "px",
             height: h + "px"
+        });
+        textbg.css({
+            marginTop: h * 0.5 - textbgH * 0.5 + "px",
         });
         $(window).resize(function () {
             var w = $(window).width();
             var h = $(window).height();
             var hh = $(".header").innerHeight();
-            $(".index_product .page").css({
+            $(".index_product .indexPage").css({
                 width: w + "px",
-                height: h+ "px"
-            })
+                height: h + "px"
+            });
+            textbg.css({
+                marginTop: h * 0.5 - textbgH *0.5+ "px",
+            });
         });
     }
 });

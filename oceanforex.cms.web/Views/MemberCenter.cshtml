@@ -24,11 +24,14 @@
         tel = member.GetValue<string>("tel");
         notmaturity = member.GetValue<double>("notmaturity").ToString("N2");
         string totalAssets = (member.GetValue<double>("okassets") + member.GetValue<double>("notmaturity") + member.GetValue<double>("fundAccount")).ToString("N2") + "元";
+
+        IContentType ct = ApplicationContext.Services.ContentTypeService.GetContentType("ChipsDepositDocument");
+        IEnumerable<IContent> list = ApplicationContext.Services.ContentService.GetContentOfContentType(ct.Id).Where(e => e.GetValue<int>("member") == member.Id);
         <section class="main-container pv-20 mb-20">
             <div class="container" id="user-summary">
                 <div class="row">
                     <div class="col-md-12">
-                        <h3 style="float:left;font-size:1.3em;margin-left:1px">比特金服用户：@username</h3>
+                        <h3 style="float:left;font-size:1.3em;margin-left:1px">天平金服用户：@username</h3>
                         <ul class="list-inline renzheng" style=" padding-top: 10px;float:left;margin-left:5px">
                             <li><a href="/memberinfo/verified/" title="实名认证"><i class="icon-font @(member.GetValue<bool>("verified")?"approve":string.Empty) " title="实名认证">&#xe641;</i></a></li>
                             <li><a href="/memberinfo/bankcertification/" title="绑定银行卡"><i class="icon-font @(member.GetValue<bool>("bankCertification") ? "approve" : string.Empty)" title="绑定银行卡">&#xf00c0;</i></a></li>
@@ -39,10 +42,10 @@
                 </div>
                 <div class="row summary-infos">
                     <div class="col-sm-6">
-                        <div class="summary-info summary-info-p2p mt-20" style="background-color:#fff">
+                        <div class="summary-info summary-info-p2p mt-20" style="background-color:#fff;">
                             <div id="profit_container">
                                 <div style="text-align:center">
-                                    <img src="/assets/images/ajax-loader2.gif" style="width:16px; margin:auto 0;padding-top:100px"
+                                    <img src="/assets/images/222.gif" style="margin:120px auto 0;"
                                          alt="Alternate Text" />
                                 </div>
                             </div>
@@ -70,8 +73,8 @@
                                                 <label><a href="/memberinfo/buyrecord">定期宝账户</a></label>
                                             </div>
                                             @*<div class="col-md-4">
-                                                <a href="/memberinfo/transferred" class="btn  btn-sm btn-default">转入定期宝</a>
-                                            </div>*@
+                                                    <a href="/memberinfo/transferred" class="btn  btn-sm btn-default">转入定期宝</a>
+                                                </div>*@
                                         </div>
                                     </div>
                                     <div class="clearfix"></div>
@@ -103,11 +106,50 @@
                                         <a class="btn btn-large btn-warning" href="/memberinfo/withdraw">余额提现</a>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
                     <div class="clearfix"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="user-record-table mt-10 user-record-table1">
+                            <thead class="user-record-head">
+                                <tr>
+                                    <th>众筹产品</th>
+                                    <th>金额</th>
+                                    <th>众筹时间</th>
+                                    <th>是否退款</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+        foreach (IContent content in list)
+        {
+            <tr>
+                <td class="td1">@(content.GetValue<string>("chipsProduct"))</td>
+                <td class="td2">@(content.GetValue<double>("amount").ToString("f2") + "元")</td>
+                <td class="td3">@(content.CreateDate.ToString("yyyy年MM月dd月 HH:mm:ss"))</td>
+                <td class="td4">
+                    @{
+            if (!content.GetValue<bool>("isRefund"))
+            {
+                <a class="btn btn-warning btn-sm" href="/chips/refund?chipsid=@content.Id">退款</a>
+            }
+            else
+            {
+                @(content.GetValue<bool>("isOk") ? "已经处理" : "审核中")
+            }
+                    }
+                </td>
+            </tr>
+        }
+                                }
+
+                            </tbody>
+                        </table>
+                        <p style="margin-top: 35px;font-size: 1em;color:  #C6AB5C;">感谢您对我们的支持，祝你生活愉快！</p>
+                    </div>
                 </div>
             </div>
         </section>

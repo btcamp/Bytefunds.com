@@ -27,18 +27,12 @@
     <title>@pageTitle@(pageTitle == string.Empty ? string.Empty : "  |  ")@pageHeadTitle</title>
     <meta name="description" content="@ViewBag.description" />
     <meta name="keywords" content="@ViewBag.keywords" />
-    <!-- Mobile Specifics -->
-
     <!-- Mobile Meta -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Favicon -->
     <link rel="shortcut icon" href="/favicon.ico">
     @{Html.RenderPartial("_Style");}
 </head>
-<!-- body classes:  -->
-<!-- "boxed": boxed layout mode e.g. <body class="boxed"> -->
-<!-- "pattern-1 ... pattern-9": background patterns for boxed layout mode e.g. <body class="boxed pattern-1"> -->
-<!-- "transparent-header": makes the header transparent and pulls the banner to top -->
 <body class="no-trans front-page ">
     <!-- page wrapper start -->
     <!-- ================ -->
@@ -64,9 +58,6 @@
         <!-- ================ -->
         @RenderBody()
     </div>
-    <!-- footer top end -->
-    <!-- footer start (Add "dark" class to #footer in order to enable dark footer) -->
-    <!-- ================ -->
     @{Html.RenderPartial("_Footer", Model);}
     <!-- footer end -->
     <!-- page-wrapper end -->

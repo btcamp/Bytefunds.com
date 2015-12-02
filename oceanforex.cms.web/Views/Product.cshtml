@@ -1,156 +1,236 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 @{
     Layout = "_Layout.cshtml";
-    ReservationViewModel reservationModel = new ReservationViewModel();
-    Html.EnableClientValidation();
-    Html.EnableUnobtrusiveJavaScript();
 }
-@Html.Partial("_Breadcrumb", Model)
-<div class="container product pv-20">
-    <div class="row">
-        <div class="col-md-6">
-            <h3>鹏华资产实盈量化复兴资产管理计划</h3>
-            <div class="separator-2"></div>
-            <p class="margin-clear hot-product-content">本私募产品是由鹏华资产管理有限公司发行的ETF期现套利对冲基金产品，仅接受合格投资人购买。预期收益可达66.9%，最大回撤0.67%，属于低风险高收益量化投资产品。</p>
-            <div class="mt-10">
-                <span class="btn btn-animated btn-warning margin-clear reservation-btn">立即预约<i class="fa fa-arrow-right pl-10"></i></span>
-            </div>
-            <div class="overlay-container">
-                <img src="/assets/images/hot/2015820105759.jpg" alt="" style="width: 100%">
-            </div>
-            <div class="description-title">
-                <h4>主要投资领域</h4>
-            </div>
-            <p>上海证券交易所、深证证券交易所上市的股票、场内ETF基金（不包括场外申赎），LOF基金，货币市场基金，网上新股申购，国债逆回购以及中国金融期货交易所上市的股指期货合约，控制基金风险。</p>
-
-        </div>
-        <div class="col-md-6 mb-20">
-            <table class="campbell-table">
-                <thead class="campbell-thead">
-                    <tr>
-                        <th colspan="2">鹏华资产实盈量化复兴资产管理计划</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="td1">基金名称</td>
-                        <td class="td2">鹏华资产实盈量化复兴资产管理计划</td>
-                    </tr>
-                    <tr>
-                        <td class="td1">产品规模</td>
-                        <td class="td2">劣后级：3000万元；优先级：1.5亿元</td>
-                    </tr>
-                    <tr>
-                        <td class="td1">币种</td>
-                        <td class="td2">人民币</td>
-                    </tr>
-                    <tr>
-                        <td class="td1">产品期限</td>
-                        <td class="td2">1年</td>
-                    </tr>
-                    <tr>
-                        <td class="td1">成立时间</td>
-                        <td class="td2">2015年8月14日</td>
-                    </tr>
-                    <tr>
-                        <td class="td1">最低起投</td>
-                        <td class="td2">100万人民币，以10万人民币为最小单位递增</td>
-                    </tr>
-                    <tr>
-                        <td class="td1">基金类型</td>
-                        <td class="td2">结构化</td>
-                    </tr>
-                    <tr>
-                        <td class="td1">最大回撤</td>
-                        <td class="td2">0.67%，超低风险</td>
-                    </tr>
-                    <tr>
-                        <td class="td1">预期收益</td>
-                        <td class="td2">年化60%，银行定存利率22倍</td>
-                    </tr>
-                    <tr>
-                        <td class="td1">开放认购额度</td>
-                        <td class="td2">30,000,000元人民币</td>
-                    </tr>
-                    <tr>
-                        <td class="td1">已认购额度</td>
-                        <td class="td2">10,000,000元人民币</td>
-                    </tr>
-                    <tr>
-                        <td class="td1">基金管理人</td>
-                        <td class="td2">鹏华资产管理（深圳）有限公司</td>
-                    </tr>
-                    <tr>
-                        <td class="td1">托管银行</td>
-                        <td class="td2">招商银行股份有限公司</td>
-                    </tr>
-                    <tr>
-                        <td class="td1">法律顾问</td>
-                        <td class="td2">广东岭南律师事务所</td>
-                    </tr>
-                    <tr>
-                        <td class="td1">投资顾问</td>
-                        <td class="td2">广州实盈投资管理有限公司</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-<div class="modal animated fadeIn hidden" id="reservation-content" tabindex="-1" role="dialog" aria-labelledby="reservation" aria-hidden="false" style="display: block;">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close closed" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="reservation-title">预约信息</h4>
-            </div>
-            <form action="/umbraco/Api/Member/Reservation" class="form-horizontal" method="post" novalidate="novalidate">
-                <div class="modal-body">
-                    <div class="form-group has-feedback">
-                        @Html.LabelFor(e => reservationModel.Name, new { @class = "col-sm-3 control-label" })
-                        <div class="col-sm-8">
-                            <div>
-                                @Html.TextBoxFor(e => reservationModel.Name, new { @class = "form-control", placeholder = "请输入姓名" })
-                                <i class="fa fa-user form-control-feedback"></i>
-                            </div>
-                            @Html.ValidationMessageFor(e => reservationModel.Name)
-                        </div>
+<section class="pv-20 clearfix current">
+    <div class="container">
+        <div class="row mb-10">
+            <div class="col-md-8 bid-left">
+                <h3>天平活期宝 <span style="font-size:14px;position:relative;top:-3px;left:10px;">固定收益 | 无风险</span></h3>
+                <div class="row mt-20">
+                    <div class="col-sm-2" id="indicatorContainer"></div>
+                    <div class="col-sm-10">
+                        <h4 class="bid-title">项目金额： <span class="">1,000,000.00 元</span>最低起投： <span>100.00 元</span></h4>
+                        <p>已经完成投标<span class="bid-now">268,100.00</span>元 , 即刻投资收益自<span class="bid-date">2015-11-28</span>起算，每万元预期收益<span class="bid-benefit" id="rate">2.74</span>元</p>
+                        <input type="hidden" id="indicatorValue" value="27">
                     </div>
-                    <div class="form-group has-feedback">
-                        @Html.LabelFor(e => reservationModel.Phone, new { @class = "col-sm-3 control-label" })
-                        <div class="col-sm-8">
-                            <div>
-                                @Html.TextBoxFor(e => reservationModel.Phone, new { @class = "form-control", placeholder = "请输入手机号" })
-                                <i class="fa fa-phone form-control-feedback"></i>
-                            </div>
-                            @Html.ValidationMessageFor(e => reservationModel.Phone)
-                        </div>
+                </div>
+                <hr>
+                <div class="bid-2 row">
+                    <div class="col-md-2 col-xs-5 bid-2-box">
+                        <p><i class="fa fa-bar-chart"></i><span class="bid-benefit">10%</span></p>
                     </div>
-                    <div class="form-group has-feedback">
-                        @Html.LabelFor(e => reservationModel.Email, new { @class = "col-sm-3 control-label" })
-                        <div class="col-sm-8">
-                            <div>
-                                @Html.TextBoxFor(e => reservationModel.Email, new { @class = "form-control", placeholder = "请输入邮箱" })
-                                <i class="fa fa-envelope form-control-feedback"></i>
-                            </div>
-                            @Html.ValidationMessageFor(e => reservationModel.Email)
-                        </div>
+                    <div class="col-md-3 col-xs-5">
+                        <p><i class="fa fa-clock-o"></i><span> 按日计息</span></p>
                     </div>
-                    <div class="form-group has-feedback">
-                        @Html.LabelFor(e => reservationModel.Text, new { @class = "col-sm-3 control-label" })
-                        <div class="col-sm-8">
-                            <div>
-                                @Html.TextAreaFor(e => reservationModel.Text, new { @class = "form-control", placeholder = "请输入信息", rows = "5" })
-                            </div>
-                            @Html.ValidationMessageFor(e => reservationModel.Text)
+                </div>
+                <hr>
+                <p class="bid-content">本活期宝产品为每日结息，具有很高的安全性和流动性。</p>
+                <div class="bid-charts text-center" id="charts" style="min-height:300px;position:relative">
+                    <img src="/assets/images/222.gif" style="position:absolute;top:50%;left:50%;margin-left:-30px;margin-top:-30px;" alt="Alternate Text" />
+                </div>
+                <div class="mt-20">
+                    <img src="/assets/images/hqb1.jpg" alt="Alternate Text" style="width:100%"/>
+                </div>
+                <div class="row hqb2">
+                    <div class="col-sm-6">
+                        <ul class="list clearfix">
+                            <li class="text-right"><img src="/assets/images/xplan1.jpg" alt="Alternate Text"/></li>
+                            <li>
+                                <h2>36921</h2>
+                                <p>累计投标次数</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6">
+                        <ul class="list clearfix">
+                            <li class="text-right"><img src="/assets/images/xplan2.jpg" alt="Alternate Text" /></li>
+                            <li>
+                                <h2>452.12</h2>
+                                <p>累计收益（万元）</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row hqb3">
+                    <div class="col-sm-6">
+                        <ul class="list clearfix">
+                            <li class="text-right"><img src="/assets/images/xplan3.jpg" alt="Alternate Text" /></li>
+                            <li>
+                                <h2>46533.74</h2>
+                                <p>已加入资金（万元）</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6">
+                        <ul class="list clearfix">
+                            <li class="text-right"><img src="/assets/images/xplan4.jpg" alt="Alternate Text" /></li>
+                            <li>
+                                <h2>27537</h2>
+                                <p>已加入人数</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="mt-20"><img src="/assets/images/pt01.jpg" alt="Alternate Text" /></p>
+                <div class="mt-20">
+                    <img src="/assets/images/hqb4.jpg" alt="Alternate Text" style="width:100%" />
+                </div>
+                <div class="mt-20">
+                    <p><img src="/assets/images/pt02.jpg" alt="Alternate Text" /></p>
+                    <p style="line-height:28px;padding:0 10px;text-indent:2em;">活期宝盒为天平金服在穹顶计划项下提取部分项目作为投资标的，由系统支持下依照分散进行自动投标，并在收到用户指令的情况下由系统自动发起债权转让，通过出让持有的债权满足流动性的需求，实现灵活投资并获取收益的目的。</p>
+                    <ul class="list mt-20 introduction">
+                        <li><span>投标范围：</span>活期宝盒的的投资范围包含积木盒子平台于穹顶计划项下以系统随机筛选的任意融资项目</li>
+                        <li><span>预期年化收益：</span>６＋Ｘ%（Ｘ为市场活动加息）</li>
+                        <li><span>锁定期：</span>1个自然日</li>
+                        <li><span>加入条件：</span>加入金额不应低于100元</li>
+                        <li><span>每日本金提取限额：</span>该项设置是为避免平台发生流动性风险，系统为每日可提取本金设置的额度上限。一旦当日可提取本金额度用尽，用户无法发起新的提取本金动作，在次日开放新的提取本金额度后即可重新发起提取本金</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4 bid-right">
+                <div class="bid-right-content content1">
+                    <h4 class="mb-20 ">即刻申购</h4>
+                    <p>可投资金额：<span class="bid-now" id="nowAmount">731900</span>元</p>
+                    <div class="input-group mb-20">
+                        <span class="input-group-addon" id="inverst-onney" style="color:#000;">投资金额（元）</span>
+                        <input type="text" class="form-control" placeholder="请输入投资金额" aria-describedby="sizing-addon2">
+                    </div>
+                    <a href="/pay?id=2336&amp;minAmount=0" class="btn-sm btn btn-block btn-warning" style="background-color:#FF7900">开始赚钱</a>
+                    <p style="line-height: 25px;" class="mt-10">尊敬的用户您好，自2015年11月17日起，天平金服基金服务功能将全面展开。</p>
+                    <hr style="border-style: dashed">
+                </div>
+                <div class="bid-right-content hidden-xs">
+                    <h4 class="mb-20">了解更多？</h4>
+                    <p>请点击右侧QQ图标在线咨询，我们将竭诚为你服务 ---&gt;&gt;</p>
+                    <hr style="border-style: dashed">
+                </div>
+                <div class="bid-right-content mt-20 mb-20">
+                    <div class="invest">
+                        <div style="border:2px solid #55ACEE">
+                            <table class="invest-table" style="width:101%">
+                                <thead class="invest-head">
+                                    <tr>
+                                        <th colspan="3">最新投资记录</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="invest-div">
+                            <table class="invest-table" style="position: relative; top: 0px;">
+                                <tbody class="invest-body"><tr><td class="td1">杜*</td><td class="td2">15300.00元</td><td class="td3">2015-11-27 14:10:16</td></tr><tr><td class="td1">韩*</td><td class="td2">11200.00元</td><td class="td3">2015-11-27 14:18:52</td></tr><tr><td class="td1">邓*</td><td class="td2">13500.00元</td><td class="td3">2015-11-27 14:30:59</td></tr><tr><td class="td1">许*</td><td class="td2">9600.00元</td><td class="td3">2015-11-27 14:03:07</td></tr><tr><td class="td1">孙*</td><td class="td2">6600.00元</td><td class="td3">2015-11-27 14:14:21</td></tr><tr><td class="td1">冯*</td><td class="td2">9500.00元</td><td class="td3">2015-11-27 14:17:08</td></tr><tr><td class="td1">李*</td><td class="td2">15200.00元</td><td class="td3">2015-11-27 14:29:05</td></tr></tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-sm btn-dark closed" data-dismiss="modal">取消</button>
-                    <button type="submit" class="btn btn-sm btn-default submit-btn">发送</button>
+                <div class="bid-right-content mt-20 mb-20" >
+                    <div class="wall" style="background-color:#f9f9f9;padding:20px 15px;font-size:14px">
+                        Q：加入活期宝盒的资金都买了什么产品？
+                        <br>
+                        A：加入活期宝盒的资金会随机购买穹顶计划项下的任意项目。
+                        <hr>
+                        Q：活期宝盒的预期收益是多少？
+                        <br>
+                        A：活期宝盒内项目对应的融资人提供6%的年化收益率收益，同时，我们会根据市场行情进行加息，加息比例每日浮动。
+                        <hr>
+                        Q：为什么每次加入上限都不一样？
+                        <br>
+                        A：我们的活期宝盒在试运行阶段，每位用户加入活期宝盒的金额上限为200000元，每次用户加入活期宝盒时系统都会检测已加入活期宝盒的资金并扣除掉相应的投资限额。
+                        <hr>
+                        Q：我加入活期宝盒时的收益是6+1%，是不是一直都会按照6+1%给我计算收益？
+                        <br>
+                        A：不会，我们的收益每日计算，计算收益的标准以基础收益率6%加上当日的浮动收益率（即6+x%）为准；加入当日显示的收益率6+1%为当日活期宝盒内资金计算收益的年化收益率。
+                        <hr>
+                        Q：每天活期宝盒在什么时间开放加入？
+                        <br>
+                        A：正常情况下每天活期宝盒会在每天10:00、12:00、14:00、16:30开放加入，根据资金情况可能会在上述某些时点不新增开放额度。
+                        <hr>
+                        Q：我什么时候可以发起提取本金？
+                        <br>
+                        A：用户的资金在加入活期宝盒的次日即可发起提取本金，本金允许提取时间为每日01:00-16:00，其他时间为系统处理时间，不可发起本金提取申请。
+                        <hr>
+                        Q：为什么我提取本金的时候可提取本金小于当前本金？
+                        <br>
+                        A：出现这种情况会有几种原因：<br>
+                        1.当日发起了一笔新的活期加入；<br>
+                        2.当日已经发起过提取本金动作；<br>
+                        3.当日可供提取的流动资金不足。
+                        <hr>
+                        Q：我什么时候可以提取收益？收益会自动发放吗？
+                        <br>
+                        A：用户每日的收益在每日凌晨00:00计算，随后会显示在可提取收益位置，只要可提取收益大于0元时都可以发起提取收益，不受时间限制。
+                    </div>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
-</div>
+</section>
+@section scripts{
+    <script>
+        $(function () {
+            var data = [2.74, 2.94, 3.04, 2.85, 2.74, 2.99, 2.83];
+            $('#charts').highcharts({
+                chart: {
+                    type: 'spline'
+                },
+                title: {
+                    text:' 天平活期宝收益',
+                    style: { color: "#55ACEE", fontSize: "1.8em", fontFamily: '黑体', fontWeight: 600 }
+                },
+                xAxis: {
+                    gridLineColor: '#EBEBEB',
+                    gridLineWidth: 1,
+                    gridLineDashStyle: 'dot',
+                    categories: [GetDateStr(-6), GetDateStr(-5), GetDateStr(-4), GetDateStr(-3), GetDateStr(-2),GetDateStr(-1), GetDateStr(0)]
+                },
+                yAxis: {
+                    gridLineDashStyle: 'dot',
+                    title: {
+                        text: ''
+                    },
+                    labels: {
+                        formatter: function() {
+                            return this.value;
+                        }
+                    },
+                    min: 0,
+                    tickPositions: [0,2.0,4.0,6.0]
+                },
+                tooltip: {
+                    valueSuffix: ' 元',
+                    crosshairs: true,
+                    shared: true,
+                },
+                credits:{
+                    enabled:false
+                },
+                exporting:{
+                    enabled:false
+                },
+                legend: {
+                    borderRadius:5,
+                    x: - 10,
+                    y:0
+                },
+                series: [{
+                    color: '#55ACEE',
+                    name: '每万元收益 ',
+                    //data:  result.Datas,
+                    data: [2.74, 2.94, 3.04, 2.85, 2.74, 2.99, 2.83],
+                    marker:{
+                        symbol:'circle'
+                    }
+                }]
+            });
+        });
+        function GetDateStr(AddDayCount)
+        {
+            var dd = new Date();
+            dd.setDate(dd.getDate()+AddDayCount);//获取AddDayCount天后的日期
+            //var y = dd.getYear();
+            var m = (dd.getMonth()+1)<10?"0"+(dd.getMonth()+1):(dd.getMonth()+1);//获取当前月份的日期，不足10补0
+            var d = dd.getDate()<10?"0"+dd.getDate():dd.getDate(); //获取当前几号，不足10补0
+            return m+"-"+d;
+        }
+    </script>
+}

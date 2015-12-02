@@ -7,201 +7,163 @@
     IContentType ct = ApplicationContext.Services.ContentTypeService.GetContentType("ProductElement");
     IEnumerable<IContent> contents = ApplicationContext.Services.ContentService.GetContentOfContentType(ct.Id).Where(c => c.Status != ContentStatus.Trashed).OrderBy(e => e.GetValue<int>("sort"));
 }
-<div class="etf-bg" data-animation-effect="fadeIn" data-effect-delay="50">
-    <img src="/assets/images/banner/banner02.jpg" alt="" style="width:100%;" />
-</div>
-
 <!-- section start -->
 <!-- ================ -->
-<section class="clearfix pv-20 light-gray-bg etf-1">
+<section class="clearfix pv-20 extreme">
     <div class="container">
-        <div class="row etf">
-            <div class="title-left col-md-6">
-                <span class="title-1">1</span>
-                <h2>不惧震荡，胜者为王</h2>
+        <div class="row">
+            <div class="col-xs-6">
+                <h3>天平·外汇宝</h3>
             </div>
-            <div class="title-right col-md-6"></div>
+            <div class="col-xs-6 text-right">
+                <span class="btn btn-animated btn-warning reservation-btn">立即预约<i class="fa fa-arrow-right pl-10"></i></span>
+            </div>
+            <div class="col-md-12 clearfix" style="position: static">
+                <img src="/assets/images/extreme/extreme_bg.jpg" alt="" style="width: 100%" />
+            </div>
         </div>
         <div class="row">
-            <div class="col-md-6">
-                <div class="l_ul">
-                    <dl>
-                        <dt>目前可能是每位投资者最为苦恼的投资阶段</dt>
-                        <dd><i class="fa fa-remove"></i>频频暴跌的股票市场不敢碰</dd>
-                        <dd><i class="fa fa-remove"></i>固定收益类产品收益正在下滑</dd>
-                        <dd><i class="fa fa-remove"></i>P2P跑路太多也不敢投</dd>
-                        <dd class="f_dd">一夜暴富的黄粱美梦被彻底打破 <br />但是生活成本持续走高，压力山大</dd>
-                    </dl>
-                    <img src="/assets/images/pic.png" alt="" class="" />
+            <div class="col-md-12 extreme-title">
+                <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                <h3>外汇宝净值与伦敦金走势图</h3>
+            </div>
+            <div class="col-md-12 mt-20">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <img src="/assets/images/extreme/net01.jpg" alt="" style="width: 100%" />
+                    </div>
+                    <div class="col-sm-4">
+                        <img src="/assets/images/extreme/net02.jpg" alt="" style="width: 100%" />
+                    </div>
+                    <div class="col-sm-4">
+                        <img src="/assets/images/extreme/net03.jpg" alt="" style="width: 100%" />
+                    </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="fl r_tbl">
-                    <p class="txt">应对市场极端情况，有一类产品表现不俗！</p>
-                    <table>
-                        <tbody>
-                            <tr class="f_tr ">
-                                <td width="">产品</td>
-                                <td width="">产品期限（月）</td>
-                                <td width="80">年化收益</td>
-                                <td>投资</td>
-                            </tr>
-
-                            @{
-
-                                foreach (IContent item in contents)
-                                {
-                                    <tr>
-                                        <td><a href="/productdetails?id=@item.Id">@(item.GetValue<string>("title"))</a></td>
-                                        <td class="cGreen cBold">@(item.GetValue<string>("cycle"))</td>
-                                        <td class="cRed cBold">@(item.GetValue<decimal>("rate").ToString("f2"))%</td>
-                                        <td class="cRed cBold"><a href="/pay?id=@item.Id&minAmount=@(item.GetValue<double>("startAmount"))" class="btn  btn-warning">立即购买</a></td>
-                                    </tr>
-                                }
-                            }
-
-                        </tbody>
-                    </table>
-                    <img src="/assets/images/ico2.png" alt="" class="hidden-xs">
+            <div class="col-md-12">
+                <div class="row algoforce-benefit">
+                    <div class="col-md-2">
+                        <img src="/assets/images/extreme/algoforce.jpg" alt="" style="margin: auto" />
+                    </div>
+                    <div class="col-md-10">
+                        <dl>
+                            <dt>每月付息，年化收益率高达14%</dt>
+                            <dd>"天平外汇宝”是天平投资有限公司推出的按月回收收益的理财服务模式。</dd>
+                            <dd>本金选择继续投资，利息按月回收，每月收益高达1.17%。选择逐月续存，收益档次自动累计，年息高达10.08%。</dd>
+                            <dd>适用于有闲置资金的理财人群，将资金较大程度利用起来，每月获得可观收益，实现资产增值。</dd>
+                        </dl>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="row object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="200">
-            <div class="col-md-12">
-                <h2 class="h_title">鹏华量化对冲历史业绩</h2>
+        <div class="row">
+            <div class="col-md-12 extreme-title">
+                <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                <h3>外汇宝<span style="font-family: Calibri;font-size: 30px;">®</span> 核心竞争力</h3>
             </div>
-            <div class="col-md-6">
-                <div class="owl-carousel content-slider-with-large-controls" style="position: relative;">
-                    <div class="overlay-container overlay-visible">
-                        <img src="/assets/images/achievement/ach01.jpg" alt="">
-                        <div class="overlay-bottom hidden-xs"></div>
-                        @*<a href="/assets/images/achievement/ach01.jpg" class="popup-img overlay-link hidden-xs" title="方正副邦-合生强债（量化部分）"><i class="icon-zoom-in"></i></a>*@
-                    </div>
-                    <div class="overlay-container overlay-visible">
-                        <img src="/assets/images/achievement/ach02.jpg" alt="">
-                        <div class="overlay-bottom hidden-xs"></div>
-                        @*<a href="/assets/images/achievement/ach02.jpg" class="popup-img overlay-link hidden-xs" title="东航金融-自营盘1号"><i class="icon-zoom-in"></i></a>*@
-                    </div>
-                    <div class="overlay-container overlay-visible">
-                        <img src="/assets/images/achievement/ach03.jpg" alt="">
-                        <div class="overlay-bottom hidden-xs"></div>
-                        @*<a href="/assets/images/achievement/ach03.jpg" class="popup-img overlay-link hidden-xs" title="东航金融-小金牛-固收2号"><i class="icon-zoom-in"></i></a>*@
+            <div class="col-md-12 mt-20">
+                <div class="row">
+                    <div class="col-md-12">
+                        <img src="/assets/images/extreme/competition.jpg" alt="" style="width: 100%" />
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <ul>
-                    <li><span class="tdr">最大年化收益率</span><span class="cRed tdl">19.05%</span></li>
-                    @*<li><span class="tdr">夏普比率</span><span class="tdl">2.99</span></li>*@
-                    <li><span class="tdr">历史最大回撤</span><span class="tdl">1.20%</span></li>
-                </ul>
-                <p class="indent">东航金融-小金牛-固收2号自成立以来年化收益率为19.05%，在同类基金中表现居前。基金在回撤控制方面表现优异，在去年12月的市场中性“黑天鹅”事件中回撤仅为0.67%。</p>
-                <p class="sjly">数据来源：鹏华量化研究中心</p>
+        </div>
+        <div class="row">
+            <div class="col-md-12 extreme-title">
+                <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                <h3>外汇宝<span style="font-family: Calibri;font-size: 30px;">®</span> 风险控制体系</h3>
+            </div>
+            <div class="col-md-12 mt-20">
+                <div class="row">
+                    <div class="risk-left col-md-5">
+                        <img src="/assets/images/extreme/risk1.png" alt="" style="width: 100%" />
+                        <img src="/assets/images/extreme/risk2.png" alt="" style="width: 100%;margin-top: 6px;" />
+                    </div>
+                    <div class="risk-right col-md-7">
+                        <img src="/assets/images/extreme/risk3.png" alt="" style="width: 100%" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-20">
+            <div class="col-md-12 extreme-title">
+                <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                <h3>理财方案</h3>
+            </div>
+            <div class="col-md-12">
+                <table class="assets-table">
+                    <tr style="background-color: #256A84;color: #ffffff">
+                        <td>金额</td>
+                        <td>期限</td>
+                        <td>年化收益</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="4" style="background-color:#ffffff">5万≤认购金额＜50万</td>
+                        <td>1个月≤期限＜3个月</td>
+                        <td>6.5%</td>
+                    </tr>
+                    <tr>
+                        <td>1个月≤期限＜6个月</td>
+                        <td>8.0%</td>
+                    </tr>
+                    <tr>
+                        <td>1个月≤期限＜12个月</td>
+                        <td>10.0%</td>
+                    </tr>
+                    <tr>
+                        <td>12个月</td>
+                        <td>13.0%</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="4" style="background-color:#ffffff">50万≤认购金额</td>
+                        <td>1个月≤期限＜3个月</td>
+                        <td>7.0%</td>
+                    </tr>
+                    <tr>
+                        <td>1个月≤期限＜6个月</td>
+                        <td>9.0%</td>
+                    </tr>
+                    <tr>
+                        <td>1个月≤期限＜12个月</td>
+                        <td>11.0%</td>
+                    </tr>
+                    <tr>
+                        <td>12个月</td>
+                        <td>14.0%</td>
+                    </tr>
+                </table>
+                <div class="row mt-20">
+                    <div class="col-sm-2 col-xs-4">
+                        产品名称：<span class="extreme-name">至尊盈陆号</span>
+                    </div>
+                    <div class="col-sm-2 col-xs-4">
+                        发行规模： <span class="extreme-name">3000万元</span>
+                    </div>
+                    <div class="col-sm-2 col-xs-4">
+                        递增金额： <span class="extreme-name">1万元</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-10">
+            <div class="col-md-12 extreme-title">
+                <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                <h3>收益计算</h3>
+            </div>
+            <div class="col-md-12">
+                <h5 style="font-size: 16px;">投资案例一：</h5>
+                <p>梁先生准备了200万元打算买一套房子，原来计划一次性付清房款，经实盈投资顾问介绍了“至尊盈陆号”理财产品后，选择了商业贷款方式，贷款10年。梁先生先首付60万元，将余下140万元投资了“至尊盈陆号”，收益率每月可达1.17%，那梁先生每月可平均回收16333元利息，不但轻松地偿还月供15698元（120期），每个月还有盈余资金。假如梁先生10年都选择在实盈做年化14%的理财产品，按复利计算140万元本金10年后可增值为519万元总资产，在还清房屋贷款的同时梁先生还可以有一笔可观的收入。</p>
+            </div>
+            <div class="col-md-12">
+                <h5 style="font-size: 16px;">投资案例二：</h5>
+                <p>
+                    曾先生有闲散资金100万元，暂时未确定其他用途，经实盈投资顾问介绍“至尊盈陆号”理财产品后，选择先尝试投资一个月，获得年息7.0%。一个月到期后曾先生选择逐月续期，续期至第三个月时，当月年息自动调整为9.0%。由于资金用途不确定性，曾先生100万投资全部以逐月续存参与“至尊盈陆号”产品，年息收益累计共10.08%，既保留了资金最大限度的流动性，还享受实盈产品的收益递增优惠
+                </p>
             </div>
         </div>
     </div>
+    <br />
 </section>
 <!-- section end -->
-<section class="section default-bg clearfix">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="call-to-action text-center">
-                    <div class="row">
-                        <div class="col-sm-8">
-                            <h1 class="title" style="margin-top:10px;">鹏华资产量化复兴管理计划</h1>
-                            <p style="padding-top:10px;font-size:1.1em">收益高，风险小，全胜战绩，历史最大收益 <span style="font-size:1.5em;color:#FFD800;">66.9%</span>，新产品火热预约中, 专业的团队，带您延续昨日的辉煌，你心动了吗？</p>
-                            <p></p>
-                        </div>
-                        <div class="col-sm-4">
-                            <br>
-                            <p><span class="reservation-btn btn btn-lg btn-gray-transparent btn-animated ">立即预约<i class="fa fa-arrow-right pl-10"></i></span></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- section start -->
-<!-- ================ -->
-<section class="clearfix pv-20 etf-2 object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
-    <div class="container">
-        <div class="row etf">
-            <div class="title-left col-md-7">
-                <span class="title-1">2</span>
-                <h2>对冲策略抗风险 量化选股争收益</h2>
-            </div>
-            <div class="title-right col-md-5"></div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 h_305">
-                <div class="w525">
-                    <p class="indent">普通的票型私募的收益呈现的是“脉冲式”增长和下跌，其起伏较大。而追求绝对收益的对冲基金，往往是<span class="cRed">一种“爬楼梯”式的上涨</span>，收益不是来自于一两次大笔收益，而是每周、每月的上涨，慢慢积累，为投资者赚取稳健的回报。</p>
-                    <dl>
-                        <dt>量化对冲是如何实现绝对收益呢？</dt>
-                        <dd><span>第<i>1</i>步</span>选出好股票，构成多头组合，这个组合有其特定的α和β。</dd>
-                        <dd><span>第<i>2</i>步</span>通过做空股指期货，对多头组合的β进行对冲。</dd>
-                    </dl>
-                </div>
-            </div>
-            <div class="col-md-6 object-non-visible" data-animation-effect="fadeIn" data-effect-delay="150">
-                <img src="/assets/images/img_1.png" alt="" style="margin:20px auto 0" />
-            </div>
-            <div class="col-md-12 object-non-visible text-center" data-animation-effect="fadeIn" data-effect-delay="200">
-                <img src="/assets/images/img_2.png" alt="" style="margin: auto" />
-            </div>
-        </div>
-    </div>
-</section>
-<!-- section end -->
-<!-- section start -->
-<!-- ================ -->
-<section class="clearfix pv-20 light-gray-bg etf-3 object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">
-    <div class="container">
-        <div class="row etf">
-            <div class="title-left col-md-8">
-                <span class="title-1">3</span>
-                <h2>鹏华资产：资深量化团队，运作业绩优良</h2>
-            </div>
-            <div class="title-right col-md-3"></div>
-        </div>
-        <div class="row etf3-content">
-            <div class="col-md-3 text-center">
-                <img src="/assets/images/dingpeng.jpg" alt="" />
-            </div>
-            <div class="col-md-9">
-                <ul class="list">
-                    <li class="indent">鹏华资产管理（深圳）有限公司于2012年12月20日获得证监会核准设立，2013年1月4日成立，是首批获得中国证监会核准成立的基金子公司，由鹏华基金管理有限公司全资控股，注册资金3000万，注册地位深圳前海。业务范围为特定客户资产管理业务及中国证监会许可的其他业务。</li>
-                    <li class="indent">截至2014年6月30日，公司成立产品157只，管理资产规模近350亿元人民币；产品基本涵盖了固定收益、资本市场、房地产基金、股权投资等主流产品线；公司是国内第一批推出宏观策略对冲基金、境内外对冲及其他多策略对冲基金的基金子公司，在对冲基金领域走在行业创新的前列；同时也是国内第一批开展私人股权投资的基金子公司；在房地产金融、资产证券化等领域也做出了有益的探索。</li>
-                </ul>
-                <div>
-                    <h4>投资经理：丁鹏</h4>
-                    <p class="indent">丁鹏，中国量化投资学会理事长，博士，《量化投资-策略与技术》的作者。方正富邦基金资深量化策略师；IEEE（国际电子电气工程协会）会员；AFA（美国金融学会）会员；《量化投资与对冲基金》副主编。曾任东方证券金融衍生品总部资深分析师，开发了D-Alpha量化对冲系统及数个实战有效的量化投资策略，实战中获得持续稳健的收益。</p>
-                </div>
-            </div>
-        </div>
-        <hr />
-        <div class="row object-non-visible" data-animation-effect="fadeIn" data-effect-delay="50">
-            <div class="col-md-12" style="padding:0 20px;">
-                <div class="fl r_tbl">
-                    <div class="product_ul">
-                        <ul class="list">
-                            <li><span class="span-li1">产品名称：</span><span>鹏华资产实盈量化复兴资产管理计划</span></li>
-                            <li><span class="span-li1">基金管理：</span><span>鹏华资产管理（深圳）有限公司</span></li>
-                            <li><span class="span-li1">存续期间：</span><span>2年，可展期</span></li>
-                            <li><span class="span-li1">资产托管：</span><span>招商银行</span></li>
-                            <li><span class="span-li1">开 放 日 ：</span><span>每季度开放一次</span></li>
-                            <li><span class="span-li1">法律顾问：</span><span>广东岭南律师事务所</span></li>
-                            <li><span class="span-li1">投资顾问：</span><span>深圳比特城资产管理有限公司</span></li>
-                        </ul>
-                        <p class="tips">注：产品要素最终以基金合同为准。</p>
-                        <p class="fxts">风险提示：投资有风险。基金管理人管理的其他基金的业绩并不构成基金业绩表现的保证。相关数据仅供参考，不构成投资建议。投资人请详阅基金合同，并自行承担投资风险。</p>
-                        <div class="bc_sm hidden-xs"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 @Html.Partial("ModalReservation")

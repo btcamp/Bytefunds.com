@@ -23,19 +23,22 @@
                     <div class="header-top-first clearfix">
                         <div class="social-links hidden-lg hidden-md hidden-sm small">
                             <div class="btn-group dropdown">
-                                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-share-alt"></i></button>
+                                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" style=" margin-left: -15px;"><i class="fa fa-share-alt"></i></button>
                                 <ul class="dropdown-menu dropdown-animation">
-                                    <li class="twitter"><i class="fa fa-phone pr-10 pl-5"></i>服务热线：028-8505-7407</li>
-                                    <li class="twitter"><i class="fa fa-qq pr-10 pl-5"></i>QQ群号：337433883</li>
+                                    <li class="twitter">&nbsp;<i class="fa fa-phone pr-5 pl-5"></i>: 028-8505-7407</li>
+                                    <li class="twitter"><i class="fa fa-envelope-o pr-5 pl-10"></i>: cs@balance.com</li>
                                 </ul>
                             </div>
                         </div>
-                        <ul class="list-inline hidden-md hidden-lg hidden-sm top-service" style="position: absolute;top:0;left: 60px;">
-                            <li class=""><a href="#" class="wechat" data-toggle="modal" data-target="#myModal"><i class="fa fa-wechat"></i></a></li>
-                        </ul>
                         <ul class="list-inline hidden-xs top-service">
-                            <li class="twitter"><i class="fa fa-phone pr-5 pl-5"></i>：028-8505-7407</li>
-                            <li class="twitter" style="font-size: 1.1em"><i class="fa fa-envelope-o pr-5 pl-10"></i>: cs@balance.com</li>
+                            <li class="twitter"><i class="fa fa-phone pr-5 pl-5"></i>: 028-8505-7407</li>
+                            <li class="twitter"><i class="fa fa-envelope-o pr-5 pl-10"></i>: cs@balance.com</li>
+                        </ul>
+                        <span class="share hidden-xs">分享到：</span>
+                        <ul class="social-links circle animated-effect-1 colored">
+                            <li class="vine" title="分享到微信朋友圈"><a href="#" class="jiathis_button_weixin"><i class="iconfont">&#xe631;</i></a></li>
+                            <li class="twitter" title="分享到QQ空间"><a href="#" class="jiathis_button_qzone"><i class="iconfont">&#xe62f;</i></a></li>
+                            <li class="soundcloud" title="分享到新浪微博"><a href="#" class="jiathis_button_tsina"><i class="iconfont">&#xe601;</i></a></li>
                         </ul>
                     </div>
                     <!-- header-top-first end -->
@@ -123,44 +126,52 @@
                                                 if (Request.Url.AbsolutePath.Contains("/funds"))
                                                 {
                                                     <li class=""><a href="/">首页</a></li>
-                                                    <li class=""><a href="#">定期宝</a></li>
-                                                    <li class=""><a href="#">娱乐宝</a></li>
-                                                    <li class=""><a href="#">活期宝</a></li>
-                                                    <li class=""><a href="#">关于我们</a></li>
+                                                    <li class="active"><a href="/funds">外汇宝</a></li>
+                                                    <li class=""><a href="/chips">娱乐宝</a></li>
+                                                    <li class=""><a href="/product">活期宝</a></li>
+                                                    <li class=""><a href="/about">关于我们</a></li>
                                                 }
-                                                else if (Request.Url.AbsolutePath.Contains("/news"))
+                                                else if (Request.Url.AbsolutePath.Contains("/product"))
                                                 {
                                                     <li class=""><a href="/">首页</a></li>
-                                                    <li class=""><a href="#">定期宝</a></li>
-                                                    <li class=""><a href="#">娱乐宝</a></li>
-                                                    <li class=""><a href="#">活期宝</a></li>
-                                                    <li class=""><a href="#">关于我们</a></li>
+                                                    <li class=""><a href="/funds">外汇宝</a></li>
+                                                    <li class=""><a href="/chips">娱乐宝</a></li>
+                                                    <li class="active"><a href="/product">活期宝</a></li>
+                                                    <li class=""><a href="/about">关于我们</a></li>
                                                 }
                                                 else if (Request.Url.AbsolutePath.Contains("/about"))
                                                 {
                                                     <li class=""><a href="/">首页</a></li>
-                                                    <li class=""><a href="#">定期宝</a></li>
-                                                    <li class=""><a href="#">娱乐宝</a></li>
-                                                    <li class=""><a href="#">活期宝</a></li>
-                                                    <li class=""><a href="#">关于我们</a></li>
+                                                    <li class=""><a href="/funds">外汇宝</a></li>
+                                                    <li class=""><a href="/chips">娱乐宝</a></li>
+                                                    <li class=""><a href="/product">活期宝</a></li>
+                                                    <li class="active"><a href="/about">关于我们</a></li>
+                                                }
+                                                else if (Request.Url.AbsolutePath.Contains("/chips"))
+                                                {
+                                                    <li class=""><a href="/">首页</a></li>
+                                                    <li class=""><a href="/funds">外汇宝</a></li>
+                                                    <li class="active"><a href="/chips">娱乐宝</a></li>
+                                                    <li class=""><a href="/product">活期宝</a></li>
+                                                    <li class=""><a href="/about">关于我们</a></li>
                                                 }
                                                 else if (Request.Url.AbsolutePath == "/")
                                                 {
-                                                    <li class="active"><a href="#header">首页</a></li>
-                                                    <li class=""><a href="#">定期宝</a></li>
-                                                    <li class=""><a href="#">娱乐宝</a></li>
-                                                    <li class=""><a href="#">活期宝</a></li>
-                                                    <li class=""><a href="#">关于我们</a></li>
+                                                    <li class="active"><a href="/header">首页</a></li>
+                                                    <li class=""><a href="/funds">外汇宝</a></li>
+                                                    <li class=""><a href="/chips">娱乐宝</a></li>
+                                                    <li class=""><a href="/product">活期宝</a></li>
+                                                    <li class=""><a href="/about">关于我们</a></li>
                                                 }
                                                 else
                                                 {
                                                     <li class=""><a href="/">首页</a></li>
-                                                    <li class=""><a href="#">定期宝</a></li>
-                                                    <li class=""><a href="#">娱乐宝</a></li>
-                                                    <li class=""><a href="#">活期宝</a></li>
-                                                    <li class=""><a href="#">关于我们</a></li>
+                                                    <li class=""><a href="/funds">外汇宝</a></li>
+                                                    <li class=""><a href="/chips">娱乐宝</a></li>
+                                                    <li class=""><a href="/product">活期宝</a></li>
+                                                    <li class=""><a href="/about">关于我们</a></li>
                                                 }
-}
+                                            }
                                         </ul>
                                     </div>
                                 </div>

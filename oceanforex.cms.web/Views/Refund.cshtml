@@ -4,7 +4,12 @@
     WithdrawViewModel withdrawModel = new WithdrawViewModel();
     Html.EnableClientValidation();
     Html.EnableUnobtrusiveJavaScript();
+    string id = Request.QueryString["chipsId"];
 
+    IContent content = ApplicationContext.Services.ContentService.GetById(int.Parse(id));
+
+    string title = content.GetValue<string>("chipsProduct");
+    string amount = content.GetValue<string>("amount");
     if (!Members.IsLoggedIn())
     {
         <script>
@@ -19,8 +24,26 @@
             <div class="container register withdraw" style="margin-bottom:30px;">
                 <div class="row">
                     <div class="form-block center-block p-20 light-gray-bg border-clear text-left">
-                        <h2 class="title">提现申请</h2>
-                        <form class="form-horizontal" role="form" action="/umbraco/Api/Member/Withdraw" method="post">
+                        <h2 class="title">申请退款</h2>
+                        <form class="form-horizontal" role="form" action="/umbraco/Api/Member/Refund" method="post">
+                            <div class="form-group has-feedback">
+                                <label class="col-sm-3 control-label">众筹产品</label>
+                                <div class="col-sm-8">
+                                    <div>
+                                        <input type="text" value="@title" disabled="disabled" class="form-control" />
+                                        <i class="fa fa-star form-control-feedback"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group has-feedback">
+                                <label class="col-sm-3 control-label">众筹金额</label>
+                                <div class="col-sm-8">
+                                    <div>
+                                        <input type="text" value="@amount" disabled="disabled" class="form-control" />
+                                        <i class="fa fa-money form-control-feedback"></i>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group has-feedback">
                                 @Html.LabelFor(m => withdrawModel.Name, new { @class = "col-sm-3 control-label" })
                                 @*<label for="inputUserName" class="col-sm-3 control-label">姓名<span class="text-danger small">*</span></label>*@
@@ -64,29 +87,10 @@
                                     @Html.ValidationMessageFor(m => withdrawModel.BankNumber)
                                 </div>
                             </div>
-                            <div class="form-group has-feedback">
-                                @Html.LabelFor(m => withdrawModel.Amount, new { @class = "col-sm-3 control-label" })
-                                <div class="col-sm-8">
-                                    <div>
-                                        @Html.TextBoxFor(m => withdrawModel.Amount, new { @class = "form-control", placeholder = "请输入您的提现金额" })
-                                        <i class="fa fa-money form-control-feedback"></i>
-                                    </div>
-                                    @Html.ValidationMessageFor(m => withdrawModel.Amount)
-                                </div>
-                            </div>
-                            @*<div class="form-group has-feedback">
-                                    <label for="rePassword" class="col-sm-3 control-label">重复密码<span class="text-danger small">*</span></label>
-                                    <div class="col-sm-8">
-                                        <input type="password" class="form-control" id="rePassword" placeholder="Repeat Password" required onfocus="$(this).attr('placeholder','')" onblur="$(this).attr('placeholder','Repeat Password')">
-                                        <i class="fa fa-lock form-control-feedback"></i>
-                                    </div>
-                                </div>*@
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-9 submit-btn">
-                                    <button type="submit" class="btn btn-group btn-warning btn-animated">申请提现<i class="fa fa-check"></i></button>
-                                    <small>
-                                        您的可提现金额：@(Members.GetCurrentMember().GetPropertyValue<decimal>("okassets").ToString("N2") + "元")
-                                    </small>
+                                    <button type="submit" class="btn btn-group btn-warning btn-animated">申请退款<i class="fa fa-check"></i></button>
+                                    <input type="hidden" name="chipsId" value="@id" />
                                 </div>
                             </div>
                         </form>

@@ -16,7 +16,7 @@
                 <div class="tab-content clear-style mt-20">
                     <div class="tab-pane active" id="pill-1">
                         @{
-                            foreach (IPublishedContent content in Model.Content.Children.OrderByDescending(e => e.CreateDate).Take(15))
+                            foreach (IPublishedContent content in Model.Content.Children.OrderByDescending(e => e.CreateDate).Take(10))
                             {
                                 <div>
                                     <h4>

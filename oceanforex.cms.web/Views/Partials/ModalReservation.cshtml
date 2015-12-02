@@ -8,7 +8,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close closed" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="reservation-title">预约信息</h4>
+                <h4 class="modal-title" id="reservation-title">天平金服预约信息</h4>
             </div>
             <form action="/umbraco/Api/Member/Reservation" class="form-horizontal" method="post" novalidate="novalidate">
                 <div class="modal-body">
@@ -46,7 +46,7 @@
                         @Html.LabelFor(e => reservationModel.Text, new { @class = "col-sm-3 control-label" })
                         <div class="col-sm-8">
                             <div>
-                                @Html.TextAreaFor(e => reservationModel.Text, new { @class = "form-control", placeholder = "请输入信息", rows = "5" })
+                                @Html.TextAreaFor(e => reservationModel.Text, new { @class = "form-control", placeholder = "请输入信息", rows = "4" })
                             </div>
                             @Html.ValidationMessageFor(e => reservationModel.Text)
                         </div>

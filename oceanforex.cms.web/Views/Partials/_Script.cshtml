@@ -26,4 +26,11 @@
 <script src="~/assets/js/radialIndicator.min.js"></script>
 <script src="~/assets/js/messenger/messenger-theme-flat.js"></script>
 <!-- Custom Scripts -->
-<script type="text/javascript" src="~/assets/js/custom.js"></script>
+<script type="text/javascript" src="/assets/js/custom.js"></script>
+<script>
+    window.onload = myfun;
+    function myfun() {
+        var temp = '<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8">';
+        $("body").append(temp);
+    }
+</script>

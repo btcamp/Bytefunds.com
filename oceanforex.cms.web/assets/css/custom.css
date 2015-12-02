@@ -1,17 +1,21 @@
-@font-face {font-family: 'share';
+@font-face {
+    font-family: 'share';
     src: url('/assets/fonts/share/iconfont.eot'); /* IE9*/
     src: url('/assets/fonts/share/iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
     url('/assets/fonts/share/iconfont.woff') format('woff'), /* chrome、firefox */
     url('/assets/fonts/share/iconfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
     url('/assets/fonts/share/iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
 }
-.iconfont{
-    font-family:"share" !important;
-    font-size:16px;font-style:normal;
+
+.iconfont {
+    font-family: "share" !important;
+    font-size: 16px;
+    font-style: normal;
     -webkit-font-smoothing: antialiased;
     -webkit-text-stroke-width: 0.2px;
     -moz-osx-font-smoothing: grayscale;
 }
+
 .news, .news ul {
     overflow: hidden;
 }
@@ -23,10 +27,6 @@
     .btn130_grey, .header-top-dropdown .user-center li a, .money-box a, .online-product h1 a:hover, .page a, .underline:hover {
         text-decoration: none;
     }
-
-.bid-content, .f_dd, .indent, .product p {
-    text-indent: 2em;
-}
 
 #user-summary label {
     cursor: default;
@@ -216,7 +216,7 @@
         }
 
         #user-summary .summary-info .ft dd {
-            margin-left:6px;
+            margin-left: 6px;
             font-size: 18px;
         }
 
@@ -301,7 +301,7 @@
 }
 
 body {
-    padding-bottom: 80px;
+    padding-bottom: 60px;
     min-height: 100%;
     position: relative;
     font-weight: 400;
@@ -311,7 +311,7 @@ body {
     text-align: center;
 }
 
-.twitter:first-child {
+.twitter {
     font-size: 1.1em;
 }
 
@@ -319,6 +319,13 @@ body {
     .navbar {
         border: none;
         background: #FCFCFC !important;
+    }
+
+    .animated-effect-1 {
+        position: absolute;
+        top: -3px;
+        width: 100px;
+        left: 45px;
     }
 }
 
@@ -339,12 +346,13 @@ body {
 }
 
 .footer {
-    padding: 25px 0 10px;
+    padding: 15px 0 5px;
     background-color: #2e3537;
     color: #fff;
     position: absolute;
     bottom: 0;
     width: 100%;
+    border-top: 1px solid #424242;
 }
 
 .footer-inner {
@@ -357,7 +365,7 @@ body {
 
     .hot-product h3 {
         margin-top: -15px !important;
-        font-size:22px;
+        font-size: 22px;
     }
 
 @media (min-width:1900px) {
@@ -440,52 +448,62 @@ body {
     color: #CD9F3B;
     background: #fff;
 }
-.servicebox{
+
+.servicebox {
     position: fixed;
     width: 58px;
     right: 2px;
-    top:65%;
+    top: 65%;
     z-index: 1002;
     color: #ffffff;
 }
-.servicebox>div{
-    border-radius: 5px;
-}
-.servicebox small{
-    display: block;
-    font-size: 12px;
-    position: relative;
-    top: -3px;
-    padding-bottom:3px;
-}
-.servicebox i{
-    font-size: 30px;
-    position: relative;
-    top: 1px;
-}
-.servicebox>div{
-    background-color:#000;
-    opacity:0.7;
-}
-.servicebox .qq{
-    cursor: pointer;
 
-}
-.servicebox .qq i{
-    font-size: 28px;
-}
-.servicebox .weixin{
-    border-bottom: 1px solid #c6c6c6;
-    cursor: pointer;
-    position: relative;
-}
-.servicebox .weixin:hover{
-    background:#5FC325;
-}
-.servicebox .qq:hover{
-    background: #2BA7E3;
-}
-.scrollToTop{
+    .servicebox > div {
+        border-radius: 5px;
+    }
+
+    .servicebox small {
+        display: block;
+        font-size: 12px;
+        position: relative;
+        top: -3px;
+        padding-bottom: 3px;
+    }
+
+    .servicebox i {
+        font-size: 30px;
+        position: relative;
+        top: 1px;
+    }
+
+    .servicebox > div {
+        background-color: #000;
+        opacity: 0.7;
+    }
+
+    .servicebox .qq {
+        cursor: pointer;
+    }
+
+        .servicebox .qq i {
+            font-size: 28px;
+        }
+
+    .servicebox .weixin {
+        border-bottom: 1px solid #c6c6c6;
+        cursor: pointer;
+        position: relative;
+    }
+
+        .servicebox .weixin:hover {
+            background: #5FC325;
+        }
+
+    .servicebox .qq:hover {
+        background: #2BA7E3;
+    }
+
+.scrollToTop {
     padding-top: 5px;
     border-top: 1px solid #c6c6c6;
     text-align: center;
@@ -497,59 +515,75 @@ body {
     -o-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
 }
-.scrollToTop:hover{
-    background:#D82B25;
-}
-.scrollToTop i {
-    position: relative;
-    font-size: 24px;
-}
-@media (min-width: 768px){
+
+    .scrollToTop:hover {
+        background: #D82B25;
+    }
+
+    .scrollToTop i {
+        position: relative;
+        font-size: 24px;
+    }
+
+@media (min-width: 768px) {
     .modal-dialog {
-        width: 550px;
+        width: 580px;
         margin: 10% auto 0;
     }
-    .vertical{
+
+    .vertical {
         margin: 10px 0;
     }
-    .treasure3  .nav-tabs > li{
+
+    .treasure3 .nav-tabs > li {
         width: 25%;
         font-size: 16px;
     }
-    .treasure3  .nav-tabs > li a{
-        padding: 12px 15px;
-    }
-    .PCicon a{
+
+        .treasure3 .nav-tabs > li a {
+            padding: 12px 15px;
+        }
+
+    .PCicon a {
         margin-left: 40%;
     }
-    .newsList .date{
+
+    .newsList .date {
         text-align: right;
     }
-    .newsContent{
+
+    .newsContent {
         padding: 30px 0;
     }
 }
+
 @media (max-width: 768px) {
-    .servicebox{
+    .servicebox {
         width: 40px;
     }
-    .servicebox>div{
-        border-radius: 3px;
-    }
-    .servicebox .qq i{
-        font-size: 24px;
-    }
-    .servicebox .weixin{
-        padding-top: 3px;
-    }
-    .servicebox .weixin i{
-        font-size: 24px;
-    }
+
+        .servicebox > div {
+            border-radius: 3px;
+        }
+
+        .servicebox .qq i {
+            font-size: 24px;
+        }
+
+        .servicebox .weixin {
+            padding-top: 3px;
+        }
+
+            .servicebox .weixin i {
+                font-size: 24px;
+            }
+
     .scrollToTop i {
         position: relative;
         font-size: 20px;
     }
-    .scrollToTop{
+
+    .scrollToTop {
         padding-bottom: 3px;
     }
 }
@@ -916,11 +950,6 @@ input:focus, select:focus, textarea:focus {
     background-color: rgba(0,0,0,.6);
 }
 
-@media(min-width:768px) {
-    .modal .modal-dialog {
-        margin-top: 6%;
-    }
-}
 
 @media(max-width:768px) {
     .modal-header {
@@ -1092,15 +1121,6 @@ input:focus, select:focus, textarea:focus {
         height: 30px;
         left: 49%;
     }
-
-.etf-bg, .r_tbl {
-    position: relative;
-}
-
-.etf .title-1, .etf-1 dl dd i {
-    border-radius: 50%;
-    display: inline-block;
-}
 
 @media (max-width:768px) {
     .r_tbl td .btn {
@@ -1490,10 +1510,12 @@ input:focus, select:focus, textarea:focus {
 }
 
 .bid-benefit, .bid-now {
-    color: #F5B024;
+    color: #FF3A00;
     font-size: 1.1em;
 }
-
+.bid-title{
+    font-size:17px;
+}
 .bid-title span {
     margin-right: 15px;
     color: #9e9e9e;
@@ -1525,7 +1547,7 @@ input:focus, select:focus, textarea:focus {
 }
 
 .bid-charts {
-    border: 1px solid rgba(158,158,158,.6);
+    border: 1px solid rgba(158,158,158,.3);
     padding: 10px 15px 0 5px;
     border-radius: 10px;
     overflow: hidden;
@@ -1618,7 +1640,7 @@ input:focus, select:focus, textarea:focus {
 
 @media (min-width:960px) {
     .bid-right-content {
-        margin: 50px 0;
+        margin: 40px 0;
         padding: 0 15px;
     }
 }
@@ -1999,9 +2021,10 @@ input:focus, select:focus, textarea:focus {
 
 .bid-right-content.content1 {
     padding-top: 10px;
-    border: 2px solid #F0AD4E;
+    border: 1px solid  #FF7900;
     border-radius: 10px;
-    box-shadow: 5px 5px 5px 0 #F9D4A0;
+    box-shadow: 5px 5px 5px 0 #FFE4CC;
+    margin-top:25px;
 }
 
 .unionlj .chengjiaoliang {
@@ -2028,15 +2051,15 @@ input:focus, select:focus, textarea:focus {
 
 .invest-div {
     padding-top: 2px;
-    height: 215px;
+    height: 245px;
     overflow: hidden !important;
     border: 1px solid #ccc;
 }
 
 .invest-table thead tr {
-    background: #F5B024;
+    background:#55ACEE;
     color: #fff;
-    border: 1px solid #F5B024;
+    border: 1px solid #55ACEE;
 }
 
 .invest-table thead th {
@@ -2169,17 +2192,6 @@ input:focus, select:focus, textarea:focus {
     width: 25%;
 }
 
-.page a {
-    height: 30px;
-    width: 30px;
-    border: 1px solid #ccc;
-    line-height:32px;
-    background-color: #fff;
-    color: #777;
-    border-radius: 2px;
-    text-align:center;
-}
-
 .attention, .icon_pag, .praise {
     color: #FFF;
     display: inline-block;
@@ -2201,10 +2213,6 @@ input:focus, select:focus, textarea:focus {
 }
 
 @media(min-width:1200px) {
-    .wanda .row {
-        margin: auto;
-    }
-
     .wanda-left img {
         width: 100%;
     }
@@ -2331,6 +2339,11 @@ input:focus, select:focus, textarea:focus {
     line-height: 24px;
 }
 
+    .lh24 img {
+        height: 60px;
+        border-radius: 50%;
+    }
+
 .p20 {
     padding: 20px;
 }
@@ -2345,6 +2358,7 @@ input:focus, select:focus, textarea:focus {
 
 .mb20 {
     margin-bottom: 20px;
+    font-size: 16px;
 }
 
 .mt20 {
@@ -2518,9 +2532,23 @@ textarea {
     height: 48px;
     line-height: 45px;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 18px;
     border: 0;
     color: #FFF;
+}
+
+.btn130, .btn130:link, .btn130:visited {
+    background: url(/assets/images/btn130.png) 0 0 no-repeat;
+    width: 130px;
+    display: block;
+    height: 48px;
+    line-height: 48px;
+    cursor: pointer;
+    font-size: 18px;
+    border: 0;
+    color: #FFF;
+    text-align: center;
+    text-decoration: none;
 }
 
 .now-sustain {
@@ -2533,67 +2561,517 @@ textarea {
 
 
 /*天平金服*/
-.index_product  .page01{
-    background-image:url(/assets/images/produt01.jpg);
+.index_product .page01 {
+    background-image: url(/assets/images/produt01.jpg);
     background-size: cover;
     -moz-background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-    position:relative;
+    position: relative;
 }
-.index_product  .page02{
-    background-image:url(/assets/images/produt02.jpg);
+
+.index_product .page02 {
+    background-image: url(/assets/images/produt02.jpg);
     background-size: cover;
     -moz-background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-    position:relative;
+    position: relative;
 }
-.index_product  .page03{
-    background-image:url(/assets/images/produt03.jpg);
+
+.index_product .page03 {
+    background-image: url(/assets/images/produt03.jpg);
     background-size: cover;
     -moz-background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-    position:relative;
+    position: relative;
 }
+
 .down {
-	position: absolute;
-	bottom: 20px;
-	text-align: center;
-	-webkit-animation: bounce 2s infinite;
-	-moz-animation: bounce 2s infinite;
-	-ms-animation: bounce 2s infinite;
-	animation: bounce 2s infinite;
-	z-index: 10;
-    width:100%;
+    position: absolute;
+    bottom: 20px;
+    text-align: center;
+    -webkit-animation: bounce 2s infinite;
+    -moz-animation: bounce 2s infinite;
+    -ms-animation: bounce 2s infinite;
+    animation: bounce 2s infinite;
+    z-index: 10;
+    width: 100%;
 }
-.index_product .page a{
-    width:35px;
+
+.index_product .indexPage .glyphicon {
+    height: 50px;
+    width: 60px;
+    border: 1px solid #ccc;
+    line-height: 50px;
+    background-color: #000;
+    color: #777;
+    border-radius: 2px;
+    text-align: center;
+    text-decoration: none !important;
+    border: none;
+    opacity: 0.5;
 }
-.down a {
-	text-shadow: 0 1px 2px rgba(0,0,0,.6);
-	filter: alpha(opacity=70);
-	opacity: .5;
-	-webkit-transition: all .2s linear;
-	-moz-transition: all .2s linear;
-	-o-transition: all .2s linear;
-	transition: all .2s linear;
-    border:none !important;
-}
-.down a:hover {
-	text-decoration: none;
-	outline: 0;
-	filter: alpha(opacity=90);
-	opacity: .9;
-	cursor: pointer;
-}
-.down.lightbg a {
-	color: #666;
-	filter: alpha(opacity=90);
-	opacity: .9
-}
+
+    .index_product .indexPage .glyphicon:hover {
+        color: #fff;
+        opacity: 0.7;
+    }
+
 .index_product .glyphicon-chevron-down:before {
-    font-size:20px;
-    margin-left:1px;
+    font-size: 20px;
+    margin-left: 1px;
 }
+
+.indexPage .textbg {
+    background-image: url(/assets/images/w.png);
+    background-color: transparent;
+    border-radius: 30px;
+}
+
+    .indexPage .textbg h1 {
+        color: #FFF;
+        font-size: 26px;
+        text-align: left;
+    }
+
+    .indexPage .textbg p {
+        color: #FFF;
+        font-size: 16px;
+        line-height: 25px;
+        text-align: left;
+    }
+
+@media(max-width:768px) {
+    .indexPage .textbg p {
+        font-size: 15px;
+    }
+}
+
+.indexPage .textbg a {
+    border: #999 1px solid;
+    border-radius: 5px;
+    background-color: transparent;
+}
+
+    .indexPage .textbg a:hover {
+        background-color: #999;
+    }
+
+.header-top .social-links li {
+    margin-right: 5px;
+}
+
+    .header-top .social-links li a {
+        width: 28px;
+        height: 28px;
+        text-decoration: none;
+    }
+
+        .header-top .social-links li a i {
+            line-height: 28px;
+            font-size: 16px;
+            position: relative;
+            top: -1px;
+        }
+
+/*天平定期宝*/
+.extreme .extreme-title h3 {
+    display: inline-block;
+    margin-left: 10px;
+    color: #B83D7C;
+}
+
+.extreme .extreme-title .glyphicon-play {
+    font-size: 18px;
+    color: #B83D7C;
+}
+
+.extreme .algoforce-benefit {
+    background-color: #B83D7C;
+    padding: 20px 10px;
+    margin: 20px 0;
+}
+
+    .extreme .algoforce-benefit dl {
+        color: #ffffff;
+    }
+
+    .extreme .algoforce-benefit dt {
+        font-size: 18px;
+        margin-top: 5px;
+    }
+
+    .extreme .algoforce-benefit dd {
+        margin-top: 15px;
+    }
+
+.extreme .project-thead {
+    background: #256A84;
+}
+
+    .extreme .project-thead th {
+        line-height: 35px;
+        text-align: center;
+        color: #ffffff;
+    }
+
+.extreme-name {
+    color: #B83D7C;
+}
+
+@media (max-width: 768px) {
+    h3 {
+        font-size: 22px;
+    }
+
+    .assets .assets-title > div {
+        width: 16px;
+        height: 16px;
+    }
+
+    .extreme .algoforce-benefit dt {
+        margin-top: 15px;
+    }
+
+    .extreme .risk-right {
+        margin-top: 8px;
+    }
+}
+
+@media (min-width: 768px) {
+    .benefit-right {
+        position: absolute;
+        left: 400px;
+        bottom: 0;
+    }
+
+    .download {
+        margin-top: 15px;
+    }
+
+    .extreme .risk-right {
+        margin-left: -45px;
+    }
+
+    .risk-left, .risk-right {
+        padding: 0;
+    }
+
+    .risk-left {
+        padding-left: 15px;
+    }
+}
+
+.assets-table td {
+    border: 1px solid #B5B6B6;
+    line-height: 35px;
+    text-align: center;
+    font-size: 15px;
+    padding: 0 15px;
+}
+
+.assets-thead th {
+    height: 50px;
+    line-height: 50px;
+    color: #ffffff;
+    font-size: 1.3em;
+    font-weight: 500;
+    text-align: center;
+    border: 1px solid #14687F;
+}
+
+.assets-table {
+    width: 100%;
+    margin-top: 20px;
+}
+
+    .assets-table .td1 {
+        width: 35%;
+    }
+
+    .assets-table .td2 {
+        width: 65%;
+    }
+
+    .assets-table tbody tr:nth-child(2n) {
+        background: #E9EEF2;
+    }
+
+.extreme .reservation-btn {
+    font-size: 1.0em;
+}
+
+reservation-content .form-horizontal .form-group {
+    margin-left: -30px;
+}
+
+#reservation-content .modal-footer {
+    padding: 15px 15px 0 15px;
+}
+
+.explain {
+    position: relative;
+    background: #fff9c9;
+    width: 100%;
+    padding: 20px 30px;
+}
+
+    .explain h2 {
+        color: #8d8b8e;
+        font-size: 18px;
+    }
+
+    .explain h3 {
+        font-size: 13px;
+        color: #8d8b8e;
+        padding: 10px 0;
+    }
+
+    .explain .explain-p {
+        line-height: 25px;
+        margin-bottom: 20px;
+    }
+
+    .explain b {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        font-size: 0;
+        width: 0;
+        height: 0;
+        display: block;
+        border-color: #fff1a6 #FCFCFC #FCFCFC #fff1a6;
+        border-style: solid;
+        border-width: 20px;
+    }
+
+
+
+/*娱乐宝清单*/
+.chips_tittle {
+    color: #3f3f3f;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 18px;
+    display: block;
+    text-decoration: none !important;
+    margin: 10px 0;
+}
+
+.chips2 .body {
+    padding: 0 10px 15px 10px;
+}
+
+.chips2-footer h5 {
+    color: #DE6C69;
+}
+
+.chips2-footer p {
+    color: #777;
+    font-size: 14px;
+}
+
+.chips2 .status {
+    padding-left: 0;
+}
+
+    .chips2 .status small {
+        position: relative;
+        top: 1px;
+        padding: 1px 5px;
+        background-color: #11B8A6;
+        color: #fff;
+    }
+
+.pro-sign {
+    background-repeat: no-repeat;
+    background-image: url(/assets/images/chips/icon.png);
+    width: 165px;
+    height: 38px;
+}
+
+.pro-up {
+    background-repeat: no-repeat;
+    background-image: url(/assets/images/chips/icon.png);
+    width: 170px;
+    height: 38px;
+    background-position: 0 -38px;
+}
+
+.pro-title a {
+    line-height: 28px;
+    font-size: 22px;
+    text-decoration: none;
+    color: #555;
+}
+
+@media(max-width:768px) {
+    .pro-title p {
+        margin-top: 20px;
+    }
+}
+
+.pro-title a:hover {
+    color: #FF3162;
+}
+
+.inv-right-info {
+    height: 20px;
+    line-height: 20px;
+    color: #ff3162;
+    font-size: 15px;
+    background-repeat: no-repeat;
+    background-image: url(/assets/images/chips/icon.png);
+    background-position: -319px -150px;
+    padding-left: 20px;
+    width: 650px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.inv-role-mask {
+    display: inline-block;
+    z-index: 10;
+    position: relative;
+}
+
+.inv-role-bg {
+    -webkit-transition: all ease-in-out .25s;
+    -o-transition: all ease-in-out .25s;
+    transition: all ease-in-out .25s;
+    background: #000;
+    z-index: 10;
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 101%;
+    height: 101%;
+    border-radius: 50%;
+    opacity: 0;
+}
+
+.inv-role-mask span {
+    position: absolute;
+    display: block;
+    text-align: center;
+    width: 100%;
+    top: 50%;
+    margin-top: -10px;
+    z-index: 100;
+    color: #fff;
+    font-size: 16px;
+    display: none;
+}
+
+.inv-role-mask:hover span {
+    display: block;
+}
+
+.inv-role-mask:hover .inv-role-bg {
+    display: block;
+    opacity: 0.5;
+}
+
+.pro-button a {
+    height: 100%;
+    float: right;
+    display: block;
+    line-height: 34px;
+    text-align: center;
+    background: #ff3162;
+    padding: 0 40px;
+    color: #fff;
+    font-size: 18px;
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -ms-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    transition: all .5s ease;
+}
+
+.pro-button {
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -ms-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    transition: all .5s ease;
+    background: #fff;
+}
+
+    .pro-button:hover {
+        opacity: 0.7;
+    }
+
+    .pro-button a:hover {
+        color: #fff;
+    }
+
+    .pro-button .pro-count {
+        float: left;
+        display: block;
+        height: 36px;
+        padding: 0 15px;
+    }
+
+.pro-button {
+    height: 36px;
+    line-height: 36px;
+    font-size: 16px;
+    color: #ff3162;
+    border: 1px solid #ff3162;
+    border-radius: 5px;
+    padding-left: 30px;
+}
+
+.pro-time {
+    font-size: 16px;
+    margin-right: 20px;
+    line-height: 38px;
+    color: #ff3162;
+}
+
+.pro-content {
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+/*天平活期宝*/
+.current canvas {
+    margin-top: 5px;
+}
+
+.hqb2 ul li, .hqb3 ul li {
+    float: left;
+    width: 50%;
+}
+
+    .hqb2 ul li img, .hqb3 ul li img {
+        margin-right: 15px;
+    }
+
+    .hqb2 ul li img {
+        margin-top: 10px;
+    }
+
+    .hqb3 ul li h2 {
+        margin-top: 25px;
+    }
+
+@media(min-width:768px) {
+    .current .introduction  li{
+        line-height:28px;
+    }
+    .current .introduction span {
+        width: 20%;
+        display: inline-block;
+        color:#333;
+    }
+}
+
+    .current .wall hr{
+        border-color:#e3e3e3;
+    }
